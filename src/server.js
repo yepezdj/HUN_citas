@@ -8,7 +8,9 @@ import connectFlash from "connect-flash";
 import session from "express-session";
 import passport from "passport";
 
+
 let app = express();
+
 
 // enable body parser post data
 app.use(bodyParser.json());
@@ -42,5 +44,5 @@ initWebRoutes(app);
 
 
 
-let port = process.env.PORT || 8081;
+let port = process.env.PORT || 80;
 app.listen(port, () =>console.log(`Server on port ${port}!`));

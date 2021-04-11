@@ -5,6 +5,9 @@ import auth from "../validation/authValidation";
 import passport from "passport";
 import initPassportLocal from "../controllers/passportLocalController";
 import homePageController from "../controllers/homePageController";
+import forgotpasswordController from "../controllers/forgotpasswordController"
+import resetPasswordController from "../controllers/resetPasswordController";
+
 
 
 initPassportLocal();
@@ -28,5 +31,12 @@ let initWebRoutes = (app) => {
     router.post("/logout", loginController.postLogOut);
     return app.use("/", router);
 };
+
+router.get('/forgot-password', forgotpasswordController.a);
+router.post('/forgot-password', forgotpasswordController.aa);
+
+router.get('/reset-password/:id/:token', resetPasswordController.b);
+
+router.post('/reset-password/:id/:token', auth.validateNewPassword, resetPasswordController.bb);
 
 module.exports = initWebRoutes;

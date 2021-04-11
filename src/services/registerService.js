@@ -66,5 +66,6 @@ let checkExistEmail = (email) => {
 };
 
 module.exports = {
-    createNewUser: createNewUser
+    createNewUser: createNewUser,
+    checkExistEmail: checkExistEmail
 };

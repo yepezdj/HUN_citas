@@ -5,7 +5,7 @@ import loginService from "../services/loginService";
 let LocalStrategy = passportLocal.Strategy;
 
 let initPassportLocal = () => {
-    passport.use(new LocalStrategy({
+    passport.use(new LocalStrategy( {
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true
@@ -14,7 +14,7 @@ let initPassportLocal = () => {
         try {
             await loginService.findUserByEmail(email).then(async (user) => {
                 if (!user) {
-                    return done(null, false, req.flash("errors", `This user email "${email}" doesn't exist`));
+                    return done(null, false, req.flash("errors", `No existe un usuario con este email: "${email}"`));
                 }
                 if (user) {
                     let match = await loginService.comparePasswordUser(password, user);

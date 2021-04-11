@@ -12,6 +12,17 @@ let validateRegister = [
     })
 ];
 
+let validateNewPassword = [
+    check("password", "Contraseña invalida. Debe tener al menos 8 caracteres")
+    .isLength( {max: 250}),
+
+    check("password2", "Las contraseñas no coinciden")
+    .custom((value, { req }) => {
+        return value === req.body.password
+    })
+];
+
 module.exports = {
     validateRegister: validateRegister,
+    validateNewPassword: validateNewPassword
 };

@@ -1,0 +1,106 @@
+require('dotenv').config();
+import {validationResult} from "express-validator";
+import loginService from "../services/loginService"
+import jwt from 'jsonwebtoken';
+import bcrypt from "bcryptjs";
+import connection from "../configs/connectDB";
+
+
+/* let getPageResetPassword = (req, res) =>{
+    return res.render("reset-password.ejs", {
+        errors: req.flash("errors")
+    });
+}; */
+
+
+let b = (req, res, next) => {
+    const {id, token} = req.params;
+    return new Promise(async (resolve, reject) =>{
+        try {
+        //verify user id
+        let user = await loginService.findUserById(id)
+        if (!user) {
+            return res.send(`pana por aquí no es`);
+        } else {
+            if (Number(id) !== user.id){
+                console.log(user.id);  
+                console.log(typeof user.id);
+                console.log(id);
+                console.log(typeof id);
+                return res.send('ID inválida')
+            }
+
+            let JWT_SECRET = process.env.JWT_SECRET;
+            const secret = JWT_SECRET + user.password
+            try {
+                const payload = jwt.verify(token, secret);
+                res.render("reset-password",
+                {email: user.email});
+                
+            } catch (error) {
+                console.log(error.message);
+                res.send(error.message);
+            }
+        }
+        } catch (e) {
+            reject(e);
+        }
+    });
+    
+    
+    
+};
+
+let bb = (req, res, next) => {
+    //validate required fields
+    const {id, token} = req.params;
+    const {password, password2} = req.body;
+    return new Promise(async (resolve, reject) =>{
+        let user = await loginService.findUserById(id);
+        let errorsArr = [];
+        let validationErrors = validationResult(req);
+        if (!validationErrors.isEmpty()) {
+            let errors = Object.values(validationErrors.mapped());
+            errors.forEach((item) => {
+                errorsArr.push(item.msg);
+            });
+            //req.flash("errors", errorsArr);
+            return res.render("reset-password",
+            {email: user.email, errors: errorsArr});
+        }
+        try {
+            //verify user id
+            if (!user) {
+                return res.send(`pana por aquí no es x2`)
+            } else {
+                let JWT_SECRET = process.env.JWT_SECRET;
+                const secret = JWT_SECRET + user.password
+                try {
+                    const payload =jwt.verify(token, secret)
+                    //validate passwords
+                    let hash = await bcrypt.hash(password,10);
+                    connection.query(
+                        `UPDATE user SET password = "${hash}" WHERE (id = "${user.id}")`,
+                        function(err, rows) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            console.log('updated');
+                        }
+                    );
+                    return res.redirect("/login");
+                } catch (error) {
+                    console.log(error.message);
+                    res.send(error.message);
+                }
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+module.exports = {
+    b: b,
+    bb: bb
+}
