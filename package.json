@@ -1,7 +1,7 @@
 {
-  "name": "quickstartnodejs",
+  "name": "hun_citas",
   "version": "1.0.0",
-  "description": "a quick start for node.js project",
+  "description": "API para el agendamiento y gestión de citas medicas y procedimientos ambulatorios en el Hospital Universidad del Norte",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/haryphamhust/quickStartNodeJSProject.git"
+    "url": "git+https://github.com/yepezdj/HUN_citas"
   },
   "keywords": [
     "nodejs",
@@ -18,9 +18,9 @@
   "author": "Hary Pham",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/haryphamhust/quickStartNodeJSProject/issues"
+    "url": "https://github.com/yepezdj/HUN_citas/issues"
   },
-  "homepage": "https://github.com/haryphamhust/quickStartNodeJSProject#readme",
+  "homepage": "https://github.com/yepezdj/HUN_citas",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
