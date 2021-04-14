@@ -40,45 +40,6 @@ let postLogin = async (req, res, next) => {
     }  
 };
 
-//ESTO NO VA A AQUÍ
-let getUser = (req, res) =>{
-    if (req.session.user) {
-        return res.render("./user/usermain.ejs", {
-            user: req.session.context
-        });
-	} else {
-        return res.render("login.ejs", {
-            errors: req.session.context
-        });
-	} 
-}
-
-let getAdmin = (req, res) =>{
-    if (req.session.admin) {
-        return res.render("./admin/adminmain.ejs", {
-            user: req.session.context
-        });
-	} else {
-        return res.render("login.ejs", {
-            errors: req.session.context
-        });
-	} 
-}
-
-let getConciliator = (req, res) =>{
-    if (req.session.conciliator) {
-        return res.render("./conciliator/conciliatormain.ejs", {
-            user: req.session.context
-        });
-	} else {
-        return res.render("login.ejs", {
-            errors: req.session.context
-        });
-	} 
-}
-
-
-
 let getLoginPage = (req, res) =>{
     if (req.session.user) {
         return res.render("./user/usermain.ejs", {
@@ -111,7 +72,4 @@ module.exports = {
     getLoginPage: getLoginPage,
     postLogOut: postLogOut,
     postLogin: postLogin,
-    getUser: getUser,
-    getAdmin: getAdmin,
-    getConciliator: getConciliator
 };

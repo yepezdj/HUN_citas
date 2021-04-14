@@ -2,7 +2,9 @@ import express, { Router } from "express";
 import loginController from "../controllers/loginController";
 import registerController from "../controllers/registerController";
 import auth from "../validation/authValidation";
-import homePageController from "../controllers/homePageController";
+import userController from "../controllers/userController";
+import adminController from "../controllers/adminController";
+import conciliatorController from "../controllers/conciliatorController";
 import forgotpasswordController from "../controllers/forgotpasswordController"
 import resetPasswordController from "../controllers/resetPasswordController";
 
@@ -12,48 +14,29 @@ let router = express.Router();
 
 
 let initWebRoutes = (app) => {
-    //router.get("/", loginController.checkLoggedIn, homePageController.getHomePage);
-    //router.get("/login",loginController.checkLoggedOut, loginController.getLoginPage);
-    router.get("/login", loginController.getLoginPage);
-    router.get("/user/usermain", loginController.getUser);
+    //LOGIN
     router.get("/", loginController.getLoginPage);
-    router.get("/admin/adminmain", loginController.getAdmin);
-    router.get("/conciliator/conciliatormain", loginController.getConciliator);
-    /* router.post("/login", passport.authenticate("local", {
-
-        successRedirect: "/",
-        ///if rol =user
-        failureRedirect: "/login",
-        successFlash: true,
-        failureFlash: true
-    })); */
+    router.get("/login", loginController.getLoginPage);
     router.post("/login", loginController.postLogin);
+    router.post("/logout", loginController.postLogOut);
 
-
-
+    //REGISTER
     router.get("/register", registerController.getPageRegister);
     router.post("/register", auth.validateRegister, registerController.createNewUser);
-    router.post("/logout", loginController.postLogOut);
-    
 
+
+    //ROUTES
+    router.get("/user/usermain", userController.getUser);
+    router.get("/admin/adminmain", adminController.getAdmin);
+    router.get("/conciliator/conciliatormain", conciliatorController.getConciliator);
+    
+    //FORGOT AND RESET PASSWORD ROUTES
     router.get('/forgot-password', forgotpasswordController.a);
     router.post('/forgot-password', forgotpasswordController.aa);
-
     router.get('/reset-password/:id/:token', resetPasswordController.b);
-
     router.post('/reset-password/:id/:token', auth.validateNewPassword, resetPasswordController.bb);
 
-    /* router.get('/admin/adminmain', (req, res) => {
-        return res.render("./admin/adminmain.ejs");
-    });
-    router.get('/conciliator/adminmain', (req, res) => {
-        return res.render("./conciliator/conciliator.ejs");
-    }); */
     return app.use("/", router);
 };
-
-
-
-    
 
 module.exports = initWebRoutes;

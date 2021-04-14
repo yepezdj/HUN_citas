@@ -1,5 +1,5 @@
 import {check} from "express-validator";
-
+//REGISTER
 let validateRegister = [
     check("email", "Correo invalido").isEmail().trim(),
 
@@ -11,7 +11,7 @@ let validateRegister = [
         return value === req.body.password
     })
 ];
-
+//RESET-PASSWORD
 let validateNewPassword = [
     check("password", "Contraseña invalida. Debe tener al menos 8 caracteres")
     .isLength( {max: 250}),
