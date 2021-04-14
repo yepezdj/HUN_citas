@@ -31,7 +31,7 @@ let comparePasswordUser = (password, user) => {
                     resolve(true);
                 } else {
                     console.log('q ise')
-                    resolve("The password that you've entered is incorrect");
+                    resolve(false);
                 }
             });
         } catch (e) {

@@ -24,13 +24,13 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     cookie:{
-        maxAge: 1000 * 60 * 60 * 24 //86400000 1day
+        maxAge: 160 * 60 * 1000 //86400000 1hour
     }
 }));
 
 //Config passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 //enable flash meessage
 app.use(connectFlash());

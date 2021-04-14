@@ -22,7 +22,8 @@ let createNewUser = (user) => {
                     cellphone: user.cellphone,
                     cedula: user.cedula,         
                     eps: user.eps,
-                    sexo: user.sexo,                   
+                    sexo: user.sexo,
+                    role: 'user'                
                 };
                 console.log('ola');
                 console.log(userItem);

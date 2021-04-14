@@ -16,7 +16,8 @@ let aa = (req, res, next) => {
         let check = await registerService.checkExistEmail(email);
         if (!check) {
             console.log(check);
-            return res.send(`Este email "${email}" no está registrado.`)
+            return res.render("forgot-password",
+            {errors: email});
         } else {
             //create 1 time link
             let JWT_SECRET = process.env.JWT_SECRET;

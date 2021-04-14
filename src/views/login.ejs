@@ -17,12 +17,10 @@
                 </div>
                 <div class="col-5">
                     <div>
-                        <% if(errors != "") { %>
-                            <% errors.forEach((item) => { %>
+                        <% if(typeof errors !== 'undefined') {%>
                                 <div class="alert alert-danger">
-                                    <%- item %>
+                                    <%- errors.errors %>
                                 </div>
-                            <% }); %>
                         <% } %>
                     </div>
                     <form method="POST" action="/login">
