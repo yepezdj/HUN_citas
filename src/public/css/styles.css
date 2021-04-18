@@ -26,12 +26,52 @@
 
 body{
   position: relative;
+  background: url(../images/undraw_events_2p66.png);
+  /* background-repeat: no-repeat; */
   margin: var(--header-height) 0 0 0;
   padding: 0 1rem;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   transition: .5s;
 }
+
+.card{
+  border: none !important;  
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;    
+  opacity: 0.9;
+  -moz-opacity: 0.9;
+  filter: alpha(opacity=90);
+  -khtml-opacity: 0.9;  
+}
+
+.table {
+  margin-top: 80px;
+  z-index: 100000 !important;
+  background: whitesmoke !important;  
+}
+
+/* .modal {
+  z-index: 100000 !important;
+} */
+
+/* .modal-backdrop {
+  z-index: 100000 !important;
+} */
+
+/* #modalEventos {
+  z-index: 100001 !important;
+} */
+
+#calendar {
+  max-width: 700px;
+  margin-top: 50px;
+  margin-left: 120px;
+  background: white;
+  /* margin: 10px auto; */
+} 
 
 a{
   text-decoration: none;
