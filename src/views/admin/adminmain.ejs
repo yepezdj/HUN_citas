@@ -10,9 +10,84 @@
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="/css/styles.css">
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css">
+              <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
+              <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+              <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
+              <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+              <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
+              <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+              <script src="/js/es.js"></script>
+
         <title>Administrador</title>
     </head>
     <body id="body-pd">
+
+        
+        <!-- Modal -->    
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="titulo"></h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">  
+          <div class="form-group row" id="elTitulo">
+            <label for="txtTitulo" class="col-sm-2 col-form-label">Titulo</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtTitulo">
+            </div>
+          </div>
+          <div class="form-group row">              
+              
+            <label for="id" class="col-sm-2 col-form-label">Identificador</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="id" name="id">
+            </div>
+            <div class="col-sm-10">
+              <select class="custom-select mt-2" style="margin-right: 10px;" id="opciones" name="opciones" onchange="doctors('opciones','Doctores')" required="true">                                  
+                <option value="0">Seleccione Especialidad</option>                   
+              </select>
+            </div>
+            <div class="col-sm-10">
+              <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores" onchange="ayuda('Doctores','calendar')">
+                <option value="0">Seleccione Médico</option>  
+              </select>
+            </div>             
+            <label for="txtHoraInicio" class="col-sm-2 col-form-label">Horario de Inicio</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtHoraInicio" name="txtHoraInicio">
+            </div>
+            <label for="txtHoraFin" class="col-sm-2 col-form-label">Horario de Fin</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtHoraFin" name="txtHoraFin">
+            </div>      
+          </div>    
+        
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="btnAgregar" class="btn btn-success">Agregar</button>
+          <button type="button" id="btnModificar" class="btn btn-warning">Modificar</button>
+          <button type="button" id="btnEliminar" class="btn btn-danger">Eliminar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
         <header class="header" id="header">
             <div class="header__toggle">
                 <i class='bx bx-menu' id="header-toggle"></i>
@@ -34,46 +109,340 @@
                             Norte
                         </span>
                     </a>
-
-                    <div class="nav__list">
-                        <a href="#" class="nav__link active">
-                        <i class='bx bx-grid-alt nav__icon' ></i>
-                            <span class="nav__name">Dashboard</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-user nav__icon' ></i>
-                            <span class="nav__name">Users</span>
-                        </a>
-                        
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-message-square-detail nav__icon' ></i>
-                            <span class="nav__name">Messages</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-bookmark nav__icon' ></i>
-                            <span class="nav__name">Favorites</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-folder nav__icon' ></i>
-                            <span class="nav__name">Data</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
-                            <span class="nav__name">Analytics</span>
-                        </a>
-                    </div>
                 </div>
                 <a href="#" onclick="logOut()" class="nav__link">
                     <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Log Out</span>
+                    <span class="nav__name">Cerrar sesión</span>
                 </a>
             </nav>
         </div>
         <h2> Bienvenido <%=user.name%></h2>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-12">
+        <form method="POST">
+          <div id='calendar'></div>
+        </form>
+      </div>
+      <div class="col-md-10"></div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
+    integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.min.js'></script>
+
+  <script>
+
+    document.onload = loadFunctions();
+    function loadFunctions() {
+      consulta();
+      consult(); 
+      $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
+     
+    }
+    var result3 = [];
+    async function consult() {
+      var con1 = document.getElementById('calendar').value;
+      const consulta2 = { con: con1 };
+      const options2 = {
+        method: "POST",
+        body: JSON.stringify(consulta2),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const response2 = await fetch('/datosAdmin', options2);
+      console.log(response2)
+      result3 = await response2.json();
+
+      console.log(result3)
+
+      ayuda();
+    }
+
+
+    var hoy = new Date();
+    var dd = String(hoy.getDate()).padStart(2, '0');
+    var mm = String(hoy.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = hoy.getFullYear();
+    hoy = yyyy + '-' + mm + '-' + dd;
+    // document.addEventListener('DOMContentLoaded', function() {
+    function ayuda() {
+      console.log(result3)
+      var data = [];
+      var j = 0;
+
+     
+      //Se realiza el ciclo for del json contenido en la variable result
+      for (var i in result3) {
+        
+          var dataSource = new Object(); 
+          dataSource.id = result3[i].ideventos;         
+          dataSource.title = result3[i].Titulo;
+          dataSource.especialidad = result3[i].Especialidad;
+          dataSource.medico = result3[i].Medico;
+          dataSource.start = result3[i].FechaI;
+          dataSource.end = result3[i].FechaF;          
+          dataSource.color = '#FF5340';
+
+          data[j] = dataSource;
+          j++;
+        
+      }
+      //En esta función se agregan los eventos contenidos en data
+      $('#calendar').fullCalendar({
+        viewRender: function (view) {
+          console.log(data)
+
+
+          // TODO: Validar los datos
+          $('#calendar').fullCalendar('destroy');
+          $('#calendar').fullCalendar('removeEvents');
+          $('#calendar').fullCalendar('addEventSource', data);
+          $('#calendar').fullCalendar('rerenderEvents');
+        },
+      })
+
+      var clickedRef = 0;
+      var enviar = document.getElementById("#btnAgregar");
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+
+        locale: 'es',
+        themeSystem: 'bootstrap',
+        buttonIcons: false,
+        addEventSource: true,
+        editable: true,
+        selectable: false,
+        initialView: 'dayGridMonth',
+        initialDate: hoy,
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        dateClick: function (info) {
+          // var moment = $('#calendar').fullCalendar('getDate');     
+          // $('#txtFecha').val(info.dateStr);
+          $('#exampleModal').modal();
+          // calendar.addEvent({ title: 'eventox', date: info.dateStr });
+        },
+
+        eventClick: function (info) {
+          var eventObj = info.event;
+
+          if (eventObj.url) {
+            alert(
+              'Clicked ' + eventObj.title + '.\n' +
+              'Will open ' + eventObj.url + ' in a new tab'
+            );
+
+            window.open(eventObj.url);
+
+            info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+          } else {            
+            var FechaInicio = dateFormat(eventObj.start);
+            var FechaFin = dateFormat(eventObj.end);
+            $('#id').val(eventObj.id);
+            $('#txtTitulo').val(eventObj.title),
+            $('#opciones').val(eventObj.extendedProps.especialidad),
+            $('#Doctores').val(eventObj.extendedProps.medico),
+            $('#txtHoraInicio').val(FechaInicio),
+            $('#txtHoraFin').val(FechaFin),      
+            console.log(eventObj.id)
+            $('#exampleModal').modal();       
+          }
+        },
+
+        events: data,
+
+
+        eventColor: '#18E734',
+        color: 'black',     // an option!
+        textColor: 'black'
+
+      });
+      // Función para formatear las fechas para los inputs
+      function dateFormat(df) {
+        var date = new Date(df);
+        var day = date.getDate();
+        var month = date.getMonth()+1;        
+        var year = date.getFullYear();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds()
+
+        month = (month<10)?"0"+month:month;
+        day = (day<10)?"0"+day:day;
+        hour = (hour<10)?"0"+hour:hour;
+        min = (min<10)?"0"+min:min;
+        sec = (sec<10)?"0"+sec:sec;
+
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+
+      }
+
+      calendar.render();
+
+      $('#btnAgregar').click(function () {
+      let data = recuperarDatosFormulario();
+      console.log(data)
+      agregarRegistro(data);
+      // $("#modalEventos").modal('hide');
+      })
+
+      $('#btnEliminar').click(function () {
+      let data = recuperarDatosFormulario();
+      console.log(data)
+      eliminarRegistro(data);
+      // $("#modalEventos").modal('hide');
+      })
+
+      $('#btnModificar').click(function () {
+      let data = recuperarDatosFormulario();
+      console.log(data)
+      modificarRegistro(data);
+      // $("#modalEventos").modal('hide');
+      })
+
+    function recuperarDatosFormulario() {
+      let data = {
+        id: $('#id').val(),
+        title: $('#txtTitulo').val(),
+        especialidad: $('#opciones').val(),
+        medico: $('#Doctores').val(),
+        FechaI: $('#txtHoraInicio').val(),
+        FechaF: $('#txtHoraFin').val(),        
+        Color: '#FF5340',
+      };
+      return data;
+    }
+
+    function agregarRegistro(data) {
+      $.ajax({
+        type: 'POST',
+        url: '/addAdmin',
+        data: data,
+        success: function (msg) {
+          $('#exampleModal').modal('toggle');  
+          calendar.refetchEvents();
+          console.log('Envío exitoso!!!')
+          // calendar.refetchEvents();
+        },
+        error: function (error) {
+          alert("Hay un problema:" + error);
+        }
+      });
+    }
+
+    function eliminarRegistro(data) {
+      $.ajax({
+        type: 'POST',
+        url: '/delate/:ideventos',
+        data: data,
+        success: function (msg) {
+          $('#exampleModal').modal('toggle');  
+          calendar.refetchEvents();
+          console.log('Envío exitoso!!!')
+          // calendar.refetchEvents();
+        },
+        error: function (error) {
+          alert("Hay un problema:" + error);
+        }
+      });
+    }
+
+    function modificarRegistro(data) {
+      $.ajax({
+        type: 'POST',
+        url: '/actualizar/:ideventos',
+        data: data,
+        success: function (msg) {
+          $('#exampleModal').modal('toggle');  
+          calendar.refetchEvents();
+          console.log('Envío exitoso!!!')
+          // calendar.refetchEvents();
+        },
+        error: function (error) {
+          alert("Hay un problema:" + error);
+        }
+      });
+    }
+
+    }
+
+    async function doctors(s1, s2) {
+        var con1 = document.getElementById('opciones').value;
+				const consulta2 = { con: con1 };
+				const options2 = {
+					method: "POST",
+					body: JSON.stringify(consulta2),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				};
+				const response2 = await fetch('/doctorAdmin', options2);
+				result5 = await response2.json();	
+            
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            
+            s2.innerHTML = "";
+           
+                select = document.getElementById('Doctores');
+                for (var i = 0; i<result5.length; i++){
+                    
+                    if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Nombres;
+                    opt.innerHTML = result5[i].Nombres;
+                    select.add(opt);
+     
+                    }
+                                  
+                }           
+                	
+           
+        }
+
+
+        var result4 = [];
+        async function consulta() {
+				var con1 = document.getElementById('opciones').value;
+				const consulta2 = { con: con1 };
+				const options2 = {
+					method: "POST",
+					body: JSON.stringify(consulta2),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				};
+				const response2 = await fetch('/agendaAdmin', options2);
+				result4 = await response2.json();
+				
+                select = document.getElementById('opciones');
+
+                for (var i = 0; i<result4.length; i++){
+                    var opt = document.createElement('option');
+                    opt.value = result4[i].Especialidad;
+                    opt.innerHTML = result4[i].Especialidad;
+                    select.add(opt);
+                                  
+                }	
+            }    
+  </script>
         <!--===== MAIN JS =====-->
         <script src="/js/main.js"></script>
     </body>
