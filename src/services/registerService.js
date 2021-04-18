@@ -47,8 +47,7 @@ let createNewUser = (user) => {
 let checkExistEmail = (email) => {
     return new Promise( (resolve, reject) => {
         try {
-            connection.query(
-                "SELECT * from user where email = ?", email,
+            connection.query( "SELECT * from user where email = ?", email,
                 function(err, rows) {
                     if (err) {
                         reject(err)

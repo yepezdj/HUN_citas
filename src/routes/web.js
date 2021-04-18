@@ -31,6 +31,7 @@ let initWebRoutes = (app) => {
     router.get("/conciliator/conciliatormain", conciliatorController.getConciliator);
     
     //FORGOT AND RESET PASSWORD ROUTES
+    router.get('/forgot-passwordRest', forgotpasswordController.Rest);
     router.get('/forgot-password', forgotpasswordController.a);
     router.post('/forgot-password', forgotpasswordController.aa);
     router.get('/reset-password/:id/:token', resetPasswordController.b);

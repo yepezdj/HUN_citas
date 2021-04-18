@@ -20,7 +20,7 @@ let b = (req, res, next) => {
                 console.log(typeof user.id);
                 console.log(id);
                 console.log(typeof id);
-                return res.send('ID inválida')
+                return res.send('ID inválida. No cambie el link de conexión.')
             }
 
             let JWT_SECRET = process.env.JWT_SECRET;
@@ -38,9 +38,7 @@ let b = (req, res, next) => {
         } catch (e) {
             reject(e);
         }
-    });
-    
-    
+    });  
     
 };
 

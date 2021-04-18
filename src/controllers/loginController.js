@@ -30,7 +30,7 @@ let postLogin = async (req, res, next) => {
 
                 } else {
                     req.session.context = {errors: (`Contraseña incorrecta`)};
-                return res.redirect("/login");
+                    return res.redirect("/login");
                 }
             }
         });
@@ -53,14 +53,13 @@ let getLoginPage = (req, res) =>{
     }
     if (req.session.conciliator) {
         return res.render("./conciliator/conciliatormain.ejs", {
-                ser: req.session.context
+            user: req.session.context
         });
     }
     return res.render("login.ejs", {
         errors: req.session.context
     });
 };
-
 
 let postLogOut = (req, res) => {
     req.session.destroy(function(err) {
