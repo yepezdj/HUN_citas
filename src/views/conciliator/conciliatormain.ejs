@@ -10,6 +10,23 @@
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="/css/styles.css">
 
+        <!-- ===== BOOTSTRAP ===== -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ 
+        <!-- ===== JQUERY ===== -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+         crossorigin="anonymous"></script>
+
+         <!-- ===== OTRAS LIBERÍAS DE BOOTSTRAP ===== -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+         crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+         crossorigin="anonymous"></script>
         <title>Conciliador</title>
     </head>
     <body id="body-pd">
@@ -34,47 +51,92 @@
                             Norte
                         </span>
                     </a>
-
-                    <div class="nav__list">
-                        <a href="#" class="nav__link active">
-                        <i class='bx bx-grid-alt nav__icon' ></i>
-                            <span class="nav__name">Dashboard</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-user nav__icon' ></i>
-                            <span class="nav__name">Users</span>
-                        </a>
-                        
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-message-square-detail nav__icon' ></i>
-                            <span class="nav__name">Messages</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-bookmark nav__icon' ></i>
-                            <span class="nav__name">Favorites</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-folder nav__icon' ></i>
-                            <span class="nav__name">Data</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
-                            <span class="nav__name">Analytics</span>
-                        </a>
-                    </div>
                 </div>
                 <a href="#" onclick="logOut()" class="nav__link">
                     <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Log Out</span>
+                    <span class="nav__name">Cerrar sesión</span>
                 </a>
             </nav>
         </div>
         <h2> Bienvenido <%=user.name%></h2>
+
+        <div class="container-fluid">        
+            <div class="col-md-12" style="margin: 20px;">
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Correo electrónico</th>
+                            <th>N° de identificación</th>
+                            <th>Especialidad</th>
+                            <th>Doctor</th>
+                            <th>Fecha de inico</th>
+                            <th>Fecha de fin</th>
+                            <th>Orden</th>
+                            <th>Imagen</th>                       
+                            <th>Aceptar solicitud</th>
+                            <th>Declinar solicitud</th>                            
+                        </tr>
+                    </thead>
+                    <tbody id="Table">
+    
+                                <tr>
+                                    <% if (info) { %>
+                                        <!-- Es el nombre que se le dió a los datos obtenidos en el controller.list -->
+                
+                                        <% for(var i=0; i < info.length; i++) { %>
+                
+                                            <tr>
+                                                <td>
+                                                    <%= info[i].NombreP %>
+                                                </td>
+                                                <td>
+                                                    <%= info[i].ApellidoP %>
+                                                </td>
+                                                <td>
+                                                    <%= info[i].Correo %>
+                                                </td>
+                                                <td>
+                                                    <%= info[i].CedulaP %>
+                                                </td>
+                                                <td>
+                                                    <%= info[i].Especialidad %>
+                                                </td>
+                                                <td>
+                                                    <%= info[i].Doctor %>
+                                                </td>
+                                                <td>
+                                                    <%= info[i].FechaInicio %>
+                                                </td>
+                                                <td>
+                                                    <%= info[i].FechaFin %>
+                                                </td>
+                                                <td> <a href="#" onclick="window.open('<%= info[i].Orden %>', '_blank', 'fullscreen=yes'); return false;"><%= info[i].Orden %></a>
+                                                    
+                                                </td>
+                                                <td>
+                                                    <%= info[i].Imagen %>
+                                                </td>                                
+                                                <td>
+                                                    <a href="/aceptar/<%= info[i].idpa %>" class="btn btn-success">Aceptar</a>                                    
+                                                </td>
+                                                <td>
+                                                    <a href="/declinar/<%= info[i].idpa %>" class="btn btn-danger">Declinar</a>
+                                                </td>                                  
+    
+                                        </tr>
+                                <% } %>
+                                <% } %>
+                    </tbody>
+    
+                </table>
+    
+            </div>    
+        </div> 
+
         <!--===== MAIN JS =====-->
         <script src="/js/main.js"></script>
+
     </body>
 </html>
