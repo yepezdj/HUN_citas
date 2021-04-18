@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="/css/styles.css">
+
+         <!-- ===== BOOTSTRAP ===== -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+        <title>Usuario</title>
+    </head>
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header__toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+
+            <div class="header__img">
+                <img src="/images/HUN.jpg" alt="">
+            </div>
+        </header>
+
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
+                        <i class='bx bx-layer nav__logo-icon'></i>
+                        <span class="nav__logo-name">
+                            Hospital<br> 
+                            Universidad del<br>
+                            Norte
+                        </span>
+                    </a>
+
+                    <div class="nav__list">
+                        <a href="/user/usermain" class="nav__link">
+                            <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
+                            <span class="nav__name">Página principal</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" onclick="logOut()" class="nav__link">
+                    <i class='bx bx-log-out nav__icon' ></i>
+                    <span class="nav__name">Cerrar sesión</span>
+                </a>
+            </nav>
+        </div>     
+
+        <div class="col-md-12" style="margin: 20px;">
+            <table class="table table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>N° de identificación</th>
+                        <th>Especialidad</th>
+                        <th>Doctor</th>
+                        <th>Fecha de inico</th>
+                        <th>Fecha de fin</th>
+                        <th>Orden</th>
+                        <th>Imagen</th>                       
+                        <th>Acciones</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+
+                    <% if (data) { %>
+                        <!-- Es el nombre que se le dió a los datos obtenidos en el controller.list -->
+
+                        <% for(var i=0; i < data.length; i++) { %>
+
+                            <tr>
+                                <td>
+                                    <%= data[i].NombreP %>
+                                </td>
+                                <td>
+                                    <%= data[i].ApellidoP %>
+                                </td>
+                                <td>
+                                    <%= data[i].CedulaP %>
+                                </td>
+                                <td>
+                                    <%= data[i].Especialidad %>
+                                </td>
+                                <td>
+                                    <%= data[i].Doctor %>
+                                </td>
+                                <td>
+                                    <%= data[i].FechaInicio %>
+                                </td>
+                                <td>
+                                    <%= data[i].FechaFin %>
+                                </td>
+                                <td> <a href="#" onclick="window.open('<%= data[i].Orden %>', '_blank', 'fullscreen=yes'); return false;"><%= data[i].Orden %></a>
+                                    
+                                </td>
+                                <td>
+                                    <%= data[i].Imagen %>
+                                </td>                                
+                                <td>
+                                    <a href="/update/<%= data[i].idpa %>" class="btn btn-info">Modificar</a>
+                                    <a href="/delete/<%= data[i].idpa %>" class="btn btn-danger">Cancelar cita</a>
+                                </td>
+                                <td>
+                                    <% switch (data[i].Estado) {
+                                        case 'Pendiente' : %>
+                                                <span class="badge bg-warning text-dark"><%= data[i].Estado %></span>
+                                                <% break;
+                                        
+                                        case 'Aceptada' : %>
+                                                <span class="badge badge-success"><%= data[i].Estado %></span>
+                                                <% break;
+                                        
+                                        case 'Rechazada' : %>
+                                                <span class="badge badge-danger"><%= data[i].Estado %></span>
+                                                <% break;
+                                        
+                                        } %>                                                                                                                                             -->
+                                </td>
+                            </tr>
+
+                            <% } %>
+                        <% } %>
+
+                </tbody>
+
+            </table>
+
+        </div>
+        <!--===== MAIN JS =====-->
+        <script src="/js/main.js"></script>
+    </body>
+</html>

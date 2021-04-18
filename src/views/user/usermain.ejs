@@ -1,80 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== BOX ICONS ===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="/css/styles.css">
+    <!-- ===== BOX ICONS ===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
-        <title>Usuario</title>
-    </head>
-    <body id="body-pd">
-        <header class="header" id="header">
-            <div class="header__toggle">
-                <i class='bx bx-menu' id="header-toggle"></i>
-            </div>
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/styles.css">
 
-            <div class="header__img">
-                <img src="/images/HUN.jpg" alt="">
-            </div>
-        </header>
+    <!-- ===== BOOTSTRAP ===== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div>
-                    <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
-                        <i class='bx bx-layer nav__logo-icon'></i>
-                        <span class="nav__logo-name">
-                            Hospital<br> 
-                            Universidad del<br>
-                            Norte
-                        </span>
+    <!-- ===== FULL CALENDAR ===== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+    <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+
+    <title>Usuario</title>
+</head>
+
+<body id="body-pd">   
+
+    <header class="header" id="header">
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+
+        <div class="header__img">
+            <img src="/images/HUN.jpg" alt="">
+        </div>
+    </header>     
+
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
+                    <i class='bx bx-layer nav__logo-icon'></i>
+                    <span class="nav__logo-name">
+                        Hospital<br>
+                        Universidad del<br>
+                        Norte
+                    </span>
+                </a>
+
+                <div class="nav__list">
+                    <a href="/consultar" class="nav__link">
+                        <i class='bx bx-folder nav__icon'></i>
+                        <span class="nav__name">Consultar estado de solicitud</span>
                     </a>
+                </div>
+            </div>
+            <a href="#" onclick="logOut()" class="nav__link">
+                <i class='bx bx-log-out nav__icon'></i>
+                <span class="nav__name">Cerrar sesión</span>
+            </a>
+        </nav>
+    </div>  
+    <div class="row" style="margin-top: 80px ;"> 
+    <h2> Bienvenido <%=user.name%></h2>
+    </div>  
+    
+    <!-- ===== FORMULARIO ===== -->
+    <div class="row" style="margin-left: 250px;">                            
+            <div class="col-md-8">
+                <div class="card text-primary">
+                    <div class="card-body card-border-primary" style="width: auto; height: auto; margin: 30px;">                        
+                        <div class="mb-4" style="margin: 50px;">
+                            <label for="Name" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" id="Name" name="Name" value="<%= user.name %>"
+                                readonly>
+                        </div>
+                        <div class="mb-4" style="margin: 50px">
+                            <label for="Lastname" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="Lastname" name="Lastname"
+                                value="<%= user.last_name %>" readonly>
+                        </div>
+                        <div class="mb-4" style="margin: 50px">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="text" class="form-control" id="email" name="email"
+                                value="<%= user.email %>" readonly>
+                        </div>
+                        <div class="mb-4" style="margin: 50px">
+                            <label for="Cedula" class="form-label">N° de identificación del paciente</label>
+                            <input type="number" class="form-control" id="Cedula" name="Cedula"
+                                placeholder="Sin puntos ni comas" required="true">
+                        </div>
+                        <div class="mb-4" style="margin: 50px">
+                            <select class="custom-select mt-2" style="margin-right: 10px;" id="opciones" name="opciones"
+                                onchange="doctors('opciones','Doctores')" required="true">
+                                <option value="0">Seleccione Especialidad</option>
+                            </select>
+                        </div>
+                        <div class="mb-4" style="margin: 50px">
+                            <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
+                                onclick="ayuda('Doctores','calendar')">
+                                <option value="0">Seleccione Médico</option>
+                            </select>
+                        </div>
 
-                    <div class="nav__list">
-                        <a href="#" class="nav__link active">
-                        <i class='bx bx-grid-alt nav__icon' ></i>
-                            <span class="nav__name">Dashboard</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-user nav__icon' ></i>
-                            <span class="nav__name">Users</span>
-                        </a>
-                        
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-message-square-detail nav__icon' ></i>
-                            <span class="nav__name">Messages</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-bookmark nav__icon' ></i>
-                            <span class="nav__name">Favorites</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-folder nav__icon' ></i>
-                            <span class="nav__name">Data</span>
-                        </a>
-
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
-                            <span class="nav__name">Analytics</span>
-                        </a>
                     </div>
                 </div>
-                <a href="#" onclick="logOut()" class="nav__link">
-                    <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Cerrar sesión</span>
-                </a>
-            </nav>
+            </div>        
+    </div>
+        <!-- ===== CALENDARIO ===== -->
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <card>
+                <form method="POST">
+                    <div id='calendar'></div>
+                </form>
+            </card>
         </div>
-        <h2> Bienvenido <%=user.name%></h2>
-        <!--===== MAIN JS =====-->
-        <script src="/js/main.js"></script>
-    </body>
+    </div>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div class="container">
+    <div class="modal fade" id="modalEventos" data-backdrop="static" data-keyboard="false" role="dialog"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloEvento">Agregar Cita</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="#" id="guardar">
+                    <div class="modal-body">
+                        <div class="form-group row" id="elTitulo">
+                            <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="titulo">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+
+                            <label for="start" class="col-sm-2 col-form-label">Fecha inicio</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="start" name="start" value="" readonly>
+                            </div>
+                            <label for="end" class="col-sm-2 col-form-label">Fecha Fin</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="end" name="end" value="" readonly>
+                            </div>
+                            <div class="col-md-10" style="margin: 50px">
+                                <input type="file" class="custom-file-input mt-2" id="Orden" name="Orden"
+                                    accept="application/pdf" required="true">
+                                <label class="custom-file-label mt-2" for="Orden">Seleccionar archivo de la orden
+                                    médica</label>
+                            </div>
+                            <div class="col-md-10 mt-3" style="margin: 50px">
+                                <input type="file" class="custom-file-input mt-2" id="Imagen" name="Imagen"
+                                    required="true">
+                                <label class="custom-file-label" for="Imagen">Seleccionar archivo de imágenes
+                                    diagnósticas</label>
+                            </div>
+                            <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="descripcion" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnAgregar">Agregar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
+        integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.min.js'></script>
+    <script>
+        document.onload = loadFunctions();
+        function loadFunctions() {
+
+            consult();
+
+            consulta();
+
+
+        }
+
+        var result = [];
+        var result3 = [];
+        async function consult() {
+            var con1 = document.getElementById('calendar').value;
+            const consulta2 = { con: con1 };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+
+            var con3 = document.getElementById('calendar').value;
+            const consulta3 = { con: con3 };
+            const options3 = {
+                method: "POST",
+                body: JSON.stringify(consulta3),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response3 = await fetch('/fechas', options3);
+            console.log(response3)
+            result3 = await response3.json();
+
+            console.log(result3)
+
+            ayuda();
+        }
+
+
+        var hoy = new Date();
+        var dd = String(hoy.getDate()).padStart(2, '0');
+        var mm = String(hoy.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = hoy.getFullYear();
+        hoy = yyyy + '-' + mm + '-' + dd;
+        // document.addEventListener('DOMContentLoaded', function() {
+        function ayuda() {
+            console.log(result)
+            console.log(result3)
+            console.log(result4)
+
+
+            var data = [];
+            var j = 0;
+
+            select = document.getElementById('Doctores');
+            //Se realiza el ciclo for del json contenido en la variable result
+            for (var i in result) {
+                if (select.value == result[i].Medico) {
+                    if (result3[i].FechaInicio !== result[i].Medico) {
+                        var dataSource = new Object();
+                        dataSource.title = result[i].Titulo;
+                        dataSource.esp = result[i].Especialidad;
+                        dataSource.name = result[i].Medico;
+                        dataSource.start = result[i].FechaI;
+                        dataSource.end = result[i].FechaF;
+                        dataSource.description = 'Esto es una cita médica';
+                        dataSource.color = '#FF5340'
+
+                        data[j] = dataSource;
+                        j++;
+                    }
+                }
+            }
+            //En esta función se agregan los eventos contenidos en data
+            $('#calendar').fullCalendar({
+                viewRender: function (view) {
+                    console.log(data)
+
+
+                    // TODO: Validar los datos
+                    $('#calendar').fullCalendar('destroy');
+                    $('#calendar').fullCalendar('removeEvents');
+                    $('#calendar').fullCalendar('addEventSource', data);
+                    $('#calendar').fullCalendar('rerenderEvents');
+                },
+            })
+
+            var clickedRef = 0;
+            var enviar = document.getElementById("#btnAgregar");
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                locale: 'es',
+                themeSystem: 'bootstrap',
+                buttonIcons: false,
+                addEventSource: true,
+                selectable: false,
+                initialView: 'dayGridMonth',
+                initialDate: hoy,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+
+                eventClick: function (info) {
+                    var eventObj = info.event;
+
+                    if (eventObj.url) {
+                        alert(
+                            'Clicked ' + eventObj.title + '.\n' +
+                            'Will open ' + eventObj.url + ' in a new tab'
+                        );
+
+                        window.open(eventObj.url);
+
+                        info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+                    } else {
+                        var FechaInicio = dateFormat(eventObj.start);
+                        var FechaFin = dateFormat(eventObj.end);
+                        $('#titulo').val(eventObj.title);
+                        $('#start').val(FechaInicio);
+                        $('#end').val(FechaFin);
+                        $('#descripcion').val();
+                        $("#modalEventos").modal("show");
+                    }
+                },
+
+                events: data,
+
+
+                eventColor: '#18E734',
+                color: 'black',     // an option!
+                textColor: 'black'
+
+            });
+            // Función para formatear las fechas para los inputs
+            function dateFormat(df) {
+                var date = new Date(df);
+                var day = date.getDate();
+                var month = date.getMonth();
+                var year = date.getFullYear();
+                var hour = date.getHours();
+                var min = date.getMinutes();
+                var sec = date.getSeconds();
+
+                month = (month < 10) ? "0" + month : month;
+                day = (day < 10) ? "0" + day : day;
+                hour = (hour < 10) ? "0" + hour : hour;
+                min = (min < 10) ? "0" + min : min;
+                sec = (sec < 10) ? "0" + sec : sec;
+
+                return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+
+            }
+
+            calendar.render();
+
+        }
+
+
+        $('#btnAgregar').click(function () {
+            let data = recuperarDatosFormulario();
+            console.log(data)
+            agregarRegistro(data);
+            // $("#modalEventos").modal('hide');
+        })
+
+        function recuperarDatosFormulario() {
+            let data = {
+
+                title: $('#titulo').val(),
+                Name: $('#Name').val(),
+                Cedula: $('#Cedula').val(),
+                Lastname: $('#Lastname').val(),
+                opciones: $('#opciones').val(),
+                name: $('#Doctores').val(),
+                start: $('#start').val(),
+                end: $('#end').val(),
+                description: $('#descripcion').val(),
+                Orden: $('#Orden').val(),
+                Imagen: $('#Imagen').val(),
+                color: '#E5C513'
+            };
+            return data;
+        }
+
+        function agregarRegistro(data) {
+            $.ajax({
+                type: 'POST',
+                url: '/add',
+                data: data,
+                success: function (msg) {
+                    calendar.refetchEvents();
+                },
+                error: function (error) {
+                    alert("Hay un problema:" + error);
+                }
+            });
+        }
+
+
+        //Se crea una función para que el nombre de los documentos cargados 
+        //en los inputs de tipo file se muestren en la página, a través de si id
+        $(document).ready(function () {
+            $("#Orden").on('change', function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+            $("#Imagen").on('change', function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        });
+
+        function help() {
+            //Se extre el formulario donde se encuentran contenidos los campos a través de su id
+            var selectes = document.getElementById("opciones").value;//Se extrea cada elemento
+            var selectdr = document.getElementById("Doctores").value;
+            var ncedula = document.getElementById("Cedula").value;
+            var fileo = document.getElementById("Cedula").files;
+
+            if (selectes == "0") {
+                $('.myalert').alert();
+                return false;
+            } if (ncedula.length == "0" || ncedula.length < "7") {
+                return false;
+            } if (fileo == "0") {
+                return false;
+            }
+        }
+
+        $("#btnAgregar").on("click", help);
+        $('#myalert').on('close.bs.alert', help)
+
+        async function doctors(s1, s2) {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = { con: con1 };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/doctor', options2);
+            result5 = await response2.json();
+
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+
+            s2.innerHTML = "";
+
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result5.length; i++) {
+
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Nombres;
+                    opt.innerHTML = result5[i].Nombres;
+                    select.add(opt);
+
+                }
+
+            }
+
+
+        }
+
+
+        var result4 = [];
+        async function consulta() {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = { con: con1 };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/agenda', options2);
+            result4 = await response2.json();
+
+            select = document.getElementById('opciones');
+
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Especialidad;
+                opt.innerHTML = result4[i].Especialidad;
+                select.add(opt);
+
+            }
+        }
+
+    </script>
+    <!--===== MAIN JS =====-->
+    <script src="/js/main.js"></script>
+</body>
+
 </html>
