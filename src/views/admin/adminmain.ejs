@@ -1,161 +1,910 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== BOX ICONS ===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="/css/styles.css">
+  <!-- ===== BOX ICONS ===== -->
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">    
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css">
-              <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
-              <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                crossorigin="anonymous"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
-              <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
-              <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
-              <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
-              <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
-              <script src="/js/es.js"></script>
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="/css/styles.css">
 
-        <title>Administrador</title>
-    </head>
-    <body id="body-pd">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
 
-        
-        <!-- Modal -->    
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="titulo"></h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">  
-          <div class="form-group row" id="elTitulo">
-            <label for="txtTitulo" class="col-sm-2 col-form-label">Titulo</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtTitulo">
-            </div>
-          </div>
-          <div class="form-group row">              
-              
-            <label for="id" class="col-sm-2 col-form-label">Identificador</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="id" name="id">
-            </div>
-            <div class="col-sm-10">
-              <select class="custom-select mt-2" style="margin-right: 10px;" id="opciones" name="opciones" onchange="doctors('opciones','Doctores')" required="true">                                  
-                <option value="0">Seleccione Especialidad</option>                   
-              </select>
-            </div>
-            <div class="col-sm-10">
-              <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores" onchange="ayuda('Doctores','calendar')">
-                <option value="0">Seleccione Médico</option>  
-              </select>
-            </div>             
-            <label for="txtHoraInicio" class="col-sm-2 col-form-label">Horario de Inicio</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtHoraInicio" name="txtHoraInicio">
-            </div>
-            <label for="txtHoraFin" class="col-sm-2 col-form-label">Horario de Fin</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtHoraFin" name="txtHoraFin">
-            </div>      
-          </div>    
-        
-        </div>
-        <div class="modal-footer">
-          <button type="submit" id="btnAgregar" class="btn btn-success">Agregar</button>
-          <button type="button" id="btnModificar" class="btn btn-warning">Modificar</button>
-          <button type="button" id="btnEliminar" class="btn btn-danger">Eliminar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        </div>
-      </div>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
+    integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
+  <!-- ===== SWEETALERT2 ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+  <title>Administrador</title>
+</head>
+
+<body id="body-pd">
+
+  <header class="header" id="header">
+    <div class="header__toggle">
+      <i class='bx bx-menu' id="header-toggle"></i>
     </div>
+
+    <div class="header__img">
+      <img src="/images/HUN.jpg" alt="">
+    </div>
+  </header>
+
+  <div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+      <div>
+        <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
+          <i class='bx bx-layer nav__logo-icon'></i>
+          <span class="nav__logo-name">
+            Hospital<br>
+            Universidad del<br>
+            Norte
+          </span>
+        </a>
+      </div>
+      <a href="#" onclick="logOut()" class="nav__link">
+        <i class='bx bx-log-out nav__icon'></i>
+        <span class="nav__name">Cerrar sesión</span>
+      </a>
+    </nav>
   </div>
+  <h2> Bienvenido <%=user.name%>
+  </h2>
 
-        <header class="header" id="header">
-            <div class="header__toggle">
-                <i class='bx bx-menu' id="header-toggle"></i>
-            </div>
-
-            <div class="header__img">
-                <img src="/images/HUN.jpg" alt="">
-            </div>
-        </header>
-
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div>
-                    <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
-                        <i class='bx bx-layer nav__logo-icon'></i>
-                        <span class="nav__logo-name">
-                            Hospital<br> 
-                            Universidad del<br>
-                            Norte
-                        </span>
-                    </a>
-                </div>
-                <a href="#" onclick="logOut()" class="nav__link">
-                    <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Cerrar sesión</span>
-                </a>
-            </nav>
-        </div>
-        <h2> Bienvenido <%=user.name%></h2>
-
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-10"></div>
-      <div class="col-md-12">
-        <form method="POST">
-          <div id='calendar'></div>
-        </form>
+  <div class="col-md-12" style="margin: 20px;">
+    <h1> Horario de doctores</h1>
+    <form method="POST" action="/createAdmin">
+      <div class="col-6 col-sm-6" style="margin-top: 20px;">
+        <select class="custom-select mt-2" style="margin-right: 35px;" id="opciones" name="opciones"
+          onchange="doctors('opciones','Doctores')" required="true">
+          <option value="0">
+            Seleccione Especialidad
+          </option>
+        </select>
       </div>
-      <div class="col-md-10"></div>
-    </div>
+      <div class="col-6 col-sm-6" style="margin-top: 20px;">
+        <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores">
+          <option value="0">
+            Seleccione Médico
+          </option>
+        </select>
+      </div>
+      <table class="table table-bordered table-hover table-responsive" id="Table">
+        <thead style="justify-content: center;">
+          <tr>
+            <th>Día</th>
+            <th>Rango de horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Lunes
+            </td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <label for="H1" class="form-label">Hora Inicio</label>
+                  <input type="text" class="form-control" id="H1" name="H1" placeholder="Hora de Inicio"
+                  autocomplete="off"onkeydown="return false">
+                </div>
+                <div class="col">
+                  <label for="H2" class="form-label">Hora De Fin</label>
+                  <input type="text" class="form-control" id="H2" name="H2" placeholder="Hora de Fin"
+                  autocomplete="off" onkeydown="return false">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H3" name="H3" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H4" name="H4" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H5" name="H5" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H6" name="H6" placeholder="Hora de Fin">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Martes
+            </td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <label for="H7" class="form-label">Hora Inicio</label>
+                  <input type="text" class="form-control" id="H7" name="H7" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <label for="H8" class="form-label">Hora De Fin</label>
+                  <input type="text" class="form-control" id="H8" name="H8" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H9" name="H9" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H10" name="H10" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H11" name="H11" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H12" name="H12" placeholder="Hora de Fin">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Miércoles
+            </td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <label for="H13" class="form-label">Hora Inicio</label>
+                  <input type="text" class="form-control" id="H13" name="H13" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <label for="H14" class="form-label">Hora De Fin</label>
+                  <input type="text" class="form-control" id="H14" name="H14" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H15" name="H15" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H16" name="H16" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H17" name="H17" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H18" name="H18" placeholder="Hora de Fin">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Jueves
+            </td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <label for="H19" class="form-label">Hora Inicio</label>
+                  <input type="text" class="form-control" id="H19" name="H19" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <label for="H20" class="form-label">Hora De Fin</label>
+                  <input type="text" class="form-control" id="H20" name="H20" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H21" name="H21" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H22" name="H22" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H23" name="H23" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H24" name="H24" placeholder="Hora de Fin">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Viernes
+            </td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <label for="H25" class="form-label">Hora Inicio</label>
+                  <input type="text" class="form-control" id="H25" name="H25" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <label for="H26" class="form-label">Hora De Fin</label>
+                  <input type="text" class="form-control" id="H26" name="H26" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H27" name="H27" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H28" name="H28" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H29" name="H29" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H30" name="H30" placeholder="Hora de Fin">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Sábado
+            </td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <label for="H1" class="form-label">Hora Inicio</label>
+                  <input class="form-control" id="H31" name="H31" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <label for="H2" class="form-label">Hora De Fin</label>
+                  <input class="form-control" id="H32" name="H32" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H33" name="H33" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H34" name="H34" placeholder="Hora de Fin">
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H35" name="H35" placeholder="Hora de Inicio">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" id="H36" name="H36" placeholder="Hora de Fin">
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="w-100 d-none d-md-block"></div>
+      <div class="col-12 col-sm-12">
+        <button type="submit" class="btn btn-outline-primary" id="btnAgregar"
+          style="margin-left: 42%; margin-top: 50px; margin-bottom: 20px;">ML Payasita 😎</button>
+      </div>
+    </form>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
     integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
-    crossorigin="anonymous"></script>
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+  </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+  </script>
 
   <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
   <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.min.js'></script>
-
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
   <script>
-
     document.onload = loadFunctions();
+
     function loadFunctions() {
-      consulta();
-      consult(); 
+      //consulta();
       $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
-     
+
     }
-    var result3 = [];
-    async function consult() {
-      var con1 = document.getElementById('calendar').value;
-      const consulta2 = { con: con1 };
+
+    //LUNES
+    $("#H1").timepicker({
+      timeFormat: 'HH:mm:ss',
+      interval: 30,
+      minTime: '07:00',
+      maxTime: '16:00',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+
+        var picker = $("#H2");
+        picker.timepicker('option', 'minTime', time);
+
+      }
+    });
+
+    $("#H2").timepicker({
+      timeFormat: 'HH:mm:ss',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H3");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H3").timepicker({
+      timeFormat: 'HH:mm:ss',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H4");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H4").timepicker({
+      timeFormat: 'HH:mm:ss',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H5");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H5").timepicker({
+      timeFormat: 'HH:mm:ss',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H6");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H6").timepicker({
+      timeFormat: 'HH:mm:ss',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+    });
+
+    //MARTES
+    $("#H7").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      minTime: '07:00',
+      maxTime: '16:00',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+
+        var picker = $("#H8");
+        picker.timepicker('option', 'minTime', time);
+
+      }
+    });
+
+    $("#H8").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H9");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H9").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H10");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H10").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H11");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H11").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H12");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H12").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+    });
+
+    //MIÉRCOLES
+    $("#H13").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      minTime: '07:00',
+      maxTime: '16:00',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+
+        var picker = $("#H14");
+        picker.timepicker('option', 'minTime', time);
+
+      }
+    });
+
+    $("#H14").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H15");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H15").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H16");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H16").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H17");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H17").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H18");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H18").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+    });
+
+    //JUEVES
+    $("#H19").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      minTime: '07:00',
+      maxTime: '16:00',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+
+        var picker = $("#H20");
+        picker.timepicker('option', 'minTime', time);
+
+      }
+    });
+
+    $("#H20").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H21");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H21").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H22");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H22").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H23");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H23").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H24");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H24").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+    });
+
+    //VIERNES
+    $("#H25").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      minTime: '07:00',
+      maxTime: '16:00',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+
+        var picker = $("#H26");
+        picker.timepicker('option', 'minTime', time);
+
+      }
+    });
+
+    $("#H26").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H27");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H27").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H28");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H28").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H29");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H29").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H30");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H30").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+    });
+
+    //SÁBADO
+    $("#H31").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      minTime: '07:00',
+      maxTime: '16:00',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+
+        var picker = $("#H32");
+        picker.timepicker('option', 'minTime', time);
+
+      }
+    });
+
+    $("#H32").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H33");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H33").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H34");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H34").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H35");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H35").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val() + ':' + min;
+        var picker = $("#H36");
+        picker.timepicker('option', 'minTime', time);
+      }
+    });
+
+    $("#H36").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+    });
+
+    //UNA VEZ SE PRESIONE EL BOTÓN SE MUESTRA EL ALERT CONFIRMANDO EL ENVÍO DE LOS DATOS
+    /* function enviar() {
+      Swal.fire(
+        '¡Buen trabajo!',
+        '¡Se han agregado correctamente los horarios!',
+        'success'
+      );
+    }
+    $("#btnAgregar").on("click", enviar); */
+
+    $("#H3").timepicker({
+      timeFormat: 'H:mm',
+      interval: 30,
+      maxTime: '16:30',
+      startTime: '0',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+    });
+
+    /* async function doctors(s1, s2) {
+      var con1 = document.getElementById('opciones').value;
+      const consulta2 = {
+        con: con1
+      };
       const options2 = {
         method: "POST",
         body: JSON.stringify(consulta2),
@@ -163,287 +912,61 @@
           "Content-Type": "application/json"
         }
       };
-      const response2 = await fetch('/datosAdmin', options2);
-      console.log(response2)
-      result3 = await response2.json();
+      const response2 = await fetch('/doctorAdmin', options2);
+      result5 = await response2.json();
 
-      console.log(result3)
+      var s1 = document.getElementById(s1);
+      var s2 = document.getElementById(s2);
 
-      ayuda();
+      s2.innerHTML = "";
+
+      select = document.getElementById('Doctores');
+      for (var i = 0; i < result5.length; i++) {
+
+        if (s1.value == result5[i].Especialidad) {
+          var opt = document.createElement('option');
+          opt.value = result5[i].Nombres;
+          opt.innerHTML = result5[i].Nombres;
+          select.add(opt);
+
+        }
+
+      }
+
+
     }
 
 
-    var hoy = new Date();
-    var dd = String(hoy.getDate()).padStart(2, '0');
-    var mm = String(hoy.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = hoy.getFullYear();
-    hoy = yyyy + '-' + mm + '-' + dd;
-    // document.addEventListener('DOMContentLoaded', function() {
-    function ayuda() {
-      console.log(result3)
-      var data = [];
-      var j = 0;
-
-     
-      //Se realiza el ciclo for del json contenido en la variable result
-      for (var i in result3) {
-        
-          var dataSource = new Object(); 
-          dataSource.id = result3[i].ideventos;         
-          dataSource.title = result3[i].Titulo;
-          dataSource.especialidad = result3[i].Especialidad;
-          dataSource.medico = result3[i].Medico;
-          dataSource.start = result3[i].FechaI;
-          dataSource.end = result3[i].FechaF;          
-          dataSource.color = '#FF5340';
-
-          data[j] = dataSource;
-          j++;
-        
-      }
-      //En esta función se agregan los eventos contenidos en data
-      $('#calendar').fullCalendar({
-        viewRender: function (view) {
-          console.log(data)
-
-
-          // TODO: Validar los datos
-          $('#calendar').fullCalendar('destroy');
-          $('#calendar').fullCalendar('removeEvents');
-          $('#calendar').fullCalendar('addEventSource', data);
-          $('#calendar').fullCalendar('rerenderEvents');
-        },
-      })
-
-      var clickedRef = 0;
-      var enviar = document.getElementById("#btnAgregar");
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-
-        locale: 'es',
-        themeSystem: 'bootstrap',
-        buttonIcons: false,
-        addEventSource: true,
-        editable: true,
-        selectable: false,
-        initialView: 'dayGridMonth',
-        initialDate: hoy,
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        dateClick: function (info) {
-          // var moment = $('#calendar').fullCalendar('getDate');     
-          // $('#txtFecha').val(info.dateStr);
-          $('#exampleModal').modal();
-          // calendar.addEvent({ title: 'eventox', date: info.dateStr });
-        },
-
-        eventClick: function (info) {
-          var eventObj = info.event;
-
-          if (eventObj.url) {
-            alert(
-              'Clicked ' + eventObj.title + '.\n' +
-              'Will open ' + eventObj.url + ' in a new tab'
-            );
-
-            window.open(eventObj.url);
-
-            info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
-          } else {            
-            var FechaInicio = dateFormat(eventObj.start);
-            var FechaFin = dateFormat(eventObj.end);
-            $('#id').val(eventObj.id);
-            $('#txtTitulo').val(eventObj.title),
-            $('#opciones').val(eventObj.extendedProps.especialidad),
-            $('#Doctores').val(eventObj.extendedProps.medico),
-            $('#txtHoraInicio').val(FechaInicio),
-            $('#txtHoraFin').val(FechaFin),      
-            console.log(eventObj.id)
-            $('#exampleModal').modal();       
-          }
-        },
-
-        events: data,
-
-
-        eventColor: '#18E734',
-        color: 'black',     // an option!
-        textColor: 'black'
-
-      });
-      // Función para formatear las fechas para los inputs
-      function dateFormat(df) {
-        var date = new Date(df);
-        var day = date.getDate();
-        var month = date.getMonth()+1;        
-        var year = date.getFullYear();
-        var hour = date.getHours();
-        var min = date.getMinutes();
-        var sec = date.getSeconds()
-
-        month = (month<10)?"0"+month:month;
-        day = (day<10)?"0"+day:day;
-        hour = (hour<10)?"0"+hour:hour;
-        min = (min<10)?"0"+min:min;
-        sec = (sec<10)?"0"+sec:sec;
-
-        return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
-
-      }
-
-      calendar.render();
-
-      $('#btnAgregar').click(function () {
-      let data = recuperarDatosFormulario();
-      console.log(data)
-      agregarRegistro(data);
-      // $("#modalEventos").modal('hide');
-      })
-
-      $('#btnEliminar').click(function () {
-      let data = recuperarDatosFormulario();
-      console.log(data)
-      eliminarRegistro(data);
-      // $("#modalEventos").modal('hide');
-      })
-
-      $('#btnModificar').click(function () {
-      let data = recuperarDatosFormulario();
-      console.log(data)
-      modificarRegistro(data);
-      // $("#modalEventos").modal('hide');
-      })
-
-    function recuperarDatosFormulario() {
-      let data = {
-        id: $('#id').val(),
-        title: $('#txtTitulo').val(),
-        especialidad: $('#opciones').val(),
-        medico: $('#Doctores').val(),
-        FechaI: $('#txtHoraInicio').val(),
-        FechaF: $('#txtHoraFin').val(),        
-        Color: '#FF5340',
+    var result4 = [];
+    async function consulta() {
+      var con1 = document.getElementById('opciones').value;
+      const consulta2 = {
+        con: con1
       };
-      return data;
-    }
-
-    function agregarRegistro(data) {
-      $.ajax({
-        type: 'POST',
-        url: '/addAdmin',
-        data: data,
-        success: function (msg) {
-          $('#exampleModal').modal('toggle');  
-          calendar.refetchEvents();
-          console.log('Envío exitoso!!!')
-          // calendar.refetchEvents();
-        },
-        error: function (error) {
-          alert("Hay un problema:" + error);
+      const options2 = {
+        method: "POST",
+        body: JSON.stringify(consulta2),
+        headers: {
+          "Content-Type": "application/json"
         }
-      });
-    }
+      };
+      const response2 = await fetch('/agendaAdmin', options2);
+      result4 = await response2.json();
 
-    function eliminarRegistro(data) {
-      $.ajax({
-        type: 'POST',
-        url: '/delate/:ideventos',
-        data: data,
-        success: function (msg) {
-          $('#exampleModal').modal('toggle');  
-          calendar.refetchEvents();
-          console.log('Envío exitoso!!!')
-          // calendar.refetchEvents();
-        },
-        error: function (error) {
-          alert("Hay un problema:" + error);
-        }
-      });
-    }
+      select = document.getElementById('opciones');
 
-    function modificarRegistro(data) {
-      $.ajax({
-        type: 'POST',
-        url: '/actualizar/:ideventos',
-        data: data,
-        success: function (msg) {
-          $('#exampleModal').modal('toggle');  
-          calendar.refetchEvents();
-          console.log('Envío exitoso!!!')
-          // calendar.refetchEvents();
-        },
-        error: function (error) {
-          alert("Hay un problema:" + error);
-        }
-      });
-    }
+      for (var i = 0; i < result4.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = result4[i].Especialidad;
+        opt.innerHTML = result4[i].Especialidad;
+        select.add(opt);
 
-    }
-
-    async function doctors(s1, s2) {
-        var con1 = document.getElementById('opciones').value;
-				const consulta2 = { con: con1 };
-				const options2 = {
-					method: "POST",
-					body: JSON.stringify(consulta2),
-					headers: {
-						"Content-Type": "application/json"
-					}
-				};
-				const response2 = await fetch('/doctorAdmin', options2);
-				result5 = await response2.json();	
-            
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-            
-            s2.innerHTML = "";
-           
-                select = document.getElementById('Doctores');
-                for (var i = 0; i<result5.length; i++){
-                    
-                    if (s1.value == result5[i].Especialidad) {
-                    var opt = document.createElement('option');
-                    opt.value = result5[i].Nombres;
-                    opt.innerHTML = result5[i].Nombres;
-                    select.add(opt);
-     
-                    }
-                                  
-                }           
-                	
-           
-        }
-
-
-        var result4 = [];
-        async function consulta() {
-				var con1 = document.getElementById('opciones').value;
-				const consulta2 = { con: con1 };
-				const options2 = {
-					method: "POST",
-					body: JSON.stringify(consulta2),
-					headers: {
-						"Content-Type": "application/json"
-					}
-				};
-				const response2 = await fetch('/agendaAdmin', options2);
-				result4 = await response2.json();
-				
-                select = document.getElementById('opciones');
-
-                for (var i = 0; i<result4.length; i++){
-                    var opt = document.createElement('option');
-                    opt.value = result4[i].Especialidad;
-                    opt.innerHTML = result4[i].Especialidad;
-                    select.add(opt);
-                                  
-                }	
-            }    
+      }
+    } */
   </script>
-        <!--===== MAIN JS =====-->
-        <script src="/js/main.js"></script>
-    </body>
+  <!--===== MAIN JS =====-->
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+
 </html>

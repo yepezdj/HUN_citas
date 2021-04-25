@@ -49,19 +49,23 @@ let initWebRoutes = (app) => {
     router.get('/update/:idpa',userController.edit);
     router.post('/update/:idpa',userController.update); 
 
+    router.post('/verifyUser', userController.verifyUser);
+
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    
     router.get('/aceptar/:idpa',conciliatorController.datosaceptar);
     router.post('/aceptar/:idpa',conciliatorController.aceptar);
     router.get('/declinar/:idpa',conciliatorController.datosdeclinar);
     router.post('/declinar/:idpa',conciliatorController.declinar);
 
-    //RUTAS PARA LA PÁGINA DE ADMINISTRADOR   
-    router.post('/agendaAdmin',adminController.espeAdmin);
+    //RUTAS PARA LA PÁGINA DE ADMINISTRADOR  
+    router.post('/createAdmin', adminController.createAdmin);
+    
+    /* router.post('/agendaAdmin',adminController.espeAdmin);
     router.post('/doctorAdmin',adminController.drAdmin);
     router.post('/datosAdmin',adminController.datosAdmin);
     router.post('/addAdmin',adminController.añadirHorarios);
     router.post('/delate/:ideventos',adminController.delateAdmin);
-    router.post('/actualizar/:ideventos',adminController.updateAdmin);
+    router.post('/actualizar/:ideventos',adminController.updateAdmin); */
 
     return app.use("/", router);
 };

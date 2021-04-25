@@ -32,7 +32,7 @@ let createNewUser = (user) => {
                     ' INSERT INTO user set ? ', userItem,
                     function(err, rows) {
                         if (err) {
-                            reject(false)
+                            reject(`No se pudo crear el usuario`)
                         }
                         resolve("Create a new user successful");
                     }
