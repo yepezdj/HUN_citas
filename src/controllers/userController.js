@@ -49,25 +49,65 @@ let verifyUser = async (req, res) => {
     if (day === 6 || day === 0) {
         console.log('es finde');
     } else if (!festivo) {
+        var pos = 0;
         //si no es festivo
 
-        //ver si hay alguna cita con ese medico ese dia y traerla
-    
-
-        //traer horarios disponibles
+        //traer horarios disponibles ++++
         let schedule = await userService.bringSchedule(day, nameDoc, EspeDoc);
-        var pos = 0;
-        var vec_hora_ini=[];
-
-        Object.keys(schedule).forEach(function(key) {
-            vec_hora_ini[pos]= schedule[key].hora_ini;       
-            pos++;   
+        pos = 0;
+        var vec_hora_ini = [];
+        Object.keys(schedule).forEach(function (key) {
+            vec_hora_ini[pos] = schedule[key].hora_ini;
+            pos++;
         });
-
+        console.log('schedule');
         console.log(vec_hora_ini);
 
-      
-        
+        //CITAS PROGRAMADAS y  CITAS PENDIENTES ---
+        let apointment = await userService.consultApo(fecha, nameDoc, EspeDoc);
+        pos = 0;
+        var vec_apointment = [];
+        Object.keys(apointment).forEach(function (key) {
+            vec_apointment[pos] = apointment[key].hora_ini;
+            pos++;
+        });
+        console.log('citas');
+        console.log(vec_apointment);
+
+        //VER EXEPCIONES-------------
+        let exception = await userService.consultException(fecha, nameDoc, EspeDoc, 'Excepcion');
+        pos = 0;
+        var vec_exception = [];
+        Object.keys(exception).forEach(function (key) {
+            vec_exception[pos] = exception[key].hora_ini;
+            pos++;
+        });
+        console.log('exception');
+        console.log(vec_exception);
+
+        //VER ADICIONES+++++++++
+        let adicion = await userService.consultException(fecha, nameDoc, EspeDoc, 'Adicion');
+        pos = 0;
+        var vec_adicion = [];
+        Object.keys(adicion).forEach(function (key) {
+            vec_adicion[pos] = adicion[key].hora_ini;
+            pos++;
+        });
+        console.log('adicion');
+        console.log(vec_adicion);
+
+        ///VECTOR A MOSTRAR
+        vec_hora_ini = vec_hora_ini.filter(function (element) {
+            return !vec_exception.includes(element);
+        });
+        vec_hora_ini = vec_hora_ini.filter(function (element) {
+            return !vec_apointment.includes(element);
+        });
+        var vec_hora_ini = vec_hora_ini.concat(vec_adicion);
+        var vec_hora_ini = vec_hora_ini.filter((item, pos) => vec_hora_ini.indexOf(item) === pos)
+        console.log('total');
+        console.log(vec_hora_ini);
+
 
     }
 

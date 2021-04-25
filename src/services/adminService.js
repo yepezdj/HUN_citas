@@ -4,6 +4,15 @@ let createNewSchedule = async (horario) => {
     const interval = "30";
     //console.log(horario);
     if (horario.hora_ini1 !== '' && horario.hora_fin1 !== '') {
+        var view1 = {
+            dia: horario.dia,
+            hora_ini: horario.hora_ini1,
+            hora_fin: horario.hora_fin1,
+            Doctor: horario.doc,
+            Especialidad: horario.espec     
+        }
+        await saveViewSchedule(view1);
+
         var starttime = horario.hora_ini1;
         var endtime = horario.hora_fin1;
         var timeslots1 = [starttime];
@@ -17,6 +26,15 @@ let createNewSchedule = async (horario) => {
         console.log(timeslots1);
     }
     if (horario.hora_ini2 !== '' && horario.hora_fin2 !== '') {
+        var view2 = {
+            dia: horario.dia,
+            hora_ini: horario.hora_ini2,
+            hora_fin: horario.hora_fin2,
+            Doctor: horario.doc,
+            Especialidad: horario.espec     
+        }
+        await saveViewSchedule(view2);
+
         var starttime = horario.hora_ini2;
         var endtime = horario.hora_fin2;
         var timeslots2 = [starttime];
@@ -30,6 +48,16 @@ let createNewSchedule = async (horario) => {
         console.log(timeslots2);
     }
     if (horario.hora_ini3 !== '' && horario.hora_fin3 !== '') {
+
+        var view3 = {
+            dia: horario.dia,
+            hora_ini: horario.hora_ini3,
+            hora_fin: horario.hora_fin3,
+            Doctor: horario.doc,
+            Especialidad: horario.espec     
+        }
+        await saveViewSchedule(view3);
+
         var starttime = horario.hora_ini3;
         var endtime = horario.hora_fin3;
         var timeslots3 = [starttime];
@@ -51,7 +79,7 @@ let saveSchedule = (dia, doc, espec, horas) => {
             //create a new account
             horas.forEach(element => {
                 connection.query(
-                    `INSERT INTO horarios (dia, hora_ini, Nombres, Especialidad) 
+                    `INSERT INTO horarios (dia, hora_ini, Doctor, Especialidad) 
                     VALUES ("${dia}", "${element}", "${doc}", "${espec}")`,
                     function(err, rows) {
                         if (err) {
@@ -65,8 +93,28 @@ let saveSchedule = (dia, doc, espec, horas) => {
             reject(e);
         }
     });
-
 }
+
+let saveViewSchedule = (view) => {
+    return new Promise(async (resolve, reject) =>{
+        try {
+            console.log(view);
+            //create a new account
+            connection.query(
+                ' INSERT INTO ver_horarios set ? ', view,
+                function(err, rows) {
+                    if (err) {
+                        reject(false)
+                    }
+                    resolve("New schedule view created");
+                }
+            );          
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
 
 function addMinutes (time, minutes) {
     var date = new Date(new Date('01/01/2015 ' + time).getTime() + minutes * 60000);
@@ -80,22 +128,5 @@ module.exports = {
     createNewSchedule: createNewSchedule,
     addMinutes: addMinutes
 };
-    
-    /* return new Promise(async (resolve, reject) =>{
-        try {
-            console.log(horario);
-            //create a new account
-            connection.query(
-                ' INSERT INTO horarios set ? ', horario,
-                function(err, rows) {
-                    if (err) {
-                        reject(false)
-                    }
-                    resolve("Create a new SCHEDULE successful");
-                }
-            );          
-        } catch (e) {
-            reject(e);
-        }
-    }); */
+
 
