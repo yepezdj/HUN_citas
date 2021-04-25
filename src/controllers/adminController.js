@@ -1,4 +1,3 @@
-import connection from "../configs/connectDB";
 import adminService from "../services/adminService"
 
 let getAdmin = (req, res) =>{
@@ -13,13 +12,6 @@ let getAdmin = (req, res) =>{
 	} 
 }
 
-function addMinutes(time, minutes) {
-    var date = new Date(new Date('01/01/2015 ' + time).getTime() + minutes * 60000);
-    var tempTime = ((date.getHours().toString().length == 1) ? '0' + date.getHours() : date.getHours()) + ':' +
-      ((date.getMinutes().toString().length == 1) ? '0' + date.getMinutes() : date.getMinutes()) + ':' +
-      ((date.getSeconds().toString().length == 1) ? '0' + date.getSeconds() : date.getSeconds());
-    return tempTime;
-}
 
 
 let createAdmin = async (req, res) =>{
@@ -44,5 +36,4 @@ let createAdmin = async (req, res) =>{
 module.exports = {    
     getAdmin: getAdmin,
     createAdmin: createAdmin,
-    addMinutes: addMinutes
 }

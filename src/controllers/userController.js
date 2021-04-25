@@ -52,6 +52,7 @@ let verifyUser = async (req, res) => {
         //si no es festivo
 
         //ver si hay alguna cita con ese medico ese dia y traerla
+    
 
         //traer horarios disponibles
         let schedule = await userService.bringSchedule(day, nameDoc, EspeDoc);
@@ -62,17 +63,10 @@ let verifyUser = async (req, res) => {
             vec_hora_ini[pos]= schedule[key].hora_ini;       
             pos++;   
         });
-        
+
         console.log(vec_hora_ini);
 
       
-
-           
-            
-            
-    
-          
-        
         
 
     }

@@ -1,6 +1,4 @@
 import connection from "../configs/connectDB";
-import adminController from "../controllers/adminController"
-
 
 let createNewSchedule = async (horario) => {
     const interval = "30";
@@ -11,7 +9,7 @@ let createNewSchedule = async (horario) => {
         var timeslots1 = [starttime];
 
         while (starttime != endtime) {
-            starttime = adminController.addMinutes(starttime, interval);
+            starttime = addMinutes(starttime, interval);
             timeslots1.push(starttime);
         }
         timeslots1.pop();
@@ -24,7 +22,7 @@ let createNewSchedule = async (horario) => {
         var timeslots2 = [starttime];
 
         while (starttime != endtime) {
-            starttime = adminController.addMinutes(starttime, interval);
+            starttime = addMinutes(starttime, interval);
             timeslots2.push(starttime);
         }
         timeslots2.pop();
@@ -37,7 +35,7 @@ let createNewSchedule = async (horario) => {
         var timeslots3 = [starttime];
 
         while (starttime != endtime) {
-            starttime = adminController.addMinutes(starttime, interval);
+            starttime = addMinutes(starttime, interval);
             timeslots3.push(starttime);
         }
         timeslots3.pop();
@@ -62,8 +60,7 @@ let saveSchedule = (dia, doc, espec, horas) => {
                         resolve("Create a new SCHEDULE successful");
                     }
                 );     
-            });
-                    
+            });          
         } catch (e) {
             reject(e);
         }
@@ -71,8 +68,34 @@ let saveSchedule = (dia, doc, espec, horas) => {
 
 }
 
-
+function addMinutes (time, minutes) {
+    var date = new Date(new Date('01/01/2015 ' + time).getTime() + minutes * 60000);
+    var tempTime = ((date.getHours().toString().length == 1) ? '0' + date.getHours() : date.getHours()) + ':' +
+      ((date.getMinutes().toString().length == 1) ? '0' + date.getMinutes() : date.getMinutes()) + ':' +
+      ((date.getSeconds().toString().length == 1) ? '0' + date.getSeconds() : date.getSeconds());
+    return tempTime;
+}
 
 module.exports = {
     createNewSchedule: createNewSchedule,
+    addMinutes: addMinutes
 };
+    
+    /* return new Promise(async (resolve, reject) =>{
+        try {
+            console.log(horario);
+            //create a new account
+            connection.query(
+                ' INSERT INTO horarios set ? ', horario,
+                function(err, rows) {
+                    if (err) {
+                        reject(false)
+                    }
+                    resolve("Create a new SCHEDULE successful");
+                }
+            );          
+        } catch (e) {
+            reject(e);
+        }
+    }); */
+
