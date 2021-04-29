@@ -22,6 +22,7 @@ let createNewSchedule = async (horario) => {
             timeslots1.push(starttime);
         }
         timeslots1.pop();
+        console.log(timeslots1);
         await saveSchedule(horario.dia, horario.doc, horario.espec, timeslots1);
         console.log(timeslots1);
     }
@@ -73,9 +74,58 @@ let createNewSchedule = async (horario) => {
 
 };
 
+let createNewException = async (exception) => {
+    const interval = "30";
+    //console.log(exception);
+    if (exception.hora_ini1 !== '' && exception.hora_fin1 !== '') {  
+
+        var starttime = exception.hora_ini1;
+        var endtime = exception.hora_fin1;
+        var timeslots1 = [starttime];
+
+        while (starttime != endtime) {
+            starttime = addMinutes(starttime, interval);
+            timeslots1.push(starttime);
+        }
+        timeslots1.pop();
+        //console.log(timeslots1);
+        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots1);
+        console.log(timeslots1);
+    }
+    if (exception.hora_ini2 !== '' && exception.hora_fin2 !== '') {
+        var starttime = exception.hora_ini2;
+        var endtime = exception.hora_fin2;
+        var timeslots2 = [starttime];
+
+        while (starttime != endtime) {
+            starttime = addMinutes(starttime, interval);
+            timeslots2.push(starttime);
+        }
+        timeslots2.pop();
+        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots2);
+        console.log(timeslots2);
+    }
+    if (exception.hora_ini3 !== '' && exception.hora_fin3 !== '') {
+
+        var starttime = exception.hora_ini3;
+        var endtime = exception.hora_fin3;
+        var timeslots3 = [starttime];
+
+        while (starttime != endtime) {
+            starttime = addMinutes(starttime, interval);
+            timeslots3.push(starttime);
+        }
+        timeslots3.pop();
+        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots3);
+        console.log(timeslots3);
+    }
+
+};
+
 let saveSchedule = (dia, doc, espec, horas) => {
     return new Promise(async (resolve, reject) =>{
         try {
+            console.log(horas);
             //create a new account
             horas.forEach(element => {
                 connection.query(
@@ -83,13 +133,38 @@ let saveSchedule = (dia, doc, espec, horas) => {
                     VALUES ("${dia}", "${element}", "${doc}", "${espec}")`,
                     function(err, rows) {
                         if (err) {
-                            reject(false)
+                            reject(false)   
                         }
                         resolve("Create a new SCHEDULE successful");
                     }
                 );     
             });          
         } catch (e) {
+            console.log(e);
+            reject(e);
+        }
+    });
+}
+
+let saveException = (fecha, tipo, doc, espec, horas) => {
+    return new Promise(async (resolve, reject) =>{
+        try {
+            console.log(horas);
+            //create a new account
+            horas.forEach(element => {
+                connection.query(
+                    `INSERT INTO excepciones (fecha, hora_ini, Doctor, Especialidad, Tipo) 
+                    VALUES ("${fecha}", "${element}", "${doc}", "${espec}","${tipo}")`,
+                    function(err, rows) {
+                        if (err) {
+                            reject(false)   
+                        }
+                        resolve("Create a new EXCEPTION successful");
+                    }
+                );     
+            });          
+        } catch (e) {
+            console.log(e);
             reject(e);
         }
     });
@@ -98,7 +173,7 @@ let saveSchedule = (dia, doc, espec, horas) => {
 let saveViewSchedule = (view) => {
     return new Promise(async (resolve, reject) =>{
         try {
-            console.log(view);
+            //console.log(view);
             //create a new account
             connection.query(
                 ' INSERT INTO ver_horarios set ? ', view,
@@ -126,7 +201,6 @@ function addMinutes (time, minutes) {
 
 module.exports = {
     createNewSchedule: createNewSchedule,
+    createNewException:createNewException,
     addMinutes: addMinutes
 };
-
-

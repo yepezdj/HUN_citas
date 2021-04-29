@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 
     <!-- ===== JQUERY ===== -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -42,6 +43,7 @@
         <div class="header__img">
             <img src="/images/HUN.jpg" alt="">
         </div>
+
     </header>
 
     <div class="l-navbar" id="nav-bar">
@@ -55,30 +57,30 @@
                         Norte
                     </span>
                 </a>
+
                 <div class="nav__list">
-                    <a href="/consultarCitas" class="nav__link">
+                    <a href="/conciliator/conciliatormain" class="nav__link">
                         <i class='bx bx-folder nav__icon'></i>
-                        <span class="nav__name">Citas aceptadas</span>
+                        <span class="nav__name">Solicitudes</span>
                     </a>
                 </div>
             </div>
-            
             <a href="#" onclick="logOut()" class="nav__link">
                 <i class='bx bx-log-out nav__icon'></i>
                 <span class="nav__name">Cerrar sesión</span>
             </a>
         </nav>
-    </div>    
+    </div>
 
     <div class="container-fluid">
-        
+
         <div class="col-md-12" style="margin-top: 80px;">
             <h4 class="title text-center mt-4">
-                Bienvenido <%=user.name%>
+                Hola <%=user.name%>
             </h4>
             <hr class="my-4">
             <div class="text-center mb-2">
-                A continuación podrá revisar las citas médicas solicitadas por los usuarios
+                A continuación podrá revisar las citas médicas agendadas hasta la fecha
             </div>
             <table id="conTable" class="table table-bordered table-responsive">
                 <thead>
@@ -93,8 +95,6 @@
                         <th>Hora</th>
                         <th>Orden</th>
                         <th>Imagen</th>
-                        <th>Aceptar solicitud</th>
-                        <th>Declinar solicitud</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,12 +138,6 @@
                                 <td>
                                     <%= info[i].Imagen %>
                                 </td>
-                                <td>
-                                    <a href="/aceptar/<%= info[i].idpa %>" class="btn btn-success">Aceptar</a>
-                                </td>
-                                <td>
-                                    <a href="/declinar/<%= info[i].idpa %>" class="btn btn-danger">Declinar</a>
-                                </td>
 
                     </tr>
                     <% } %>
@@ -165,7 +159,8 @@
 
     <script>
         $(document).ready(function () {
-            $('#conTable').DataTable({
+            $('#conTable').DataTable({ 
+                // "scrollX": true,              
                 language: {
                     processing: "Búsqueda en curso...",
                     search: "Buscar:",
@@ -175,7 +170,7 @@
                     infoFiltered: "(filtrado de _MAX_ total elementos)",
                     zeroRecords:    "No hay registros con este criterio de búsqueda",
                     infoPostFix: "",
-                    loadingRecords: "Cargando...",                   
+                    loadingRecords: "Cargando...",
                     emptyTable: "La tabla aún no contiene registros",
                     paginate: {
                         first: "Primero",

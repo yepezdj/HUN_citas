@@ -13,6 +13,7 @@ let getUser = (req, res) => {
     }
 }
 
+
 let verifyUser = async (req, res) => {
 
     const holiday2021 = ['01-01-2021', // Año Nuevo
@@ -36,12 +37,16 @@ let verifyUser = async (req, res) => {
     ];
 
 
-    var fecha = req.body.fecha;
+    var fecha = req.body.date;
+    console.log(fecha);
     var festivo = (holiday2021.indexOf(fecha) > -1);
 
-    var nameDoc = req.body.Doctores;
-    var EspeDoc = req.body.opciones;
+    var nameDoc = req.body.nameDoc;
+    console.log(nameDoc);
+    var EspeDoc = req.body.EspeDoc;
+    console.log(EspeDoc);
     var date = new Date(fecha); //dia en palabras
+    
     var day = date.getDay();
     //var year = date.getFullYear();
 
@@ -56,8 +61,9 @@ let verifyUser = async (req, res) => {
         let schedule = await userService.bringSchedule(day, nameDoc, EspeDoc);
         pos = 0;
         var vec_hora_ini = [];
+        
         Object.keys(schedule).forEach(function (key) {
-            vec_hora_ini[pos] = schedule[key].hora_ini;
+            vec_hora_ini[pos] = schedule[key].hora_ini;            
             pos++;
         });
         console.log('schedule');
@@ -67,6 +73,7 @@ let verifyUser = async (req, res) => {
         let apointment = await userService.consultApo(fecha, nameDoc, EspeDoc);
         pos = 0;
         var vec_apointment = [];
+        
         Object.keys(apointment).forEach(function (key) {
             vec_apointment[pos] = apointment[key].hora_ini;
             pos++;
@@ -74,12 +81,13 @@ let verifyUser = async (req, res) => {
         console.log('citas');
         console.log(vec_apointment);
 
-        //VER EXEPCIONES-------------
+        //VER EXCEPCIONES-------------
         let exception = await userService.consultException(fecha, nameDoc, EspeDoc, 'Excepcion');
         pos = 0;
         var vec_exception = [];
+        
         Object.keys(exception).forEach(function (key) {
-            vec_exception[pos] = exception[key].hora_ini;
+            vec_exception[pos] = exception[key].hora_ini;           
             pos++;
         });
         console.log('exception');
@@ -98,7 +106,7 @@ let verifyUser = async (req, res) => {
 
         ///VECTOR A MOSTRAR
         vec_hora_ini = vec_hora_ini.filter(function (element) {
-            return !vec_exception.includes(element);
+            return !vec_exception.includes(element);            
         });
         vec_hora_ini = vec_hora_ini.filter(function (element) {
             return !vec_apointment.includes(element);
@@ -106,12 +114,17 @@ let verifyUser = async (req, res) => {
         var vec_hora_ini = vec_hora_ini.concat(vec_adicion);
         var vec_hora_ini = vec_hora_ini.filter((item, pos) => vec_hora_ini.indexOf(item) === pos)
         console.log('total');
-        console.log(vec_hora_ini);
+        // console.log(vec_hora_ini);
 
+        var hora = vec_hora_ini
+        res.end(JSON.stringify(hora));
+        console.log(hora)
+       
+        // return vec_hora_ini;      
 
     }
 
-    return res.redirect("/user/usermain");
+    // return res.redirect("/user/usermain");
 }
 
 //Se extraen las especialidades y se convierten en formato json
@@ -146,7 +159,7 @@ let tabla = (req, res) => {
     var cedula = user.cedula;
     /* console.log(cedula); */
     // console.log(req.session.user)
-    connection.query('SELECT a.idpa, a.NombreP, a.ApellidoP, a.CedulaP, a.Especialidad, a.Doctor, a.FechaInicio, a.FechaFin, a.Orden, a.Imagen, a.Estado FROM agendamiento a WHERE a.CedulaP = ?', cedula, (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen, Estado FROM agendamiento WHERE CedulaP = ?', cedula, (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -174,7 +187,7 @@ let agendaDatos = (req, res) => {
 //Se extraen todos los campos de la tabla que contiene la información de los horarios y se convierten en formato json
 let datos = (req, res) => {
 
-    connection.query('SELECT * FROM eventos', (err, dat) => {
+    connection.query('SELECT * FROM ver_horarios', (err, dat) => {
         if (err) {
             res.json(err);
         }
@@ -201,35 +214,42 @@ let fechas = (req, res) => {
 //Se extraen mediante el req.body los elementos llenandos en la página para insertarlos en la tabla agendamiento
 let agendar = (req, res) => {
     const datos = req.body;
-    var id2 = '3';
-    var correo = req.body.email;
-    var titulo = req.body.title;
-    var doctor = req.body.name;
-    var inicio = req.body.start;
-    var fin = req.body.end;
-    var descripcion = req.body.description;
-    var name = req.body.Name;
-    var lastname = req.body.Lastname;
-    var espe = req.body.opciones;
-    var Orden = req.body.Orden;
-    var Imagen = req.body.Imagen;
+    var name = req.body.Nombre;
+    var lastname = req.body.Apellido;
     var Cedula = req.body.Cedula;
-    var Estado = 'Pendiente'
+    var correo = req.body.Correo;   
+    var doctor = req.body.Doctor; 
+    var espe = req.body.Especialidad;
+    var hora = req.body.Hora;
+    var fecha = req.body.Fecha;
+    var Orden = req.body.Orden;
+    var Imagen = req.body.Imagen;   
+    var Estado = 'Pendiente';
+    var descripcion = req.body.description;
+    var id = '3';
+    var datearray = fecha.split("-");
+    var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
     console.log(datos);
+    console.log(hora)
 
-    connection.query('INSERT INTO agendamiento (Titulo, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, FechaInicio, FechaFin, Orden, Imagen, Descripcion, Estado, Correo, idu) VALUES ("' + titulo + '","' + name + '","' + lastname + '","' + Cedula + '","' + espe + '", "' + doctor + '", "' + inicio + '", "' + fin + '","' + Orden + '", "' + Imagen + '", "' + descripcion + '", "' + Estado + '", "' + correo + '", "' + id2 + '")', (err, datos) => {
-        if (err) {
-            res.json(err);
+    connection.query(
+        `INSERT INTO agendamiento (Especialidad, Doctor, Fecha, hora_ini, Orden, Imagen, NombreP, ApellidoP, CedulaP, idu, Descripcion, Estado, Correo) 
+        VALUES ("${espe}", "${doctor}", "${newdate}", "${hora}", "${Orden}", "${Imagen}", "${name}", "${lastname}", "${Cedula}", "${id}", "${descripcion}", "${Estado}", "${correo}")`,
+        function(err, rows) {
+            if (err) {
+                res.json(err);
+            }
+            console.log(rows)
+            res.redirect('/user/usermain')
         }
-        console.log(datos);
-        // res.redirect('/');
-    });
+    );
+   
 }
 
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
 let edit = (req, res) => {
     const id = req.params.idpa;
-    connection.query('SELECT idpa, Titulo, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, FechaInicio, FechaFin, Orden, Imagen, Descripcion FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen, Descripcion, Correo FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -242,18 +262,22 @@ let edit = (req, res) => {
 
 //Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
 let update = (req, res) => {
-    const id = req.body.id;
-    const t = req.body.title;
-    const c = req.body.Cedula;
-    const e = req.body.opciones;
-    const d = req.body.name;
-    const pi = req.body.start;
-    const pf = req.body.end;
-    const o = req.body.Orden;
-    const i = req.body.Imagen;
-    const dc = req.body.description;
-    console.log(e)
-    connection.query("UPDATE agendamiento SET Titulo = ?, CedulaP = ?, Especialidad = ?, Doctor = ?, FechaInicio = ?, FechaFin = ?, Orden = ?, Imagen = ?, Descripcion = ? WHERE idpa = ?", [t, c, e, d, pi, pf, o, i, dc, id], (err, datos) => {
+    const id = req.body.id;    
+    var name = req.body.Nombre;
+    var lastname = req.body.Apellido;
+    var Cedula = req.body.Cedula;
+    var correo = req.body.Correo;   
+    var doctor = req.body.Doctor; 
+    var espe = req.body.Especialidad;
+    var hora = req.body.Hora;
+    var fecha = req.body.Fecha;
+    var Orden = req.body.Orden;
+    var Imagen = req.body.Imagen;   
+    var Estado = 'Pendiente';
+    var descripcion = req.body.description;    
+    var datearray = fecha.split("-");
+    var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+    connection.query("UPDATE agendamiento SET CedulaP = ?, Especialidad = ?, Doctor = ?, fecha = ?, hora_ini = ?, Orden = ?, Imagen = ?, Descripcion = ? WHERE idpa = ?", [Cedula, espe, doctor, newdate, hora, Orden, Imagen, descripcion, id], (err, datos) => {
         console.log(datos);
         res.redirect('/consultar');
     });

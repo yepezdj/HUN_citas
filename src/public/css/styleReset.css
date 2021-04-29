@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Aleo:wght@400;600;700&display=swap");
+
+:root{
+  /*===== Colors =====*/
+  --first-color: #008DCA;
+  --first-color-light: #99d1e9;
+  --white-color: #F7F6FB;
+  
+  /*===== Font and typography =====*/
+  --body-font: 'Aleo';
+
+}
+
+body{
+  height: 100vh;
+  background: var(--first-color) !important;
+  display: flex;
+  font-family: var(--body-font);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card{
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.img-left{
+  width: 45%;
+  background: center;
+  background-size: cover;
+}
+
+.card-body{
+  padding: 2rem;
+  font-family: var(--body-font);
+}
+
+.title{
+  margin-bottom: 2rem;
+}
+
+.form-input{
+  position: relative;
+}
+
+.form-input input{
+  width: 100%;
+  height: 45px;
+  font-family: var(--body-font);
+  padding-left: 40px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  box-shadow: none;
+  border: 1px solid #00000020;
+  border-radius: 50px;
+  outline: none;
+  background: transparent;
+}
+
+.form-input span{
+  position: absolute;
+  top: 10px;
+  padding-left: 15px;
+  color: var(--first-color);
+}
+
+.form-input input::placeholder{
+  font-family: var(--body-font);
+  color: black;
+  padding-left: 0px;
+}
+
+.form-input input:focus, .form-input input:valid{
+  font-family: var(--body-font);
+  border: 2px solid var(--first-color);
+}
+
+.form-input input:focus::placeholder{
+  font-family: var(--body-font);
+  color: #454b69;
+}
+
+
+.form-box button[type="submit"]{
+  margin-top: 10px;
+  border: none;
+  font-family: var(--body-font);
+  cursor: pointer;
+  border-radius: 50px;
+  background: var(--first-color);
+  color: var(--white-color);
+  font-size: 90%;
+  font-weight: bold;
+  letter-spacing: .1rem;
+  transition: 0.5s;
+  padding: 12px;
+}
+
+.form-box button[type="submit"]:hover{
+  background: var(--first-color);
+}
+
+.forget-link, .register-link{
+  color: var(--first-color);
+  font-family: var(--body-font);
+  font-weight: bold;
+}
+
+.forget-link:hover, .register-link:hover{
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+

@@ -64,8 +64,8 @@
                         <th>N° de identificación</th>
                         <th>Especialidad</th>
                         <th>Doctor</th>
-                        <th>Fecha de inico</th>
-                        <th>Fecha de fin</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
                         <th>Orden</th>
                         <th>Imagen</th>                       
                         <th>Acciones</th>
@@ -96,10 +96,10 @@
                                     <%= data[i].Doctor %>
                                 </td>
                                 <td>
-                                    <%= data[i].FechaInicio %>
+                                    <%= data[i].fecha %>
                                 </td>
                                 <td>
-                                    <%= data[i].FechaFin %>
+                                    <%= data[i].hora_ini %>
                                 </td>
                                 <td> <a href="#" onclick="window.open('<%= data[i].Orden %>', '_blank', 'fullscreen=yes'); return false;"><%= data[i].Orden %></a>
                                     

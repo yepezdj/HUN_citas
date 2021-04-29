@@ -65,8 +65,8 @@ let consultException = (fecha, nameDoc, EspeDoc, type) => {
             var str = convert(fecha);
             //console.log(str);
             connection.query(
-                `SELECT hora_ini from excepciones WHERE dia = "${str}" AND Doctor = "${nameDoc}"
-                AND Especialidad = "${EspeDoc}" AND Especialidad = "${type}"`,
+                `SELECT hora_ini from excepciones WHERE fecha = "${str}" AND Doctor = "${nameDoc}"
+                AND Especialidad = "${EspeDoc}" AND Tipo = "${type}"`,
                 function (err, rows) {
                     if (err) {
                         reject(err)

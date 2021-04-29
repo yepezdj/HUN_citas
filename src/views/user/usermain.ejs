@@ -9,21 +9,27 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styleuser.css">
 
     <!-- ===== BOOTSTRAP ===== -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+    <!-- ===== SWEETALERT2 ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
     <!-- ===== DATEPICKER ===== -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
+
 
     <title>Usuario</title>
 </head>
 
-<body id="body-pd">   
+<body id="body-pd">
     <header class="header" id="header">
         <div class="header__toggle">
             <i class='bx bx-menu' id="header-toggle"></i>
@@ -32,7 +38,7 @@
         <div class="header__img">
             <img src="/images/HUN.jpg" alt="">
         </div>
-    </header>     
+    </header>
 
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
@@ -58,69 +64,185 @@
                 <span class="nav__name">Cerrar sesión</span>
             </a>
         </nav>
-    </div>  
-    <div class="row" style="margin-top: 80px ;"> 
-    <h2> Bienvenido <%=user.name%></h2>
-    </div>  
-    
+    </div>
+
     <!-- ===== FORMULARIO ===== -->
-    <div class="row" style="margin-left: 250px;">                            
-        <div class="col-md-8">
-            <div class="card text-primary">
-                <div class="card-body card-border-primary" style="width: auto; height: auto; margin: 30px;">   
-                    <form method="POST" action="/verifyUser">                    
-                        <div class="mb-4" style="margin: 50px;">
-                            <label for="Name" class="form-label">Nombres del paciente</label>
-                            <input type="text" class="form-control" id="Name" name="Name" 
-                            value="<%= user.name %>">
+    <div class="container">
+        <div class="row px-3">
+            <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+                <div class="card-body">
+                    <h4 class="title text-center mt-4">
+                        Hola <%=user.name%>
+                    </h4>
+                    <hr class="my-4">
+                    <div class="text-center mb-2">
+                        A continuación podrá completar toda la información requerida para el agendamiento de su cita
+                        médica
+                    </div>
+                    <hr class="my-4">
+                    <div class="form-input">
+                        <label for="Name" class="form-label">Nombres del paciente</label>
+                        <input type="text" class="form-control" id="Name" name="Name" value="<%= user.name %>">
+                    </div>
+                    <div class="form-input">
+                        <label for="Lastname" class="form-label">Apellidos del paciente</label>
+                        <input type="text" class="form-control" id="Lastname" name="Lastname"
+                            value="<%= user.last_name %>">
+                    </div>
+                    <div class="form-input">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>">
+                    </div>
+                    <div class="form-input">
+                        <label for="Cedula" class="form-label">N° de identificación del paciente</label>
+                        <input type="number" class="form-control" id="Cedula" name="Cedula"
+                            placeholder="Sin puntos ni comas ni guiones" required>
+                    </div>
+                    <div class="form-input">
+                        <select class="custom-select mt-2" style="margin-right: 35px;margin-top: 10px;" id="Cita"
+                            name="Cita">
+                            <option value="0">Seleccione tipo de cita médica</option>
+                            <option value="Ayudas diagnósticas">Ayudas diagnósticas</option>
+                            <option value="Proceso de dermatología">Proceso de dermatología</option>
+                            <option value="Cita común (Especialista o médico general)">Cita común (Especialista o médico
+                                general)</option>
+                        </select>
+                    </div>
+                    <div class="form-input" id="div" style="display: none; margin-top: 20px;">
+                        <select class="custom-select mt-2" style="margin-right: 35px;" id="Modo" name="Modo">
+                            <option value="0">Seleccione modalidad</option>
+                            <option value="Virtual">Virtual</option>
+                            <option value="Presencial">Presencial</option>
+                        </select>
+                    </div>
+                    <div class="form-input" style="margin-top: 20px;">
+                        <select class="custom-select mt-2" style="margin-right: 35px;" id="Factura" name="Factura">
+                            <option value="0">Seleccione tipo de facturación</option>
+                            <option value="Prepagada">Prepagada</option>
+                            <option value="EPS">EPS</option>
+                            <option value="ARL">ARL</option>
+                            <option value="Particular">Particular</option>
+                        </select>
+                    </div>
+                    <div class="form-input" style="margin-top: 20px;">
+                        <select class="custom-select mt-2" style="margin-right: 10px;" id="opciones" name="opciones"
+                            onchange="doctors('opciones','Doctores')" onclick="vacio(), vacioU()" required="true">
+                            <option value="0">Seleccione Especialidad</option>
+                        </select>
+                    </div>
+                    <div class="form-input" style="margin-top: 20px; margin-bottom: 20px;">
+                        <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
+                            onclick="buildTable()" onchange="vaciar(), vaciarU()">
+                            <option value="0">Seleccione Médico</option>
+                        </select>
+                    </div>
+
+                    <hr class="my-4">
+                    <div id="hide" style="display: none;">
+                        <div class="text-center mb-2">
+                            Horarios habituales del doctor.
                         </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <label for="Lastname" class="form-label">Apellidos del paciente</label>
-                            <input type="text" class="form-control" id="Lastname" name="Lastname"
-                                value="<%= user.last_name %>">
+                        <div class="font-italic font-weight-bold mb-2">
+                            Nota: No tiene en cuenta excepciones
                         </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <label for="email" class="form-label">Correo electrónico del paciente</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                value="<%= user.email %>" >
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <label for="Cedula" class="form-label">N° de identificación del paciente</label>
-                            <input type="number" class="form-control" id="Cedula" name="Cedula"
-                                placeholder="Sin puntos ni comas">
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <select class="custom-select mt-2" style="margin-right: 10px;" id="opciones" name="opciones"
-                                onchange="doctors('opciones','Doctores')" required="true">
-                                <option value="0">Seleccione Especialidad</option>
-                            </select>
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores">
-                                <option value="0">Seleccione Médico</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 col-sm-6">
-                                <label for="fecha" class="form-label">Fecha de la cita</label>        
-                                <input class="form-control" id="fecha" name="fecha" autocomplete="off" onkeypress="return false">     
-                            </div>
-                            <div class="col-6 col-sm-6" >
-                                <label for="fecha" class="form-label">Seleccione el horario</label>
-                            </div>
-                        </div>           
                         <div class="w-100 d-none d-md-block"></div>
-                        <div class="col-12 col-sm-12">
-                            <button type="submit" class="btn btn-outline-primary" id="btnAgregar" 
-                            style="margin-left: 42%; margin-top: 50px; margin-bottom: 20px;">ML Payasita 😎</button>
+
+
+                        <table class="table table-hover" id="tabla">
+                            <thead>
+                                <tr>
+                                    <th>Disponibilidad</th>
+                                    <th>Rango de horas disponibles</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                            </tbody>
+                        </table>
+
+
+
+                        <div class="w-100 d-none d-md-block"></div>
+                        <div class="form-input" style="margin-top: 20px;">
+                            <label for="fecha" class="form-label">Fecha de la cita</label>
+                            <input class="form-control" id="fecha" name="fecha" autocomplete="off"
+                                onkeypress="return false">
                         </div>
-                    </form> 
+                        <div class="w-100 d-none d-md-block"></div>
+                        <div class="row">
+                            <div class="col-12 col-sm-4">
+                                <button type="submit" class="btn btn-outline-warning btn-block" id="btnConsultar"
+                                    style="margin-left: 10px; margin-top: 50px; margin-bottom: 20px;"
+                                    onclick="user(), TableUser()">Consultar</button>
+                            </div>
+                            <div class="col-12 col-sm-8" id="hide2" style="display: none;">
+                                <table class="table table-hover" id="tablaU">
+                                    <thead>
+                                        <tr>
+                                            <th>Horarios disponibles</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TableUser">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
+
     <!-- ===== a ===== -->
-    
+    <!-- ===== MODAL ===== -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Solicitar cita</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row" id="elTitulo">
+
+                        <label for="date" class="col-sm-2 col-form-label">Fecha</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="date" name="date" value="" readonly>
+                        </div>
+                        <label for="start" class="col-sm-2 col-form-label" style="margin-top: 20px;">Hora</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="start" name="start" style="margin-top: 20px;"
+                                value="" readonly>
+                        </div>
+                        <div class="col-md-10" style="margin: 50px">
+                            <input type="file" class="custom-file-input mt-2" id="Orden" name="Orden"
+                                accept="application/pdf" value="" required="true">
+                            <label class="custom-file-label mt-2" for="Orden">Seleccionar archivo de la orden
+                                médica</label>
+                        </div>
+                        <div class="col-md-10 mt-3" style="margin: 50px">
+                            <input type="file" class="custom-file-input mt-2" id="Imagen" name="Imagen" value=""
+                                required="true">
+                            <label class="custom-file-label" for="Imagen">Seleccionar archivo de imágenes
+                                diagnósticas</label>
+                        </div>
+                        <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="descripcion" rows="2" value=""></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnAgregar" onclick="validar()">Solicitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
         integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
         crossorigin="anonymous"></script>
@@ -133,23 +255,313 @@
     <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
 
     <!-- ===== DATEPICKER ===== -->
     <script>
-        $( function() {
-          $( "#fecha" ).datepicker({
-              dateFormat: 'mm-dd-yy',
-              minDate: new Date(),
-              maxDate: '+6m'
-          });
-        } );
-        </script>
+
+
+        var date = new Date();
+        var year = date.getFullYear();
+        console.log(year)
+
+        if (year == '2021') {
+            natDays = [[1, 1, 2021],
+            [1, 11, 2021], [3, 22, 2021], [4, 1, 2021], [4, 2, 2021],
+            [5, 1, 2021], [5, 17, 2021], [6, 7, 2021], [6, 14, 2021],
+            [7, 5, 2021], [7, 20, 2021], [8, 7, 2021], [8, 16, 2021],
+            [10, 18, 2021], [11, 1, 2021], [11, 15, 2021], [12, 8, 2021],
+            [12, 25, 2021]
+            ];
+        } if (year == '2022') {
+            natDays = [[1, 1, 2022],
+            [1, 10, 2022], [3, 21, 2022], [4, 14, 2022], [4, 15, 2022],
+            [5, 1, 2022], [5, 30, 2022], [6, 20, 2022], [6, 27, 2022],
+            [7, 4, 2022], [7, 20, 2022], [8, 7, 2022], [8, 15, 2022],
+            [10, 17, 2022], [11, 7, 2022], [11, 14, 2022], [12, 8, 2022],
+            [12, 25, 2022]
+            ];
+        }
+
+        function nationalDays(date) {
+            for (i = 0; i < natDays.length; i++) {
+                if (date.getMonth() == natDays[i][0] - 1
+                    && date.getDate() == natDays[i][1]) {
+                    return [false, natDays[i][2] + '_day'];
+                }
+            }
+            return [true, ''];
+        }
+
+        $(function () {
+            $.datepicker.setDefaults($.datepicker.regional["es"]);
+            $("#fecha").datepicker({
+                dateFormat: 'mm-dd-yy',
+                minDate: new Date(),
+                // maxDate: '+6m',                
+                monthNames: ['Enero', 'Febrero', 'Marzo',
+                    'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre',
+                    'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                beforeShowDay: nationalDays
+            });
+        });
+    </script>
 
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
             consulta();
+            consult();
         }
+
+
+        $(document).ready(function () {
+            $('#Cita').on('change', function () {
+
+                if (this.value == 'Cita común (Especialista o médico general)') {
+                    $("#div").show();
+                }
+                else {
+                    $("#div").hide()
+                }
+
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Doctores').on('click', function () {
+
+                if (this.value !== '0') {
+                    $("#hide").show();
+                }
+                else {
+                    $("#hide").hide()
+                }
+
+            });
+        });
+
+        $(document).ready(function () {
+            $('#btnConsultar').on('click', function () {
+
+                if (this.value !== '0') {
+                    $("#hide2").show();
+                }
+                else {
+                    $("#hide2").hide()
+                }
+
+            });
+        });
+
+        var hora = [];
+        async function user() {
+            var con1 = document.getElementById('btnConsultar').value;
+            var EspeDoc = document.getElementById('opciones').value;
+            var nameDoc = document.getElementById('Doctores').value;
+            var date = document.getElementById('fecha').value;
+            const consulta2 = { con: con1, EspeDoc: EspeDoc, nameDoc: nameDoc, date: date };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            var response2 = await fetch('/verifyUser', options2);
+            console.log(response2);
+            hora = await response2.json();
+            console.log(hora);
+
+            TableUser();
+
+        }
+
+        function TableUser() {
+
+            vaciarU();
+            vacioU();
+            var tableU = document.getElementById('TableUser');
+            var ced = document.getElementById('Cedula').value;
+
+            for (var i = 0; i < hora.length; i++) {
+                if (ced.length !== '0') {
+                    var row = `<tr>							
+							<td>
+                                <button type="button" class="btn btn-primary btn-block"
+                                data-toggle="modal" data-target="#myModal" id="btnModal" data-id="${hora[i]}">
+                                 ${hora[i]}
+                            </button>                                
+                            </td>                                                          
+					  </tr>`
+
+                    tableU.innerHTML += row
+                }
+            }
+
+            var valor;
+            var fecha = document.getElementById('fecha').value
+            $(function () {
+                $(".btn").click(function () {
+                    valor = $(this).attr('data-id');
+                    $('#date').val(fecha);
+                    $('#start').val(valor);
+                    $('#descripcion').val();
+                    $("#modalEventos").on('shown.bs.modal', function () {
+                        $(".modal").css('display', 'block');
+                    })
+                })
+            })
+        }
+
+        $('#btnAgregar').click(function () {
+            let data = recuperarDatosFormulario();
+            console.log(data)
+            agregarRegistro(data);
+            // $("#modalEventos").modal('hide');
+        })
+
+        function recuperarDatosFormulario() {
+            let data = {
+                Nombre: $('#Name').val(),
+                Apellido: $('#Lastname').val(),
+                Correo: $('#email').val(),
+                Cedula: $('#Cedula').val(),
+                Especialidad: $('#opciones').val(),
+                Doctor: $('#Doctores').val(),
+                Fecha: $('#date').val(),
+                Hora: $('#start').val(),
+                Orden: $('#Orden').val(),
+                Imagen: $('#Imagen').val(),
+                description: $('#descripcion').val()
+            };
+            return data;
+        }
+
+        function agregarRegistro(data) {
+            $.ajax({
+                type: 'POST',
+                url: '/add',
+                data: data,
+                success: function (msg) {
+                    Swal.fire(
+                        '¡Buen trabajo!',
+                        '¡Se han enviado correctamente los datos!',
+                        'success'
+                    );
+                    console.log('Datos enviados correctamente')
+                },
+                error: function (error) {
+                    // alert("Hay un problema:" + error);
+                }
+            });
+        }
+
+        function validar() {
+            //Se extre el formulario donde se encuentran contenidos los campos a través de su id
+            var selectes = document.getElementById("opciones").value;//Se extrea cada elemento
+            var selectdr = document.getElementById("Doctores").value;
+            var ncedula = document.getElementById("Cedula").value;
+            var fecha = document.getElementById("fecha").value;
+            var fileo = document.getElementById("Cedula").files;
+
+
+            if (ncedula.length == "0" || ncedula.length < "7") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe ingresar el número de identidad'
+                })
+                return false;
+            }
+            // if (selectes == "0") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Oops...',
+            //         text: 'Debe seleccionar una especialidad'
+            //     })
+            //     return false;
+            // }
+            // if (fecha == "") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Oops...',
+            //         text: 'Debe seleccionar una fecha'
+            //     })
+            //     return false;
+            // }
+        }
+
+        var result = [];
+        var result3 = [];
+        async function consult() {
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = { con: con1 };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+
+            buildTable()
+
+
+        }
+
+        function buildTable() {
+            vaciar();
+            vacio();
+            console.log(result)
+
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores');
+
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+
+                    table.innerHTML += row
+
+                }
+            }
+        }
+
+
+
+        function vaciarU() {
+            document.getElementById('TableUser').innerHTML = '';
+        }
+        function vacioU() {
+            document.getElementById('TableUser').innerHTML = '';
+        }
+
+        function vaciar() {
+            document.getElementById('myTable').innerHTML = '';
+        }
+        function vacio() {
+            document.getElementById('myTable').innerHTML = '';
+        }
+
+
+
 
         //Se crea una función para que el nombre de los documentos cargados 
         //en los inputs de tipo file se muestren en la página, a través de si id

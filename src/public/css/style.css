@@ -1,21 +1,50 @@
-/* REGISTRO Y LOGIN */
-.red {
-    border: 1px solid red;
+/* REGISTRO*/
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Aleo:wght@400;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root{
+  --header-height: 3rem;
+  --nav-width: 68px;
+
+  /*===== Colors =====*/
+  --first-color: #008DCA;
+  --first-color-light: #99d1e9;
+  --white-color: #F7F6FB;
+  
+  /*===== Font and typography =====*/
+  --body-font: 'Aleo';
+  --normal-font-size: 1rem;
+  
+  /*===== z index =====*/
+  --z-fixed: 100;
 }
 
-.green {
-    border: 1px solid green;
+/*===== BASE =====*/
+*,::before,::after{
+  box-sizing: border-box;
 }
 
-.image-left {
-    background-image: url("../images/flavida.jpeg");
-    height: 600px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
-    opacity: 0.9;
-    border-radius: 3px;
+body{
+  position: relative;  
+  background: url(../images/regis.png);
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-family: var(--body-font) !important;
+  font-size: var(--normal-font-size);
+  transition: .5s;
 }
+
+input{
+  /* border: none !important;   */
+  border-color: #008DCA !important;
+}
+
+#btn{
+    background-color: #008DCA !important;
+    color: white;
+}
+
+
 
 /* RUTAS */

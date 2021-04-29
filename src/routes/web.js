@@ -52,13 +52,16 @@ let initWebRoutes = (app) => {
     router.post('/verifyUser', userController.verifyUser);
 
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    
+    router.get('/consultarCitas',conciliatorController.Citas);
     router.get('/aceptar/:idpa',conciliatorController.datosaceptar);
     router.post('/aceptar/:idpa',conciliatorController.aceptar);
     router.get('/declinar/:idpa',conciliatorController.datosdeclinar);
     router.post('/declinar/:idpa',conciliatorController.declinar);
 
     //RUTAS PARA LA PÁGINA DE ADMINISTRADOR  
+    router.get('/admin/adminException', adminController.getException)
     router.post('/createAdmin', adminController.createAdmin);
+    router.post('/createException',  adminController.createException);
     
     /* router.post('/agendaAdmin',adminController.espeAdmin);
     router.post('/doctorAdmin',adminController.drAdmin);
