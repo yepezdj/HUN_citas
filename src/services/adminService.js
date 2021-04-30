@@ -150,14 +150,18 @@ let saveException = (fecha, tipo, doc, espec, horas) => {
     return new Promise(async (resolve, reject) =>{
         try {
             console.log(horas);
+            var datearray = fecha.split("-");
+            var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+            console.log(newdate)
             //create a new account
             horas.forEach(element => {
                 connection.query(
                     `INSERT INTO excepciones (fecha, hora_ini, Doctor, Especialidad, Tipo) 
-                    VALUES ("${fecha}", "${element}", "${doc}", "${espec}","${tipo}")`,
+                    VALUES ("${newdate}", "${element}", "${doc}", "${espec}","${tipo}")`,
                     function(err, rows) {
                         if (err) {
-                            reject(false)   
+                            console.log(err)
+                            // reject(false)   
                         }
                         resolve("Create a new EXCEPTION successful");
                     }

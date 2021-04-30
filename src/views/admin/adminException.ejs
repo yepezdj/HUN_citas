@@ -18,16 +18,20 @@
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  </script>
+    </script>
 
   <!-- ===== TIMEPICKER ===== -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">">
+
+  <!-- ===== DATATABLES ===== -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 
   <!-- ===== DATEPICKER ===== -->
   <link rel="stylesheet"
@@ -38,7 +42,8 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
+  <!-- ===== SWEETALERT2 ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
   <title>Excepciones</title>
 </head>
 
@@ -65,22 +70,145 @@
             Norte
           </span>
         </a>
+        <div class="nav__list">
+          <a href="/admin/adminmain" class="nav__link">
+            <i class='bx bx-bar-chart-alt-2 nav__icon'></i>
+            <span class="nav__name">Horario de medicos</span>
+          </a>
+        </div>
+        <div class="nav__list">
+          <a href="/consultarCitasAdmin" class="nav__link">
+            <i class='bx bx-bar-chart-alt-2 nav__icon'></i>
+            <span class="nav__name">Citas</span>
+          </a>
+        </div>
       </div>
-      <div class="nav__list">
-        <a href="/admin/adminmain" class="nav__link">
-          <i class='bx bx-bar-chart-alt-2 nav__icon'></i>
-          <span class="nav__name">Horario de medicos</span>
-        </a>
-      </div>
+
       <a href="#" onclick="logOut()" class="nav__link">
         <i class='bx bx-log-out nav__icon'></i>
         <span class="nav__name">Cerrar sesión</span>
       </a>
     </nav>
   </div>
-  <h2> Bienvenido <%=user.name%>
-  </h2>
+  <div class="container" style="margin-top: 50px;">
+    <div class="row px-3">
+      <div class="card flex-row mx-auto px-0">
+        <div class=" d-none d-md-flex">
+        </div>
+        <div class="card-body">
+          <h4 class="title text-center mt-4">
+            Hola <%=user.name%>
+          </h4>
+          <hr class="my-4">
+          <div class="text-center mb-2">
+            A continuación podrá realizar el proceso de adiciones y excepciones de los doctores del HUN
+          </div>
+          <form class="form-box px-3">
+            <div class="row">
+              <div class="col">
+                <div class="col-12 col-sm-12" style="margin-top: 20px;">
+                  <select class="custom-select mt-2" style="margin-right: 35px;" id="opciones" name="opciones"
+                    onchange="doctors('opciones','Doctores')" onclick="vacio()" required>
+                    <option value="0">
+                      Seleccione Especialidad
+                    </option>
+                  </select>
+                </div>
+                <div class="w-100 d-none d-md-block"></div>
+                <div class="col-12 col-sm-12" style="margin-top: 20px;">
+                  <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
+                    onclick="buildTable()" onchange="vaciar()">
+                    <option value="0">
+                      Seleccione Médico
+                    </option>
+                  </select>
+                </div>
+                <div class="w-100 d-none d-md-block"></div>
+                <div class="col-12 col-sm-12" style="margin-top: 20px;">
+                  <select class="custom-select mt-2" style="margin-right: 35px;" id="type" name="type">
+                    <option value="0">
+                      Seleccione tipo
+                    </option>
+                    <option value="Adicion">Adición</option>
+                    <option value="Excepcion">Excepción</option>
+                  </select>
+                </div>
+                <div class="w-100 d-none d-md-block"></div>
+                <div class="col-12 col-sm-12">
+                  <label for="fecha" class="form-label" style="margin-top: 20px;">Fecha de la cita</label>
+                  <input class="form-control" id="fecha" name="fecha" autocomplete="off" onkeypress="return false">
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <table class="table table-hover" id="tabla" style="height: 20px;">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Hora</th>
+                      <th>Tipo</th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTable">                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+          <table class="table table-bordered table-hover table-responsive" id="Table">
+            <thead style="justify-content: center;">
+              <tr>
+                <th>Rango de horas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="row">
+                    <div class="col">
+                      <label for="H1" class="form-label">Hora de inicio</label>
+                      <input type="text" class="form-control" id="H1" name="H1" placeholder="Hora de Inicio"
+                        autocomplete="off" onkeydown="return false">
+                    </div>
+                    <div class="col">
+                      <label for="H2" class="form-label">Hora de finalización</label>
+                      <input type="text" class="form-control" id="H2" name="H2" placeholder="Hora de Fin"
+                        autocomplete="off" onkeydown="return false">
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                      <input type="text" class="form-control" id="H3" name="H3" placeholder="Hora de Inicio"
+                        autocomplete="off" onkeydown="return false">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" id="H4" name="H4" placeholder="Hora de Fin"
+                        autocomplete="off" onkeydown="return false">
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                      <input type="text" class="form-control" id="H5" name="H5" placeholder="Hora de Inicio"
+                        autocomplete="off" onkeydown="return false">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" id="H6" name="H6" placeholder="Hora de Fin"
+                        autocomplete="off" onkeydown="return false">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
+          <div class="w-100 d-none d-md-block"></div>
+          <div class="col-12 col-sm-12">
+            <button type="submit" class="btn btn-outline-primary btn-block" id="btnAgregar"
+              style="margin-top: 50px; margin-bottom: 20px;">Añadir excepciones</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
   <div class="col-md-12" style="margin: 20px;">
     <h1> Excepciones de doctores</h1>
     <form method="POST" action="/createException">
@@ -148,22 +276,27 @@
           style="margin-left: 42%; margin-top: 50px; margin-bottom: 20px;">ML Payasita 😎</button>
       </div>
     </form>
-  </div>
+  </div> -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
     integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
     integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-  </script>
+    </script>
 
   <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
 
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
   <script>
     $(function () {
       $("#fecha").datepicker({
@@ -174,9 +307,28 @@
     });
     document.onload = loadFunctions();
     function loadFunctions() {
-      //consulta();
+      consult();
+      admin();
       $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
     }
+
+    async function admin() {
+      var con1 = document.getElementById('btnAgregar').value;
+      var EspeDoc = document.getElementById('opciones').value;
+      var nameDoc = document.getElementById('Doctores').value;
+      var date = document.getElementById('fecha').value;
+      const consulta2 = { con: con1, EspeDoc: EspeDoc, nameDoc: nameDoc, date: date };
+      const options2 = {
+        method: "POST",
+        body: JSON.stringify(consulta2),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      var response2 = await fetch('/verifyAdmin', options2);
+      console.log(response2);
+    }
+
     //LUNES
     $("#H1").timepicker({
       timeFormat: 'HH:mm:ss',
@@ -187,7 +339,16 @@
       dynamic: false,
       dropdown: true,
       scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val();
+        console.log(time)
+        var picker = $("#H2");
+        picker.timepicker('option', 'minTime', time);
+
+      }
     });
+
     $("#H2").timepicker({
       timeFormat: 'HH:mm:ss',
       interval: 30,
@@ -196,7 +357,14 @@
       dynamic: false,
       dropdown: true,
       scrollbar: true,
+      change: function (time) {
+        var min = 30;
+        var time = $(this).val();
+        var picker = $("#H3");
+        picker.timepicker('option', 'minTime', time);
+      }
     });
+
     $("#H3").timepicker({
       timeFormat: 'HH:mm:ss',
       interval: 30,
@@ -207,11 +375,12 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
+        var time = $(this).val();
         var picker = $("#H4");
         picker.timepicker('option', 'minTime', time);
       }
     });
+
     $("#H4").timepicker({
       timeFormat: 'HH:mm:ss',
       interval: 30,
@@ -222,11 +391,12 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
+        var time = $(this).val();
         var picker = $("#H5");
         picker.timepicker('option', 'minTime', time);
       }
     });
+
     $("#H5").timepicker({
       timeFormat: 'HH:mm:ss',
       interval: 30,
@@ -237,11 +407,12 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
+        var time = $(this).val();
         var picker = $("#H6");
         picker.timepicker('option', 'minTime', time);
       }
     });
+
     $("#H6").timepicker({
       timeFormat: 'HH:mm:ss',
       interval: 30,
@@ -251,6 +422,170 @@
       dropdown: true,
       scrollbar: true
     });
+
+    $('#btnAgregar').click(function () {
+      let data = recuperarDatosFormulario();
+      console.log(data)
+      if (!data) {
+        console.log('error')
+      } else {
+        agregarRegistro(data);
+      }
+      // $("#modalEventos").modal('hide');
+    })
+
+    function recuperarDatosFormulario() {
+      let data = {
+        opciones: $('#opciones').val(),
+        Doctores: $('#Doctores').val(),
+        type: $('#type').val(),
+        fecha: $('#fecha').val(),
+        H1: $('#H1').val(),
+        H2: $('#H2').val(),
+        H3: $('#H3').val(),
+        H4: $('#H4').val(),
+        H5: $('#H5').val(),
+        H6: $('#H6').val()
+      };
+      console.log(typeof data.H1)
+      if (data.opciones == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar una especialidad'
+        });
+        return false;
+      } if (data.type == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar el tipo de excepción'
+        });
+        return false;
+      } if (data.fecha == "") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar una fecha'
+        });
+        return false;
+      }
+      return data;
+    }
+
+    function agregarRegistro(data) {
+      $.ajax({
+        type: 'POST',
+        url: '/createException',
+        data: data,
+        success: function (msg) {
+          Swal.fire(
+            '¡Buen trabajo!',
+            '¡Se han enviado correctamente los datos!',
+            'success'
+          );
+        },
+        error: function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error'
+          })
+        }
+      });
+    }
+
+    // $(document).ready(function () {
+    //   $('#tabla').DataTable({
+    //     scrollY: '50vh',
+    //     scrollCollapse: true,
+    //     paging: false,
+    //     language: {
+    //       processing: "Búsqueda en curso...",
+    //       search: "Buscar:",
+    //       lengthMenu: "Mostrar _MENU_ registros",
+    //       info: "Página _PAGE_ de _PAGES_",
+    //       infoEmpty: "No hay registros disponibles",
+    //       infoFiltered: "(filtrado de _MAX_ total elementos)",
+    //       zeroRecords: "No hay registros con este criterio de búsqueda",
+    //       infoPostFix: "",
+    //       loadingRecords: "Cargando...",
+    //       emptyTable: "La tabla aún no contiene registros",
+    //       paginate: {
+    //         first: "Primero",
+    //         previous: "Anterior",
+    //         next: "Siguiente",
+    //         last: "último"
+    //       },
+    //       aria: {
+    //         sortAscending: ": Ordenar de forma ascendente",
+    //         sortDescending: ": Ordenar de forma descendente"
+    //       }
+    //     }
+    //   });
+
+    // });
+
+    var result = [];
+    var result3 = [];
+    async function consult() {
+      var con1 = document.getElementById('Doctores').value;
+      const consulta2 = { con: con1 };
+      const options2 = {
+        method: "POST",
+        body: JSON.stringify(consulta2),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const response2 = await fetch('/exceptions', options2);
+      console.log(response2)
+      result = await response2.json();
+      console.log(result)
+
+      buildTable()
+
+    }
+
+    function buildTable() {
+      vaciar();
+      vacio();
+      console.log(result)
+
+      var table = document.getElementById('myTable');
+      select = document.getElementById('Doctores');
+
+      for (var i = 0; i < result.length; i++) {
+        if (select.value == result[i].Doctor) {
+          var row = `<tr>
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+						              	<td>                              
+                                ${result[i].hora_ini}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].Tipo}                                
+                            </td>                                                         
+					              </tr>`
+
+          table.innerHTML += row
+
+        }
+      }
+    }
+
+    function vaciar() {
+      document.getElementById('myTable').innerHTML = '';
+    }
+    function vacio() {
+      document.getElementById('myTable').innerHTML = '';
+    }
+
+  </script>
+
+  <script>
+
   </script>
   <!--===== MAIN JS =====-->
   <script src="/js/main.js"></script>

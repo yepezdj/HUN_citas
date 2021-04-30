@@ -70,7 +70,7 @@ body{
 
 .form-input input::placeholder{
   font-family: var(--body-font);
-  color: black;
+  color: #525355;
   padding-left: 0px;
 }
 
@@ -81,7 +81,7 @@ body{
 
 .form-input input:focus::placeholder{
   font-family: var(--body-font);
-  color: #454b69;
+  color: #525355;
 }
 
 

@@ -37,11 +37,9 @@ let initWebRoutes = (app) => {
     router.get('/reset-password/:id/:token', resetPasswordController.b);
     router.post('/reset-password/:id/:token', auth.validateNewPassword, resetPasswordController.bb);
     
-    //RUTAS PARA LA PÁGINA DE USUARIO
-    router.post('/fechas',userController.fechas);  
+    //RUTAS PARA LA PÁGINA DE USUARIO    
     router.post('/datos',userController.datos);
-    router.post('/add',userController.agendar);
-    router.post('/agendaDatos',userController.agendaDatos);
+    router.post('/add',userController.agendar); 
     router.get('/consultar',userController.tabla);   
     router.post('/agenda',userController.espe);
     router.post('/doctor',userController.dr);
@@ -61,15 +59,10 @@ let initWebRoutes = (app) => {
     //RUTAS PARA LA PÁGINA DE ADMINISTRADOR  
     router.get('/admin/adminException', adminController.getException)
     router.post('/createAdmin', adminController.createAdmin);
-    router.post('/createException',  adminController.createException);
-    
-    /* router.post('/agendaAdmin',adminController.espeAdmin);
-    router.post('/doctorAdmin',adminController.drAdmin);
-    router.post('/datosAdmin',adminController.datosAdmin);
-    router.post('/addAdmin',adminController.añadirHorarios);
-    router.post('/delate/:ideventos',adminController.delateAdmin);
-    router.post('/actualizar/:ideventos',adminController.updateAdmin); */
-
+    router.post('/createException',  adminController.createException); 
+    router.post('/exceptions',  adminController.exceptions); 
+    router.get('/consultarCitasAdmin',adminController.CitasAdmin); 
+   
     return app.use("/", router);
 };
 

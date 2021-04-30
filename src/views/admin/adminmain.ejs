@@ -18,13 +18,13 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  </script>
+    </script>
 
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
@@ -62,10 +62,16 @@
         </a>
         <div class="nav__list">
           <a href="/admin/adminException" class="nav__link">
-              <i class='bx bx-folder nav__icon'></i>
-              <span class="nav__name">Excepciones</span>
+            <i class='bx bx-folder nav__icon'></i>
+            <span class="nav__name">Excepciones</span>
           </a>
-      </div>
+        </div>
+        <div class="nav__list">
+          <a href="/consultarCitasAdmin" class="nav__link">
+            <i class='bx bx-bar-chart-alt-2 nav__icon'></i>
+            <span class="nav__name">Citas</span>
+          </a>
+        </div>
       </div>
       <a href="#" onclick="logOut()" class="nav__link">
         <i class='bx bx-log-out nav__icon'></i>
@@ -73,100 +79,118 @@
       </a>
     </nav>
   </div>
-  <h2> Bienvenido <%=user.name%>
-  </h2>
 
-  <div class="col-md-12" style="margin: 20px;">
-    <h1> Horario de doctores</h1>
-    <form method="POST" action="/createAdmin">
-      <div class="col-6 col-sm-6" style="margin-top: 20px;">
-        <select class="custom-select mt-2" style="margin-right: 35px;" id="opciones" name="opciones"
-          onchange="doctors('opciones','Doctores')" required="true">
-          <option value="0">
-            Seleccione Especialidad
-          </option>
-        </select>
+  <div class="container" style="margin-top: 50px;">
+    <div class="row px-3">
+      <div class="card flex-row mx-auto px-0">
+        <div class=" d-none d-md-flex">          
+        </div>
+        <div class="card-body">
+          <h4 class="title text-center mt-4">
+            Hola <%=user.name%>
+        </h4>
+        <hr class="my-4">
+        <div class="text-center mb-2">
+            A continuación podrá ingresar los horarios de los doctores del HUN
+        </div>          
+          <form class="form-box px-3">
+            <div class="row">           
+            <div class="col-12 col-sm-6" style="margin-top: 20px;">
+              <select class="custom-select mt-2" style="margin-right: 35px;" id="opciones" name="opciones"
+                onchange="doctors('opciones','Doctores')" required>
+                <option value="0">
+                  Seleccione Especialidad
+                </option>
+              </select>
+            </div>
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-12 col-sm-6" style="margin-top: 20px;">
+              <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores">
+                <option value="0">
+                  Seleccione Médico
+                </option>
+              </select>
+            </div>
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-12 col-sm-6" style="margin-top: 20px;">
+              <select class="custom-select mt-2" style="margin-right: 35px;" id="Dia" name="Dia">
+                <option value="0">Seleccione Día</option>
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miercoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Sábado</option>
+                <option value="Sabado">Domingo</option>
+              </select>
+            </div>                 
+          </div>
+        </form>
+            <table class="table table-bordered table-hover table-responsive" id="Table">
+              <thead style="justify-content: center;">
+                <tr>
+                  <th>Rango de horas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="row">
+                      <div class="col">
+                        <label for="H1" class="form-label">Hora de inicio</label>
+                        <input type="text" class="form-control" id="H1" name="H1" placeholder="Hora de Inicio"
+                          autocomplete="off" onkeydown="return false">
+                      </div>
+                      <div class="col">
+                        <label for="H2" class="form-label">Hora de finalización</label>
+                        <input type="text" class="form-control" id="H2" name="H2" placeholder="Hora de Fin"
+                          autocomplete="off" onkeydown="return false">
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col">
+                        <input type="text" class="form-control" id="H3" name="H3" placeholder="Hora de Inicio"
+                          autocomplete="off" onkeydown="return false">
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" id="H4" name="H4" placeholder="Hora de Fin"
+                          autocomplete="off" onkeydown="return false">
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col">
+                        <input type="text" class="form-control" id="H5" name="H5" placeholder="Hora de Inicio"
+                          autocomplete="off" onkeydown="return false">
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" id="H6" name="H6" placeholder="Hora de Fin"
+                          autocomplete="off" onkeydown="return false">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-12 col-sm-12">
+              <button type="submit" class="btn btn-outline-primary btn-block" id="btnAgregar"
+                style="margin-top: 50px; margin-bottom: 20px;">Guardar cambios</button>
+            </div>     
+        </div>
       </div>
-      <div class="col-6 col-sm-6" style="margin-top: 20px;">
-        <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores">
-          <option value="0">
-            Seleccione Médico
-          </option>
-        </select>
-      </div>
-      <div class="col-6 col-sm-6" style="margin-top: 20px;">
-        <select class="custom-select mt-2" style="margin-right: 35px;" id="Dia" name="Dia">
-          <option value="0">Seleccione Día</option>
-          <option value="Lunes">Lunes</option>
-          <option value="Martes">Martes</option>
-          <option value="Miercoles">Miércoles</option>
-          <option value="Jueves">Jueves</option>
-          <option value="Viernes">Sábado</option>
-          <option value="Sabado">Domingo</option>
-        </select>
-      </div>
-      <table class="table table-bordered table-hover table-responsive" id="Table">
-        <thead style="justify-content: center;">
-          <tr>            
-            <th>Rango de horas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>            
-            <td>
-              <div class="row">
-                <div class="col">
-                  <label for="H1" class="form-label">Hora Inicio</label>
-                  <input type="text" class="form-control" id="H1" name="H1" placeholder="Hora de Inicio"
-                  autocomplete="off" onkeydown="return false">
-                </div>
-                <div class="col">
-                  <label for="H2" class="form-label">Hora De Fin</label>
-                  <input type="text" class="form-control" id="H2" name="H2" placeholder="Hora de Fin"
-                  autocomplete="off" onkeydown="return false">
-                </div>
-                <div class="w-100"></div>
-                <div class="col">
-                  <input type="text" class="form-control" id="H3" name="H3" placeholder="Hora de Inicio"
-                  autocomplete="off" onkeydown="return false">
-                </div>
-                <div class="col">
-                  <input type="text" class="form-control" id="H4" name="H4" placeholder="Hora de Fin"
-                  autocomplete="off" onkeydown="return false">
-                </div>
-                <div class="w-100"></div>
-                <div class="col">
-                  <input type="text" class="form-control" id="H5" name="H5" placeholder="Hora de Inicio"
-                  autocomplete="off" onkeydown="return false">
-                </div>
-                <div class="col">
-                  <input type="text" class="form-control" id="H6" name="H6" placeholder="Hora de Fin"
-                  autocomplete="off" onkeydown="return false">
-                </div>
-              </div>
-            </td>
-          </tr>          
-        </tbody>
-      </table>
-      <div class="w-100 d-none d-md-block"></div>
-      <div class="col-12 col-sm-12">
-        <button type="submit" class="btn btn-outline-primary" id="btnAgregar"
-          style="margin-left: 42%; margin-top: 50px; margin-bottom: 20px;">ML Payasita 😎</button>
-      </div>
-    </form>
+    </div>
   </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
     integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
     integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-  </script>
-
+    </script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.min.js'></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
   <script>
@@ -190,7 +214,7 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
+        var time = $(this).val();
         console.log(time)
         var picker = $("#H2");
         picker.timepicker('option', 'minTime', time);
@@ -208,9 +232,9 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
-        var picker = $("#H3");        
-        picker.timepicker('option', 'minTime', time);        
+        var time = $(this).val();
+        var picker = $("#H3");
+        picker.timepicker('option', 'minTime', time);
       }
     });
 
@@ -224,7 +248,7 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
+        var time = $(this).val();
         var picker = $("#H4");
         picker.timepicker('option', 'minTime', time);
       }
@@ -240,7 +264,7 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
+        var time = $(this).val();
         var picker = $("#H5");
         picker.timepicker('option', 'minTime', time);
       }
@@ -256,7 +280,7 @@
       scrollbar: true,
       change: function (time) {
         var min = 30;
-        var time = $(this).val() + ':' + min;
+        var time = $(this).val();
         var picker = $("#H6");
         picker.timepicker('option', 'minTime', time);
       }
@@ -272,82 +296,70 @@
       scrollbar: true
     });
 
-    
-
-    //UNA VEZ SE PRESIONE EL BOTÓN SE MUESTRA EL ALERT CONFIRMANDO EL ENVÍO DE LOS DATOS
-    /* function enviar() {
-      Swal.fire(
-        '¡Buen trabajo!',
-        '¡Se han agregado correctamente los horarios!',
-        'success'
-      );
-    }
-    $("#btnAgregar").on("click", enviar); */
-
-
-    /* async function doctors(s1, s2) {
-      var con1 = document.getElementById('opciones').value;
-      const consulta2 = {
-        con: con1
-      };
-      const options2 = {
-        method: "POST",
-        body: JSON.stringify(consulta2),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const response2 = await fetch('/doctorAdmin', options2);
-      result5 = await response2.json();
-
-      var s1 = document.getElementById(s1);
-      var s2 = document.getElementById(s2);
-
-      s2.innerHTML = "";
-
-      select = document.getElementById('Doctores');
-      for (var i = 0; i < result5.length; i++) {
-
-        if (s1.value == result5[i].Especialidad) {
-          var opt = document.createElement('option');
-          opt.value = result5[i].Nombres;
-          opt.innerHTML = result5[i].Nombres;
-          select.add(opt);
-
-        }
-
+    $('#btnAgregar').click(function () {
+      let data = recuperarDatosFormulario();
+      console.log(data)
+      if (!data) {
+        console.log('error')
+      } else {
+        agregarRegistro(data);
       }
+      // $("#modalEventos").modal('hide');
+    })
 
-
+    function recuperarDatosFormulario() {
+      let data = {
+        opciones: $('#opciones').val(),
+        Doctores: $('#Doctores').val(),
+        Dia: $('#Dia').val(),
+        H1: $('#H1').val(),
+        H2: $('#H2').val(),
+        H3: $('#H3').val(),
+        H4: $('#H4').val(),
+        H5: $('#H5').val(),
+        H6: $('#H6').val()
+      };
+      console.log(typeof data.H1)
+      if (data.opciones == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar una especialidad'
+        });
+        return false;
+      } if (data.Dia == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar un día'
+        });
+        return false;
+      }
+      return data;
     }
 
-
-    var result4 = [];
-    async function consulta() {
-      var con1 = document.getElementById('opciones').value;
-      const consulta2 = {
-        con: con1
-      };
-      const options2 = {
-        method: "POST",
-        body: JSON.stringify(consulta2),
-        headers: {
-          "Content-Type": "application/json"
+    function agregarRegistro(data) {
+      $.ajax({
+        type: 'POST',
+        url: '/createAdmin',
+        data: data,
+        success: function (msg) {
+          Swal.fire(
+            '¡Buen trabajo!',
+            '¡Se han enviado correctamente los datos!',
+            'success'
+          );
+        },
+        error: function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error'
+          })
         }
-      };
-      const response2 = await fetch('/agendaAdmin', options2);
-      result4 = await response2.json();
+      });
+    }
 
-      select = document.getElementById('opciones');
-
-      for (var i = 0; i < result4.length; i++) {
-        var opt = document.createElement('option');
-        opt.value = result4[i].Especialidad;
-        opt.innerHTML = result4[i].Especialidad;
-        select.add(opt);
-
-      }
-    } */
   </script>
   <!--===== MAIN JS =====-->
   <script src="/js/main.js"></script>

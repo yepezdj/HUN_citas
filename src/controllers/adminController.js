@@ -1,3 +1,4 @@
+import connection from "../configs/connectDB";
 import adminService from "../services/adminService"
 
 
@@ -12,8 +13,6 @@ let getAdmin = (req, res) =>{
         });
 	} 
 }
-
-
 
 let getException = (req, res) =>{
     if (req.session.admin) {
@@ -67,10 +66,44 @@ let createAdmin = async (req, res) =>{
     res.redirect("/admin/adminmain");
 }
 
+let exceptions = (req, res) => {
+
+    connection.query('SELECT DATE_FORMAT(fecha, "%Y-%m-%d") fecha, Tipo, Doctor, hora_ini, Especialidad FROM excepciones', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result = dat
+        res.end(JSON.stringify(result));
+        /* console.log(result) */
+    });
+
+};
+
+let CitasAdmin = (req, res) => {
+    if (req.session.admin) {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen FROM agendamiento WHERE Estado = "Aceptada"',(err,info) => {
+            if(err){
+                res.json(err);
+            }
+                console.log(info);
+                res.render('./admin/adminAppoitments.ejs', {
+                    info: info,
+                    user: req.session.context
+                    //user: req.user
+                });
+        });      
+	} else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+	} 
+};
 
 module.exports = {    
     getAdmin: getAdmin,
     createAdmin: createAdmin,
     createException: createException,
     getException: getException,
+    exceptions: exceptions,
+    CitasAdmin: CitasAdmin   
 }

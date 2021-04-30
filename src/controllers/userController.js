@@ -171,19 +171,6 @@ let tabla = (req, res) => {
     });
 };
 
-let agendaDatos = (req, res) => {
-
-    connection.query('SELECT * FROM eventos', (err, dat) => {
-        if (err) {
-            res.json(err);
-        }
-        var result2 = dat
-        res.end(JSON.stringify(result2));
-        /* console.log(result2) */
-    });
-
-};
-
 //Se extraen todos los campos de la tabla que contiene la información de los horarios y se convierten en formato json
 let datos = (req, res) => {
 
@@ -198,18 +185,7 @@ let datos = (req, res) => {
 
 };
 
-let fechas = (req, res) => {
 
-    connection.query('SELECT FechaInicio FROM agendamiento', (err, dat) => {
-        if (err) {
-            res.json(err);
-        }
-        var result3 = dat
-        res.end(JSON.stringify(result3));
-        /* console.log(result3) */
-    });
-
-};
 
 //Se extraen mediante el req.body los elementos llenandos en la página para insertarlos en la tabla agendamiento
 let agendar = (req, res) => {
@@ -301,10 +277,8 @@ module.exports = {
     verifyUser: verifyUser,
     espe: espe,
     dr: dr,
-    tabla: tabla,
-    fechas: fechas,
-    datos: datos,
-    agendaDatos: agendaDatos,
+    tabla: tabla,    
+    datos: datos,    
     agendar: agendar,
     edit: edit,
     update: update,

@@ -113,8 +113,7 @@ tbody tr:nth-child(odd) {
   }
   
   .form-input input::placeholder{
-    font-family: var(--body-font);
-    color: black;
+    font-family: var(--body-font);    
     padding-left: 0px;
   }
   
@@ -125,7 +124,7 @@ tbody tr:nth-child(odd) {
   
   .form-input input:focus::placeholder{
     font-family: var(--body-font);
-    color: #454b69;
+    color: #525355;
   }
 
   input{
@@ -135,7 +134,7 @@ tbody tr:nth-child(odd) {
 
  input:focus::placeholder{
     font-family: var(--body-font);
-    color: #454b69 !important;
+    color: #525355 !important;
   }
 
 select{
