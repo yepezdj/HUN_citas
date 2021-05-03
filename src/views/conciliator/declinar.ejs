@@ -29,7 +29,7 @@
          crossorigin="anonymous"></script>
         <title>Conciliador</title>
     </head>
-    <body id="body-pd">
+    <body id="body-pd" style="background:  url(../images/regis.png);">
         <header class="header" id="header">
             <div class="header__toggle">
                 <i class='bx bx-menu' id="header-toggle"></i>
@@ -59,15 +59,76 @@
                 </a>
             </nav>
         </div>
+
+        <div class="container" style="margin-top: 80px;">
+            <div class="row px-3">
+                <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+                    <div class="card-body">
+                        <h7 class="title text-center mt-4">
+                            A continuación podrá observar detalladamente los datos del paciente y enviarle las
+                            recomendaciones adecuadas
+                        </h7>
+                        <hr class="my-4">
+                        <form action="/declinar/<%= datos.idpa %>" method="POST">
+    
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="Name" class="form-label">Nombres del paciente</label>
+                                <input type="text" class="form-control" id="Name" name="Name" value="<%= datos.NombreP %>" readonly>
+                            </div>
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="Lastname" class="form-label">Apellidos del paciente</label>
+                                <input type="text" class="form-control" id="Lastname" name="Lastname"
+                                    value="<%= datos.ApellidoP %>" readonly>
+                            </div>
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="correo" class="form-label">Correo electrónico del paciente</label>
+                                <input type="text" class="form-control" id="correo" name="correo"
+                                    value="<%= datos.Correo %>" readonly>
+                            </div>
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="especialidad" class="form-label">Especialidad elegida</label>
+                                <input type="text" class="form-control" id="especialidad" name="especialidad"
+                                    value="<%= datos.Especialidad %>" readonly>
+                            </div>
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="doctor" class="form-label">Médico elegido</label>
+                                <input type="text" class="form-control" id="doctor" name="doctor"
+                                    value="<%= datos.Doctor %>" readonly>
+                            </div>
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="fechaI" class="form-label">Fecha</label>
+                                <input type="text" class="form-control" id="fechaI" name="fechaI"
+                                    value="<%= datos.fecha %>" readonly>
+                            </div>
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="horaI" class="form-label">Hora</label>
+                                <input type="text" class="form-control" id="horaI" name="horaI"
+                                    value="<%= datos.hora_ini %>" readonly>
+                            </div>
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="descripcion" name="descripcion" rows="2"></textarea>
+                            </div>
+                            <div class="w-100 d-none d-md-block"></div>
+                            <div class="mb-3" style="margin-top: 20px; margin-bottom: 20px;">
+                                <button type="submit" class="btn btn-danger btn-block text-uppercase">
+                                    Enviar información
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
        
-        <div class="container mt-5">
+        <!-- <div class="container mt-5">
             <div class="row mt-5">
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card border-primary">
                         <div class="card-body" style="width: 300px; height: 350px; margin: 30px;">
                             <form action="/declinar/<%= datos.idpa %>" method="POST" id="form"> <!-- Se está mostrando un dato único, por eso se coloca como parámetro el id -->
-                                <div class="mb-4" style="margin: 50px;">
+                                <!-- <div class="mb-4" style="margin: 50px;">
                                     <label for="Name" class="form-label">Nombres del paciente</label>
                                     <input type="text" class="form-control" id="Name" name="Name" value="<%= datos.NombreP %>">
                                   </div>
@@ -81,7 +142,7 @@
                                   </div>
                                   <div class="mb-4" style="margin: 50px">
                                     <label for="descripcion" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="descripcion" rows="1"></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="2" value=""></textarea>
                                   </div>   
                                                              
                                 <div class="form-group3 mt-5">
@@ -93,7 +154,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --> 
 
         <!--===== MAIN JS =====-->
         <script src="/js/main.js"></script>

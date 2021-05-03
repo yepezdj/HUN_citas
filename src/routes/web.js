@@ -7,6 +7,20 @@ import adminController from "../controllers/adminController";
 import conciliatorController from "../controllers/conciliatorController";
 import forgotpasswordController from "../controllers/forgotpasswordController"
 import resetPasswordController from "../controllers/resetPasswordController";
+import filesController from "../controllers/filesController";
+import multer from "multer";
+import path from "path"
+
+const storage = multer.diskStorage({ destination: 'D:/Desktop/PF/Ordeneseimagenes',
+filename: function (req, file, cb) {
+    cb(null, 'Arhivos'+'-'+Date.now()+
+    path.extname(file.originalname) );
+    }
+});
+
+const upload = multer({
+    storage: storage
+});
 
 //initPassportLocalUser();
 
@@ -37,15 +51,18 @@ let initWebRoutes = (app) => {
     router.get('/reset-password/:id/:token', resetPasswordController.b);
     router.post('/reset-password/:id/:token', auth.validateNewPassword, resetPasswordController.bb);
     
+    //RUTA DE ARCHIVOS SUBIDOS POR EL USUARIO
+    router.get('/files/:id/:token', filesController.getFile);
+   
     //RUTAS PARA LA PÁGINA DE USUARIO    
     router.post('/datos',userController.datos);
-    router.post('/add',userController.agendar); 
+    router.post('/add', upload.array('images',2), userController.agendar); 
     router.get('/consultar',userController.tabla);   
     router.post('/agenda',userController.espe);
     router.post('/doctor',userController.dr);
     router.get('/delete/:idpa',userController.delate); 
-    router.get('/update/:idpa',userController.edit);
-    router.post('/update/:idpa',userController.update); 
+    router.get('/update/:idpa', upload.array('images',2), userController.edit);
+    router.post('/update/:idpa', upload.array('images',2), userController.update); 
 
     router.post('/verifyUser', userController.verifyUser);
 
@@ -55,6 +72,8 @@ let initWebRoutes = (app) => {
     router.post('/aceptar/:idpa',conciliatorController.aceptar);
     router.get('/declinar/:idpa',conciliatorController.datosdeclinar);
     router.post('/declinar/:idpa',conciliatorController.declinar);
+    router.get('/updateC/:idpa',conciliatorController.editC);
+    router.post('/updateC/:idpa',conciliatorController.updateC);
 
     //RUTAS PARA LA PÁGINA DE ADMINISTRADOR  
     router.get('/admin/adminException', adminController.getException)

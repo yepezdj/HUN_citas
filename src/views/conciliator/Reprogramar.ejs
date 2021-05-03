@@ -7,8 +7,6 @@
 
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
     <!-- ===== CSS ===== -->
     <link rel="stylesheet" href="/css/styleuser.css">
@@ -17,8 +15,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
     <!-- ===== SWEETALERT2 ===== -->
@@ -27,11 +34,11 @@
     <!-- ===== DATEPICKER ===== -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-
     <title>Usuario</title>
 </head>
 
 <body id="body-pd">
+
     <header class="header" id="header">
         <div class="header__toggle">
             <i class='bx bx-menu' id="header-toggle"></i>
@@ -55,9 +62,9 @@
                 </a>
 
                 <div class="nav__list">
-                    <a href="/consultar" class="nav__link">
+                    <a href="/consultarCitas" class="nav__link">
                         <i class='bx bx-folder nav__icon'></i>
-                        <span class="nav__name">Consultar estado de solicitud</span>
+                        <span class="nav__name">Citas aceptadas</span>
                     </a>
                 </div>
             </div>
@@ -72,13 +79,10 @@
         <div class="row px-3">
             <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
                 <div class="card-body">
-                    <form action="/add" method="POST" enctype="multipart/form-data">
-                        <h4 class="title text-center mt-4">
-                            Hola <%=user.name%>                            
-                        </h4>                        
-                        <hr class="my-4">
+                    <form action="/updateC/<%= datos.idpa %>" method="POST">
+
                         <div class="text-center mb-2">
-                            A continuación podrá completar toda la información requerida para el agendamiento de su cita
+                            A continuación podrá modificar toda la información requerida para el agendamiento de su cita
                             médica
                         </div>
                         <hr class="my-4">
@@ -101,7 +105,7 @@
                                                 <div class="form-input">
                                                     <label for="Name" class="form-label">Nombres del paciente</label>
                                                     <input type="text" class="form-control" id="Name" name="Name"
-                                                        value="<%= user.name %>">
+                                                        value="<%= datos.NombreP %>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6">
@@ -109,7 +113,7 @@
                                                     <label for="Lastname" class="form-label">Apellidos del
                                                         paciente</label>
                                                     <input type="text" class="form-control" id="Lastname"
-                                                        name="Lastname" value="<%= user.last_name %>">
+                                                        name="Lastname" value="<%= datos.ApellidoP %>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -118,7 +122,7 @@
                                                 <div class="form-input">
                                                     <label for="email" class="form-label">Correo electrónico</label>
                                                     <input type="email" class="form-control" id="email" name="email"
-                                                        value="<%= user.email %>">
+                                                        value="<%= datos.Correo %>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6">
@@ -126,7 +130,8 @@
                                                     <label for="Cedula" class="form-label">N° de identificación del
                                                         paciente</label>
                                                     <input type="number" class="form-control" id="Cedula" name="Cedula"
-                                                        placeholder="Sin puntos ni comas ni guiones">
+                                                        placeholder="Sin puntos ni comas ni guiones"
+                                                        value="<%= datos.CedulaP %>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -150,15 +155,9 @@
                                                 <div class="form-input" style="margin-top: 20px;">
                                                     <select class="custom-select mt-2" style="margin-top: 20px;"
                                                         id="Cita" name="Cita">
-                                                        <option value="0">Seleccione tipo de cita médica</option>
-                                                        <option value="Ayudas diagnósticas">Ayudas diagnósticas</option>
-                                                        <option value="Proceso de dermatología">Proceso de dermatología
+                                                        <option value="<%= datos.Cita %>">
+                                                            <%= datos.Cita %>
                                                         </option>
-                                                        <option value="Cita común (Especialista o médico general)">Cita
-                                                            común
-                                                            (Especialista o
-                                                            médico
-                                                            general)</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -166,11 +165,9 @@
                                                 <div class="form-input" style="margin-top: 20px;">
                                                     <select class="custom-select mt-2" style="margin-right: 20px;"
                                                         id="Factura" name="Factura">
-                                                        <option value="0">Seleccione tipo de afiliación</option>
-                                                        <option value="Prepagada">Prepagada</option>
-                                                        <option value="EPS">EPS</option>
-                                                        <option value="ARL">ARL</option>
-                                                        <option value="Particular">Particular</option>
+                                                        <option value="<%= datos.Afiliacion %>">
+                                                            <%= datos.Afiliacion %>
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -181,7 +178,9 @@
                                                     style="margin-top: 20px; display: none;">
                                                     <select class="custom-select mt-2" style="margin-top: 20px;"
                                                         id="Modo" name="Modo">
-                                                        <option value="0">Seleccione modalidad</option>
+                                                        <option value="<%= datos.Modo %>">
+                                                            <%= datos.Modo %>
+                                                        </option>
                                                         <option value="Virtual">Virtual</option>
                                                         <option value="Presencial">Presencial</option>
                                                     </select>
@@ -192,19 +191,20 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-input" style="margin-top: 20px;">
                                                     <select class="custom-select mt-2" style="margin-right: 10px;"
-                                                        id="opciones" name="opciones"
-                                                        onchange="doctors('opciones','Doctores')" onclick="vacio()"
-                                                        required="true">
-                                                        <option value="0">Seleccione especialidad</option>
+                                                        id="opciones" name="opciones">
+                                                        <option value="<%= datos.Especialidad %>">
+                                                            <%= datos.Especialidad %>
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-input" style="margin-top: 20px; margin-bottom: 20px;">
                                                     <select class="custom-select mt-2" style="margin-right: 35px;"
-                                                        id="Doctores" name="Doctores" onclick="buildTable()"
-                                                        onchange="vaciar()">
-                                                        <option value="0">Seleccione médico</option>
+                                                        id="Doctores" name="Doctores">
+                                                        <option value="<%= datos.Doctor %>">
+                                                            <%= datos.Doctor %>
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -246,9 +246,10 @@
                                             <div class="row">
                                                 <div class="col-12 col-sm-4">
                                                     <div class="form-input" style="margin-top: 20px;">
-                                                        <label for="fecha" class="form-label">Fecha de la cita</label>
-                                                        <input class="form-control" id="fecha" name="fecha"
-                                                            autocomplete="off" onkeypress="return false">
+                                                        <label for="fecha1" class="form-label">Fecha de la cita</label>
+                                                        <input class="form-control" id="fecha1" name="fecha1"
+                                                            autocomplete="off" onkeypress="return false"
+                                                            value="<%= datos.fecha %>">
                                                     </div>
                                                 </div>
 
@@ -262,7 +263,9 @@
                                                         style="margin-top: 20px; margin-bottom: 20px;">
                                                         <select class="custom-select mt-2" style="margin-right: 35px;"
                                                             id="Horario" name="Horario">
-                                                            <option value="0">Seleccione hora</option>
+                                                            <option value="<%= datos.hora_ini %>">
+                                                                <%= datos.hora_ini %>
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -285,20 +288,22 @@
                                 <div id="collapse4" style="display: none;">
                                     <div class="card-body">
                                         <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">                                            
-                                            <input type="file" class="custom-file-input mt-2" id="Orden" name="images"
-                                                accept="application/pdf" value="">
-                                            <label class="custom-file-label mt-2" for="images">Seleccionar archivo de la
-                                                orden
-                                                médica</label>
+                                        <div class="form-input" style="margin-top: 20px;">
+                                            <label for="Orden" class="form-label">Orden médica </label>
+
+                                            <a href="#"
+                                                onclick="window.open('<%= datos.Orden %>', '_blank', 'fullscreen=yes'); return false;">
+                                                <i class="far fa-eye"></i>
+                                            </a>
                                         </div>
                                         <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">                                            
-                                            <input type="file" class="custom-file-input mt-2" id="Imagen" name="images"
-                                                accept="application/pdf" value="">
-                                            <label class="custom-file-label" for="images">Seleccionar archivo de
-                                                imágenes
-                                                diagnósticas</label>
+                                        <div class="form-input" style="margin-top: 20px;">
+                                            <label for="Imagen" class="form-label">Imágenes diagnósticas </label>
+
+                                            <a href="#"
+                                                onclick="window.open('<%= datos.Imagen %>', '_blank', 'fullscreen=yes'); return false;">
+                                                <i class="far fa-eye"></i>
+                                            </a>
                                         </div>
                                         <div class="w-100 d-none d-md-block"></div>
                                         <div class="form-input" style="margin-top: 20px;">
@@ -309,17 +314,16 @@
                                         <div class="w-100 d-none d-md-block"></div>
                                         <div class="form-input" style="margin-top: 20px;">
                                             <button type="submit" class="btn btn-primary"
-                                                id="btnAgregar">Solicitar</button>
+                                                id="btnReagendar">Reagendar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                </div>
-                </form>
+                    </form>
+                </div> 
             </div>
         </div>
-    </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
@@ -375,10 +379,10 @@
 
         $(function () {
             $.datepicker.setDefaults($.datepicker.regional["es"]);
-            $("#fecha").datepicker({
+            $("#fecha1").datepicker({
                 dateFormat: 'mm-dd-yy',
                 minDate: new Date(),
-                // maxDate: '+6m',                
+                maxDate: '+6m',
                 monthNames: ['Enero', 'Febrero', 'Marzo',
                     'Abril', 'Mayo', 'Junio',
                     'Julio', 'Agosto', 'Septiembre',
@@ -456,7 +460,7 @@
             var con1 = document.getElementById('btnConsultar').value;
             var EspeDoc = document.getElementById('opciones').value;
             var nameDoc = document.getElementById('Doctores').value;
-            var date = document.getElementById('fecha').value;
+            var date = document.getElementById('fecha1').value;
             const consulta2 = { con: con1, EspeDoc: EspeDoc, nameDoc: nameDoc, date: date };
             const options2 = {
                 method: "POST",
@@ -482,43 +486,40 @@
             return false;
         }
 
-        // function validar() {
-        //     event.preventDefault();
-        //     //Se extre el formulario donde se encuentran contenidos los campos a través de su id
-        //     var selectes = document.getElementById("opciones").value;//Se extrea cada elemento
-        //     var selectdr = document.getElementById("Doctores").value;
-        //     var ncedula = document.getElementById("Cedula").value;
-        //     var fecha = document.getElementById("fecha").value;
-        //     var fileo = document.getElementById("Orden").files;
+        function validar() {
+            //Se extre el formulario donde se encuentran contenidos los campos a través de su id
+            var selectes = document.getElementById("opciones").value;//Se extrea cada elemento
+            var selectdr = document.getElementById("Doctores").value;
+            var ncedula = document.getElementById("Cedula").value;
+            var fecha = document.getElementById("fecha").value;
+            var fileo = document.getElementById("Cedula").files;
 
 
-        //     if (ncedula.length == "0" || ncedula.length < "7") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debe ingresar el número de identidad'
-        //         })
-        //         return false;
-        //     }
-        //     if (selectes == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debe seleccionar una especialidad'
-        //         })
-        //         return false;
-        //     }
-        //     if (fecha == "") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debe seleccionar una fecha'
-        //         })
-        //         return false;
-        //     }
-        //     // var con1 = document.getElementById('btnAgregar').value;
-        //     // return false;
-        // }
+            if (ncedula.length == "0" || ncedula.length < "7") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe ingresar el número de identidad'
+                })
+                return false;
+            }
+            // if (selectes == "0") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Oops...',
+            //         text: 'Debe seleccionar una especialidad'
+            //     })
+            //     return false;
+            // }
+            // if (fecha == "") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Oops...',
+            //         text: 'Debe seleccionar una fecha'
+            //     })
+            //     return false;
+            // }
+        }
 
         var result = [];
         var result3 = [];

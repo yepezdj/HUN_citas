@@ -305,7 +305,7 @@ a{
 }
 
 /* ===== MEDIA QUERIES=====*/
-/* @media screen and (min-width: 768px){
+@media screen and (min-width: 768px){
   body{
     margin: calc(var(--header-height) + 1rem) 0 0 0;
     padding-left: calc(var(--nav-width) + 2rem);
@@ -329,17 +329,17 @@ a{
     left: 0;
     padding: 1rem 1rem 0 0;
   }
-   */
+
   /*Show navbar desktop*/
-  /* .show{
+  .show{
     width: calc(var(--nav-width) + 156px);
-  }  */
+  }  
 
   /*Add padding body desktop*/
- /* .body-pd{ 
+.body-pd{ 
     padding-left: calc(var(--nav-width) + 188px);
   }
-}    */
+}    
 
 
 

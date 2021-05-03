@@ -7,6 +7,9 @@
 
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 
     <!-- ===== CSS ===== -->
     <link rel="stylesheet" href="/css/styleuser.css">
@@ -74,182 +77,269 @@
             </a>
         </nav>
     </div>  
-    
-    <!-- ===== FORMULARIO ===== -->
-    <div class="container">
+
+    <div class="container-flex">
         <div class="row px-3">
             <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
-                <div class="card-body">    
-                    
-                    <div class="text-center mb-2">
-                        A continuación podrá cambiar toda la información solicitada para el agendamiento de su cita
-                        médica
-                    </div>
-                    <hr class="my-4">
-                    <div class="form-input">
-                        <label for="Name" class="form-label">Nombres del paciente</label>
-                        <input type="text" class="form-control" id="Name" name="Name" value="<%= datos.NombreP %>">
-                    </div>
-                    <div class="form-input">
-                        <label for="Lastname" class="form-label">Apellidos del paciente</label>
-                        <input type="text" class="form-control" id="Lastname" name="Lastname"
-                        value="<%= datos.ApellidoP %>">
-                    </div>
-                    <div class="form-input">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<%= datos.Correo %>">
-                    </div>
-                    <div class="form-input">
-                        <label for="Cedula" class="form-label">N° de identificación del paciente</label>
-                        <input type="number" class="form-control" id="Cedula" name="Cedula"
-                        value="<%= datos.CedulaP %>">
-                    </div>
-                    <div class="form-input">
-                        <select class="custom-select mt-2" style="margin-right: 35px;margin-top: 10px;" id="Cita"
-                            name="Cita">
-                            <option value="0">Seleccione tipo de cita médica</option>
-                            <option value="Ayudas diagnósticas">Ayudas diagnósticas</option>
-                            <option value="Proceso de dermatología">Proceso de dermatología</option>
-                            <option value="Cita común (Especialista o médico general)">Cita común (Especialista o médico
-                                general)</option>
-                        </select>
-                    </div>
-                    <div class="form-input" id="div" style="display: none; margin-top: 20px;">
-                        <select class="custom-select mt-2" style="margin-right: 35px;" id="Modo" name="Modo">
-                            <option value="0">Seleccione modalidad</option>
-                            <option value="Virtual">Virtual</option>
-                            <option value="Presencial">Presencial</option>
-                        </select>
-                    </div>
-                    <div class="form-input" style="margin-top: 20px;">
-                        <select class="custom-select mt-2" style="margin-right: 35px;" id="Factura" name="Factura">
-                            <option value="0">Seleccione tipo de facturación</option>
-                            <option value="Prepagada">Prepagada</option>
-                            <option value="EPS">EPS</option>
-                            <option value="ARL">ARL</option>
-                            <option value="Particular">Particular</option>
-                        </select>
-                    </div>
-                    <div class="form-input" style="margin-top: 20px;">
-                        <select class="custom-select mt-2" style="margin-right: 10px;" id="opciones" name="opciones"
-                            onchange="doctors('opciones','Doctores')" onclick="vacio(), vacioU()">
-                            <option value="<%= datos.Especialidad %>"><%= datos.Especialidad %></option>
-                        </select>
-                    </div>
-                    <div class="form-input" style="margin-top: 20px; margin-bottom: 20px;">
-                        <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
-                            onclick="buildTable()"
-                            onchange="vaciar(), vaciarU()">
-                            <option value="<%= datos.Doctor %>"><%= datos.Doctor %></option>
-                        </select>
-                    </div>
-
-                    <hr class="my-4">
-                    <div id="hide" style="display: none;">
-                    <div class="text-center mb-2">
-                        Horarios habituales del doctor.
-                    </div>
-                    <div class="font-italic font-weight-bold mb-2">
-                        Nota: No tiene en cuenta excepciones
-                    </div>
-                    <div class="w-100 d-none d-md-block"></div>
-                    
+                <div class="card-body">
+                    <form action="/update/<%= datos.idpa %>" method="POST" enctype="multipart/form-data">
                         
-                            <table class="table table-hover" id="tabla">
-                                <thead>
-                                    <tr>
-                                        <th>Disponibilidad</th>
-                                        <th>Rango de horas disponibles</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="myTable">
-                                </tbody>
-                            </table>
-                                               
-                    
-                    
-                    <div class="w-100 d-none d-md-block"></div>
-                    <div class="form-input" style="margin-top: 20px;">
-                        <label for="fecha" class="form-label">Fecha de la cita</label>
-                        <input class="form-control" id="fecha" name="fecha" autocomplete="off" value="<%= datos.fecha %>"
-                            onkeypress="return false">
-                    </div>
-                    <div class="w-100 d-none d-md-block"></div>
-                    <div class="row">
-                        <div class="col-12 col-sm-4">
-                            <button type="submit" class="btn btn-outline-warning btn-block" id="btnConsultar"
-                                style="margin-left: 10px; margin-top: 50px; margin-bottom: 20px;"
-                                onclick="user(), TableUser(), validar()">Consultar</button>
+                        <div class="text-center mb-2">
+                            A continuación podrá modificar toda la información requerida para el agendamiento de su cita
+                            médica
                         </div>
-                        <div class="col-12 col-sm-8" id="hide2" style="display: none;">
-                            <table class="table table-hover" id="tablaU">
-                                <thead>
-                                    <tr>
-                                        <th>Horarios disponibles</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="TableUser">
-                                </tbody>
-                            </table>
+                        <hr class="my-4">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne" id="btnC1">
+                                            INFORMACIÓN PERSONAL
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div>
+                                    <div class="card-body" id="collapse1">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input">
+                                                    <label for="Name" class="form-label">Nombres del paciente</label>
+                                                    <input type="text" class="form-control" id="Name" name="Name"
+                                                    value="<%= datos.NombreP %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input">
+                                                    <label for="Lastname" class="form-label">Apellidos del
+                                                        paciente</label>
+                                                    <input type="text" class="form-control" id="Lastname"
+                                                        name="Lastname" value="<%= datos.ApellidoP %>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input">
+                                                    <label for="email" class="form-label">Correo electrónico</label>
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                    value="<%= datos.Correo %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input">
+                                                    <label for="Cedula" class="form-label">N° de identificación del
+                                                        paciente</label>
+                                                    <input type="number" class="form-control" id="Cedula" name="Cedula"
+                                                        placeholder="Sin puntos ni comas ni guiones" value="<%= datos.CedulaP %>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo" id="btnC2">
+                                            INFORMACIÓN MÉDICA
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div>
+                                    <div class="card-body" id="collapse2" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input" style="margin-top: 20px;">
+                                                    <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                        id="Cita" name="Cita">
+                                                        <option value="<%= datos.Cita %>"><%= datos.Cita %></option>
+                                                        <option value="Ayudas diagnósticas">Ayudas diagnósticas</option>
+                                                        <option value="Proceso de dermatología">Proceso de dermatología
+                                                        </option>
+                                                        <option value="Cita común (Especialista o médico general)">Cita
+                                                            común
+                                                            (Especialista o
+                                                            médico
+                                                            general)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input" style="margin-top: 20px;">
+                                                    <select class="custom-select mt-2" style="margin-right: 20px;"
+                                                        id="Factura" name="Factura">
+                                                        <option value="<%= datos.Afiliacion %>"><%= datos.Afiliacion %></option>
+                                                        <option value="Prepagada">Prepagada</option>
+                                                        <option value="EPS">EPS</option>
+                                                        <option value="ARL">ARL</option>
+                                                        <option value="Particular">Particular</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12">
+                                                <div class="form-input" id="div"
+                                                    style="margin-top: 20px; display: none;">
+                                                    <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                        id="Modo" name="Modo">
+                                                        <option value="<%= datos.Modo %>"><%= datos.Modo %></option>
+                                                        <option value="Virtual">Virtual</option>
+                                                        <option value="Presencial">Presencial</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input" style="margin-top: 20px;">
+                                                    <select class="custom-select mt-2" style="margin-right: 10px;"
+                                                        id="opciones" name="opciones"
+                                                        onchange="doctors('opciones','Doctores')" onclick="vacio()"
+                                                        required="true">
+                                                        <option value="<%= datos.Especialidad %>"><%= datos.Especialidad %></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-input" style="margin-top: 20px; margin-bottom: 20px;">
+                                                    <select class="custom-select mt-2" style="margin-right: 35px;"
+                                                        id="Doctores" name="Doctores" onclick="buildTable()"
+                                                        onchange="vaciar()">
+                                                        <option value="<%= datos.Doctor %>"><%= datos.Doctor %></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree" id="btnC3">
+                                            AGENDA
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div>
+                                    <div class="card-body" id="collapse3" style="display: none;">
+                                        <div id="hide">
+                                            <div class="text-center mb-2">
+                                                Horarios habituales del doctor.
+                                            </div>
+                                            <div class="w-100 d-none d-md-block"></div>
+
+
+                                            <table class="table table-hover" id="tabla">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Disponibilidad</th>
+                                                        <th>Rango de horas disponibles</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="myTable">
+                                                </tbody>
+                                            </table>
+
+                                            <div class="w-100 d-none d-md-block"></div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="form-input" style="margin-top: 20px;">
+                                                        <label for="fecha" class="form-label">Fecha de la cita</label>
+                                                        <input class="form-control" id="fecha" name="fecha"
+                                                            autocomplete="off" onkeypress="return false" value="<%= datos.fecha %>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-sm-4">
+                                                    <button type="button" class="btn btn-outline-warning btn-block"
+                                                        id="btnConsultar"
+                                                        style="margin-top: 50px; margin-bottom: 20px;"
+                                                        onclick="user()">Consultar</button>
+                                                </div>
+                                                <div class="col-12 col-sm-4" id="hide2">
+                                                    <div class="form-input"
+                                                        style="margin-top: 20px; margin-bottom: 20px;">
+                                                        <select class="custom-select mt-2" style="margin-right: 35px;"
+                                                            id="Horario" name="Horario">
+                                                            <option value="<%= datos.hora_ini %>"><%= datos.hora_ini %></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree" id="btnC4">
+                                            INFORMACIÓN ADICIONAL
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapse4" style="display: none;">
+                                    <div class="card-body">
+                                        <div class="w-100 d-none d-md-block"></div>
+                                        <label class="form-label mt-2">Orden médica <a href="#"
+                                            onclick="window.open('<%= datos.Orden %>', '_blank', 'fullscreen=yes'); return false;">
+                                            <i class="far fa-eye"></i>
+                                        </a></label>
+                                        <div class="form-input" style="margin-top: 20px;">                                            
+                                            <input type="file" class="custom-file-input mt-2" id="Orden" name="images"
+                                                accept="application/pdf">
+                                            <label class="custom-file-label mt-2" for="images">Seleccione archivo de
+                                                orden médica</label>
+                                        </div>
+                                        <label class="form-label mt-2">Imágenes diagnósticas <a href="#"
+                                            onclick="window.open('<%= datos.Imagen %>', '_blank', 'fullscreen=yes'); return false;">
+                                            <i class="far fa-eye"></i>
+                                        </a></label>
+                                        <div class="w-100 d-none d-md-block"></div>
+                                        <div class="form-input" style="margin-top: 20px;">
+                                            <a href="#"
+                                                onclick="window.open('<%= datos.Imagen %>', '_blank', 'fullscreen=yes'); return false;">
+                                                <%= datos.Imagen %>
+                                            </a>
+                                            <input type="file" class="custom-file-input mt-2" id="Imagen" name="images"
+                                                accept="application/pdf">
+                                            <label class="custom-file-label" for="images">Seleccione archivo de
+                                                imágenes
+                                                diagnósticas</label>
+                                        </div>
+                                        <div class="w-100 d-none d-md-block"></div>
+                                        <div class="form-input" style="margin-top: 20px;">
+                                            <label for="descripcion" class="form-label">Descripción</label>
+                                            <textarea class="form-control" id="descripcion" name="descripcion"
+                                                rows="2" value="<%= datos.Descripcion %>"></textarea>
+                                        </div>
+                                        <div class="w-100 d-none d-md-block"></div>
+                                        <div class="form-input" style="margin-top: 20px;">
+                                            <button type="submit" class="btn btn-primary"
+                                                id="btnModificar">Modificar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                 </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-
-    <!-- ===== a ===== -->
-    <!-- ===== MODAL ===== -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Solicitar cita</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span>
-
-                    </button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row" id="elTitulo">
-                        <div class="col-sm-10" style="display: none;">
-                            <input type="text" class="form-control" id="id" name="id" value="<%= datos.idpa %>">
-                        </div>
-                        <label for="date" class="col-sm-2 col-form-label">Fecha</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="date" name="date" value="" readonly>
-                        </div>
-                        <label for="start" class="col-sm-2 col-form-label" style="margin-top: 20px;">Hora</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="start" name="start" style="margin-top: 20px;" value="" readonly>
-                        </div>
-                        <div class="col-md-10" style="margin: 50px">
-                            <input type="file" class="custom-file-input mt-2" id="Orden" name="Orden"
-                                accept="application/pdf" value="<%= datos.Orden %>" required>
-                            <label class="custom-file-label mt-2" for="Orden" value="<%= datos.Imagen %>"><%= datos.Orden %></label>
-                        </div>
-                        <div class="col-md-10 mt-3" style="margin: 50px">
-                            <input type="file" class="custom-file-input mt-2" id="Imagen" name="Imagen" value="<%= datos.Imagen %>" required>
-                            <label class="custom-file-label" for="Imagen" value="<%= datos.Imagen %>"><%= datos.Imagen %></label>
-                        </div>
-                        <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="descripcion" rows="2" value="<%= datos.Descripcion %>"><%= datos.Descripcion %></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-warning" id="btnModificar">Solicitar cambio</button>
-                </div>
-            </div>
-        </div>
     </div>
-
- 
-    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
         integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
@@ -260,27 +350,62 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
 
     <!-- ===== DATEPICKER ===== -->
     <script>
+
+
+        var date = new Date();
+        var year = date.getFullYear();
+        console.log(year)
+
+        if (year == '2021') {
+            natDays = [[1, 1, 2021],
+            [1, 11, 2021], [3, 22, 2021], [4, 1, 2021], [4, 2, 2021],
+            [5, 1, 2021], [5, 17, 2021], [6, 7, 2021], [6, 14, 2021],
+            [7, 5, 2021], [7, 20, 2021], [8, 7, 2021], [8, 16, 2021],
+            [10, 18, 2021], [11, 1, 2021], [11, 15, 2021], [12, 8, 2021],
+            [12, 25, 2021]
+            ];
+        } if (year == '2022') {
+            natDays = [[1, 1, 2022],
+            [1, 10, 2022], [3, 21, 2022], [4, 14, 2022], [4, 15, 2022],
+            [5, 1, 2022], [5, 30, 2022], [6, 20, 2022], [6, 27, 2022],
+            [7, 4, 2022], [7, 20, 2022], [8, 7, 2022], [8, 15, 2022],
+            [10, 17, 2022], [11, 7, 2022], [11, 14, 2022], [12, 8, 2022],
+            [12, 25, 2022]
+            ];
+        }
+
+        function nationalDays(date) {
+            for (i = 0; i < natDays.length; i++) {
+                if (date.getMonth() == natDays[i][0] - 1
+                    && date.getDate() == natDays[i][1]) {
+                    return [false, natDays[i][2] + '_day'];
+                }
+            }
+            return [true, ''];
+        }
 
         $(function () {
             $.datepicker.setDefaults($.datepicker.regional["es"]);
             $("#fecha").datepicker({
                 dateFormat: 'mm-dd-yy',
                 minDate: new Date(),
-                maxDate: '+6m',
+                // maxDate: '+6m',                
                 monthNames: ['Enero', 'Febrero', 'Marzo',
                     'Abril', 'Mayo', 'Junio',
                     'Julio', 'Agosto', 'Septiembre',
                     'Octubre', 'Noviembre', 'Diciembre'],
                 monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
                     'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                beforeShowDay: nationalDays
             });
         });
     </script>
@@ -306,31 +431,44 @@
             });
         });
 
-        $(document).ready(function () {
-            $('#Doctores').on('click', function () {
-
-                if (this.value !== '0') {
-                    $("#hide").show();
-                }
-                else {
-                    $("#hide").hide()
-                }
-
-            });
+        $('#btnC1').click(function () {
+            $('#collapse1').toggle();
+        });
+        $('#btnC2').click(function () {
+            $('#collapse2').toggle();
+        });
+        $('#btnC3').click(function () {
+            $('#collapse3').toggle();
+        });
+        $('#btnC4').click(function () {
+            $('#collapse4').toggle();
         });
 
-        $(document).ready(function () {
-            $('#btnConsultar').on('click', function () {
+        // $(document).ready(function () {
+        //     $('#Doctores').on('click', function () {
 
-                if (this.value !== '0') {
-                    $("#hide2").show();
-                }
-                else {
-                    $("#hide2").hide()
-                }
+        //         if (this.value !== '0') {
+        //             $("#hide").show();
+        //         }
+        //         else {
+        //             $("#hide").hide()
+        //         }
 
-            });
-        });
+        //     });
+        // });
+
+        // $(document).ready(function () {
+        //     $('#btnConsultar').on('click', function () {
+
+        //         if (this.value !== '0') {
+        //             $("#hide2").show();
+        //         }
+        //         else {
+        //             $("#hide2").hide()
+        //         }
+
+        //     });
+        // });
 
         var hora = [];
         async function user() {
@@ -351,89 +489,16 @@
             hora = await response2.json();
             console.log(hora);
 
-            TableUser();
-
-        }
-
-        function TableUser() {
-
-            vaciarU();
-            vacioU();
-            var tableU = document.getElementById('TableUser');
-            var ced = document.getElementById('Cedula').value;
-
+            select = document.getElementById('Horario');
+            $("#Horario").empty();
             for (var i = 0; i < hora.length; i++) {
-                if(ced.length !== '0'){
-                var row = `<tr>							
-							<td>
-                                <button type="button" class="btn btn-primary btn-block"
-                                data-toggle="modal" data-target="#myModal" id="btnModal" data-id="${hora[i]}">
-                                 ${hora[i]}
-                            </button>                                
-                            </td>                                                          
-					  </tr>`
-
-                tableU.innerHTML += row
-                }
+                var opt = document.createElement('option');
+                opt.value = hora[i];
+                opt.innerHTML = hora[i];
+                select.add(opt);
             }
-
-            var valor;
-            var fecha = document.getElementById('fecha').value
-            $(function () {
-                $(".btn").click(function () {
-                    valor = $(this).attr('data-id');                   
-                    $('#date').val(fecha);
-                    $('#start').val(valor);
-                    $('#descripcion').val();
-                    $("#modalEventos").on('shown.bs.modal', function () {
-                        $(".modal").css('display', 'block');
-                    })
-                })
-            })
-        }
-
-        $('#btnModificar').click(function () {
-            let data = recuperarDatosFormulario();
-            console.log(data)
-            agregarRegistro(data);
-            // $("#modalEventos").modal('hide');
-        })
-
-        function recuperarDatosFormulario() {
-            let data = {
-                id: $('#id').val(),   
-                Nombre: $('#Name').val(),
-                Apellido: $('#Lastname').val(),
-                Correo: $('#email').val(),
-                Cedula: $('#Cedula').val(),
-                Especialidad: $('#opciones').val(),
-                Doctor: $('#Doctores').val(),
-                Fecha: $('#date').val(),
-                Hora: $('#start').val(),
-                Orden: $('#Orden').val(),
-                Imagen: $('#Imagen').val(),
-                description: $('#descripcion').val()
-            };
-            return data;
-        }
-
-        function agregarRegistro(data) {
-            $.ajax({
-                type: 'POST',
-                url: '/update/:idpa',
-                data: data,
-                success: function (msg) {
-                    Swal.fire(
-                        '¡Buen trabajo!',
-                        '¡Se han enviado correctamente los datos!',
-                        'success'
-                    );
-                    console.log('Datos enviados correctamente')
-                },
-                error: function (error) {                    
-                    // alert("Hay un problema:" + error);
-                }
-            });
+            $("#Horario").prepend('<option selected="true" value="0">Seleccione hora</option>');
+            return false;
         }
 
         function validar() {
@@ -444,31 +509,31 @@
             var fecha = document.getElementById("fecha").value;
             var fileo = document.getElementById("Cedula").files;
 
-            
+
             if (ncedula.length == "0" || ncedula.length < "7") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe ingresar el número de identidad'                   
-                })
-                return false;
-            } 
-            if (selectes == "0") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debe seleccionar una especialidad'                   
+                    text: 'Debe ingresar el número de identidad'
                 })
                 return false;
             }
-            if (fecha == "") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debe seleccionar una fecha'                   
-                })
-                return false;
-            }
+            // if (selectes == "0") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Oops...',
+            //         text: 'Debe seleccionar una especialidad'
+            //     })
+            //     return false;
+            // }
+            // if (fecha == "") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Oops...',
+            //         text: 'Debe seleccionar una fecha'
+            //     })
+            //     return false;
+            // }
         }
 
         var result = [];
@@ -502,8 +567,8 @@
             select = document.getElementById('Doctores');
 
             for (var i = 0; i < result.length; i++) {
-                if (select.value == result[i].Doctor) {                    
-                        var row = `<tr>
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
                             <td>                              
                                 ${result[i].dia}                                
                             </td> 							
@@ -512,13 +577,13 @@
                             </td>                                                          
 					  </tr>`
 
-                        table.innerHTML += row
-                   
+                    table.innerHTML += row
+
                 }
             }
         }
 
-        
+
 
         function vaciarU() {
             document.getElementById('TableUser').innerHTML = '';
@@ -533,7 +598,10 @@
         function vacio() {
             document.getElementById('myTable').innerHTML = '';
         }
-        
+
+
+
+
         //Se crea una función para que el nombre de los documentos cargados 
         //en los inputs de tipo file se muestren en la página, a través de si id
         $(document).ready(function () {
@@ -546,8 +614,6 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         });
-
-
 
         async function doctors(s1, s2) {
             var con1 = document.getElementById('opciones').value;
@@ -575,12 +641,9 @@
                     opt.value = result5[i].Nombres;
                     opt.innerHTML = result5[i].Nombres;
                     select.add(opt);
-
                 }
-
             }
-
-
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccione médico</option>');
         }
 
 

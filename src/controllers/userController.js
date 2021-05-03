@@ -1,5 +1,6 @@
 import connection from "../configs/connectDB";
-import userService from "../services/userService"
+import userService from "../services/userService";
+import jwt from "jsonwebtoken";
 
 let getUser = (req, res) => {
     if (req.session.user) {
@@ -46,7 +47,7 @@ let verifyUser = async (req, res) => {
     var EspeDoc = req.body.EspeDoc;
     console.log(EspeDoc);
     var date = new Date(fecha); //dia en palabras
-    
+
     var day = date.getDay();
     //var year = date.getFullYear();
 
@@ -61,9 +62,9 @@ let verifyUser = async (req, res) => {
         let schedule = await userService.bringSchedule(day, nameDoc, EspeDoc);
         pos = 0;
         var vec_hora_ini = [];
-        
+
         Object.keys(schedule).forEach(function (key) {
-            vec_hora_ini[pos] = schedule[key].hora_ini;            
+            vec_hora_ini[pos] = schedule[key].hora_ini;
             pos++;
         });
         console.log('schedule');
@@ -73,7 +74,7 @@ let verifyUser = async (req, res) => {
         let apointment = await userService.consultApo(fecha, nameDoc, EspeDoc);
         pos = 0;
         var vec_apointment = [];
-        
+
         Object.keys(apointment).forEach(function (key) {
             vec_apointment[pos] = apointment[key].hora_ini;
             pos++;
@@ -85,9 +86,9 @@ let verifyUser = async (req, res) => {
         let exception = await userService.consultException(fecha, nameDoc, EspeDoc, 'Excepcion');
         pos = 0;
         var vec_exception = [];
-        
+
         Object.keys(exception).forEach(function (key) {
-            vec_exception[pos] = exception[key].hora_ini;           
+            vec_exception[pos] = exception[key].hora_ini;
             pos++;
         });
         console.log('exception');
@@ -105,21 +106,23 @@ let verifyUser = async (req, res) => {
         console.log(vec_adicion);
 
         ///VECTOR A MOSTRAR
+        var vec_hora_ini = vec_hora_ini.concat(vec_adicion);
+        var vec_hora_ini = vec_hora_ini.filter((item, pos) => vec_hora_ini.indexOf(item) === pos)
+
         vec_hora_ini = vec_hora_ini.filter(function (element) {
-            return !vec_exception.includes(element);            
+            return !vec_exception.includes(element);
         });
         vec_hora_ini = vec_hora_ini.filter(function (element) {
             return !vec_apointment.includes(element);
         });
-        var vec_hora_ini = vec_hora_ini.concat(vec_adicion);
-        var vec_hora_ini = vec_hora_ini.filter((item, pos) => vec_hora_ini.indexOf(item) === pos)
+
         console.log('total');
         // console.log(vec_hora_ini);
 
         var hora = vec_hora_ini
         res.end(JSON.stringify(hora));
         console.log(hora)
-       
+
         // return vec_hora_ini;      
 
     }
@@ -188,44 +191,110 @@ let datos = (req, res) => {
 
 
 //Se extraen mediante el req.body los elementos llenandos en la página para insertarlos en la tabla agendamiento
-let agendar = (req, res) => {
+let agendar = async (req, res) => {
     const datos = req.body;
-    var name = req.body.Nombre;
-    var lastname = req.body.Apellido;
+    var name = req.body.Name;
+    var lastname = req.body.Lastname;
     var Cedula = req.body.Cedula;
-    var correo = req.body.Correo;   
-    var doctor = req.body.Doctor; 
-    var espe = req.body.Especialidad;
-    var hora = req.body.Hora;
-    var fecha = req.body.Fecha;
-    var Orden = req.body.Orden;
-    var Imagen = req.body.Imagen;   
+    var correo = req.body.email;
+    var doctor = req.body.Doctores;
+    var espe = req.body.opciones;
+    var hora = req.body.Horario;
+    var fecha = req.body.fecha;
+    // var Orden = req.body.Orden;
+    // var Imagen = req.body.Imagen; 
+    var Cita = req.body.Cita;
+    var Factura = req.body.Factura;
     var Estado = 'Pendiente';
-    var descripcion = req.body.description;
+    var descripcion = req.body.descripcion;
     var id = '3';
+
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+
+    var linkOrden;
+    var linkImagen;
+    var user = req.session.context;
+    let JWT_SECRET = process.env.JWT_SECRET;
+    const secret = JWT_SECRET;
+
+
+    //IMAGEN Y ORDEN SUBIDAS
+    if (req.files[0]) {
+        var Orden = req.files[0].path;
+        console.log(Orden);
+
+        const payloadOrden = {
+            Orden: Orden,
+            id: user.id
+        }
+
+        const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
+        linkOrden = `http://localhost/files/${user.id}/${tokenOrden}`;
+        console.log(linkOrden);
+    } else {
+        linkOrden = 'El paciente no adjuntó orden médica';
+        console.log(linkOrden);
+    }
+
+
+    if (req.files[1]) {
+        var Imagen = req.files[1].path;
+        console.log(Imagen);
+
+        const payloadImagen = {
+            Imagen: Imagen,
+            id: user.id
+        }
+
+        const tokenImagen = jwt.sign(payloadImagen, secret, { expiresIn: '100 years' });
+        linkImagen = `http://localhost/files/${user.id}/${tokenImagen}`;
+        console.log(linkImagen);
+    } else {
+        linkImagen = 'El paciente no adjuntó imagen diagnóstica';
+        console.log(linkImagen);
+    }
+
+    var Modo;
+    if (Cita == "Ayudas diagnósticas" || Cita == "Proceso de dermatología") {
+        Modo = 'Presencial'
+    } else {
+        Modo = req.body.Modo;
+    }
+
     console.log(datos);
     console.log(hora)
 
-    connection.query(
-        `INSERT INTO agendamiento (Especialidad, Doctor, Fecha, hora_ini, Orden, Imagen, NombreP, ApellidoP, CedulaP, idu, Descripcion, Estado, Correo) 
-        VALUES ("${espe}", "${doctor}", "${newdate}", "${hora}", "${Orden}", "${Imagen}", "${name}", "${lastname}", "${Cedula}", "${id}", "${descripcion}", "${Estado}", "${correo}")`,
-        function(err, rows) {
-            if (err) {
-                res.json(err);
-            }
-            console.log(rows)
-            res.redirect('/user/usermain')
+    connection.query(`SELECT * FROM agendamiento WHERE Especialidad = "${espe}" AND Doctor = "${doctor}" AND Fecha = "${newdate}"
+    AND hora_ini = "${hora}"`, (err, datos) => {
+        if (err) {
+            res.json(err);
         }
-    );
-   
+        console.log(datos);
+        if (!datos.length) {
+            connection.query(
+                `INSERT INTO agendamiento (Especialidad, Doctor, Fecha, hora_ini, Orden, Imagen, NombreP, ApellidoP, CedulaP, idu, Descripcion, Estado, Correo, Cita, Modo, Afiliacion) 
+                VALUES ("${espe}", "${doctor}", "${newdate}", "${hora}", "${linkOrden}", "${linkImagen}", "${name}", "${lastname}", "${Cedula}", "${id}", "${descripcion}", "${Estado}", "${correo}", "${Cita}", "${Modo}", "${Factura}")`,
+                function (err, rows) {
+                    if (err) {
+                        res.json(err);
+                    }
+                    console.log(rows)
+                    return res.redirect('/user/usermain')
+                }
+            );
+        } else {
+            return res.redirect('/user/usermain')
+        }
+    });
+
 }
 
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
-let edit = (req, res) => {
+let edit = async (req, res) => {
+    var user = req.session.context;
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen, Descripcion, Correo FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Imagen, Descripcion, Correo, Cita, Afiliacion, Modo FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -237,25 +306,101 @@ let edit = (req, res) => {
 };
 
 //Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
-let update = (req, res) => {
-    const id = req.body.id;    
-    var name = req.body.Nombre;
-    var lastname = req.body.Apellido;
+let update = async (req, res) => {
+    const id = req.params.idpa;
+    var name = req.body.Name;
+    var lastname = req.body.Lastname;
     var Cedula = req.body.Cedula;
-    var correo = req.body.Correo;   
-    var doctor = req.body.Doctor; 
-    var espe = req.body.Especialidad;
-    var hora = req.body.Hora;
-    var fecha = req.body.Fecha;
-    var Orden = req.body.Orden;
-    var Imagen = req.body.Imagen;   
+    var correo = req.body.email;
+    var doctor = req.body.Doctores;
+    var espe = req.body.opciones;
+    var hora = req.body.Horario;
+    var fecha = req.body.fecha;
+
+    var Cita = req.body.Cita;
+    var Factura = req.body.Factura;
     var Estado = 'Pendiente';
-    var descripcion = req.body.description;    
+    var descripcion = req.body.descripcion;
+
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
-    connection.query("UPDATE agendamiento SET CedulaP = ?, Especialidad = ?, Doctor = ?, fecha = ?, hora_ini = ?, Orden = ?, Imagen = ?, Descripcion = ? WHERE idpa = ?", [Cedula, espe, doctor, newdate, hora, Orden, Imagen, descripcion, id], (err, datos) => {
+    console.log(newdate)
+    // console.log(newdate)
+
+    var linkOrden;
+    var linkImagen;
+    var user = req.session.context;
+    let JWT_SECRET = process.env.JWT_SECRET;
+    const secret = JWT_SECRET;
+
+
+    //IMAGEN Y ORDEN SUBIDAS
+    if (req.files[0]) {
+        var Orden = req.files[0].path;
+        console.log(Orden);
+
+        const payloadOrden = {
+            Orden: Orden,
+            id: user.id
+        }
+
+        const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
+        linkOrden = `http://localhost/files/${user.id}/${tokenOrden}`;
+        console.log(linkOrden);
+
+        connection.query("UPDATE agendamiento SET Orden = ? WHERE idpa = ?", [linkOrden, req.params.idpa], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            console.log(datos);
+            // return res.redirect('/consultar');
+        });
+    } else {
+        // linkOrden = 'El paciente no adjuntó orden médica';
+        // console.log(linkOrden);
+    }
+
+
+    if (req.files[1]) {
+        var Imagen = req.files[1].path;
+        console.log(Imagen);
+
+        const payloadImagen = {
+            Imagen: Imagen,
+            id: user.id
+        }
+
+        const tokenImagen = jwt.sign(payloadImagen, secret, { expiresIn: '100 years' });
+        linkImagen = `http://localhost/files/${user.id}/${tokenImagen}`;
+        console.log(linkImagen);
+        connection.query("UPDATE agendamiento SET Imagen = ? WHERE idpa = ?", [linkImagen, req.params.idpa], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            console.log(datos);
+            // return res.redirect('/consultar');
+        });
+    } else {
+        // linkImagen = 'El paciente no adjuntó imagen diagnóstica';
+        // console.log(linkImagen);
+    }
+
+
+
+    var Modo;
+    if (Cita == "Ayudas diagnósticas" || Cita == "Proceso de dermatología") {
+        Modo = 'Presencial'
+    } else {
+        Modo = req.body.Modo;
+    }
+
+    connection.query("UPDATE agendamiento SET NombreP = ?, ApellidoP = ?, CedulaP = ?, Especialidad = ?, Doctor = ?, fecha = ?, hora_ini = ?, Descripcion = ?, Cita = ?, Afiliacion = ?, Modo = ?, Correo = ? WHERE idpa = ?", [name, lastname, Cedula, espe, doctor, newdate, hora, descripcion, Cita, Factura, Modo, correo, id], (err, datos) => {
+        if (err) {
+            res.json(err);
+        }
+
         console.log(datos);
-        res.redirect('/consultar');
+        return res.redirect('/consultar');
     });
 };
 
@@ -277,8 +422,8 @@ module.exports = {
     verifyUser: verifyUser,
     espe: espe,
     dr: dr,
-    tabla: tabla,    
-    datos: datos,    
+    tabla: tabla,
+    datos: datos,
     agendar: agendar,
     edit: edit,
     update: update,

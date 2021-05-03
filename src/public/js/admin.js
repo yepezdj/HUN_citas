@@ -50,8 +50,8 @@ async function doctors(s1, s2) {
             opt.innerHTML = result5[i].Nombres;
             select.add(opt);
         }
-
     }
+    $("#Doctores").prepend('<option selected="true" value="0">Seleccione médico</option>');
 }
 
 
