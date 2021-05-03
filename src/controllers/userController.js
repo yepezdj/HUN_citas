@@ -201,20 +201,21 @@ let agendar = async (req, res) => {
     var espe = req.body.opciones;
     var hora = req.body.Horario;
     var fecha = req.body.fecha;
+    var user = req.session.context;
     // var Orden = req.body.Orden;
     // var Imagen = req.body.Imagen; 
     var Cita = req.body.Cita;
     var Factura = req.body.Factura;
     var Estado = 'Pendiente';
     var descripcion = req.body.descripcion;
-    var id = '3';
+    var id = user.id;
 
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
 
     var linkOrden;
     var linkImagen;
-    var user = req.session.context;
+    
     let JWT_SECRET = process.env.JWT_SECRET;
     const secret = JWT_SECRET;
 

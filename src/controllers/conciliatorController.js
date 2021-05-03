@@ -80,8 +80,10 @@ let aceptar = (req, res) => {
     }
     gmailController.sendEmailNormal(correo, 'Solicitud de cita médica-HUN', body)
 
-    connection.query("UPDATE citashun.agendamiento SET Estado = ? WHERE agendamiento.idpa = ?", [estado, req.params.idpa], (err, datos) => {
-        console.log(datos);
+    connection.query(`UPDATE agendamiento SET Estado = "${estado}" WHERE agendamiento.idpa = "${req.params.idpa}"`, (err, datos) => {
+        if (err) {
+            res.json(err);
+        }
         res.redirect('/conciliator/conciliatormain');
     });
 
