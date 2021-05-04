@@ -162,26 +162,7 @@ select{
     position: relative;    
 }
 
-  
 
-/* .modal {
-  z-index: 100000 !important;
-} */
-
-/* .modal-backdrop {
-  z-index: 100000 !important;
-} */
-
-/* #modalEventos {
-  z-index: 100001 !important;
-} */
-
-#calendar {
-  max-width: 700px;
-  margin-top: 50px !important;
-  margin-left: 400px !important;  
-  background: white;  
-}
 
 a{
   text-decoration: none;

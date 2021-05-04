@@ -45,6 +45,20 @@ input{
     color: white;
 }
 
+.toggle .btn {
+  cursor: pointer;
+  background: #ffffff;
+  transition: background 0.2s, color 0.2s;
+  border: 2px solid #008DCA;
+  user-select: none;
+  color: black;
+}
+
+.toggle .active {
+  border: 2px solid #008DCA;
+  background: #008DCA;
+  color: white;
+}
 
 
 /* RUTAS */

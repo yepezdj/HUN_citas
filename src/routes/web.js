@@ -13,7 +13,7 @@ import path from "path"
 
 const storage = multer.diskStorage({ destination: 'D:/Desktop/PF/Ordeneseimagenes',
 filename: function (req, file, cb) {
-    cb(null, 'Arhivos'+'-'+Date.now()+
+    cb(null, 'Archivo'+'-'+Date.now()+
     path.extname(file.originalname) );
     }
 });
