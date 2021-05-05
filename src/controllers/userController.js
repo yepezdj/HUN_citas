@@ -115,18 +115,13 @@ let verifyUser = async (req, res) => {
         vec_hora_ini = vec_hora_ini.filter(function (element) {
             return !vec_apointment.includes(element);
         });
-
         console.log('total');
         // console.log(vec_hora_ini);
-
         var hora = vec_hora_ini
         res.end(JSON.stringify(hora));
         console.log(hora)
-
-        // return vec_hora_ini;      
-
+        // return vec_hora_ini;
     }
-
     // return res.redirect("/user/usermain");
 }
 
@@ -157,21 +152,27 @@ let dr = (req, res) => {
 //Se extraen campos de la tabla agendamiento y son enviados a la página tabla para posteriormente ser mostrados
 let tabla = (req, res) => {
 
-    var user = req.session.context;
-    /* console.log(user) */
-    var cedula = user.cedula;
-    /* console.log(cedula); */
-    // console.log(req.session.user)
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen, Estado FROM agendamiento WHERE CedulaP = ?', cedula, (err, datos) => {
-        if (err) {
-            res.json(err);
-        }
-        /* console.log(datos); */
-        res.render('./user/usertable.ejs', {
-            data: datos,
-            //user: req.user
+    if (req.session.user) {
+        var user = req.session.context;
+        /* console.log(user) */
+        var cedula = user.cedula;
+        /* console.log(cedula); */
+        // console.log(req.session.user)
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen, Cita, Afiliacion, Modo, Estado FROM agendamiento WHERE CedulaP = ?', cedula, (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            /* console.log(datos); */
+            res.render('./user/usertable.ejs', {
+                data: datos,
+                //user: req.user
+            });
         });
-    });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
 };
 
 //Se extraen todos los campos de la tabla que contiene la información de los horarios y se convierten en formato json
@@ -192,7 +193,7 @@ let datos = (req, res) => {
 
 //Se extraen mediante el req.body los elementos llenandos en la página para insertarlos en la tabla agendamiento
 let agendar = async (req, res) => {
-    const datos = req.body;
+    const datos = req.body;    
     var name = req.body.Name;
     var lastname = req.body.Lastname;
     var Cedula = req.body.Cedula;
@@ -208,6 +209,11 @@ let agendar = async (req, res) => {
     var Estado = 'Pendiente';
     var descripcion = req.body.descripcion;
     var id = '3';
+
+    var p1 = req.body.options;    
+    var p2 = req.body.options1;
+    var p3 = req.body.options2;
+    var idp;
 
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
@@ -236,7 +242,6 @@ let agendar = async (req, res) => {
         linkOrden = 'El paciente no adjuntó orden médica';
         console.log(linkOrden);
     }
-
 
     if (req.files[1]) {
         var Imagen = req.files[1].path;
@@ -280,13 +285,32 @@ let agendar = async (req, res) => {
                         res.json(err);
                     }
                     console.log(rows)
-                    return res.redirect('/user/usermain')
+                    // return res.redirect('/user/usermain')
                 }
             );
+            connection.query('SELECT MAX(idpa) FROM agendamiento', (err, dat) => {
+                if (err) {
+                    res.json(err);
+                }
+                idp = dat.idpa
+                console.log(idp);
+                connection.query(
+                    `INSERT INTO encuesta (P1, P2, P3, idpa) VALUES ("${p1}", "${p2}", "${p3}", "${idp}")`,
+                    function (err, rows) {
+                        if (err) {
+                            res.json(err);
+                        }
+                        console.log(rows)
+                        return res.redirect('/user/usermain')
+                    }
+                );
+            });            
         } else {
             return res.redirect('/user/usermain')
         }
     });
+
+    
 
 }
 
@@ -321,6 +345,7 @@ let update = async (req, res) => {
     var Factura = req.body.Factura;
     var Estado = 'Pendiente';
     var descripcion = req.body.descripcion;
+    var option = req.body.Option
 
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
@@ -385,7 +410,15 @@ let update = async (req, res) => {
         // console.log(linkImagen);
     }
 
-
+    if (option == '1') {
+        connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ? WHERE idpa = ?", [newdate, hora, req.params.idpa], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            console.log(datos);
+            // return res.redirect('/consultar');
+        });
+    }
 
     var Modo;
     if (Cita == "Ayudas diagnósticas" || Cita == "Proceso de dermatología") {
@@ -394,7 +427,7 @@ let update = async (req, res) => {
         Modo = req.body.Modo;
     }
 
-    connection.query("UPDATE agendamiento SET NombreP = ?, ApellidoP = ?, CedulaP = ?, Especialidad = ?, Doctor = ?, fecha = ?, hora_ini = ?, Descripcion = ?, Cita = ?, Afiliacion = ?, Modo = ?, Correo = ? WHERE idpa = ?", [name, lastname, Cedula, espe, doctor, newdate, hora, descripcion, Cita, Factura, Modo, correo, id], (err, datos) => {
+    connection.query("UPDATE agendamiento SET NombreP = ?, ApellidoP = ?, CedulaP = ?, Especialidad = ?, Doctor = ?, Descripcion = ?, Cita = ?, Afiliacion = ?, Modo = ?, Correo = ? WHERE idpa = ?", [name, lastname, Cedula, espe, doctor, descripcion, Cita, Factura, Modo, correo, req.params.idpa], (err, datos) => {
         if (err) {
             res.json(err);
         }

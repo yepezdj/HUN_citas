@@ -39,6 +39,7 @@ body{
   margin-top: 80px !important;  
   background: white !important; 
   font-family: var(--body-font); 
+  text-align: center !important;
 }
 
 

@@ -96,6 +96,9 @@
                         <th>Doctor</th>
                         <th>Fecha</th>
                         <th>Hora</th>
+                        <th>Cita</th>
+                        <th>Modalidad</th>
+                        <th>Afiliación</th>
                         <th>Orden</th>
                         <th>Imagen</th>
                         <th>Aceptar solicitud</th>
@@ -133,6 +136,15 @@
                                 </td>
                                 <td>
                                     <%= info[i].hora_ini %>
+                                </td>
+                                <td>
+                                    <%= info[i].Cita %>
+                                </td>
+                                <td>
+                                    <%= info[i].Modo %>
+                                </td>
+                                <td>
+                                    <%= info[i].Afiliacion %>
                                 </td>
                                 <td> <a href="#" class="btn btn-warning"
                                         onclick="window.open('<%= info[i].Orden %>', '_blank', 'fullscreen=yes'); return false;">

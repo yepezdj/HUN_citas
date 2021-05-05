@@ -63,7 +63,7 @@ let initWebRoutes = (app) => {
     router.get('/delete/:idpa',userController.delate); 
     router.get('/update/:idpa', upload.array('images',2), userController.edit);
     router.post('/update/:idpa', upload.array('images',2), userController.update); 
-
+    // router.post('/survey', userController.Survey);
     router.post('/verifyUser', userController.verifyUser);
 
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    

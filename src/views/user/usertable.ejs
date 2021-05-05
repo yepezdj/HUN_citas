@@ -87,6 +87,9 @@
                         <th>Doctor</th>
                         <th>Fecha</th>
                         <th>Hora</th>
+                        <th>Citaa</th>
+                        <th>Afiliacion</th>
+                        <th>Modalidad</th>
                         <th>Orden</th>
                         <th>Imagen</th>                        
                         <th>Estado</th>
@@ -133,12 +136,23 @@
                                 <td>
                                     <%= data[i].hora_ini %>
                                 </td>
-                                <td> <a href="#" class="btn btn-warning"
+                                <td>
+                                    <%= data[i].Cita %>
+                                </td>
+                                <td>
+                                    <%= data[i].Afiliacion %>
+                                </td>
+                                <td>
+                                    <%= data[i].Modo %>
+                                </td>
+                                <td>                                     
+                                    <a href="#" class="btn btn-warning"
                                         onclick="window.open('<%= data[i].Orden %>', '_blank', 'fullscreen=yes'); return false;">
                                         <i class="far fa-file-pdf"></i>
-                                    </a>
+                                    </a>                                   
                                 </td>
-                                <td> <a href="#" class="btn btn-warning"
+                                <td>
+                                    <a href="#" class="btn btn-warning"
                                         onclick="window.open('<%= data[i].Imagen %>', '_blank', 'fullscreen=yes'); return false;">
                                         <i class="far fa-file-pdf"></i>
                                     </a>
@@ -156,7 +170,7 @@
                                                 <span class="badge badge-danger">
                                                     <%= data[i].Estado %>
                                                 </span>
-                                                <% break; } %> -->
+                                                <% break; } %> 
                                 </td>
                             </tr>
 

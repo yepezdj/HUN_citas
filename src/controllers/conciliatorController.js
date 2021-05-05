@@ -3,7 +3,7 @@ import gmailController from "../controllers/gmailController";
 
 let getConciliator = (req, res) => {
     if (req.session.conciliator) {
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen FROM agendamiento WHERE Estado = "Pendiente"', (err, info) => {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Cita, Modo, Afiliacion, Orden, Imagen FROM agendamiento WHERE Estado = "Pendiente"', (err, info) => {
             if (err) {
                 res.json(err);
             }
@@ -24,7 +24,7 @@ let getConciliator = (req, res) => {
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
 let datosaceptar = (req, res) => {
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Cita, Modo FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -132,7 +132,7 @@ let declinar = (req, res) => {
 
 let Citas = (req, res) => {
     if (req.session.conciliator) {
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen FROM agendamiento WHERE Estado = "Aceptada"', (err, info) => {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Cita, Modo, Afiliacion, Orden, Imagen FROM agendamiento WHERE Estado = "Aceptada"', (err, info) => {
             if (err) {
                 res.json(err);
             }

@@ -49,7 +49,7 @@ body{
   margin-top: 30px;
   z-index: 100000 !important;
   background: white !important;  
-  text-align: center;
+  text-align: center !important;
   font-family: var(--body-font);  
   border: none;
 }
@@ -137,6 +137,16 @@ tbody tr:nth-child(odd) {
     color: #525355 !important;
   }
 
+.custom-file-input{
+  border:2px solid#008DCA !important;   
+}
+
+.custom-file-label::after { 
+  content: "Subir" !important;
+  border:2px solid#008DCA !important;  
+  background: #c0e1f0 !important;
+}
+
 select{
 	appearance: none;
 	-webkit-appearance: none;
@@ -151,13 +161,13 @@ select{
     width: 100%;
     height: 45px !important;
     top: 10px;
-	display: inline-block;	
-	cursor: pointer;  	
+	  display: inline-block;	
+	  cursor: pointer;  	
   	outline: 0; 
   	border: 0;	
     color: #4646cc;    
-	font-size: 16px;	
-	border:2px solid#008DCA !important;
+	  font-size: 16px;	
+	  border:2px solid#008DCA !important;
     border-radius: 50px !important;
     position: relative;    
 }
@@ -175,13 +185,6 @@ select{
 /* #modalEventos {
   z-index: 100001 !important;
 } */
-
-#calendar {
-  max-width: 700px;
-  margin-top: 50px !important;
-  margin-left: 400px !important;  
-  background: white;  
-}
 
 a{
   text-decoration: none;
