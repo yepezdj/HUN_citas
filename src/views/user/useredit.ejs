@@ -20,14 +20,14 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 
     <!-- ===== SWEETALERT2 ===== -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
@@ -176,8 +176,12 @@
                                                 <div class="form-input" style="margin-top: 20px;">
                                                     <select class="custom-select mt-2" style="margin-right: 20px;"
                                                         id="Factura" name="Factura">
+
                                                         <option value="<%= datos.Afiliacion %>">
                                                             <%= datos.Afiliacion %>
+
+                                                        <option value="<%= datos.Afiliacion %>"><%= datos.Afiliacion %>
+
                                                         </option>
                                                         <option value="Prepagada">Prepagada</option>
                                                         <option value="EPS">EPS</option>
@@ -210,8 +214,12 @@
                                                         onchange="doctors('opciones','Doctores')" onclick="vacio()"
                                                         required="true">
                                                         <option value="<%= datos.Especialidad %>">
+
                                                             <%= datos.Especialidad %>
                                                         </option>
+
+                                                            <%= datos.Especialidad %></option>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -287,12 +295,6 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- <div class="col-12 col-sm-4">
-                                                    <button type="button" class="btn btn-outline-warning btn-block"
-                                                        id="btnConsultar"
-                                                        style="margin-top: 50px; margin-bottom: 20px;"
-                                                        onclick="user()">Consultar</button>
-                                                </div> -->
                                                 <div class="col-12 col-sm-6" id="hide2">
                                                     <div class="form-input" style="margin-top: 10px;">
                                                         <label for="Horario" class="custom-label">Hora de la
@@ -303,9 +305,8 @@
                                                             </option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -336,9 +337,17 @@
                                         <label class="form-label mt-2">Imágenes diagnósticas <a href="#"
                                                 onclick="window.open('<%= datos.Imagen %>', '_blank', 'fullscreen=yes'); return false;">
                                                 <i class="far fa-eye"></i>
+
                                             </a></label>
                                         <div class="w-100 d-none d-md-block"></div>
                                         <div class="form-input" style="margin-top: 20px;">
+
+                                            </a>
+                                        </label>
+                                        <div class="w-100 d-none d-md-block"></div>
+                                        <div class="form-input" style="margin-top: 20px;">
+                                            
+
                                             <input type="file" class="custom-file-input mt-2" id="Imagen" name="images"
                                                 accept="application/pdf" onchange="ValidateSize2(this)">
                                             <label class="custom-file-label" for="images">Seleccione archivo de
@@ -371,19 +380,16 @@
         integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
-        crossorigin="anonymous"></script>
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
     <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-
-
-    <!-- ===== DATEPICKER ===== -->
-
+  
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
@@ -428,7 +434,7 @@
             $("#fecha").datepicker({
                 dateFormat: 'mm-dd-yy',
                 minDate: new Date(),
-                // maxDate: '+6m',                
+                maxDate: '+6m',                
                 monthNames: ['Enero', 'Febrero', 'Marzo',
                     'Abril', 'Mayo', 'Junio',
                     'Julio', 'Agosto', 'Septiembre',
@@ -437,17 +443,11 @@
                     'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
                 dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
                 beforeShowDay: nationalDays,
-                onSelect: async function (date) {
-                    //Set my textbox value
+                onSelect: async function (date) {                    
                     console.log(date)
                     var con1 = document.getElementById('fecha').value;
                     var EspeDoc = document.getElementById('opciones').value;
-                    var nameDoc = document.getElementById('Doctores').value;
-
-                    //    var fechaI = dateFormat();
-                    //    console.log(fechaI)
-
-                    // var date = document.getElementById('fecha').value;
+                    var nameDoc = document.getElementById('Doctores').value;                    
                     const consulta2 = { con: con1, EspeDoc: EspeDoc, nameDoc: nameDoc, date: date };
                     const options2 = {
                         method: "POST",
@@ -471,46 +471,62 @@
                     }
                     $("#Horario").prepend('<option selected="true" value="0">Seleccione hora</option>');
                     return false;
-                },
-                // onSelect: function (date) {
-
-                //     user(date)
-                // }
-            })
-            // .on("change", function (date) {
-
-            //     console.log(date);
-            // });
+                },                
+            })            
         });
 
+        function encuesta(){
+            var cita = document.getElementsById('Cita');
+            var modo = document.getElementsById('Modo');
+
+
+        }
 
         $(document).ready(function () {
             $('#Cita').on('change', function () {
+                if (this.value == 'Ayudas diagnósticas') {
+                    $("#card3").show();
+                }
+                else if(this.value == 'Proceso de dermatología'){
+                    $("#card3").show()
+                } else{
+                    $("#card3").hide()
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#Modo').on('change', function () {
+                if (this.value == 'Presencial') {
+                    $("#card3").show();
+                }
+                else {
+                    $("#card3").hide()
+                }
+            });
+        });
 
+        $(document).ready(function () {
+            $('#Cita').on('change', function () {
                 if (this.value == 'Cita común (Especialista o médico general)') {
                     $("#div").show();
                 }
                 else {
                     $("#div").hide()
                 }
-
             });
         });
 
         $(document).ready(function () {
             $('#Option').on('change', function () {
-
                 if (this.value == '1') {
                     $("#hide").show();
-                    $("#Option").hide()
+                    $("#row").hide()
                 }
                 else {
                     $("#hide").hide()
                 }
-
             });
         });
-
 
         $('#btnC1').click(function () {
             $('#collapse1').toggle();
@@ -524,68 +540,12 @@
         $('#btnC4').click(function () {
             $('#collapse4').toggle();
         });
-
-        // $(document).ready(function () {
-        //     $('#Doctores').on('click', function () {
-
-        //         if (this.value !== '0') {
-        //             $("#hide").show();
-        //         }
-        //         else {
-        //             $("#hide").hide()
-        //         }
-
-        //     });
-        // });
-
-        // $(document).ready(function () {
-        //     $('#btnConsultar').on('click', function () {
-
-        //         if (this.value !== '0') {
-        //             $("#hide2").show();
-        //         }
-        //         else {
-        //             $("#hide2").hide()
-        //         }
-
-        //     });
-        // });
-
-        // var hora = [];
-        // async function user() {
-        //     var con1 = document.getElementById('btnConsultar').value;
-        //     var EspeDoc = document.getElementById('opciones').value;
-        //     var nameDoc = document.getElementById('Doctores').value;
-        //     var date = document.getElementById('fecha').value;
-        //     const consulta2 = { con: con1, EspeDoc: EspeDoc, nameDoc: nameDoc, date: date };
-        //     const options2 = {
-        //         method: "POST",
-        //         body: JSON.stringify(consulta2),
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         }
-        //     };
-        //     var response2 = await fetch('/verifyUser', options2);
-        //     console.log(response2);
-        //     hora = await response2.json();
-        //     console.log(hora);
-
-        //     select = document.getElementById('Horario');
-        //     $("#Horario").empty();
-        //     for (var i = 0; i < hora.length; i++) {
-        //         var opt = document.createElement('option');
-        //         opt.value = hora[i];
-        //         opt.innerHTML = hora[i];
-        //         select.add(opt);
-        //     }
-        //     $("#Horario").prepend('<option selected="true" value="0">Seleccione hora</option>');
-        //     return false;
-        // }
+        $('#btnC5').click(function () {
+            $('#collapse5').toggle();
+        });
 
         function validar() {
-
             //Se extre el formulario donde se encuentran contenidos los campos a través de su id
-
             var ncedula = document.getElementById("Cedula").value;
             var cita = document.getElementById("Cita").value;
             var factura = document.getElementById("Factura").value;
@@ -676,16 +636,13 @@
                 })
                 event.preventDefault();
                 return false;
-            }
-            // var con1 = document.getElementById('btnAgregar').value;
-            // return false;
+            }            
         }
 
         function ValidateSize(file) {
-            var FileSize = file.files[0].size / 1024 / 1024; // in MiB
+            var FileSize = file.files[0].size / 1024 / 1024; 
             var fileo = document.getElementById("Orden");
-            if (FileSize > 3) {
-                // alert('File size exceeds 2 MiB');
+            if (FileSize > 3) {                
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -694,26 +651,22 @@
                 fileo.value = "";
                 event.preventDefault();
                 return false;
-
             }
         }
         function ValidateSize2(file) {
-            var FileSize = file.files[0].size / 1024 / 1024; // in MiB
+            var FileSize = file.files[0].size / 1024 / 1024; 
             var fileo = document.getElementById("Imagen");
-            if (FileSize > 2) {
-                // alert('File size exceeds 2 MiB');
+            if (FileSize > 3) {               
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'El archivo supera los 2MB'
+                    text: 'El archivo supera los 3 MB'
                 })
                 fileo.value = "";
                 event.preventDefault();
                 return false;
-
             }
         }
-
 
         var result = [];
         var result3 = [];
@@ -731,10 +684,7 @@
             console.log(response2)
             result = await response2.json();
             console.log(result)
-
             buildTable()
-
-
         }
 
         function buildTable() {
@@ -777,9 +727,6 @@
         function vacio() {
             document.getElementById('myTable').innerHTML = '';
         }
-
-
-
 
         //Se crea una función para que el nombre de los documentos cargados 
         //en los inputs de tipo file se muestren en la página, a través de si id

@@ -76,8 +76,6 @@ tbody tr:nth-child(odd) {
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);    
   }
   
-
-  
   .card-body{
     padding: 2rem;
     font-family: var(--body-font);
@@ -171,20 +169,6 @@ select{
     border-radius: 50px !important;
     position: relative;    
 }
-
-  
-
-/* .modal {
-  z-index: 100000 !important;
-} */
-
-/* .modal-backdrop {
-  z-index: 100000 !important;
-} */
-
-/* #modalEventos {
-  z-index: 100001 !important;
-} */
 
 a{
   text-decoration: none;

@@ -26,55 +26,56 @@
             <div class="container">
               <div>
                 <% if(errors !==" " ) {%>
-                  <% errors.forEach(function(item) { %>
-                    <div class="alert alert-danger">
-                      <%- item %>
-                    </div>
-                    <%})%>
-                      <%}%>
+                <% errors.forEach(function(item) { %>
+                <div class="alert alert-danger">
+                  <%- item %>
+                </div>
+                <%})%>
+                <%}%>
               </div>
               <form method="POST" action="/register">
                 <div class="row">
                   <div class="col-lg-6 my-4">
                     <div class="form-group mb-4">
                       <label for="nombre" class="font-weight-bold">Nombres</label>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese sus nombres">
+                      <input type="text" class="form-control" id="name" name="name"
+                        placeholder="Ingrese sus nombres" required>
                     </div>
                     <div class="form-group mb-4">
                       <label for="email" class="font-weight-bold">Apellidos</label>
                       <input type="text" class="form-control" id="last_name " name="last_name"
-                        placeholder="Ingrese sus apellidos">
+                        placeholder="Ingrese sus apellidos" required>
                     </div>
                     <div class="form-group mb-4">
-                      <label for="cedula" class="font-weight-bold">Cedula</label>
-                      <input type="number" class="form-control" id="cedula" name="cedula"
-                        placeholder="Ingrese su cedula" autocomplete="off">
+                      <label for="cedula" class="font-weight-bold">Número de identificación</label>
+                      <input type="tel" class="form-control" id="cedula" name="cedula" pattern="[0-9]{10}"
+                        placeholder="Ingrese su cedula" autocomplete="off" required>
                     </div>
                     <div class="form-group mb-0">
                       <label for="sexo" class="font-weight-bold">Sexo</label>
                     </div>
                     <div class="form-group mb-4">
-                      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-info active">
+                      <div class="btn-group btn-group-toggle toggle" data-toggle="buttons">
+                        <label class="btn active">
                           <input type="radio" name="sexo" id="masculino" value="masculino" checked> Masculino
                         </label>
-                        <label class="btn btn-info">
+                        <label class="btn open-btn">
                           <input type="radio" name="sexo" id="femenino" value="femenino"> Femenino
                         </label>
                       </div>
                     </div>
                     <div class="form-group mb-4">
                       <label for="fecha_nac" class="font-weight-bold">Fecha de nacimiento</label>
-                      <input class="form-control" id="fecha_nac" name="fecha_nac"
+                      <input class="form-control" id="fecha_nac" name="fecha_nac" type="date" min='1900-01-01'
                         placeholder="Ingrese su fecha de nacimiento" autocomplete="off">
+                      <span class="validity"></span>
                     </div>
                     <div class="form-group mb-4">
-                      <label for="cedula" class="font-weight-bold">Numero de celular</label>
-                      <input type="number" class="form-control" id="cellphone" name="cellphone"
-                        placeholder="Ingrese su celular" autocomplete="off">
+                      <label for="cedula" class="font-weight-bold">Número de celular</label>
+                      <input type="tel" class="form-control" id="cellphone" name="cellphone"
+                        placeholder="Ingrese su celular" autocomplete="off" pattern="[0-9]{10}">
                     </div>
                   </div>
-
                   <div class="col-lg-6 my-4">
                     <div class="form-group mb-4">
                       <label for="email" class="font-weight-bold">Correo electrónico</label>
@@ -84,7 +85,7 @@
                     <div class="form-group mb-4">
                       <label for="city" class="font-weight-bold">Ciudad de residencia</label>
                       <input class="form-control" id="city" name="city" placeholder="Ingrese su ciudad de residencia"
-                        autocomplete="off">
+                        autocomplete="off" required>
                     </div>
                     <div class="form-group mb-4">
                       <label for="eps" class="font-weight-bold">EPS</label>
@@ -94,6 +95,7 @@
                       <label for="password" class="font-weight-bold">Contraseña</label>
                       <input type="password" class="form-control" id="password" name="password"
                         placeholder="Ingrese su Contraseña">
+                      <small class="form-text text-muted">La contraseña debe tener almenos 8 caracteres.</small>
                     </div>
                     <div class="form-group mb-4">
                       <label for="password" class="font-weight-bold">Confirmar contraseña</label>
@@ -102,7 +104,7 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" id="btn" class="btn btn-block">REGISTRAR</button>
+                <button type="submit" id="btn" class="btn btn-block">REGISTRARSE</button>
               </form>
               <hr class="my-4">
               <div class="text-center mb-2">
@@ -129,15 +131,22 @@
   <script src="/lib/jquery/jquery.js"></script>
   <script src="/lib/jquery/jquery.datetimepicker.full.js"></script>
   <script>
-    $("#fecha_examen").datetimepicker({
-      format: 'Y-m-d',
-      timepicker: false
-    });
 
-    $("#fecha_nac").datetimepicker({
-      format: 'Y-m-d',
-      timepicker: false
-    });
+    document.getElementById('fecha_nac').max = new Date(new Date().getTime() - 
+      new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+
+      var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirmationPassword");
+
+    function validatePassword(){
+      if(password.value != confirmationPassword.value) {
+        confirmationPassword.setCustomValidity("Las contraseñas no coinciden.");
+      } else {
+        confirmationPassword.setCustomValidity('');
+      }
+    }
+    password.onchange = validatePassword;
+    confirmationPassword.onkeyup = validatePassword;
   </script>
 </body>
 
