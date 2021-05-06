@@ -105,11 +105,13 @@
                             <tr>
                                 <td>
                                     <div class="row">
-                                        <div class="col-10 col-sm-5">
+                                        <% if (data[i].Estado !== 'Aceptada') { %>
+                                        <div class="col-12 col-sm-6">
                                             <a href="/update/<%= data[i].idpa %>" class="btn btn-info"><i
                                                     class="fas fa-edit"></i></a>
                                         </div>
-                                        <div class="col-10 col-sm-5">
+                                        <% } %>
+                                        <div class="col-12 col-sm-6">
                                             <a href="/delete/<%= data[i].idpa %>" class="btn btn-danger"><i
                                                     class="far fa-trash-alt"></i></a>
                                         </div>

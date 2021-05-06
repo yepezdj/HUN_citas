@@ -62,7 +62,7 @@
                 </a>
 
                 <div class="nav__list">
-                    <a href="/consultarCitas" class="nav__link">
+                    <a href="/consultarCitasAdmin" class="nav__link">
                         <i class='bx bx-folder nav__icon'></i>
                         <span class="nav__name">Citas aceptadas</span>
                     </a>
@@ -79,7 +79,7 @@
         <div class="row px-3">
             <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
                 <div class="card-body">
-                    <form action="/updateC/<%= datos.idpa %>" method="POST">
+                    <form action="/updateA/<%= datos.idpa %>" method="POST">
 
                         <div class="text-center mb-2">
                             A continuación podrá modificar toda la información requerida para el agendamiento de su cita
@@ -337,6 +337,7 @@
 
 
     
+
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
@@ -421,7 +422,6 @@
                 },
             })
         });
-
 
         $(document).ready(function () {
             $('#Cita').on('change', function () {

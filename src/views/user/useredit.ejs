@@ -21,13 +21,13 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- ===== SWEETALERT2 ===== -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
@@ -180,7 +180,8 @@
                                                         <option value="<%= datos.Afiliacion %>">
                                                             <%= datos.Afiliacion %>
 
-                                                        <option value="<%= datos.Afiliacion %>"><%= datos.Afiliacion %>
+                                                        <option value="<%= datos.Afiliacion %>">
+                                                            <%= datos.Afiliacion %>
 
                                                         </option>
                                                         <option value="Prepagada">Prepagada</option>
@@ -211,22 +212,18 @@
                                                 <div class="form-input" style="margin-top: 20px;">
                                                     <select class="custom-select mt-2" style="margin-right: 10px;"
                                                         id="opciones" name="opciones"
-                                                        onchange="doctors('opciones','Doctores')" onclick="vacio()"
+                                                        onchange="doctors('opciones','Doctores')" onclick="vacio(), vaciarF()"
                                                         required="true">
                                                         <option value="<%= datos.Especialidad %>">
-
                                                             <%= datos.Especialidad %>
                                                         </option>
-
-                                                            <%= datos.Especialidad %></option>
-
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-input" style="margin-top: 20px; margin-bottom: 20px;">
                                                     <select class="custom-select mt-2" style="margin-right: 35px;"
-                                                        id="Doctores" name="Doctores" onclick="buildTable()"
+                                                        id="Doctores" name="Doctores" onclick="buildTable(), vacioF()"
                                                         onchange="vaciar()">
                                                         <option value="<%= datos.Doctor %>">
                                                             <%= datos.Doctor %>
@@ -305,7 +302,7 @@
                                                             </option>
                                                         </select>
                                                     </div>
-                                                </div>                                                
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -343,37 +340,38 @@
                                         <div class="form-input" style="margin-top: 20px;">
 
                                             </a>
-                                        </label>
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            
+                                            </label>
+                                            <div class="w-100 d-none d-md-block"></div>
+                                            <div class="form-input" style="margin-top: 20px;">
 
-                                            <input type="file" class="custom-file-input mt-2" id="Imagen" name="images"
-                                                accept="application/pdf" onchange="ValidateSize2(this)">
-                                            <label class="custom-file-label" for="images">Seleccione archivo de
-                                                imágenes
-                                                diagnósticas</label>
-                                        </div>
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            <label for="descripcion" class="form-label">Descripción</label>
-                                            <textarea class="form-control" id="descripcion" name="descripcion" rows="2"
-                                                value="<%= datos.Descripcion %>"></textarea>
-                                        </div>
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            <button type="submit" class="btn btn-primary"
-                                                id="btnModificar" onclick="validar()">Modificar</button>
+
+                                                <input type="file" class="custom-file-input mt-2" id="Imagen"
+                                                    name="images" accept="application/pdf"
+                                                    onchange="ValidateSize2(this)">
+                                                <label class="custom-file-label" for="images">Seleccione archivo de
+                                                    imágenes
+                                                    diagnósticas</label>
+                                            </div>
+                                            <div class="w-100 d-none d-md-block"></div>
+                                            <div class="form-input" style="margin-top: 20px;">
+                                                <label for="descripcion" class="form-label">Descripción</label>
+                                                <textarea class="form-control" id="descripcion" name="descripcion"
+                                                    rows="2" value="<%= datos.Descripcion %>"></textarea>
+                                            </div>
+                                            <div class="w-100 d-none d-md-block"></div>
+                                            <div class="form-input" style="margin-top: 20px;">
+                                                <button type="submit" class="btn btn-primary" id="btnModificar"
+                                                    onclick="validar()">Modificar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
-    </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
@@ -381,15 +379,15 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+        </script>
     <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-  
+
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
@@ -434,7 +432,7 @@
             $("#fecha").datepicker({
                 dateFormat: 'mm-dd-yy',
                 minDate: new Date(),
-                maxDate: '+6m',                
+                maxDate: '+6m',
                 monthNames: ['Enero', 'Febrero', 'Marzo',
                     'Abril', 'Mayo', 'Junio',
                     'Julio', 'Agosto', 'Septiembre',
@@ -443,11 +441,11 @@
                     'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
                 dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
                 beforeShowDay: nationalDays,
-                onSelect: async function (date) {                    
+                onSelect: async function (date) {
                     console.log(date)
                     var con1 = document.getElementById('fecha').value;
                     var EspeDoc = document.getElementById('opciones').value;
-                    var nameDoc = document.getElementById('Doctores').value;                    
+                    var nameDoc = document.getElementById('Doctores').value;
                     const consulta2 = { con: con1, EspeDoc: EspeDoc, nameDoc: nameDoc, date: date };
                     const options2 = {
                         method: "POST",
@@ -471,15 +469,27 @@
                     }
                     $("#Horario").prepend('<option selected="true" value="0">Seleccione hora</option>');
                     return false;
-                },                
-            })            
+                },
+            })
         });
 
-        function encuesta(){
+        function vaciarF() {
+
+            $('#fecha').val('').datepicker("refresh");
+            $("#Horario").empty();
+
+        }
+
+        function vacioF() {
+
+            $('#fecha').val('').datepicker("refresh");
+            $("#Horario").empty();
+
+        }
+
+        function encuesta() {
             var cita = document.getElementsById('Cita');
             var modo = document.getElementsById('Modo');
-
-
         }
 
         $(document).ready(function () {
@@ -487,9 +497,9 @@
                 if (this.value == 'Ayudas diagnósticas') {
                     $("#card3").show();
                 }
-                else if(this.value == 'Proceso de dermatología'){
+                else if (this.value == 'Proceso de dermatología') {
                     $("#card3").show()
-                } else{
+                } else {
                     $("#card3").hide()
                 }
             });
@@ -636,13 +646,13 @@
                 })
                 event.preventDefault();
                 return false;
-            }            
+            }
         }
 
         function ValidateSize(file) {
-            var FileSize = file.files[0].size / 1024 / 1024; 
+            var FileSize = file.files[0].size / 1024 / 1024;
             var fileo = document.getElementById("Orden");
-            if (FileSize > 3) {                
+            if (FileSize > 3) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -654,9 +664,9 @@
             }
         }
         function ValidateSize2(file) {
-            var FileSize = file.files[0].size / 1024 / 1024; 
+            var FileSize = file.files[0].size / 1024 / 1024;
             var fileo = document.getElementById("Imagen");
-            if (FileSize > 3) {               
+            if (FileSize > 3) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',

@@ -81,6 +81,8 @@ let initWebRoutes = (app) => {
     router.post('/createException',  adminController.createException); 
     router.post('/exceptions',  adminController.exceptions); 
     router.get('/consultarCitasAdmin',adminController.CitasAdmin); 
+    router.get('/updateA/:idpa',adminController.editA);
+    router.post('/updateA/:idpa',adminController.updateA);
    
     return app.use("/", router);
 };

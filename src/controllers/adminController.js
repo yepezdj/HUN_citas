@@ -1,5 +1,6 @@
 import connection from "../configs/connectDB";
-import adminService from "../services/adminService"
+import adminService from "../services/adminService";
+import gmailController from "../controllers/gmailController";
 
 
 let getAdmin = (req, res) =>{
@@ -99,11 +100,76 @@ let CitasAdmin = (req, res) => {
 	} 
 };
 
+let editA = async (req, res) => {
+    var user = req.session.context;
+    const id = req.params.idpa;
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Imagen, Descripcion, Correo, Cita, Afiliacion, Modo FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+        if (err) {
+            res.json(err);
+        }
+        console.log(datos);
+        res.render('./admin/adminReprogramar.ejs', {
+            datos: datos[0]
+        });
+    });
+};
+
+//Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
+let updateA = async (req, res) => {
+    const id = req.params.idpa;
+    var name = req.body.Name;
+    var lastname = req.body.Lastname;
+    var Cedula = req.body.Cedula;
+    var correo = req.body.email;
+    var doctor = req.body.Doctores;
+    var espe = req.body.opciones;
+    var hora = req.body.Horario;
+    var fecha = req.body.fecha1;
+
+    var Cita = req.body.Cita;
+    var Factura = req.body.Factura;
+    var descripcion = req.body.descripcion;
+
+    console.log(fecha)
+    var datearray = fecha.split("-");
+    var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+    // console.log(fecha)
+    console.log(newdate)
+
+    var Modo;
+    if (Cita == "Ayudas diagnósticas" || Cita == "Proceso de dermatología") {
+        Modo = 'Presencial'
+    } else {
+        Modo = req.body.Modo;
+    }
+
+    const body = `<h4>Estimado/a ${name} ${lastname}</h4>
+    Se le informa que su cita médica ha sido reprogramada con el/la ${doctor} para el ${newdate} a las ${hora}
+    <hr class="my-4">
+    <div class="text-center mb-2">
+      ¿Tiene alguna inquietud al respecto? Favor comunicarse a la línea
+      <a href="#" class="register-link">
+      (57) (5) 3858131
+      </a>`;
+    gmailController.sendEmailNormal(correo, 'Reprogramación de cita médica-HUN', body)
+
+    connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ?, Descripcion = ?, Cita = ?, Modo = ? WHERE idpa = ?", [newdate, hora, descripcion, Cita, Modo, id], (err, datos) => {
+        if (err) {
+            res.json(err);
+        }
+
+        console.log(datos);
+        return res.redirect('/consultarCitasAdmin');
+    });
+};
+
 module.exports = {    
     getAdmin: getAdmin,
     createAdmin: createAdmin,
     createException: createException,
     getException: getException,
     exceptions: exceptions,
-    CitasAdmin: CitasAdmin   
+    CitasAdmin: CitasAdmin,
+    editA: editA,
+    updateA: updateA   
 }
