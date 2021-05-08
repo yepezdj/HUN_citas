@@ -11,7 +11,7 @@ import filesController from "../controllers/filesController";
 import multer from "multer";
 import path from "path"
 
-const storage = multer.diskStorage({ destination: 'D:/Desktop/PF/Ordeneseimagenes',
+const storage = multer.diskStorage({ destination: 'uploads/',
 filename: function (req, file, cb) {
     cb(null, 'Archivo'+'-'+Date.now()+
     path.extname(file.originalname) );
