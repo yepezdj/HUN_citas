@@ -167,10 +167,10 @@ let tabla = (req, res) => {
     if (req.session.user) {
         var user = req.session.context;
         /* console.log(user) */
-        var cedula = user.cedula;
+        var id = user.id;
         /* console.log(cedula); */
         // console.log(req.session.user)
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Cita, Afiliacion, Modo, Estado, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE CedulaP = ?', cedula, (err, datos) => {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Cita, Afiliacion, Modo, Estado, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idu = ?', id, (err, datos) => {
             if (err) {
                 res.json(err);
             }
@@ -205,7 +205,7 @@ let datos = (req, res) => {
 
 //Se extraen mediante el req.body los elementos llenandos en la página para insertarlos en la tabla agendamiento
 let agendar = async (req, res) => {
-    const datos = req.body;    
+    const datos = req.body;
     var name = req.body.Name;
     var lastname = req.body.Lastname;
     var Cedula = req.body.Cedula;
@@ -217,7 +217,7 @@ let agendar = async (req, res) => {
     var number = req.body.number;
     var tipo = req.body.Tipo;
     var user = req.session.context;
-    
+
     // var Orden = req.body.Orden;
     // var Imagen = req.body.Imagen; 
     var Cita = req.body.Cita;
@@ -226,7 +226,7 @@ let agendar = async (req, res) => {
     var descripcion = req.body.descripcion;
     var id = user.id;
 
-    var p1 = req.body.options;    
+    var p1 = req.body.options;
     var p2 = req.body.options1;
     var p3 = req.body.options2;
     var p4 = req.body.options3;
@@ -240,8 +240,8 @@ let agendar = async (req, res) => {
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
 
-    var linkOrden;  
-    
+    var linkOrden;
+
     let JWT_SECRET = process.env.JWT_SECRET;
     const secret = JWT_SECRET;
 
@@ -262,12 +262,12 @@ let agendar = async (req, res) => {
     } else {
         linkOrden = 'El paciente no adjuntó orden médica';
         console.log(linkOrden);
-    }    
+    }
 
     var autorizacion;
-    if(req.body.autorizacion){
+    if (req.body.autorizacion) {
         autorizacion = req.body.autorizacion;
-    }else{
+    } else {
         autorizacion = 'No ingresó el número de autorización';
     }
 
@@ -296,50 +296,65 @@ let agendar = async (req, res) => {
     console.log(datos);
     console.log(hora)
 
-    connection.query(`SELECT * FROM agendamiento WHERE Especialidad = "${espe}" AND Doctor = "${doctor}" AND Fecha = "${newdate}"
-    AND hora_ini = "${hora}"`, (err, datos) => {
-        if (err) {
-            res.json(err);
-        }
-        console.log(datos);
-        if (!datos.length) {
-            connection.query(
-                `INSERT INTO agendamiento (Especialidad, Doctor, Fecha, hora_ini, Orden, NombreP, ApellidoP, CedulaP, idu, Descripcion, Estado, Correo, Cita, Modo, Afiliacion, Celular, Tipo_documento, Autorizacion, entidad, Regimen) 
-                VALUES ("${espe}", "${doctor}", "${newdate}", "${hora}", "${linkOrden}", "${name}", "${lastname}", "${Cedula}", "${id}", "${descripcion}", "${Estado}", "${correo}", "${Cita}", 
-                "${Modo}", "${Factura}", "${number}", "${tipo}", "${autorizacion}", "${entidad}", "${regimen}")`,
-                function (err, rows) {
-                    if (err) {
-                        res.json(err);
-                    }
-                    console.log(rows)
-                    // return res.redirect('/user/usermain')
-                }
-            );
-            connection.query('SELECT MAX(idpa) FROM agendamiento', (err, dat) => {
-                if (err) {
-                    res.json(err);
-                }
-                idp = dat.idpa
-                console.log(idp);
-                connection.query(
-                    `INSERT INTO encuesta (P1, P2, P3, P4, P5, P6, P7, P8, P9, idpa) VALUES ("${p1}", "${p2}", "${p3}", "${p4}", "${p5}", "${p6}", "${p7}", "${p8}", "${p9}", "${idp}")`,
-                    function (err, rows) {
-                        if (err) {
-                            res.json(err);
-                        }
-                        console.log(rows)
-                        return res.redirect('/user/usermain')
-                    }
-                );
-            });            
-        } else {
-            return res.redirect('/user/usermain')
-        }
-    });
+    let citaExist = await userService.availabilityConsult(espe, doctor, newdate, hora);
+
+    if (citaExist) {
+        let idp = await userService.magic(espe, doctor, newdate, hora, linkOrden, name, lastname,
+            Cedula, id, descripcion, Estado, correo, Cita, Modo, Factura, autorizacion, entidad, regimen, number, tipo)
+
+        await userService.survey(p1, p2, p3, p4, p5, p6, p7, p8, p9, idp);
+
+        return res.redirect('/consultar')
+
+    } else {
+        return res.redirect('/user/usermain')
+    }
+}
+
+    // connection.query(`SELECT * FROM agendamiento WHERE Especialidad = "${espe}" AND Doctor = "${doctor}" AND Fecha = "${newdate}"
+    // AND hora_ini = "${hora}"`, (err, datos) => {
+    //     if (err) {
+    //         res.json(err);
+    //     }
+    //     console.log(datos);
+    //     if (!datos.length) {
+    //         connection.query(
+    //             `INSERT INTO agendamiento (Especialidad, Doctor, Fecha, hora_ini, Orden, NombreP, ApellidoP, CedulaP, idu, Descripcion, Estado, Correo, Cita, Modo, Afiliacion, Celular, Tipo_documento, Autorizacion, entidad, Regimen) 
+    //             VALUES ("${espe}", "${doctor}", "${newdate}", "${hora}", "${linkOrden}", "${name}", "${lastname}", "${Cedula}", "${id}", "${descripcion}", "${Estado}", "${correo}", "${Cita}", 
+    //             "${Modo}", "${Factura}", "${number}", "${tipo}", "${autorizacion}", "${entidad}", "${regimen}")`,
+    //             function (err, rows) {
+    //                 if (err) {
+    //                     res.json(err);
+    //                 }
+    //                 console.log(rows)
+    //                 // return res.redirect('/user/usermain')
+    //             }
+    //         );
+    //         connection.query('SELECT MAX(idpa) FROM agendamiento', (err, dat) => {
+    //             if (err) {
+    //                 res.json(err);
+    //             }
+    //             idp = dat.idpa
+    //             console.log(idp);
+    //             connection.query(
+    //                 `INSERT INTO encuesta (P1, P2, P3, P4, P5, P6, P7, P8, P9, idpa) VALUES ("${p1}", "${p2}", "${p3}", "${p4}", "${p5}", "${p6}", "${p7}", "${p8}", "${p9}", "${idp}")`,
+    //                 function (err, rows) {
+    //                     if (err) {
+    //                         res.json(err);
+    //                     }
+    //                     console.log(rows)
+    //                     return res.redirect('/user/usermain')
+    //                 }
+    //             );
+    //         });            
+    //     } else {
+    //         return res.redirect('/user/usermain')
+    //     }
+    // });
 
     
 
-}
+
 
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
 let edit = async (req, res) => {
@@ -381,7 +396,7 @@ let update = async (req, res) => {
     console.log(newdate)
     // console.log(newdate)
 
-    var linkOrden;   
+    var linkOrden;
     var user = req.session.context;
     let JWT_SECRET = process.env.JWT_SECRET;
     const secret = JWT_SECRET;
@@ -411,7 +426,7 @@ let update = async (req, res) => {
     } else {
         // linkOrden = 'El paciente no adjuntó orden médica';
         // console.log(linkOrden);
-    }    
+    }
 
     if (option == '1') {
         connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ? WHERE idpa = ?", [newdate, hora, req.params.idpa], (err, datos) => {
@@ -424,9 +439,9 @@ let update = async (req, res) => {
     }
 
     var autorizacion;
-    if(req.body.autorizacion){
+    if (req.body.autorizacion) {
         autorizacion = req.body.autorizacion;
-    }else{
+    } else {
         autorizacion = 'No ingresó el número de autorización';
     }
 

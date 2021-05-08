@@ -80,8 +80,80 @@ let consultException = (fecha, nameDoc, EspeDoc, type) => {
     });
 };
 
+let survey = (p1, p2, p3, p4, p5, p6, p7, p8, p9, idp) => {
+    return new Promise((resolve, reject) => {
+        try {
+            console.log(idp);
+            connection.query(
+                `INSERT INTO encuesta (P1, P2, P3, P4, P5, P6, P7, P8, P9, idpa)
+                 VALUES ("${p1}", "${p2}", "${p3}", "${p4}", "${p5}", "${p6}", "${p7}", "${p8}", "${p9}","${idp}")`,
+                function (err, rows) {
+                    if (err) {
+                        reject(err);
+                    }
+                    console.log('ya');
+                    resolve("Create a new user successful");
+                }
+            );
+
+        } catch (err) {
+            reject(err);
+        }
+    });
+};
+
+
+let magic = (espe, doctor, newdate, hora, linkOrden, name, lastname,
+    Cedula, id, descripcion, Estado, correo, Cita, Modo, Factura, autorizacion, entidad, regimen, number, tipo) => {
+    return new Promise((resolve, reject) => {
+        try {
+            connection.query(
+                `INSERT INTO agendamiento (Especialidad, Doctor, Fecha, hora_ini, Orden, NombreP, ApellidoP, CedulaP, idu, Descripcion, Estado, Correo, Cita, Modo, Afiliacion, Celular, Tipo_documento, entidad, Regimen, Autorizacion) 
+                VALUES ("${espe}", "${doctor}", "${newdate}", "${hora}", "${linkOrden}", "${name}", "${lastname}", "${Cedula}", "${id}", "${descripcion}", "${Estado}", "${correo}", "${Cita}", "${Modo}", "${Factura}", "${number}", "${tipo}", "${entidad}", "${regimen}", "${autorizacion}")`,
+                function (err, rows) {
+                    if (err) {
+                        res.json(err);
+                    }
+                    resolve(rows.insertId);
+                }       
+            );
+
+        } catch (err) {
+            reject(err);
+        }
+    });
+};
+
+
+
+let availabilityConsult = (espe, doctor, newdate, hora) => {
+    return new Promise((resolve, reject) => {
+        try {
+            connection.query(`SELECT * FROM agendamiento WHERE Especialidad = "${espe}" AND Doctor = "${doctor}" AND Fecha = "${newdate}"
+                AND hora_ini = "${hora}"`, (err, datos) => {
+                if (err) {
+                    res.json(err);
+                }
+                if (!datos.length) {
+                    resolve(true);
+                } else {
+                    console.log('ya hay cita ese dia');
+                    resolve(false);
+                }
+            });
+
+        } catch (err) {
+            reject(err);
+        }
+    });
+};
+
 module.exports = {
     bringSchedule: bringSchedule,
     consultApo: consultApo,
-    consultException: consultException
+    consultException: consultException,
+    availabilityConsult: availabilityConsult,
+    magic: magic,
+    survey: survey
 }
+

@@ -143,6 +143,12 @@ tbody tr:nth-child(odd) {
   border:2px solid#008DCA !important;   
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 .custom-file-label::after { 
   content: "Subir" !important;
   border:2px solid#008DCA !important;  

@@ -80,10 +80,11 @@
                         <hr class="my-4">
                         <div class="text-center mb-2">
                             A continuación podrá completar toda la información requerida para el agendamiento de la cita
-                            médica. <br>                            
+                            médica. <br>
                             Para esto, haz click en cada ventana y completa los 4 pasos.<br>
                             <br>
-                            <strong class="font-italic" style="color: red;">RECUERDE QUE DEBE INGRESAR LOS DATOS DEL PACIENTE.</strong>
+                            <strong class="font-italic" style="color: red;">RECUERDE QUE DEBE INGRESAR LOS DATOS DEL
+                                PACIENTE.</strong>
                         </div>
                         <hr class="my-4">
                         <div class="accordion" id="accordionExample">
@@ -310,26 +311,26 @@
                                                 <div class="row" id="eps" style="display: none;">
                                                     <div class="col-12 col-sm-6">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <label for="regimen" class="form-label">Tipo de régimen<label
-                                                                    class="redText">*</label></label>
+                                                            <label for="regimen" class="form-label">Tipo de
+                                                                régimen<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="regimen" name="regimen">
                                                                 <option value="0">Seleccione tipo de régimen
                                                                 </option>
                                                                 <option value="Subsidiado">Subsidiado
                                                                 </option>
-                                                                <option value="Contributivo">Contributivo                                                                    
-                                                                </option>                                                               
+                                                                <option value="Contributivo">Contributivo
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <label for="entidad" class="form-label">Entidad prestadora de salud<label
-                                                                    class="redText">*</label></label>
+                                                            <label for="entidad" class="form-label">Entidad prestadora
+                                                                de salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2"
                                                                 style="margin-right: 20px;" id="entidad" name="entidad">
-                                                                <option value="0">Seleccione EPS</option>                                                                
+                                                                <option value="0">Seleccione EPS</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -731,7 +732,8 @@
                                                             <input type="number" class="form-control" id="autorizacion"
                                                                 name="autorizacion"
                                                                 placeholder="Sin puntos ni comas ni guiones" min="0"
-                                                                step="1" oninput="validity.valid||(value='');" style="margin-bottom: 50px;">
+                                                                step="1" oninput="validity.valid||(value='');"
+                                                                style="margin-bottom: 50px;">
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="form-input" style="margin-top: 20px;">
@@ -836,7 +838,9 @@
                     return [false, natDays[i][2] + '_day'];
                 }
             }
-            return [true, ''];
+            //return [true, ''];
+            var day = date.getDay();
+            return [(day != 0)];
         }
         $(function () {
             $("#fecha").datepicker({
@@ -1054,6 +1058,11 @@
             var fileo = document.getElementById("Orden").value;
             var autorizacion = document.getElementById("autorizacion").value;
 
+            console.log(fileo)
+            console.log(autorizacion)
+            console.log(typeof fileo)
+            console.log(typeof autorizacion)
+
             if (name == "") {
                 Swal.fire({
                     icon: 'error',
@@ -1086,6 +1095,15 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Debe digitar su número de celular'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (number.length < "10") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Número de celular inválido'
                 })
                 event.preventDefault();
                 return false;
@@ -1189,14 +1207,15 @@
                 event.preventDefault();
                 return false;
             }
-            // if (!fileo || autorizacion.length == "0") {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Oops...',
-            //         text: 'Debe adjuntar archivo de orden médica o digitar número de autorización'
-            //     })
-            //     event.preventDefault();
-            //     return false;}
+            if (fileo == '' || autorizacion.length == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe adjuntar archivo de orden médica o digitar número de autorización'
+                })
+                event.preventDefault();
+                return false;
+            }
             else {
                 Swal.fire({
                     icon: 'success',
@@ -1219,7 +1238,7 @@
                 return false;
             }
         }
-       
+
         var result = [];
         var result3 = [];
         async function consult() {
