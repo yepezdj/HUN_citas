@@ -193,6 +193,7 @@ a{
 }
 
 
+
 /* ===== MEDIA QUERIES=====*/
 @media screen and (min-width: 768px){
   body{
@@ -229,6 +230,7 @@ a{
     padding-left: calc(var(--nav-width) + 188px);
   }
 }
+
 
 
 

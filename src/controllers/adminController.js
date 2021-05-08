@@ -82,7 +82,7 @@ let exceptions = (req, res) => {
 
 let CitasAdmin = (req, res) => {
     if (req.session.admin) {
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Imagen FROM agendamiento WHERE Estado = "Aceptada"',(err,info) => {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Modo, Afiliacion, Cita FROM agendamiento WHERE Estado = "Aceptada"',(err,info) => {
             if(err){
                 res.json(err);
             }
@@ -103,7 +103,7 @@ let CitasAdmin = (req, res) => {
 let editA = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Imagen, Descripcion, Correo, Cita, Afiliacion, Modo FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Imagen, Descripcion, Correo, Cita, Afiliacion, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }

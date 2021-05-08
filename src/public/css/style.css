@@ -60,5 +60,28 @@ input{
   color: white;
 }
 
+select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select{
+    width: 100%;    
+	  display: inline-block;	
+	  cursor: pointer;  	
+  	outline: 0; 
+  	border: 0;	
+    color: #4646cc;    
+	  font-size: 16px;	
+	  border:2px solid#008DCA !important;    
+    position: relative;    
+}
+
+
 
 /* RUTAS */

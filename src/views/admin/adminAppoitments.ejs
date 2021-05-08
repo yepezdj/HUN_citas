@@ -98,13 +98,20 @@
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Correo electrónico</th>
+                        <th>Celular</th>
+                        <th>Tipo de identificación</th>
                         <th>N° de identificación</th>
                         <th>Especialidad</th>
                         <th>Doctor</th>
                         <th>Fecha</th>
                         <th>Hora</th>
-                        <th>Orden</th>
-                        <th>Imagen</th>
+                        <th>Cita</th>
+                        <th>Afiliación</th>
+                        <th>Entidad</th>
+                        <th>Régimen</th>
+                        <th>Modalidad</th>
+                        <th>Orden</th> 
+                        <th>Autorización</th>  
                     </tr>
                 </thead>
                 <tbody>
@@ -128,6 +135,12 @@
                                     <%= info[i].Correo %>
                                 </td>
                                 <td>
+                                    <%= info[i].Celular %>
+                                </td>
+                                <td>
+                                    <%= info[i].Tipo_documento %>
+                                </td>
+                                <td>
                                     <%= info[i].CedulaP %>
                                 </td>
                                 <td>
@@ -142,16 +155,29 @@
                                 <td>
                                     <%= info[i].hora_ini %>
                                 </td>
+                                <td>
+                                    <%= info[i].Cita %>
+                                </td>
+                                <td>
+                                    <%= info[i].Afiliacion %>
+                                </td>
+                                <td>
+                                    <%= info[i].entidad %>
+                                </td>
+                                <td>
+                                    <%= info[i].Regimen %>
+                                </td>
+                                <td>
+                                    <%= info[i].Modo %>
+                                </td>
                                 <td> <a href="#" class="btn btn-warning"
                                     onclick="window.open('<%= info[i].Orden %>', '_blank', 'fullscreen=yes'); return false;">
                                     <i class="far fa-file-pdf"></i>
                                 </a>
 
                                 </td>
-                                <td> <a href="#" class="btn btn-warning"
-                                    onclick="window.open('<%= info[i].Imagen %>', '_blank', 'fullscreen=yes'); return false;">
-                                    <i class="far fa-file-pdf"></i>
-                                </a>
+                                <td>
+                                    <%= info[i].Autorizacion %>
                                 </td>
 
                     </tr>

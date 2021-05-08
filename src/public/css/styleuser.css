@@ -49,7 +49,7 @@ body{
   margin-top: 30px;
   z-index: 100000 !important;
   background: white !important;  
-  text-align: center !important;
+  /* text-align: center !important; */
   font-family: var(--body-font);  
   border: none;
 }
@@ -102,6 +102,10 @@ tbody tr:nth-child(odd) {
     outline: none;
     background: transparent;
   }
+
+  /* #email{
+    margin-bottom: 0px !important;
+  } */
   
   .form-input span{
     position: absolute;
@@ -157,18 +161,35 @@ select::-ms-expand {
 
 select{
     width: 100%;
-    height: 45px !important;
-    top: 10px;
+    height: 45px !important;  
+    padding-left: 40px !important;  
 	  display: inline-block;	
 	  cursor: pointer;  	
   	outline: 0; 
   	border: 0;	
+    background-color: transparent !important;
     color: #4646cc;    
 	  font-size: 16px;	
 	  border:2px solid#008DCA !important;
     border-radius: 50px !important;
     position: relative;    
 }
+
+.toggle .btn {
+  cursor: pointer;
+  background: #ffffff;
+  transition: background 0.2s, color 0.2s;
+  border: 2px solid #008DCA;
+  user-select: none;
+  color: black;
+}
+
+.toggle .active {
+  border: 2px solid #008DCA;
+  background: #008DCA;
+  color: white;
+}
+
 
 a{
   text-decoration: none;
@@ -291,6 +312,14 @@ a{
   background-color: var(--white-color);
 }
 
+.redText {
+  color: red;
+}
+
+p {
+  text-align: center;
+}
+
 /* ===== MEDIA QUERIES=====*/
 @media screen and (min-width: 768px){
   body{
@@ -327,6 +356,3 @@ a{
     padding-left: calc(var(--nav-width) + 188px);
   }
 }    
-
-
-

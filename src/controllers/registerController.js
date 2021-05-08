@@ -1,3 +1,4 @@
+import connection from "../configs/connectDB";
 import {validationResult} from "express-validator";
 import registerService from "../services/registerService";
 
@@ -27,7 +28,8 @@ let createNewUser = async (req, res) => {
             cedula: req.body.cedula,
             sexo: req.body.sexo,
             fecha_nac: req.body.fecha_nac,
-            city: req.body.city,
+            departamento: req.body.Departamento,
+            municipio: req.body.city,            
             eps: req.body.eps,
             cellphone: req.body.cellphone,
             email: req.body.email,
@@ -42,7 +44,32 @@ let createNewUser = async (req, res) => {
 
     }
 };
+
+let departamentos = (req, res) => {
+    connection.query('SELECT * FROM departamentos', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
+let municipio = (req, res) => {
+    connection.query('SELECT * FROM municipios', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
 module.exports = {
     getPageRegister: getPageRegister,
-    createNewUser: createNewUser
+    createNewUser: createNewUser,
+    departamentos: departamentos,
+    municipio: municipio
 };

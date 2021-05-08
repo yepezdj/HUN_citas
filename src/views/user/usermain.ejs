@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
 
     <!-- ===== SWEETALERT2 ===== -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
@@ -57,8 +57,8 @@
                 <div class="nav__list">
                     <a href="/consultar" class="nav__link">
                         <i class='bx bx-folder nav__icon'></i>
-                        <span class="nav__name">Consultar estado <br>
-                            de solicitud</span>
+                        <span class="nav__name">Consultar estado de <br>
+                            solicitud</span>
                     </a>
                 </div>
             </div>
@@ -79,368 +79,766 @@
                         </h4>
                         <hr class="my-4">
                         <div class="text-center mb-2">
-                            A continuación podrá completar toda la información requerida para el agendamiento de su cita
-                            médica.
+                            A continuación podrá completar toda la información requerida para el agendamiento de la cita
+                            médica. <br>                            
+                            Para esto, haz click en cada ventana y completa los 4 pasos.<br>
+                            <br>
+                            <strong class="font-italic" style="color: red;">RECUERDE QUE DEBE INGRESAR LOS DATOS DEL PACIENTE.</strong>
                         </div>
                         <hr class="my-4">
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-header" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne" id="btnC1">
-                                            INFORMACIÓN PERSONAL
-                                        </button>
-                                    </h2>
-                                </div>
-
-                                <div>
-                                    <div class="card-body" id="collapse1">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input">
-                                                    <label for="Name" class="form-label">Nombres del paciente</label>
-                                                    <input type="text" class="form-control" id="Name" name="Name"
-                                                        value="<%= user.name %>">
-                                                </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div>
+                                                <img src="/images/paso1.jpg" style="margin-left: 25px;" width="100px" />
                                             </div>
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input">
-                                                    <label for="Lastname" class="form-label">Apellidos del
-                                                        paciente</label>
-                                                    <input type="text" class="form-control" id="Lastname"
-                                                        name="Lastname" value="<%= user.last_name %>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input">
-                                                    <label for="email" class="form-label">Correo electrónico</label>
-                                                    <input type="email" class="form-control" id="email" name="email"
-                                                        value="<%= user.email %>">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input">
-                                                    <label for="Cedula" class="form-label">N° de identificación del
-                                                        paciente</label>
-                                                    <input type="number" class="form-control" id="Cedula" name="Cedula"
-                                                        placeholder="Sin puntos ni comas ni guiones">
-                                                </div>
+                                            <div class="col">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link btn-block text-left" type="button"
+                                                        data-toggle="collapse" data-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne" id="btnC1">
+                                                        INFORMACIÓN PERSONAL
+                                                    </button>
+                                                </h2>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                                            aria-controls="collapseTwo" id="btnC2">
-                                            INFORMACIÓN MÉDICA
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div>
-                                    <div class="card-body" id="collapse2" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input" style="margin-top: 20px;">
-                                                    <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                        id="Cita" name="Cita" onclick="encuesta()">
-                                                        <option value="0">Seleccione tipo de cita médica</option>
-                                                        <option value="Ayudas diagnósticas">Ayudas diagnósticas</option>
-                                                        <option value="Proceso de dermatología">Proceso de dermatología
-                                                        </option>
-                                                        <option value="Cita común (Especialista o médico general)">Cita
-                                                            común (Especialista o médico general)</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input" style="margin-top: 20px;">
-                                                    <select class="custom-select mt-2" style="margin-right: 20px;"
-                                                        id="Factura" name="Factura">
-                                                        <option value="0">Seleccione tipo de afiliación</option>
-                                                        <option value="Prepagada">Prepagada</option>
-                                                        <option value="EPS">EPS</option>
-                                                        <option value="ARL">ARL</option>
-                                                        <option value="Particular">Particular</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12">
-                                                <div class="form-input" id="div"
-                                                    style="margin-top: 20px; display: none;">
-                                                    <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                        id="Modo" name="Modo" onclick="encuesta()">
-                                                        <option value="0">Seleccione modalidad</option>
-                                                        <option value="Virtual">Virtual</option>
-                                                        <option value="Presencial">Presencial</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input" style="margin-top: 20px;">
-                                                    <select class="custom-select mt-2" style="margin-right: 10px;"
-                                                        id="opciones" name="opciones"
-                                                        onchange="doctors('opciones','Doctores')"
-                                                        onclick="vacio(), vaciarF()" required="true">
-                                                        <option value="0">Seleccione especialidad</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-input" style="margin-top: 20px; margin-bottom: 20px;">
-                                                    <select class="custom-select mt-2" style="margin-right: 35px;"
-                                                        id="Doctores" name="Doctores" onclick="buildTable(), vacioF()"
-                                                        onchange="vaciar()">
-                                                        <option value="0">Seleccione médico</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card" style="display: none;" id="card3">
-                                <div class="card-header" id="headingThree">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                                            aria-controls="collapseThree" id="btnC4">
-                                            ENCUESTA EPIDEMIOLÓGICA
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapse4" style="display: none;">
-                                    <div class="card-body">
-                                        <div class="text-center mb-2">
-                                            A continuación deberá completar la siguiente encuesta para poder solicitar
-                                            su cita
-                                        </div>
-                                        <table id="conTable" class="table table-bordered">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        1. ¿Ha tenido fiebre o gripe en estos últimos días?
-                                                    </td>
-                                                    <td>
-                                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                            <label class="btn btn-primary">
-                                                                <input type="radio" name="options" id="option1"
-                                                                    value="Sí" autocomplete="off"> Sí
-                                                            </label>
-                                                            <label class="btn btn-primary active">
-                                                                <input type="radio" name="options" id="option2"
-                                                                    value="No" autocomplete="off" checked> No
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        2. ¿Ha tenido contacto con alguna persona con COVID-19?
-                                                    </td>
-                                                    <td>
-                                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                            <label class="btn btn-primary">
-                                                                <input type="radio" name="options1" id="option3"
-                                                                    value="Sí" autocomplete="off"> Sí
-                                                            </label>
-                                                            <label class="btn btn-primary active">
-                                                                <input type="radio" name="options1" id="option4"
-                                                                    value="No" autocomplete="off" checked> No
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        3. ¿Ha tenido COVID-19 recientemente?
-                                                    </td>
-                                                    <td>
-                                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                            <label class="btn btn-primary">
-                                                                <input type="radio" name="options2" id="option5"
-                                                                    value="Sí" autocomplete="off"> Sí
-                                                            </label>
-                                                            <label class="btn btn-primary active">
-                                                                <input type="radio" name="options2" id="option6"
-                                                                    value="No" autocomplete="off" checked> No
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingThree">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                                            aria-controls="collapseThree" id="btnC3">
-                                            AGENDA
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div>
-                                    <div class="card-body" id="collapse3" style="display: none;">
-                                        <div id="hide">
-                                            <div class="text-center mb-2">
-                                                Horarios habituales del doctor.
-                                            </div>
-                                            <div class="w-100 d-none d-md-block"></div>
-                                            <table class="table table-hover" id="tabla">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Disponibilidad</th>
-                                                        <th>Rango de horas disponibles</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="myTable">
-                                                </tbody>
-                                            </table>
-                                            <div class="w-100 d-none d-md-block"></div>
+                                    <div>
+                                        <div class="card-body" id="collapse1">
+                                            <p class="centered">Completa todos los campos de información personal. <i
+                                                    class="bi bi-person-lines-fill"></i></p>
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
-                                                    <div class="form-input" style="margin-top: 20px;">
-                                                        <label for="fecha" class="form-label">Fecha de la cita</label>
-                                                        <input class="form-control" id="fecha" name="fecha"
-                                                            autocomplete="off" onkeypress="return false">
+                                                    <div class="form-input">
+                                                        <label for="Name" class="form-label">Nombres del paciente <label
+                                                                class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Name" name="Name"
+                                                            value="<%= user.name %>">
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-sm-6" id="hide2">
-                                                    <div class="form-input" style="margin-top: 8px;">
-                                                        <label for="Horario" class="custom-label">Hora de la
-                                                            cita</label>
-                                                        <select class="custom-select" id="Horario" name="Horario">
-                                                            <option value="0">Seleccione hora</option>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Lastname" class="form-label">Apellidos del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Lastname"
+                                                            name="Lastname" value="<%= user.last_name %>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email" class="form-label">Correo electrónico <label
+                                                                class="redText">*</label></label>
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            value="<%= user.email %>">
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <!-- <span id="emailOK"></span> -->
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email1" class="form-label">Confirme correo
+                                                            electrónico <label class="redText">*</label></label>
+                                                        <input type="email1" class="form-control" id="email1"
+                                                            name="email1">
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOT">
+                                                        <small class="form-text" style="margin-left: 20px;">Los correos
+                                                            no coinciden</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number" class="form-label">Número de celular<label
+                                                                class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number"
+                                                            name="number" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number1" class="form-label">Confirme número de
+                                                            celular <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number1"
+                                                            name="number1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Tipo" class="form-label">Tipo de documento<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select" style="margin-right: 20px;"
+                                                            id="Tipo" name="Tipo">
+                                                            <option value="0">Seleccione tipo de documento</option>
+                                                            <option value="Cédula de ciudadanía">Cédula de ciudadanía
+                                                            </option>
+                                                            <option value="Cédula de extranjería">Cédula de extranjería
+                                                            </option>
+                                                            <option value="NIT">NIT</option>
+                                                            <option value="Tarjeta de identitidad">Tarjeta de
+                                                                identitidad</option>
+                                                            <option value="Pasaporte">Pasaporte</option>
+                                                            <option value="Fideicomiso">Fideicomiso</option>
+                                                            <option value="Registro civil">Registro civil</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula" class="form-label">N° de identificación del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula"
+                                                            name="Cedula" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula1" class="form-label">Confirme N° de
+                                                            identificación<label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula1"
+                                                            name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingFour">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                                            aria-controls="collapseThree" id="btnC5">
-                                            INFORMACIÓN ADICIONAL
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapse5" style="display: none;">
-                                    <div class="card-body">
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <label for="Orden" class="custom-label">Orden médica</label>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            <input type="file" class="custom-file-input mt-2" id="Orden" name="images"
-                                                accept="application/pdf" onchange="ValidateSize(this)" value="">
-                                            <label class="custom-file-label mt-2" for="images">Seleccionar archivo de la
-                                                orden
-                                                médica</label>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div>
+                                                    <img src="/images/paso2.jpg" style="margin-left: 25px;"
+                                                        width="100px" />
+                                                </div>
+                                                <div class="col">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link btn-block text-left collapsed"
+                                                            type="button" data-toggle="collapse"
+                                                            data-target="#collapseTwo" aria-expanded="false"
+                                                            aria-controls="collapseTwo" id="btnC2">
+                                                            INFORMACIÓN DE LA CITA
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <label for="Imagen" class="custom-label">Imágenes diagnósticas</label>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            <input type="file" class="custom-file-input mt-2" id="Imagen" name="images"
-                                                accept="application/pdf" onchange="ValidateSize2(this)" value="">
-                                            <label class="custom-file-label" for="images">Seleccionar archivo de
-                                                imágenes
-                                                diagnósticas</label>
+                                        <div>
+                                            <div class="card-body" id="collapse2" style="display: none;">
+                                                <p class="centered">Completa todos los campos de información acerca de
+                                                    la
+                                                    cita.
+                                                    <i class="bi bi-clipboard-plus"></i>
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" class="form-label">Tipo de cita <label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Cita" name="Cita" onclick="encuesta()">
+                                                                <option value="0">Seleccione tipo de cita médica
+                                                                </option>
+                                                                <option value="Ayudas diagnósticas">Ayudas diagnósticas
+                                                                </option>
+                                                                <option value="Procedimiento ambulatorio">Procedimiento
+                                                                    ambulatorio
+                                                                </option>
+                                                                <option value="Consulta medicina general">
+                                                                    Consulta medicina general</option>
+                                                                <option value="Consulta especializada">Consulta
+                                                                    especializada
+                                                                </option>
+                                                                <option value="Consulta odontología general">Consulta
+                                                                    odontología general
+                                                                </option>
+                                                                <option value="Consulta odontología especializada">
+                                                                    Consulta odontología especializada
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Factura" class="form-label">¿Bajo que afiliacion
+                                                                desea solicitar esta cita?<label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2"
+                                                                style="margin-right: 20px;" id="Factura" name="Factura">
+                                                                <option value="0">Seleccione afiliación</option>
+                                                                <option value="Prepagada">Prepagada</option>
+                                                                <option value="EPS">EPS</option>
+                                                                <option value="ARL">ARL</option>
+                                                                <option value="Particular">Particular</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="eps" style="display: none;">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="regimen" class="form-label">Tipo de régimen<label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="regimen" name="regimen">
+                                                                <option value="0">Seleccione tipo de régimen
+                                                                </option>
+                                                                <option value="Subsidiado">Subsidiado
+                                                                </option>
+                                                                <option value="Contributivo">Contributivo                                                                    
+                                                                </option>                                                               
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="entidad" class="form-label">Entidad prestadora de salud<label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2"
+                                                                style="margin-right: 20px;" id="entidad" name="entidad">
+                                                                <option value="0">Seleccione EPS</option>                                                                
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-12">
+                                                        <div class="form-input" id="div"
+                                                            style="margin-top: 20px; display: none;">
+                                                            <label for="Cita" class="form-label">Modalidad de la cita
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Modo" name="Modo" onclick="encuesta()">
+                                                                <option value="0">Seleccione modalidad</option>
+                                                                <option value="Virtual">Virtual</option>
+                                                                <option value="Presencial">Presencial</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" style="margin-top: 20px;"
+                                                                class="form-label">Especialidad <label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2"
+                                                                style="margin-right: 10px;" id="opciones"
+                                                                name="opciones"
+                                                                onchange="doctors('opciones','Doctores')"
+                                                                onclick="vacio(), vaciarF()" required="true">
+                                                                <option value="0">Seleccione especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label style="margin-top: 20px;" for="Cita"
+                                                                class="form-label">Profesional de la salud<label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2"
+                                                                style="margin-right: 35px;" id="Doctores"
+                                                                name="Doctores" onclick="buildTable(), vacioF()"
+                                                                onchange="vaciar()">
+                                                                <option value="0">Seleccione profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            <label for="descripcion" class="form-label">Descripción</label>
-                                            <textarea class="form-control" id="descripcion" name="descripcion"
-                                                rows="2"></textarea>
+                                    </div>
+                                    <div class="card" style="display: none;" id="card3">
+                                        <div class="card-header" id="headingThree">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <img src="/images/pasoextra.jpg" style="margin-left: 25px;"
+                                                            width="130px" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <h2 class="mb-0">
+                                                            <button class="btn btn-link btn-block text-left collapsed"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree" id="btnC4">
+                                                                ENCUESTA DE RIESGO EPIDEMIOLÓGICO
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            <button type="submit" class="btn btn-primary" id="btnAgregar"
-                                                onclick="validar()">Solicitar</button>
+                                        <div id="collapse4" style="display: none;">
+                                            <div class="card-body">
+                                                <div class="text-center mb-2">
+                                                    Debido a que ha seleccionado la modalidad de cita presencial, dada
+                                                    la emergencia sanitaria
+                                                    deberá completar la siguiente encuesta para poder solicitar su cita.
+                                                </div>
+                                                <table id="conTable" class="table table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                1. ¿Ha tenido fiebre?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options" id="option1"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options" id="option2"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                2. ¿Ha presentado síntomas respiratorios: tos,dificultad
+                                                                para respirar, secreción nasal,pérdida del olfato,
+                                                                pérdida del
+                                                                gusto, cansancio, fatiga y/o dolor de garganta?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options1" id="option3"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options1" id="option4"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                3. ¿ Ha sido diagnosticado con neumonía recientemente
+                                                                (en menos de 20 días)?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options2" id="option5"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options2" id="option6"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                4. ¿Alguna de las personas con las que convive ha
+                                                                presentado fiebre o los síntomas respiratorios antes
+                                                                mencionados?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options3" id="option7"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options3" id="option8"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                5. ¿Ha viajado fuera del país los últimos 20 días?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options4" id="option9"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options4"
+                                                                            id="option10" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                6. ¿Es usted personal de salud o trabaja en el área de
+                                                                la salud y ha tenido contacto con pacientes con síntomas
+                                                                respiratorios?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options5"
+                                                                            id="option11" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options5"
+                                                                            id="option12" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                7. ¿Ha tenido contacto en los últimos 20 días con
+                                                                pacientes a los se les haya diagnosticado coronavirus?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options6"
+                                                                            id="option13" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options6"
+                                                                            id="option14" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                8. ¿Ha tenido contacto en los último 20 días con
+                                                                pacientes hospitalizados por neumonía, o descomposición
+                                                                de sus
+                                                                enfermedades de base?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options7"
+                                                                            id="option15" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options7"
+                                                                            id="option16" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                9. ANTECEDENTES PATOLÓGICOS NO CONTROLADOS O SIN
+                                                                MEDICACIÓN EN EL MOMENTO
+                                                                (Diabetes,Hipertesión,Respiratorios, Cardiovasculares,
+                                                                obesidad, entre otros)
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="encuesta"
+                                                                        class="form-label">Cuáles:</label>
+                                                                    <textarea class="form-control" id="encuesta"
+                                                                        name="encuesta" rows="3"></textarea>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <img src="/images/paso3.jpg" style="margin-left: 25px;"
+                                                            width="100px" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <h2 class="mb-0">
+                                                            <button class="btn btn-link btn-block text-left collapsed"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree" id="btnC3">
+                                                                AGENDAMIENTO
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="card-body" id="collapse3" style="display: none;">
+                                                    <p class="centered">Selecciona el horario de tu cita de acuerdo a la
+                                                        disponibilidad del profesional de la salud. <i
+                                                            class="bi bi-calendar-event"></i>
+                                                    </p>
+                                                    <div id="hide">
+                                                        <div class="text-center mb-2">
+                                                            Horarios habituales del doctor.
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <table class="table table-hover" id="tabla">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Días disponibles</th>
+                                                                    <th>Horarios disponibles</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="myTable">
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="fecha" class="form-label">Fecha de la
+                                                                        cita
+                                                                        <label class="redText">*</label></label>
+                                                                    <input class="form-control" id="fecha" name="fecha"
+                                                                        autocomplete="off" onkeypress="return false">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6" id="hide2">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="Horario" class="custom-label">Horas
+                                                                        disponibles
+                                                                        <label class="redText">*</label></label>
+                                                                    <select class="custom-select" id="Horario"
+                                                                        name="Horario">
+                                                                        <option value="0">Seleccione hora</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header" id="headingFour">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div>
+                                                            <img src="/images/paso4.jpg" style="margin-left: 25px;"
+                                                                width="100px" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="btn btn-link btn-block text-left collapsed"
+                                                                    type="button" data-toggle="collapse"
+                                                                    data-target="#collapseThree" aria-expanded="false"
+                                                                    aria-controls="collapseThree" id="btnC5">
+                                                                    INFORMACIÓN ADICIONAL
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="collapse5" style="display: none;">
+                                                    <div class="card-body">
+                                                        <p class="centered">Adjunta archivos necesarios para la cita,
+                                                            como
+                                                            orden
+                                                            médica ó número de autorización. <i
+                                                                class="bi bi-archive"></i>
+                                                        </p>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <label for="Orden" class="custom-label">Orden médica (original)
+                                                            <i class="bi bi-paperclip"></i></label>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <input type="file" class="custom-file-input mt-2" id="Orden"
+                                                                name="images" accept="application/pdf"
+                                                                onchange="ValidateSize(this)" value="">
+                                                            <label class="custom-file-label mt-2"
+                                                                for="images">Seleccionar
+                                                                archivo
+                                                                de la
+                                                                orden
+                                                                médica</label>
+                                                        </div>
+                                                        <!-- <div class="w-100 d-none d-md-block"></div>
+                                                        <label for="Imagen" class="custom-label">Imágenes diagnósticas
+                                                            <i class="bi bi-images"></i></label>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <input type="file" class="custom-file-input mt-2"
+                                                                id="Imagen" name="images" accept="application/pdf"
+                                                                onchange="ValidateSize2(this)" value="">
+                                                            <label class="custom-file-label" for="images">Seleccionar
+                                                                archivo de
+                                                                imágenes
+                                                                diagnósticas</label>
+                                                        </div> -->
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <hr class="my-4">
+                                                        <div class="text-center mb-2">
+                                                            Ó
+                                                        </div>
+                                                        <div class="form-input">
+                                                            <label for="autorizacion" class="form-label">Digite número
+                                                                de autorización <label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="autorizacion"
+                                                                name="autorizacion"
+                                                                placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                                step="1" oninput="validity.valid||(value='');" style="margin-bottom: 50px;">
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="descripcion" class="form-label">Motivo de la
+                                                                consulta y notas</label>
+                                                            <textarea class="form-control" id="descripcion"
+                                                                name="descripcion" rows="2"></textarea>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; text-align: center;">
+                                                            <button type="submit" class="btn btn-primary"
+                                                                id="btnAgregar" onclick="validar()">Solicitar
+                                                                cita</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
-    </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
         integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
-        crossorigin="anonymous"></script>
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
     <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
+    <!-- ===== DATEPICKER ===== -->
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
             consulta();
             consult();
+            eps();
         }
-
         var date = new Date();
         var year = date.getFullYear();
         console.log(year)
-
         if (year == '2021') {
-            natDays = [[1, 1, 2021],
-            [1, 11, 2021], [3, 22, 2021], [4, 1, 2021], [4, 2, 2021],
-            [5, 1, 2021], [5, 17, 2021], [6, 7, 2021], [6, 14, 2021],
-            [7, 5, 2021], [7, 20, 2021], [8, 7, 2021], [8, 16, 2021],
-            [10, 18, 2021], [11, 1, 2021], [11, 15, 2021], [12, 8, 2021],
-            [12, 25, 2021]
-            ];
-        } if (year == '2022') {
-            natDays = [[1, 1, 2022],
-            [1, 10, 2022], [3, 21, 2022], [4, 14, 2022], [4, 15, 2022],
-            [5, 1, 2022], [5, 30, 2022], [6, 20, 2022], [6, 27, 2022],
-            [7, 4, 2022], [7, 20, 2022], [8, 7, 2022], [8, 15, 2022],
-            [10, 17, 2022], [11, 7, 2022], [11, 14, 2022], [12, 8, 2022],
-            [12, 25, 2022]
+            natDays = [
+                [1, 1, 2021],
+                [1, 11, 2021],
+                [3, 22, 2021],
+                [4, 1, 2021],
+                [4, 2, 2021],
+                [5, 1, 2021],
+                [5, 17, 2021],
+                [6, 7, 2021],
+                [6, 14, 2021],
+                [7, 5, 2021],
+                [7, 20, 2021],
+                [8, 7, 2021],
+                [8, 16, 2021],
+                [10, 18, 2021],
+                [11, 1, 2021],
+                [11, 15, 2021],
+                [12, 8, 2021],
+                [12, 25, 2021]
             ];
         }
-
+        if (year == '2022') {
+            natDays = [
+                [1, 1, 2022],
+                [1, 10, 2022],
+                [3, 21, 2022],
+                [4, 14, 2022],
+                [4, 15, 2022],
+                [5, 1, 2022],
+                [5, 30, 2022],
+                [6, 20, 2022],
+                [6, 27, 2022],
+                [7, 4, 2022],
+                [7, 20, 2022],
+                [8, 7, 2022],
+                [8, 15, 2022],
+                [10, 17, 2022],
+                [11, 7, 2022],
+                [11, 14, 2022],
+                [12, 8, 2022],
+                [12, 25, 2022]
+            ];
+        }
         function nationalDays(date) {
             for (i = 0; i < natDays.length; i++) {
-                if (date.getMonth() == natDays[i][0] - 1
-                    && date.getDate() == natDays[i][1]) {
+                if (date.getMonth() == natDays[i][0] - 1 &&
+                    date.getDate() == natDays[i][1]) {
                     return [false, natDays[i][2] + '_day'];
                 }
             }
             return [true, ''];
         }
-
         $(function () {
-            $.datepicker.setDefaults($.datepicker.regional["es"]);
             $("#fecha").datepicker({
                 dateFormat: 'mm-dd-yy',
                 minDate: new Date(),
@@ -448,9 +846,11 @@
                 monthNames: ['Enero', 'Febrero', 'Marzo',
                     'Abril', 'Mayo', 'Junio',
                     'Julio', 'Agosto', 'Septiembre',
-                    'Octubre', 'Noviembre', 'Diciembre'],
+                    'Octubre', 'Noviembre', 'Diciembre'
+                ],
                 monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+                ],
                 dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
                 beforeShowDay: nationalDays,
                 onSelect: async function (date) {
@@ -458,7 +858,12 @@
                     var con1 = document.getElementById('fecha').value;
                     var EspeDoc = document.getElementById('opciones').value;
                     var nameDoc = document.getElementById('Doctores').value;
-                    const consulta2 = { con: con1, EspeDoc: EspeDoc, nameDoc: nameDoc, date: date };
+                    const consulta2 = {
+                        con: con1,
+                        EspeDoc: EspeDoc,
+                        nameDoc: nameDoc,
+                        date: date
+                    };
                     const options2 = {
                         method: "POST",
                         body: JSON.stringify(consulta2),
@@ -470,7 +875,6 @@
                     console.log(response2);
                     var hora = await response2.json();
                     console.log(hora);
-
                     select = document.getElementById('Horario');
                     $("#Horario").empty();
                     for (var i = 0; i < hora.length; i++) {
@@ -479,43 +883,54 @@
                         opt.innerHTML = hora[i];
                         select.add(opt);
                     }
-                    $("#Horario").prepend('<option selected="true" value="0">Seleccione hora</option>');
+                    $("#Horario").prepend(
+                        '<option selected="true" value="0">Seleccione hora</option>');
                     return false;
                 },
             })
         });
-
         // $(document).ready(function () {
         //     $('#opciones').click(function () {
         //         $('#Horario"]').val('');
         //     });
         // });
-
         function vaciarF() {
-
             $('#fecha').val('').datepicker("refresh");
             $("#Horario").empty();
-
         }
-
         function vacioF() {
-
             $('#fecha').val('').datepicker("refresh");
             $("#Horario").empty();
-
         }
-
         function encuesta() {
             var cita = document.getElementsById('Cita');
             var modo = document.getElementsById('Modo');
         }
-
         $(document).ready(function () {
             $('#Cita').on('change', function () {
                 if (this.value == 'Ayudas diagnósticas') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requiere de ayudas diagnósticas, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                    })
                     $("#card3").show();
-                }
-                else if (this.value == 'Proceso de dermatología') {
+                } else if (this.value == 'Procedimiento ambulatorio') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requiere de procedimiento ambulatorio, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                    })
+                    $("#card3").show()
+                } else if (this.value == 'Consulta odontología general') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requiere consulta odontológica general, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                    })
+                    $("#card3").show()
+                } else if (this.value == 'Consulta odontología especializada') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requiere consulta odontológica especializada, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                    })
                     $("#card3").show()
                 } else {
                     $("#card3").hide()
@@ -525,9 +940,12 @@
         $(document).ready(function () {
             $('#Modo').on('change', function () {
                 if (this.value == 'Presencial') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que ha seleccionado la modalidad de cita presencial, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                    })
                     $("#card3").show();
-                }
-                else {
+                } else {
                     $("#card3").hide()
                 }
             });
@@ -535,11 +953,22 @@
 
         $(document).ready(function () {
             $('#Cita').on('change', function () {
-                if (this.value == 'Cita común (Especialista o médico general)') {
+                if (this.value == 'Consulta medicina general') {
                     $("#div").show();
-                }
-                else {
+                } else if (this.value == 'Consulta especializada') {
+                    $("#div").show();
+                } else {
                     $("#div").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Factura').on('change', function () {
+                if (this.value == 'EPS') {
+                    $("#eps").show();
+                } else {
+                    $("#eps").hide()
                 }
             });
         });
@@ -560,18 +989,125 @@
             $('#collapse5').toggle();
         });
 
+        document.getElementById('email').addEventListener('input', function () {
+            campo = event.target;
+            valido = document.getElementById('emailOK');
+
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+            if (emailRegex.test(campo.value)) {
+                $("#emailOK").show();
+                $("#emailNOTOK").hide();
+                $("#emailOK").hide();
+                // valido.innerText = "válido";               
+            } else {
+                $("#emailNOTOK").show();
+                $("#emailOK").hide();
+                // valido.innerText = "incorrecto";
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: 'Oops...',
+                //     text: 'Debe escribir una dirección válida'
+                // })
+            }
+        });
+        document.getElementById('email1').addEventListener('input', function () {
+            campo = event.target;
+            valido = document.getElementById('emailOK1');
+            // var email = document.getElementsById('email');
+
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+            if (emailRegex.test(campo.value)) {
+                $("#emailOK1").show();
+                $("#emailNOTOK1").hide();
+                $("#emailOK1").hide();
+                // valido.innerText = "válido";               
+            } else {
+                $("#emailNOTOK1").show();
+                $("#emailOK1").hide();
+            }
+
+            // if(campo.value !== email.value){
+            //     $("#emailNOT").show();
+            // }else{
+            //     $("#emailNOT").hide();
+            // }
+        });
+
         function validar() {
             //Se extre el formulario donde se encuentran contenidos los campos a través de su id
+            var name = document.getElementById("Name").value;
+            var lastname = document.getElementById("Lastname").value;
+            var email = document.getElementById("email").value;
+            var email1 = document.getElementById("email1").value;
+            var number = document.getElementById("number").value;
+            var number1 = document.getElementById("number1").value;
+            var Tipo = document.getElementById("Tipo").value;
             var ncedula = document.getElementById("Cedula").value;
+            var ncedula1 = document.getElementById("Cedula1").value;
             var cita = document.getElementById("Cita").value;
             var factura = document.getElementById("Factura").value;
             var modo = document.getElementById("Modo").value;
-            var selectes = document.getElementById("opciones").value;//Se extrea cada elemento
+            var selectes = document.getElementById("opciones").value; //Se extrea cada elemento
             var selectdr = document.getElementById("Doctores").value;
             var fecha = document.getElementById("fecha").value;
             var hora = document.getElementById("Horario").value;
             var fileo = document.getElementById("Orden").value;
+            var autorizacion = document.getElementById("autorizacion").value;
 
+            if (name == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe escribir sus nombres'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (lastname == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe escribir sus apellidos'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (email1 !== email) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Los correos no coinciden'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (number.length == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe digitar su número de celular'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (number1 !== number) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Los números de celular ingresados no coinciden'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (Tipo == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe seleccionar el tipo de documento'
+                })
+                event.preventDefault();
+                return false;
+            }
             if (ncedula.length == "0") {
                 Swal.fire({
                     icon: 'error',
@@ -585,7 +1121,16 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'El número de identificación no puede tener menos de 7 dígitos'
+                    text: 'El número de identificación debe tener por lo menos 7 dígitos'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (ncedula1 !== ncedula) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El número de identificación no coincide'
                 })
                 event.preventDefault();
                 return false;
@@ -644,15 +1189,15 @@
                 event.preventDefault();
                 return false;
             }
-            if (!fileo) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debe seleccionar archivo de orden médica'
-                })
-                event.preventDefault();
-                return false;
-            } else {
+            // if (!fileo || autorizacion.length == "0") {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Oops...',
+            //         text: 'Debe adjuntar archivo de orden médica o digitar número de autorización'
+            //     })
+            //     event.preventDefault();
+            //     return false;}
+            else {
                 Swal.fire({
                     icon: 'success',
                     title: '¡Buen trabajo!',
@@ -660,7 +1205,6 @@
                 })
             }
         }
-
         function ValidateSize(file) {
             var FileSize = file.files[0].size / 1024 / 1024;
             var fileo = document.getElementById("Orden");
@@ -675,26 +1219,14 @@
                 return false;
             }
         }
-        function ValidateSize2(file) {
-            var FileSize = file.files[0].size / 1024 / 1024;
-            var fileo = document.getElementById("Imagen");
-            if (FileSize > 3) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'El archivo supera los 3 MB'
-                })
-                fileo.value = "";
-                event.preventDefault();
-                return false;
-            }
-        }
-
+       
         var result = [];
         var result3 = [];
         async function consult() {
             var con1 = document.getElementById('Doctores').value;
-            const consulta2 = { con: con1 };
+            const consulta2 = {
+                con: con1
+            };
             const options2 = {
                 method: "POST",
                 body: JSON.stringify(consulta2),
@@ -708,15 +1240,12 @@
             console.log(result)
             buildTable()
         }
-
         function buildTable() {
             vaciar();
             vacio();
             console.log(result)
-
             var table = document.getElementById('myTable');
             select = document.getElementById('Doctores');
-
             for (var i = 0; i < result.length; i++) {
                 if (select.value == result[i].Doctor) {
                     var row = `<tr>
@@ -727,29 +1256,22 @@
                                 ${result[i].hora_ini} - ${result[i].hora_fin}                                
                             </td>                                                          
 					  </tr>`
-
                     table.innerHTML += row
-
                 }
             }
         }
-
-
-
         function vaciarU() {
             document.getElementById('TableUser').innerHTML = '';
         }
         function vacioU() {
             document.getElementById('TableUser').innerHTML = '';
         }
-
         function vaciar() {
             document.getElementById('myTable').innerHTML = '';
         }
         function vacio() {
             document.getElementById('myTable').innerHTML = '';
         }
-
         //Se crea una función para que el nombre de los documentos cargados 
         //en los inputs de tipo file se muestren en la página, a través de si id
         $(document).ready(function () {
@@ -762,10 +1284,11 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         });
-
         async function doctors(s1, s2) {
             var con1 = document.getElementById('opciones').value;
-            const consulta2 = { con: con1 };
+            const consulta2 = {
+                con: con1
+            };
             const options2 = {
                 method: "POST",
                 body: JSON.stringify(consulta2),
@@ -775,15 +1298,11 @@
             };
             const response2 = await fetch('/doctor', options2);
             result5 = await response2.json();
-
             var s1 = document.getElementById(s1);
             var s2 = document.getElementById(s2);
-
             s2.innerHTML = "";
-
             select = document.getElementById('Doctores');
             for (var i = 0; i < result5.length; i++) {
-
                 if (s1.value == result5[i].Especialidad) {
                     var opt = document.createElement('option');
                     opt.value = result5[i].Nombres;
@@ -791,14 +1310,14 @@
                     select.add(opt);
                 }
             }
-            $("#Doctores").prepend('<option selected="true" value="0">Seleccione médico</option>');
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccione profesional de la salud</option>');
         }
-
-
         var result4 = [];
         async function consulta() {
             var con1 = document.getElementById('opciones').value;
-            const consulta2 = { con: con1 };
+            const consulta2 = {
+                con: con1
+            };
             const options2 = {
                 method: "POST",
                 body: JSON.stringify(consulta2),
@@ -808,18 +1327,38 @@
             };
             const response2 = await fetch('/agenda', options2);
             result4 = await response2.json();
-
             select = document.getElementById('opciones');
-
             for (var i = 0; i < result4.length; i++) {
                 var opt = document.createElement('option');
                 opt.value = result4[i].Especialidad;
                 opt.innerHTML = result4[i].Especialidad;
                 select.add(opt);
-
             }
         }
 
+        var result4 = [];
+        async function eps() {
+            var con1 = document.getElementById('entidad').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/listaEPS', options2);
+            result4 = await response2.json();
+            select = document.getElementById('entidad');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].eps;
+                opt.innerHTML = result4[i].eps;
+                select.add(opt);
+            }
+        }
     </script>
     <!--===== MAIN JS =====-->
     <script src="/js/main.js"></script>

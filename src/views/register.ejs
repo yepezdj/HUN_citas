@@ -26,20 +26,24 @@
             <div class="container">
               <div>
                 <% if(errors !==" " ) {%>
-                <% errors.forEach(function(item) { %>
-                <div class="alert alert-danger">
-                  <%- item %>
-                </div>
-                <%})%>
-                <%}%>
+                  <% errors.forEach(function(item) { %>
+                    <div class="alert alert-danger">
+                      <%- item %>
+                    </div>
+                    <%})%>
+                      <%}%>
               </div>
+              <div class="text-center mb-2">
+                A continuación podrá completar toda la información su registro.
+              </div>
+              <hr class="my-4">
               <form method="POST" action="/register">
                 <div class="row">
                   <div class="col-lg-6 my-4">
                     <div class="form-group mb-4">
                       <label for="nombre" class="font-weight-bold">Nombres</label>
-                      <input type="text" class="form-control" id="name" name="name"
-                        placeholder="Ingrese sus nombres" required>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese sus nombres"
+                        required>
                     </div>
                     <div class="form-group mb-4">
                       <label for="email" class="font-weight-bold">Apellidos</label>
@@ -49,10 +53,10 @@
                     <div class="form-group mb-4">
                       <label for="cedula" class="font-weight-bold">Número de identificación</label>
                       <input type="tel" class="form-control" id="cedula" name="cedula" pattern="[0-9]{10}"
-                        placeholder="Ingrese su cedula" autocomplete="off" required>
+                        placeholder="Sin puntos ni comas ni guiones" autocomplete="off" required>
                     </div>
                     <div class="form-group mb-0">
-                      <label for="sexo" class="font-weight-bold">Sexo</label>
+                      <label for="sexo" class="font-weight-bold">Género</label>
                     </div>
                     <div class="form-group mb-4">
                       <div class="btn-group btn-group-toggle toggle" data-toggle="buttons">
@@ -83,21 +87,34 @@
                         placeholder="Ingrese su correo electrónico">
                     </div>
                     <div class="form-group mb-4">
-                      <label for="city" class="font-weight-bold">Ciudad de residencia</label>
-                      <input class="form-control" id="city" name="city" placeholder="Ingrese su ciudad de residencia"
-                        autocomplete="off" required>
+                      <label for="Departamento" style="margin-top: 0px;" class="form-label">Departamento de
+                        residencia<label class="redText">*</label></label>
+                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="Departamento"
+                        name="Departamento" onchange="departamento('Departamento','city')" required="true">
+                        <option value="0">Seleccione departamento de residencia</option>
+                      </select>
                     </div>
                     <div class="form-group mb-4">
-                      <label for="eps" class="font-weight-bold">EPS</label>
-                      <input class="form-control" id="eps" name="eps" placeholder="Ingrese su EPS, si tiene" autocomplete="off">
+                      <label for="city" style="margin-top: 0px;" class="form-label">Municipio de residencia<label
+                          class="redText">*</label></label>
+                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="city" name="city"
+                        required="true">
+                        <option value="0">Seleccione municipio de residencia</option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-4">
+                      <label for="eps" style="margin-top: 0px;" class="form-label">EPS (Si aplica)<label class="redText">*</label></label>
+                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="eps" name="eps">
+                        <option value="0">Seleccione EPS</option>
+                      </select>
                     </div>
                     <div class="form-group mb-4">
                       <label for="password" class="font-weight-bold">Contraseña</label>
                       <input type="password" class="form-control" id="password" name="password"
                         placeholder="Ingrese su Contraseña">
-                      <small class="form-text text-muted">La contraseña debe tener almenos 8 caracteres.</small>
+                      <small class="form-text text-muted">La contraseña debe tener al menos 8 caracteres.</small>
                     </div>
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-4"  style="margin-top: -20px;">
                       <label for="password" class="font-weight-bold">Confirmar contraseña</label>
                       <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword"
                         placeholder="Confirme su contraseña">
@@ -131,15 +148,18 @@
   <script src="/lib/jquery/jquery.js"></script>
   <script src="/lib/jquery/jquery.datetimepicker.full.js"></script>
   <script>
+    document.onload = loadFunctions();
+    function loadFunctions() {
+      consulta();
+      eps();
+    }
 
-    document.getElementById('fecha_nac').max = new Date(new Date().getTime() - 
+    document.getElementById('fecha_nac').max = new Date(new Date().getTime() -
       new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-
-      var password = document.getElementById("password")
-        , confirm_password = document.getElementById("confirmationPassword");
-
-    function validatePassword(){
-      if(password.value != confirmationPassword.value) {
+    var password = document.getElementById("password")
+      , confirm_password = document.getElementById("confirmationPassword");
+    function validatePassword() {
+      if (password.value != confirmationPassword.value) {
         confirmationPassword.setCustomValidity("Las contraseñas no coinciden.");
       } else {
         confirmationPassword.setCustomValidity('');
@@ -147,6 +167,82 @@
     }
     password.onchange = validatePassword;
     confirmationPassword.onkeyup = validatePassword;
+
+    async function departamento(s1, s2) {
+      var con1 = document.getElementById('Departamento').value;
+      const consulta2 = {
+        con: con1
+      };
+      const options2 = {
+        method: "POST",
+        body: JSON.stringify(consulta2),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const response2 = await fetch('/municipio', options2);
+      result5 = await response2.json();
+      var s1 = document.getElementById(s1);
+      var s2 = document.getElementById(s2);
+      s2.innerHTML = "";
+      select = document.getElementById('city');
+      for (var i = 0; i < result5.length; i++) {
+        if (s1.value == result5[i].Departamento) {
+          var opt = document.createElement('option');
+          opt.value = result5[i].Municipio;
+          opt.innerHTML = result5[i].Municipio;
+          select.add(opt);
+        }
+      }
+      $("#city").prepend('<option selected="true" value="0">Seleccione municipio de residencia</option>');
+    }
+    var result4 = [];
+    async function consulta() {
+      var con1 = document.getElementById('Departamento').value;
+      const consulta2 = {
+        con: con1
+      };
+      const options2 = {
+        method: "POST",
+        body: JSON.stringify(consulta2),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const response2 = await fetch('/departamentos', options2);
+      result4 = await response2.json();
+      select = document.getElementById('Departamento');
+      for (var i = 0; i < result4.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = result4[i].Departamento;
+        opt.innerHTML = result4[i].Departamento;
+        select.add(opt);
+      }
+    }
+
+    var result4 = [];
+    async function eps() {
+      var con1 = document.getElementById('eps').value;
+      const consulta2 = {
+        con: con1
+      };
+      const options2 = {
+        method: "POST",
+        body: JSON.stringify(consulta2),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const response2 = await fetch('/listaEPS', options2);
+      result4 = await response2.json();
+      select = document.getElementById('eps');
+      for (var i = 0; i < result4.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = result4[i].eps;
+        opt.innerHTML = result4[i].eps;
+        select.add(opt);
+      }
+    }
   </script>
 </body>
 

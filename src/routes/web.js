@@ -37,7 +37,8 @@ let initWebRoutes = (app) => {
     //REGISTER
     router.get("/register", registerController.getPageRegister);
     router.post("/register", auth.validateRegister, registerController.createNewUser);
-
+    router.post("/departamentos", registerController.departamentos);
+    router.post("/municipio", registerController.municipio);
 
     //ROUTES
     router.get("/user/usermain", userController.getUser);
@@ -56,15 +57,17 @@ let initWebRoutes = (app) => {
    
     //RUTAS PARA LA PÁGINA DE USUARIO    
     router.post('/datos',userController.datos);
-    router.post('/add', upload.array('images',2), userController.agendar); 
+    router.post('/add', upload.array('images',1), userController.agendar); 
     router.get('/consultar',userController.tabla);   
     router.post('/agenda',userController.espe);
     router.post('/doctor',userController.dr);
+    router.post('/listaEPS',userController.listaEPS);
     router.get('/delete/:idpa',userController.delate); 
-    router.get('/update/:idpa', upload.array('images',2), userController.edit);
-    router.post('/update/:idpa', upload.array('images',2), userController.update); 
+    router.get('/update/:idpa', upload.array('images',1), userController.edit);
+    router.post('/update/:idpa', upload.array('images',1), userController.update); 
     // router.post('/survey', userController.Survey);
     router.post('/verifyUser', userController.verifyUser);
+
 
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    
     router.get('/consultarCitas',conciliatorController.Citas);
