@@ -104,7 +104,8 @@
                         <th>Régimen</th>
                         <th>Modalidad</th>
                         <th>Orden</th> 
-                        <th>Autorización</th>  
+                        <th>Autorización</th> 
+                        <th>Encuesta</th>  
                         <th>Aceptar solicitud</th>
                         <th>Declinar solicitud</th>
                     </tr>
@@ -170,6 +171,19 @@
                                 </td>
                                 <td>
                                     <%= info[i].Autorizacion %>
+                                </td>
+                                <td> <% if (info[i].P1 == 'Sí' || info[i].P2 == 'Sí' || info[i].P3 == 'Sí' || info[i].P4 == 'Sí' || info[i].P5 == 'Sí' || info[i].P6 == 'Sí' || info[i].P7 == 'Sí' || info[i].P8 == 'Sí') { %>
+                                    <div class="text-center mb-2">
+                                        Indicios de COVID: <strong class="font-italic" style="color: red;">SÍ</strong> <br>                                                                              
+                                        Patologías: <strong class="font-italic" style="color: red;"> <%= info[i].P9 %></strong>
+                                    </div>
+                                    <% } %>
+                                    <% if (info[i].P1 == 'No' & info[i].P2 == 'No' & info[i].P3 == 'No' & info[i].P4 == 'No' & info[i].P5 == 'No' & info[i].P6 == 'No' & info[i].P7 == 'No' & info[i].P8 == 'No') { %>
+                                        <div class="text-center mb-2">
+                                            Indicios de COVID: <strong class="font-italic" style="color: red;">NO</strong> <br>                                                                              
+                                            Patologías: <strong class="font-italic" style="color: red;"> <%= info[i].P9 %></strong>
+                                        </div>
+                                        <% } %>
                                 </td>
                                 <td>
                                     <a href="/aceptar/<%= info[i].idpa %>" class="btn btn-success">Aceptar</a>

@@ -311,51 +311,6 @@ let agendar = async (req, res) => {
     }
 }
 
-    // connection.query(`SELECT * FROM agendamiento WHERE Especialidad = "${espe}" AND Doctor = "${doctor}" AND Fecha = "${newdate}"
-    // AND hora_ini = "${hora}"`, (err, datos) => {
-    //     if (err) {
-    //         res.json(err);
-    //     }
-    //     console.log(datos);
-    //     if (!datos.length) {
-    //         connection.query(
-    //             `INSERT INTO agendamiento (Especialidad, Doctor, Fecha, hora_ini, Orden, NombreP, ApellidoP, CedulaP, idu, Descripcion, Estado, Correo, Cita, Modo, Afiliacion, Celular, Tipo_documento, Autorizacion, entidad, Regimen) 
-    //             VALUES ("${espe}", "${doctor}", "${newdate}", "${hora}", "${linkOrden}", "${name}", "${lastname}", "${Cedula}", "${id}", "${descripcion}", "${Estado}", "${correo}", "${Cita}", 
-    //             "${Modo}", "${Factura}", "${number}", "${tipo}", "${autorizacion}", "${entidad}", "${regimen}")`,
-    //             function (err, rows) {
-    //                 if (err) {
-    //                     res.json(err);
-    //                 }
-    //                 console.log(rows)
-    //                 // return res.redirect('/user/usermain')
-    //             }
-    //         );
-    //         connection.query('SELECT MAX(idpa) FROM agendamiento', (err, dat) => {
-    //             if (err) {
-    //                 res.json(err);
-    //             }
-    //             idp = dat.idpa
-    //             console.log(idp);
-    //             connection.query(
-    //                 `INSERT INTO encuesta (P1, P2, P3, P4, P5, P6, P7, P8, P9, idpa) VALUES ("${p1}", "${p2}", "${p3}", "${p4}", "${p5}", "${p6}", "${p7}", "${p8}", "${p9}", "${idp}")`,
-    //                 function (err, rows) {
-    //                     if (err) {
-    //                         res.json(err);
-    //                     }
-    //                     console.log(rows)
-    //                     return res.redirect('/user/usermain')
-    //                 }
-    //             );
-    //         });            
-    //     } else {
-    //         return res.redirect('/user/usermain')
-    //     }
-    // });
-
-    
-
-
-
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
 let edit = async (req, res) => {
     var user = req.session.context;
