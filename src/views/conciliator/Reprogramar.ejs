@@ -254,7 +254,7 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-6" id="hide2">
-                                                    <div class="form-input" style="margin-top: 10px;">
+                                                    <div class="form-input" style="margin-top: 20px;">
                                                         <label for="Horario" class="custom-label">Hora de la
                                                             cita</label>
                                                         <select class="custom-select" id="Horario" name="Horario">
@@ -290,21 +290,12 @@
                                                 onclick="window.open('<%= datos.Orden %>', '_blank', 'fullscreen=yes'); return false;">
                                                 <i class="far fa-eye"></i>
                                             </a>
-                                        </div>
-                                        <div class="w-100 d-none d-md-block"></div>
-                                        <div class="form-input" style="margin-top: 20px;">
-                                            <label for="Imagen" class="form-label">Imágenes diagnósticas </label>
-
-                                            <a href="#"
-                                                onclick="window.open('<%= datos.Imagen %>', '_blank', 'fullscreen=yes'); return false;">
-                                                <i class="far fa-eye"></i>
-                                            </a>
-                                        </div>
+                                        </div>                                        
                                         <div class="w-100 d-none d-md-block"></div>
                                         <div class="form-input" style="margin-top: 20px;">
                                             <label for="descripcion" class="form-label">Descripción</label>
                                             <textarea class="form-control" id="descripcion" name="descripcion"
-                                                rows="2"></textarea>
+                                                rows="2"><%= datos.Descripcion %></textarea>
                                         </div>
                                         <div class="w-100 d-none d-md-block"></div>
                                         <div class="form-input" style="margin-top: 20px;">
