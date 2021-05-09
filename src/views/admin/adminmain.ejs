@@ -327,6 +327,13 @@
           text: 'Debe seleccionar una especialidad'
         });
         return false;
+      } if (data.Doctores == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar un profesional de la salud'
+        });
+        return false;
       } if (data.Dia == '0') {
         Swal.fire({
           icon: 'error',
