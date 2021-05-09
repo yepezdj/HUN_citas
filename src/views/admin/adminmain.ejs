@@ -85,6 +85,7 @@
       <div class="card flex-row mx-auto px-0">
         <div class=" d-none d-md-flex">
         </div>
+        <form action="/createAdmin" method="POST">
         <div class="card-body">
           <h4 class="title text-center mt-4">
             Hola <%=user.name%>
@@ -172,9 +173,10 @@
           <div class="w-100 d-none d-md-block"></div>
           <div class="col-12 col-sm-12">
             <button type="submit" class="btn btn-outline-primary btn-block" id="btnAgregar"
-              style="margin-top: 50px; margin-bottom: 20px;">Guardar cambios</button>
+              style="margin-top: 50px; margin-bottom: 20px;" onclick="validar()">Guardar cambios</button>
           </div>
         </div>
+        </form>
       </div>
     </div>
   </div>
@@ -296,68 +298,50 @@
       scrollbar: true
     });
     
-    $('#btnAgregar').click(function () {
-      let data = recuperarDatosFormulario();
-      console.log(data)
-      if (!data) {
-        console.log('error')
-      } else {
-        agregarRegistro(data);
-      }
-      // $("#modalEventos").modal('hide');
-    })
+    
+    function validar() {
+      var opciones = document.getElementById("opciones").value;
+      var Doctores = document.getElementById("Doctores").value;
+      var Dia = document.getElementById("Dia").value;
+      var H1 = document.getElementById("H1").value;
+      var H2 = document.getElementById("H2").value;
+      var H3 = document.getElementById("H3").value;
+      var H4 = document.getElementById("H4").value;
+      var H5 = document.getElementById("H5").value;
+      var H6 = document.getElementById("H6").value;
 
-    function recuperarDatosFormulario() {
-      let data = {
-        opciones: $('#opciones').val(),
-        Doctores: $('#Doctores').val(),
-        Dia: $('#Dia').val(),
-        H1: $('#H1').val(),
-        H2: $('#H2').val(),
-        H3: $('#H3').val(),
-        H4: $('#H4').val(),
-        H5: $('#H5').val(),
-        H6: $('#H6').val()
-      };
-      console.log(typeof data.H1)
-      if (data.opciones == '0') {
+      if (opciones == '0') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Debe seleccionar una especialidad'
         });
+        event.preventDefault();
         return false;
-      } if (data.Dia == '0') {
+      } if (Doctores == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar un profesional de la salud'
+        });
+        event.preventDefault();
+        return false;
+      } if (Dia == '0') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Debe seleccionar un día'
         });
+        event.preventDefault();
         return false;
-      } 
-      return data;
-    }
+      } else {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Buen trabajo!',
+          text: '¡Se han enviado correctamente los datos!'
+        })
+      }
 
-    function agregarRegistro(data) {
-      $.ajax({
-        type: 'POST',
-        url: '/createAdmin',
-        data: data,
-        success: function (msg) {
-          Swal.fire(
-            '¡Buen trabajo!',
-            '¡Se han enviado correctamente los datos!',
-            'success'
-          );
-        },
-        error: function (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Hubo un error'
-          })
-        }
-      });
     }
 
   </script>
