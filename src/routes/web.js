@@ -75,8 +75,8 @@ let initWebRoutes = (app) => {
     router.post('/aceptar/:idpa',conciliatorController.aceptar);
     router.get('/declinar/:idpa',conciliatorController.datosdeclinar);
     router.post('/declinar/:idpa',conciliatorController.declinar);
-    router.get('/updateC/:idpa', , upload.array('images',1), conciliatorController.editC);
-    router.post('/updateC/:idpa', , upload.array('images',1), conciliatorController.updateC);
+    router.get('/updateC/:idpa', upload.array('images',1), conciliatorController.editC);
+    router.post('/updateC/:idpa', upload.array('images',1), conciliatorController.updateC);
 
     //RUTAS PARA LA PÁGINA DE ADMINISTRADOR  
     router.get('/admin/adminException', adminController.getException)
@@ -84,8 +84,8 @@ let initWebRoutes = (app) => {
     router.post('/createException',  adminController.createException); 
     router.post('/exceptions',  adminController.exceptions); 
     router.get('/consultarCitasAdmin',adminController.CitasAdmin); 
-    router.get('/updateA/:idpa', , upload.array('images',1), adminController.editA);
-    router.post('/updateA/:idpa', , upload.array('images',1), adminController.updateA);
+    router.get('/updateA/:idpa', upload.array('images',1), adminController.editA);
+    router.post('/updateA/:idpa', upload.array('images',1), adminController.updateA);
    
     return app.use("/", router);
 };
