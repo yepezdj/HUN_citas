@@ -158,7 +158,7 @@ let Citas = (req, res) => {
 let editC = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Imagen, Descripcion, Correo, Cita, Afiliacion, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
