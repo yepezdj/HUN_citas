@@ -943,15 +943,15 @@
                 return false;
             }
             
-            // if (!fileo || autorizacion.length == "0") {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Oops...',
-            //         text: 'Debe adjuntar archivo de orden médica o digitar número de autorización'
-            //     })
-            //     event.preventDefault();
-            //     return false;}
-            else {
+            if (!fileo & autorizacion.length == "0") {
+                 Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe adjuntar archivo de orden médica o digitar número de autorización'
+                 })
+                 event.preventDefault();
+                 return false;
+	 } else {
                 Swal.fire({
                     icon: 'success',
                     title: '¡Buen trabajo!',
