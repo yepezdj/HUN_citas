@@ -257,7 +257,7 @@ let agendar = async (req, res) => {
         }
 
         const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
-        linkOrden = `http://localhost/files/${user.id}/${tokenOrden}`;
+        linkOrden = `http://http://3.15.154.185:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
     } else {
         linkOrden = 'El paciente no adjuntó orden médica';
@@ -368,7 +368,7 @@ let update = async (req, res) => {
         }
 
         const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
-        linkOrden = `http://localhost/files/${user.id}/${tokenOrden}`;
+        linkOrden = `http://http://3.15.154.185:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
 
         connection.query("UPDATE agendamiento SET Orden = ? WHERE idpa = ?", [linkOrden, req.params.idpa], (err, datos) => {
