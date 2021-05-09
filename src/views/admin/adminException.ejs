@@ -119,7 +119,7 @@
                   <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
                   onclick="buildTable()" onchange="vaciar()">
                     <option value="0">
-                      Seleccione Médico
+                      Seleccione profesional de la salud
                     </option>
                   </select>
                 </div>
@@ -469,7 +469,28 @@
           text: 'Debe seleccionar una fecha'
         });
         return false;
-      }
+      }if (data.H1 >= data.H2){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de finalización debe ser mayor a la de inicio'
+        });
+        return false;
+      } if (data.H3 >= data.H4 & data.H3 !== '' & data.H4 !== ''){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de finalización debe ser mayor a la de inicio'
+        });
+        return false;
+      } if (data.H5 >= data.H6 & data.H5 !== '' & data.H6 !== ''){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de finalización debe ser mayor a la de inicio'
+        });
+        return false;
+      } 
       return data;
     }
 
