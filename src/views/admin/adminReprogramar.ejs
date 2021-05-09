@@ -254,7 +254,7 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-6" id="hide2">
-                                                    <div class="form-input" style="margin-top: 10px;">
+                                                    <div class="form-input" style="margin-top: 20px;">
                                                         <label for="Horario" class="custom-label">Hora de la
                                                             cita</label>
                                                         <select class="custom-select" id="Horario" name="Horario">
@@ -361,12 +361,13 @@
 
         function nationalDays(date) {
             for (i = 0; i < natDays.length; i++) {
-                if (date.getMonth() == natDays[i][0] - 1
-                    && date.getDate() == natDays[i][1]) {
+                if (date.getMonth() == natDays[i][0] - 1 &&
+                    date.getDate() == natDays[i][1]) {
                     return [false, natDays[i][2] + '_day'];
                 }
-            }
-            return [true, ''];
+            }           
+            var day = date.getDay();
+            return [(day != 0)];
         }
 
         $(function () {
