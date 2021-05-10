@@ -298,13 +298,81 @@
   <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
   <script>
+    var date = new Date();
+    var year = date.getFullYear();
+    console.log(year)
+    if (year == '2021') {
+      natDays = [
+        [1, 1, 2021],
+        [1, 11, 2021],
+        [3, 22, 2021],
+        [4, 1, 2021],
+        [4, 2, 2021],
+        [5, 1, 2021],
+        [5, 17, 2021],
+        [6, 7, 2021],
+        [6, 14, 2021],
+        [7, 5, 2021],
+        [7, 20, 2021],
+        [8, 7, 2021],
+        [8, 16, 2021],
+        [10, 18, 2021],
+        [11, 1, 2021],
+        [11, 15, 2021],
+        [12, 8, 2021],
+        [12, 25, 2021]
+      ];
+    }
+    if (year == '2022') {
+      natDays = [
+        [1, 1, 2022],
+        [1, 10, 2022],
+        [3, 21, 2022],
+        [4, 14, 2022],
+        [4, 15, 2022],
+        [5, 1, 2022],
+        [5, 30, 2022],
+        [6, 20, 2022],
+        [6, 27, 2022],
+        [7, 4, 2022],
+        [7, 20, 2022],
+        [8, 7, 2022],
+        [8, 15, 2022],
+        [10, 17, 2022],
+        [11, 7, 2022],
+        [11, 14, 2022],
+        [12, 8, 2022],
+        [12, 25, 2022]
+      ];
+    }
+    function nationalDays(date) {
+      for (i = 0; i < natDays.length; i++) {
+        if (date.getMonth() == natDays[i][0] - 1 &&
+          date.getDate() == natDays[i][1]) {
+          return [false, natDays[i][2] + '_day'];
+        }
+      }
+      var day = date.getDay();
+      return [(day != 0)];
+    }
     $(function () {
       $("#fecha").datepicker({
         dateFormat: 'mm-dd-yy',
         minDate: new Date(),
-        maxDate: '+6m'
-      });
+        maxDate: '+6m',
+        monthNames: ['Enero', 'Febrero', 'Marzo',
+          'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre',
+          'Octubre', 'Noviembre', 'Diciembre'
+        ],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+          'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+        ],
+        dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+        beforeShowDay: nationalDays      
+      })
     });
+
     document.onload = loadFunctions();
     function loadFunctions() {
       consult();
