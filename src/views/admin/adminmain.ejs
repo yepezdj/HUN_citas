@@ -376,7 +376,9 @@
             '¡Buen trabajo!',
             '¡Se han enviado correctamente los datos!',
             'success'
-          );
+          ).then(function () {
+            window.location = "/admin/adminmain";
+          });
         },
         error: function (error) {
           Swal.fire({
