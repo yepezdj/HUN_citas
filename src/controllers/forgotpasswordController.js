@@ -33,7 +33,7 @@ let aa = (req, res, next) => {
                 id: user.id
             }
             const token = jwt.sign(payload, secret,{expiresIn: '30m'});
-            const link =`http://localhost/reset-password/${user.id}/${token}`;
+            const link =`http://3.141.6.247:8080/reset-password/${user.id}/${token}`;
             console.log(link);
 
             gmailController.sendEmailNormal(user.email, 'Recuperar contraseña NOMBRE DE LA APP Hospital Universidad del Norte',link)
