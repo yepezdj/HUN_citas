@@ -70,9 +70,9 @@
     </div>
 
     <div class="container-flex">
-        <div class="row px-3">
+        <div class="row px-3" style="display: block; min-width: fit-content;" id="MyComponent">
             <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
-                <div class="card-body">
+                <div class="card-body" style="display: block;">
                     <form action="/add" method="POST" enctype="multipart/form-data">
                         <h4 class="title text-center mt-4">
                             Hola <%=user.name%>
@@ -112,12 +112,12 @@
                                             <p class="centered">Completa todos los campos de la información del
                                                 paciente. <i class="bi bi-person-lines-fill"></i></p>
                                             <div class="row">
-                                                <div class="col-12 col-sm-6" >
+                                                <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="Name" class="form-label">Fecha y hora actual<label
+                                                        <label for="actual" class="form-label">Fecha y hora actual<label
                                                                 class="redText">*</label></label>
-                                                        <input type="text" class="form-control" id="Name" name="Name"
-                                                            value="<%= user.name %>">
+                                                        <input type="text" class="form-control" id="actual"
+                                                            name="actual" value="">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -663,18 +663,19 @@
                                                             Horarios habituales del profesional de la salud.
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
-                                                        <div class="col-12 col-sm-12" style="height:300px; overflow-y: scroll;">
-                                                        <table class="table table-hover" id="tabla">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Profesional de la salud</th>
-                                                                    <th>Días disponibles</th>
-                                                                    <th>Horarios disponibles</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="myTable">
-                                                            </tbody>
-                                                        </table>
+                                                        <div class="col-12 col-sm-12"
+                                                            style="height:300px; overflow-y: scroll;">
+                                                            <table class="table table-hover" id="tabla">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Profesional de la salud</th>
+                                                                        <th>Días disponibles</th>
+                                                                        <th>Horarios disponibles</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="myTable">
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="row">
@@ -808,9 +809,35 @@
         function loadFunctions() {
 
             consult();
-
+            // dateFormat()
+            actual()
 
         }
+
+        function actual() {
+            // var FechaInicio = dateFormat();
+            // $('#actual').val(FechaInicio);
+        }
+
+        //function dateFormat() {
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+
+        month = (month < 10) ? "0" + month : month;
+        day = (day < 10) ? "0" + day : day;
+        hour = (hour < 10) ? "0" + hour : hour;
+        min = (min < 10) ? "0" + min : min;
+        sec = (sec < 10) ? "0" + sec : sec;
+
+        var actualidad = year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+        $('#actual').val(actualidad);
+        //}
+
         var date = new Date();
         var year = date.getFullYear();
         console.log(year)
@@ -903,7 +930,7 @@
                     };
                     var response2 = await fetch('/verifyUser', options2);
                     console.log(response2);
-                    var hora = await response2.json();
+                    var hora = await response2.json();                    
                     console.log(hora);
                     select = document.getElementById('Horario');
                     $("#Horario").empty();
@@ -1638,7 +1665,7 @@
                     opt.innerHTML = result4[i].eps;
                     select.add(opt);
                 }
-            }            
+            }
         }
 
     </script>
