@@ -128,7 +128,7 @@ let verifyUser = async (req, res) => {
 
 //Se extraen las especialidades y se convierten en formato json
 let espe = (req, res) => {
-    connection.query('SELECT Especialidad FROM especialidades', (err, dat) => {
+    connection.query('SELECT Especialidad FROM especialidades ORDER BY Especialidad ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
@@ -139,7 +139,30 @@ let espe = (req, res) => {
 };
 
 let listaEPS = (req, res) => {
-    connection.query('SELECT eps FROM eps', (err, dat) => {
+    connection.query('SELECT eps, Prepagada FROM eps ORDER BY eps ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
+
+let ayuda = (req, res) => {
+    connection.query('SELECT Ayudas, Especialidad FROM ayudasdiagnosticas ORDER BY Ayudas ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
+let procedimiento = (req, res) => {
+    connection.query('SELECT Procedimientos, Especialidad FROM procedimientos ORDER BY Procedimientos ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
@@ -151,7 +174,7 @@ let listaEPS = (req, res) => {
 
 //Se extraen los nombres de los médicos y se convierten en formato json
 let dr = (req, res) => {
-    connection.query('SELECT Especialidad, Nombres FROM doctor', (err, dat) => {
+    connection.query('SELECT Especialidad, Nombres FROM doctor ORDER BY Nombres ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
@@ -315,7 +338,7 @@ let agendar = async (req, res) => {
 let edit = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion, Tipo_documento FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -455,5 +478,7 @@ module.exports = {
     edit: edit,
     update: update,
     delate: delate,
-    listaEPS: listaEPS
+    listaEPS: listaEPS,
+    ayuda: ayuda,
+    procedimiento: procedimiento
 }

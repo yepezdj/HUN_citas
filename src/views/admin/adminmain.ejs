@@ -91,7 +91,7 @@
           </h4>
           <hr class="my-4">
           <div class="text-center mb-2">
-            A continuación podrá ingresar los horarios de los doctores del HUN
+            A continuación podrás ingresar los horarios de los profesionales de la salud del HUN
           </div>
           <form class="form-box px-3">
             <div class="row">
@@ -99,7 +99,7 @@
                 <select class="custom-select mt-2" style="margin-right: 35px;" id="opciones" name="opciones"
                   onchange="doctors('opciones','Doctores')" required>
                   <option value="0">
-                    Seleccione Especialidad
+                    Seleccionar Especialidad
                   </option>
                 </select>
               </div>
@@ -107,20 +107,20 @@
               <div class="col-12 col-sm-6" style="margin-top: 20px;">
                 <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores">
                   <option value="0">
-                    Seleccione Médico
+                    Seleccionar profesional de la salud
                   </option>
                 </select>
               </div>
               <div class="w-100 d-none d-md-block"></div>
               <div class="col-12 col-sm-6" style="margin-top: 20px;">
                 <select class="custom-select mt-2" style="margin-right: 35px;" id="Dia" name="Dia">
-                  <option value="0">Seleccione Día</option>
+                  <option value="0">Seleccionar día</option>
                   <option value="Lunes">Lunes</option>
                   <option value="Martes">Martes</option>
-                  <option value="Miercoles">Miércoles</option>
+                  <option value="Miércoles">Miércoles</option>
                   <option value="Jueves">Jueves</option>
-                  <option value="Viernes">Sábado</option>
-                  <option value="Sabado">Domingo</option>
+                  <option value="Viernes">Viernes</option>
+                  <option value="Sábado">Sábado</option>
                 </select>
               </div>
             </div>
@@ -141,7 +141,7 @@
                         autocomplete="off" onkeydown="return false">
                     </div>
                     <div class="col">
-                      <label for="H2" class="form-label">Hora de finalización</label>
+                      <label for="H2" class="form-label">Hora de fin</label>
                       <input type="text" class="form-control" id="H2" name="H2" placeholder="Hora de Fin"
                         autocomplete="off" onkeydown="return false">
                     </div>
@@ -205,7 +205,7 @@
     //LUNES
     $("#H1").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       minTime: '07:00',
       maxTime: '16:00',
       startTime: '0',
@@ -218,18 +218,47 @@
         console.log(time)
         var picker = $("#H2");
         picker.timepicker('option', 'minTime', time);
-
+        // picker.timepicker('option', 'disabled', false);
       }
     });
 
+    // function habilitar() {
+    //   var H1 = document.getElementById('H1').value;
+    //   console.log(H1)
+    //   if (H1 === '') {
+    //     $('#H2').attr('disabled', 'disabled');
+    //     // $("#H2").prop('disabled', true);
+
+    //   } else {
+    //     $("#H2").removeAttr("disabled");
+    //     $("#H2").timepicker({
+    //       timeFormat: 'HH:mm:ss',
+    //       interval: 30,
+    //       maxTime: '16:30',
+    //       startTime: '0',
+    //       dynamic: false,
+    //       dropdown: true,
+    //       scrollbar: true,
+    //       disabled: false,
+    //       change: function (time) {
+    //         var min = 30;
+    //         var time = $(this).val();
+    //         var picker = $("#H3");
+    //         picker.timepicker('option', 'minTime', time);
+    //       }
+    //     });
+    //   }
+    // }
+
     $("#H2").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
       dropdown: true,
       scrollbar: true,
+      disabled: false,
       change: function (time) {
         var min = 30;
         var time = $(this).val();
@@ -238,9 +267,10 @@
       }
     });
 
+
     $("#H3").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -256,7 +286,7 @@
 
     $("#H4").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -272,7 +302,7 @@
 
     $("#H5").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -288,14 +318,14 @@
 
     $("#H6").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
       dropdown: true,
       scrollbar: true
     });
-    
+
     $('#btnAgregar').click(function () {
       let data = recuperarDatosFormulario();
       console.log(data)
@@ -324,24 +354,101 @@
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Debe seleccionar una especialidad'
+          text: 'Debes seleccionar una especialidad'
         });
         return false;
       } if (data.Doctores == '0') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Debe seleccionar un profesional de la salud'
+          text: 'Debes seleccionar un profesional de la salud'
         });
         return false;
       } if (data.Dia == '0') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Debe seleccionar un día'
+          text: 'Debes seleccionar un día'
         });
         return false;
-      } 
+      } if (data.Dia == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes seleccionar un día'
+        });
+        return false;
+      } if (data.H1 == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H1 == '' & data.H2 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H1 !== '' & data.H2 == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de fin'
+        });
+        return false;
+      } if (data.H1 >= data.H2 & data.H1 !== '' & data.H2 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de fin debe ser mayor a la de inicio'
+        });
+        return false;
+      } if (data.H3 == '' & data.H4 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H4 == '' & data.H3 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de fin'
+        });
+        return false;
+      } if (data.H3 >= data.H4 & data.H3 !== '' & data.H4 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de fin debe ser mayor a la de inicio'
+        });
+        return false;
+      } if (data.H5 == '' & data.H6 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H6 == '' & data.H5 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de fin'
+        });
+        return false;
+      } if (data.H5 >= data.H6 & data.H5 !== '' & data.H6 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de fin debe ser mayor a la de inicio'
+        });
+        return false;
+      }
       return data;
     }
 
@@ -355,7 +462,9 @@
             '¡Buen trabajo!',
             '¡Se han enviado correctamente los datos!',
             'success'
-          );
+          ).then(function () {
+            window.location = "/admin/adminmain";
+          });
         },
         error: function (error) {
           Swal.fire({

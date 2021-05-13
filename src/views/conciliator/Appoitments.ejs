@@ -83,7 +83,7 @@
             </h4>
             <hr class="my-4">
             <div class="text-center mb-2">
-                A continuación podrá revisar las citas médicas agendadas hasta la fecha
+                A continuación podrás revisar las citas médicas agendadas hasta la fecha
             </div>
             <table id="conTable" class="table table-bordered table-responsive">
                 <thead>
@@ -99,12 +99,12 @@
                         <th>Doctor</th>
                         <th>Fecha</th>
                         <th>Hora</th>
-                        <th>Citaa</th>
+                        <th>Cita</th>
                         <th>Afiliación</th>
                         <th>Entidad</th>
                         <th>Régimen</th>
                         <th>Modalidad</th>
-                        <th>Orden</th> 
+                        <th>Anexos</th> 
                         <th>Autorización</th>  
                     </tr>
                 </thead>
@@ -152,9 +152,6 @@
                                     <%= info[i].Cita %>
                                 </td>
                                 <td>
-                                    <%= info[i].Modo %>
-                                </td>
-                                <td>
                                     <%= info[i].Afiliacion %>
                                 </td>
                                 <td>
@@ -162,6 +159,9 @@
                                 </td>
                                 <td>
                                     <%= info[i].Regimen %>
+                                </td>
+                                <td>
+                                    <%= info[i].Modo %>
                                 </td>
                                 <td> <a href="#" class="btn btn-success"
                                         onclick="window.open('<%= info[i].Orden %>', '_blank', 'fullscreen=yes'); return false;">

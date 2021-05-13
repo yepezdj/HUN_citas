@@ -614,12 +614,13 @@
 
         function nationalDays(date) {
             for (i = 0; i < natDays.length; i++) {
-                if (date.getMonth() == natDays[i][0] - 1
-                    && date.getDate() == natDays[i][1]) {
+                if (date.getMonth() == natDays[i][0] - 1 &&
+                    date.getDate() == natDays[i][1]) {
                     return [false, natDays[i][2] + '_day'];
                 }
-            }
-            return [true, ''];
+            }            
+            var day = date.getDay();
+            return [(day != 0)];
         }
 
         $(function () {
@@ -825,6 +826,8 @@
             var fileo = document.getElementById("Orden").value;
             var autorizacion = document.getElementById("autorizacion").value;
 
+            var option = document.getElementById("Option").value;
+
             if (name == "") {
                 Swal.fire({
                     icon: 'error',
@@ -942,7 +945,24 @@
                 event.preventDefault();
                 return false;
             }
-            
+            if (fecha == "" & option == "1") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una fecha'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (hora == "0" & option == "1") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una hora'
+                })
+                event.preventDefault();
+                return false;
+            }
             if (!fileo & autorizacion.length == "0") {
                  Swal.fire({
                     icon: 'error',
@@ -951,7 +971,7 @@
                  })
                  event.preventDefault();
                  return false;
-	 } else {
+	        } else {
                 Swal.fire({
                     icon: 'success',
                     title: '¡Buen trabajo!',

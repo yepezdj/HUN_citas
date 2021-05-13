@@ -82,8 +82,7 @@
                     <form action="/updateC/<%= datos.idpa %>" method="POST">
 
                         <div class="text-center mb-2">
-                            A continuación podrá modificar toda la información requerida para el agendamiento de su cita
-                            médica
+                            A continuación podrás reprogramar la cita médica del paciente
                         </div>
                         <hr class="my-4">
                         <div class="accordion" id="accordionExample">
@@ -93,7 +92,7 @@
                                         <button class="btn btn-link btn-block text-left" type="button"
                                             data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                                             aria-controls="collapseOne" id="btnC1">
-                                            INFORMACIÓN PERSONAL
+                                            INFORMACIÓN DEL PACIENTE
                                         </button>
                                     </h2>
                                 </div>
@@ -144,7 +143,7 @@
                                         <button class="btn btn-link btn-block text-left collapsed" type="button"
                                             data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
                                             aria-controls="collapseTwo" id="btnC2">
-                                            INFORMACIÓN MÉDICA
+                                            INFORMACIÓN DE LA CITA
                                         </button>
                                     </h2>
                                 </div>
@@ -218,7 +217,7 @@
                                         <button class="btn btn-link btn-block text-left collapsed" type="button"
                                             data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
                                             aria-controls="collapseThree" id="btnC3">
-                                            AGENDA
+                                            AGENDAMIENTO
                                         </button>
                                     </h2>
                                 </div>
@@ -226,7 +225,7 @@
                                     <div class="card-body" id="collapse3" style="display: none;">
                                         <div id="hide">
                                             <div class="text-center mb-2">
-                                                Horarios habituales del doctor.
+                                                Horarios habituales del profesional de la salud.
                                             </div>
                                             <div class="w-100 d-none d-md-block"></div>
 
@@ -254,12 +253,12 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-6" id="hide2">
-                                                    <div class="form-input" style="margin-top: 10px;">
+                                                    <div class="form-input" style="margin-top: 20px;">
                                                         <label for="Horario" class="custom-label">Hora de la
                                                             cita</label>
                                                         <select class="custom-select" id="Horario" name="Horario">
                                                             <option value="0">
-                                                                Seleccione hora
+                                                                Seleccionar hora
                                                             </option>
                                                         </select>
                                                     </div>
@@ -293,14 +292,14 @@
                                         </div>                                        
                                         <div class="w-100 d-none d-md-block"></div>
                                         <div class="form-input" style="margin-top: 20px;">
-                                            <label for="descripcion" class="form-label">Descripción</label>
+                                            <label for="descripcion" class="form-label">Motivo de consulta y anotaciones</label>
                                             <textarea class="form-control" id="descripcion" name="descripcion"
                                                 rows="2"><%= datos.Descripcion %></textarea>
                                         </div>
                                         <div class="w-100 d-none d-md-block"></div>
                                         <div class="form-input" style="margin-top: 20px;">
                                             <button type="submit" class="btn btn-primary"
-                                                id="btnReagendar">Reagendar</button>
+                                                id="btnReagendar" onclick="validar()">Reagendar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -359,12 +358,13 @@
 
         function nationalDays(date) {
             for (i = 0; i < natDays.length; i++) {
-                if (date.getMonth() == natDays[i][0] - 1
-                    && date.getDate() == natDays[i][1]) {
+                if (date.getMonth() == natDays[i][0] - 1 &&
+                    date.getDate() == natDays[i][1]) {
                     return [false, natDays[i][2] + '_day'];
                 }
-            }
-            return [true, ''];
+            }            
+            var day = date.getDay();
+            return [(day != 0)];
         }
 
         $(function () {
@@ -493,43 +493,42 @@
                 opt.innerHTML = hora[i];
                 select.add(opt);
             }
-            $("#Horario").prepend('<option selected="true" value="0">Seleccione hora</option>');
+            $("#Horario").prepend('<option selected="true" value="0">Seleccionar hora</option>');
             return false;
         }
 
         function validar() {
             //Se extre el formulario donde se encuentran contenidos los campos a través de su id
-            var selectes = document.getElementById("opciones").value;//Se extrea cada elemento
-            var selectdr = document.getElementById("Doctores").value;
-            var ncedula = document.getElementById("Cedula").value;
+            
             var fecha = document.getElementById("fecha").value;
-            var fileo = document.getElementById("Cedula").files;
+            var hora = document.getElementById("Horario").value;
 
 
-            if (ncedula.length == "0" || ncedula.length < "7") {
+            if (fecha == "") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe ingresar el número de identidad'
+                    text: 'Debes seleccionar una fecha'
                 })
+                event.preventDefault();
                 return false;
             }
-            // if (selectes == "0") {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Oops...',
-            //         text: 'Debe seleccionar una especialidad'
-            //     })
-            //     return false;
-            // }
-            // if (fecha == "") {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Oops...',
-            //         text: 'Debe seleccionar una fecha'
-            //     })
-            //     return false;
-            // }
+            if (hora == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una hora'
+                })
+                event.preventDefault();
+                return false;
+            }
+            else {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Buen trabajo!',
+                    text: '¡Se han enviado correctamente los datos!'
+                })
+            }
         }
 
         var result = [];
@@ -611,62 +610,6 @@
             });
         });
 
-        async function doctors(s1, s2) {
-            var con1 = document.getElementById('opciones').value;
-            const consulta2 = { con: con1 };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/doctor', options2);
-            result5 = await response2.json();
-
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-
-            s2.innerHTML = "";
-
-            select = document.getElementById('Doctores');
-            for (var i = 0; i < result5.length; i++) {
-
-                if (s1.value == result5[i].Especialidad) {
-                    var opt = document.createElement('option');
-                    opt.value = result5[i].Nombres;
-                    opt.innerHTML = result5[i].Nombres;
-                    select.add(opt);
-                }
-            }
-            $("#Doctores").prepend('<option selected="true" value="0">Seleccione médico</option>');
-        }
-
-
-        var result4 = [];
-        async function consulta() {
-            var con1 = document.getElementById('opciones').value;
-            const consulta2 = { con: con1 };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/agenda', options2);
-            result4 = await response2.json();
-
-            select = document.getElementById('opciones');
-
-            for (var i = 0; i < result4.length; i++) {
-                var opt = document.createElement('option');
-                opt.value = result4[i].Especialidad;
-                opt.innerHTML = result4[i].Especialidad;
-                select.add(opt);
-
-            }
-        }
 
     </script>
     <!--===== MAIN JS =====-->

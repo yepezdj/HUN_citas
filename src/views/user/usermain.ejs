@@ -79,11 +79,12 @@
                         </h4>
                         <hr class="my-4">
                         <div class="text-center mb-2">
-                            A continuación podrá completar toda la información requerida para el agendamiento de la cita
+                            A continuación podrás completar toda la información requerida para el agendamiento de la
+                            cita
                             médica. <br>
                             Para esto, haz click en cada ventana y completa los 4 pasos.<br>
                             <br>
-                            <strong class="font-italic" style="color: red;">RECUERDE QUE DEBE INGRESAR LOS DATOS DEL
+                            <strong class="font-italic" style="color: red;">RECUERDA QUE DEBES INGRESAR LOS DATOS DEL
                                 PACIENTE.</strong>
                         </div>
                         <hr class="my-4">
@@ -100,7 +101,7 @@
                                                     <button class="btn btn-link btn-block text-left" type="button"
                                                         data-toggle="collapse" data-target="#collapseOne"
                                                         aria-expanded="true" aria-controls="collapseOne" id="btnC1">
-                                                        INFORMACIÓN PERSONAL
+                                                        INFORMACIÓN DEL PACIENTE
                                                     </button>
                                                 </h2>
                                             </div>
@@ -108,9 +109,17 @@
                                     </div>
                                     <div>
                                         <div class="card-body" id="collapse1">
-                                            <p class="centered">Completa todos los campos de información personal. <i
-                                                    class="bi bi-person-lines-fill"></i></p>
+                                            <p class="centered">Completa todos los campos de la información del
+                                                paciente. <i class="bi bi-person-lines-fill"></i></p>
                                             <div class="row">
+                                                <div class="col-12 col-sm-6" >
+                                                    <div class="form-input">
+                                                        <label for="Name" class="form-label">Fecha y hora actual<label
+                                                                class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Name" name="Name"
+                                                            value="<%= user.name %>">
+                                                    </div>
+                                                </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="Name" class="form-label">Nombres del paciente <label
@@ -150,7 +159,7 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="email1" class="form-label">Confirme correo
+                                                        <label for="email1" class="form-label">Confirma el correo
                                                             electrónico <label class="redText">*</label></label>
                                                         <input type="email1" class="form-control" id="email1"
                                                             name="email1">
@@ -184,7 +193,7 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="number1" class="form-label">Confirme número de
+                                                        <label for="number1" class="form-label">Confirma el número de
                                                             celular <label class="redText">*</label></label>
                                                         <input type="number" class="form-control" id="number1"
                                                             name="number1" placeholder="Sin puntos ni comas ni guiones"
@@ -199,7 +208,7 @@
                                                                 class="redText">*</label></label>
                                                         <select class="custom-select" style="margin-right: 20px;"
                                                             id="Tipo" name="Tipo">
-                                                            <option value="0">Seleccione tipo de documento</option>
+                                                            <option value="0">Seleccionar tipo de documento</option>
                                                             <option value="Cédula de ciudadanía">Cédula de ciudadanía
                                                             </option>
                                                             <option value="Cédula de extranjería">Cédula de extranjería
@@ -208,7 +217,6 @@
                                                             <option value="Tarjeta de identitidad">Tarjeta de
                                                                 identitidad</option>
                                                             <option value="Pasaporte">Pasaporte</option>
-                                                            <option value="Fideicomiso">Fideicomiso</option>
                                                             <option value="Registro civil">Registro civil</option>
                                                         </select>
                                                     </div>
@@ -261,7 +269,7 @@
                                             <div class="card-body" id="collapse2" style="display: none;">
                                                 <p class="centered">Completa todos los campos de información acerca de
                                                     la
-                                                    cita.
+                                                    cita del paciente.
                                                     <i class="bi bi-clipboard-plus"></i>
                                                 </p>
                                                 <div class="row">
@@ -270,8 +278,8 @@
                                                             <label for="Cita" class="form-label">Tipo de cita <label
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Cita" name="Cita" onclick="encuesta()">
-                                                                <option value="0">Seleccione tipo de cita médica
+                                                                id="Cita" name="Cita" onchange="limpiar()">
+                                                                <option value="0">Seleccionar tipo de cita médica
                                                                 </option>
                                                                 <option value="Ayudas diagnósticas">Ayudas diagnósticas
                                                                 </option>
@@ -295,11 +303,12 @@
                                                     <div class="col-12 col-sm-6">
                                                         <div class="form-input" style="margin-top: 20px;">
                                                             <label for="Factura" class="form-label">¿Bajo que afiliacion
-                                                                desea solicitar esta cita?<label
+                                                                deseas solicitar esta cita?<label
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2"
-                                                                style="margin-right: 20px;" id="Factura" name="Factura">
-                                                                <option value="0">Seleccione afiliación</option>
+                                                                style="margin-right: 20px;" id="Factura" name="Factura"
+                                                                onchange="limpiarAfiliacion()">
+                                                                <option value="0">Seleccionar afiliación</option>
                                                                 <option value="Prepagada">Prepagada</option>
                                                                 <option value="EPS">EPS</option>
                                                                 <option value="ARL">ARL</option>
@@ -307,15 +316,15 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row" id="eps" style="display: none;">
-                                                    <div class="col-12 col-sm-6">
+                                                    <!-- </div>
+                                                <div class="row" > -->
+                                                    <div class="col-12 col-sm-6" id="reg" style="display: none;">
                                                         <div class="form-input" style="margin-top: 20px;">
                                                             <label for="regimen" class="form-label">Tipo de
                                                                 régimen<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="regimen" name="regimen">
-                                                                <option value="0">Seleccione tipo de régimen
+                                                                <option value="0">Seleccionar tipo de régimen
                                                                 </option>
                                                                 <option value="Subsidiado">Subsidiado
                                                                 </option>
@@ -324,58 +333,80 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 col-sm-6">
+                                                    <div class="col-12 col-sm-6" id="eps" style="display: none;">
                                                         <div class="form-input" style="margin-top: 20px;">
                                                             <label for="entidad" class="form-label">Entidad prestadora
                                                                 de salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2"
                                                                 style="margin-right: 20px;" id="entidad" name="entidad">
-                                                                <option value="0">Seleccione EPS</option>
+                                                                <option value="0">Seleccionar EPS</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12 col-sm-12">
-                                                        <div class="form-input" id="div"
-                                                            style="margin-top: 20px; display: none;">
-                                                            <label for="Cita" class="form-label">Modalidad de la cita
+                                                    <!-- </div>
+                                                <div class="row"> -->
+                                                    <div class="col-12 col-sm-6" id="div" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Modo" class="form-label">Modalidad de la cita
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Modo" name="Modo" onclick="encuesta()">
-                                                                <option value="0">Seleccione modalidad</option>
+                                                                id="Modo" name="Modo">
+                                                                <option value="0">Seleccionar modalidad</option>
                                                                 <option value="Virtual">Virtual</option>
                                                                 <option value="Presencial">Presencial</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12 col-sm-6">
+                                                    <div class="col-12 col-sm-6" id="ayudas" style="display: none;">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <label for="Cita" style="margin-top: 20px;"
-                                                                class="form-label">Especialidad <label
-                                                                    class="redText">*</label></label>
-                                                            <select class="custom-select mt-2"
-                                                                style="margin-right: 10px;" id="opciones"
-                                                                name="opciones"
-                                                                onchange="doctors('opciones','Doctores')"
-                                                                onclick="vacio(), vaciarF()" required="true">
-                                                                <option value="0">Seleccione especialidad</option>
+                                                            <label for="Ayudas" class="form-label">Ayudas diagnósticas
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Ayudas" name="Ayudas"
+                                                                onchange="especialidad('Ayudas','opciones')">
+                                                                <option value="0">Seleccionar ayuda diagnóstica</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 col-sm-6">
+                                                    <div class="col-12 col-sm-6" id="procedimiento"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Procedimientos"
+                                                                class="form-label">Procedimientos ambulatorios
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Procedimientos" name="Procedimientos"
+                                                                onchange="especialidad1('Procedimientos','opciones')">
+                                                                <option value="0">Seleccionar procedimiento ambulatorio
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row"> -->
+
+                                                    <div class="col-12 col-sm-6" id="especialidad"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" class="form-label">Especialidad <label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones" name="opciones"
+                                                                onchange="doctors('opciones','Doctores')"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor" style="display: none;">
                                                         <div class="form-input"
                                                             style="margin-top: 20px; margin-bottom: 20px;">
-                                                            <label style="margin-top: 20px;" for="Cita"
-                                                                class="form-label">Profesional de la salud<label
-                                                                    class="redText">*</label></label>
-                                                            <select class="custom-select mt-2"
-                                                                style="margin-right: 35px;" id="Doctores"
-                                                                name="Doctores" onclick="buildTable(), vacioF()"
-                                                                onchange="vaciar()">
-                                                                <option value="0">Seleccione profesional de la salud
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores" name="Doctores"
+                                                                onclick="buildTable(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -408,15 +439,16 @@
                                         <div id="collapse4" style="display: none;">
                                             <div class="card-body">
                                                 <div class="text-center mb-2">
-                                                    Debido a que ha seleccionado la modalidad de cita presencial, dada
+                                                    Debido a que haz seleccionado la modalidad de cita presencial, dada
                                                     la emergencia sanitaria
-                                                    deberá completar la siguiente encuesta para poder solicitar su cita.
+                                                    deberás completar la siguiente encuesta para poder solicitar la
+                                                    cita.
                                                 </div>
                                                 <table id="conTable" class="table table-bordered">
                                                     <tbody>
                                                         <tr>
                                                             <td>
-                                                                1. ¿Ha tenido fiebre?
+                                                                1. ¿Has tenido fiebre?
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group btn-group-toggle toggle"
@@ -434,7 +466,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                2. ¿Ha presentado síntomas respiratorios: tos,dificultad
+                                                                2. ¿Has presentado síntomas respiratorios:
+                                                                tos,dificultad
                                                                 para respirar, secreción nasal,pérdida del olfato,
                                                                 pérdida del
                                                                 gusto, cansancio, fatiga y/o dolor de garganta?
@@ -455,7 +488,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                3. ¿ Ha sido diagnosticado con neumonía recientemente
+                                                                3. ¿ Has sido diagnosticado con neumonía recientemente
                                                                 (en menos de 20 días)?
                                                             </td>
                                                             <td>
@@ -474,7 +507,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                4. ¿Alguna de las personas con las que convive ha
+                                                                4. ¿Alguna de las personas con las que convives ha
                                                                 presentado fiebre o los síntomas respiratorios antes
                                                                 mencionados?
                                                             </td>
@@ -494,7 +527,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                5. ¿Ha viajado fuera del país los últimos 20 días?
+                                                                5. ¿Has viajado fuera del país los últimos 20 días?
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group btn-group-toggle toggle"
@@ -513,8 +546,9 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                6. ¿Es usted personal de salud o trabaja en el área de
-                                                                la salud y ha tenido contacto con pacientes con síntomas
+                                                                6. ¿Eres personal de salud o trabajas en el área de
+                                                                la salud y has tenido contacto con pacientes con
+                                                                síntomas
                                                                 respiratorios?
                                                             </td>
                                                             <td>
@@ -535,7 +569,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                7. ¿Ha tenido contacto en los últimos 20 días con
+                                                                7. ¿Has tenido contacto en los últimos 20 días con
                                                                 pacientes a los se les haya diagnosticado coronavirus?
                                                             </td>
                                                             <td>
@@ -556,7 +590,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                8. ¿Ha tenido contacto en los último 20 días con
+                                                                8. ¿Has tenido contacto en los último 20 días con
                                                                 pacientes hospitalizados por neumonía, o descomposición
                                                                 de sus
                                                                 enfermedades de base?
@@ -582,7 +616,7 @@
                                                                 9. ANTECEDENTES PATOLÓGICOS NO CONTROLADOS O SIN
                                                                 MEDICACIÓN EN EL MOMENTO
                                                                 (Diabetes,Hipertesión,Respiratorios, Cardiovasculares,
-                                                                obesidad, entre otros)                                                                
+                                                                obesidad, entre otros)
                                                                 <div class="form-input" style="margin-top: 20px;">
                                                                     <label for="encuesta"
                                                                         class="form-label">Cuáles:</label>
@@ -626,12 +660,14 @@
                                                     </p>
                                                     <div id="hide">
                                                         <div class="text-center mb-2">
-                                                            Horarios habituales del doctor.
+                                                            Horarios habituales del profesional de la salud.
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="col-12 col-sm-12" style="height:300px; overflow-y: scroll;">
                                                         <table class="table table-hover" id="tabla">
                                                             <thead>
                                                                 <tr>
+                                                                    <th>Profesional de la salud</th>
                                                                     <th>Días disponibles</th>
                                                                     <th>Horarios disponibles</th>
                                                                 </tr>
@@ -639,6 +675,7 @@
                                                             <tbody id="myTable">
                                                             </tbody>
                                                         </table>
+                                                        </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="row">
                                                             <div class="col-12 col-sm-6">
@@ -657,7 +694,7 @@
                                                                         <label class="redText">*</label></label>
                                                                     <select class="custom-select" id="Horario"
                                                                         name="Horario">
-                                                                        <option value="0">Seleccione hora</option>
+                                                                        <option value="0">Seleccionar la hora</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -689,10 +726,11 @@
                                                 </div>
                                                 <div id="collapse5" style="display: none;">
                                                     <div class="card-body">
-                                                        <p class="centered">Adjunta archivos necesarios para la cita,
-                                                            como
+                                                        <p class="centered">Adjunta los archivos necesarios para la
+                                                            cita,
+                                                            como la
                                                             orden
-                                                            médica ó número de autorización. <i
+                                                            médica ó el número de autorización. <i
                                                                 class="bi bi-archive"></i>
                                                         </p>
                                                         <div class="w-100 d-none d-md-block"></div>
@@ -708,7 +746,7 @@
                                                                 de la
                                                                 orden
                                                                 médica</label>
-                                                        </div>                                                        
+                                                        </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <hr class="my-4">
                                                         <div class="text-center mb-2">
@@ -723,13 +761,13 @@
                                                                 step="1" oninput="validity.valid||(value='');"
                                                                 style="margin-bottom: 50px;">
                                                         </div>
-                                                        <div class="w-100 d-none d-md-block"></div>                                                        
+                                                        <div class="w-100 d-none d-md-block"></div>
                                                         <div class="form-input" style="margin-top: 20px;">
                                                             <label for="descripcion" class="form-label">Motivo de la
-                                                                consulta y notas</label>
+                                                                consulta y anotaciones</label>
                                                             <textarea class="form-control" id="descripcion"
                                                                 name="descripcion" rows="2"></textarea>
-                                                        </div> 
+                                                        </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="form-input"
                                                             style="margin-top: 20px; text-align: center;">
@@ -768,9 +806,10 @@
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
-            consulta();
+
             consult();
-            eps();
+
+
         }
         var date = new Date();
         var year = date.getFullYear();
@@ -826,7 +865,6 @@
                     return [false, natDays[i][2] + '_day'];
                 }
             }
-            //return [true, ''];
             var day = date.getDay();
             return [(day != 0)];
         }
@@ -876,16 +914,12 @@
                         select.add(opt);
                     }
                     $("#Horario").prepend(
-                        '<option selected="true" value="0">Seleccione hora</option>');
+                        '<option selected="true" value="0">Seleccionar hora</option>');
                     return false;
                 },
             })
         });
-        // $(document).ready(function () {
-        //     $('#opciones').click(function () {
-        //         $('#Horario"]').val('');
-        //     });
-        // });
+
         function vaciarF() {
             $('#fecha').val('').datepicker("refresh");
             $("#Horario").empty();
@@ -894,6 +928,24 @@
             $('#fecha').val('').datepicker("refresh");
             $("#Horario").empty();
         }
+        function limpiar() {
+            $("#Procedimientos").empty();
+            $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
+            $("#Ayudas").empty();
+            $("#Ayudas").prepend('<option selected="true" value="0">Seleccionar ayuda diagnóstica</option>');
+            $("#opciones").empty();
+            $("#opciones").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+            $("#Doctores").empty();
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+
+        function limpiarAfiliacion() {
+            $("#Procedimientos").empty();
+            $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
+            $("#entidad").empty();
+            $("#entidad").prepend('<option selected="true" value="0">Seleccionar EPS</option>');
+        }
+
         function encuesta() {
             var cita = document.getElementsById('Cita');
             var modo = document.getElementsById('Modo');
@@ -903,25 +955,25 @@
                 if (this.value == 'Ayudas diagnósticas') {
                     Swal.fire({
                         icon: 'info',
-                        text: 'Debido a que requiere de ayudas diagnósticas, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                        text: 'Debido a que requieres de ayudas diagnósticas, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
                     })
                     $("#card3").show();
                 } else if (this.value == 'Procedimiento ambulatorio') {
                     Swal.fire({
                         icon: 'info',
-                        text: 'Debido a que requiere de procedimiento ambulatorio, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                        text: 'Debido a que requieres de procedimiento ambulatorio, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
                     })
                     $("#card3").show()
                 } else if (this.value == 'Consulta odontología general') {
                     Swal.fire({
                         icon: 'info',
-                        text: 'Debido a que requiere consulta odontológica general, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                        text: 'Debido a que requieres consulta odontológica general, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
                     })
                     $("#card3").show()
                 } else if (this.value == 'Consulta odontología especializada') {
                     Swal.fire({
                         icon: 'info',
-                        text: 'Debido a que requiere consulta odontológica especializada, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                        text: 'Debido a que requieres consulta odontológica especializada, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
                     })
                     $("#card3").show()
                 } else {
@@ -934,7 +986,7 @@
                 if (this.value == 'Presencial') {
                     Swal.fire({
                         icon: 'info',
-                        text: 'Debido a que ha seleccionado la modalidad de cita presencial, dada la emergencia sanitaria deberá completar la siguiente encuesta para poder solicitar su cita.'
+                        text: 'Debido a que has seleccionado la modalidad de cita presencial, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
                     })
                     $("#card3").show();
                 } else {
@@ -958,9 +1010,49 @@
         $(document).ready(function () {
             $('#Factura').on('change', function () {
                 if (this.value == 'EPS') {
+                    eps();
                     $("#eps").show();
+                    $("#reg").show();
+                } else if (this.value == 'Prepagada') {
+                    epsPrepagada();
+                    $("#eps").show();
+                    $("#reg").hide();
+                } else if (this.value == 'ARL') {
+                    eps();
+                    $("#eps").show();
+                    $("#reg").hide();
                 } else {
-                    $("#eps").hide()
+                    $("#eps").hide();
+                    $("#reg").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Cita').on('change', function () {
+                if (this.value == 'Consulta especializada') {
+                    consulta();
+                    $("#especialidad").show();
+                    $("#doctor").show();
+                    $("#ayudas").hide();
+                    $("#procedimiento").hide();
+                } else if (this.value == 'Ayudas diagnósticas') {
+                    ayuda();
+                    $("#ayudas").show();
+                    $("#especialidad").show();
+                    $("#doctor").show();
+                    $("#procedimiento").hide();
+                } else if (this.value == 'Procedimiento ambulatorio') {
+                    procedimiento();
+                    $("#procedimiento").show();
+                    $("#especialidad").show();
+                    $("#doctor").show();
+                    $("#ayudas").hide();
+                } else {
+                    $("#procedimiento").hide();
+                    $("#ayudas").hide();
+                    $("#especialidad").hide();
+                    $("#doctor").hide()
                 }
             });
         });
@@ -1038,9 +1130,12 @@
             var ncedula1 = document.getElementById("Cedula1").value;
             var cita = document.getElementById("Cita").value;
             var factura = document.getElementById("Factura").value;
+            var ayuda = document.getElementById("Ayudas").value;
             var modo = document.getElementById("Modo").value;
             var selectes = document.getElementById("opciones").value; //Se extrea cada elemento
             var selectdr = document.getElementById("Doctores").value;
+            var regi = document.getElementById("regimen").value;
+            var entidad = document.getElementById("entidad").value;
             var fecha = document.getElementById("fecha").value;
             var hora = document.getElementById("Horario").value;
             var fileo = document.getElementById("Orden").value;
@@ -1055,7 +1150,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe escribir sus nombres'
+                    text: 'Debes escribir los nombres'
                 })
                 event.preventDefault();
                 return false;
@@ -1064,7 +1159,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe escribir sus apellidos'
+                    text: 'Debes escribir los apellidos'
                 })
                 event.preventDefault();
                 return false;
@@ -1082,7 +1177,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe digitar su número de celular'
+                    text: 'Debes digitar el número de celular'
                 })
                 event.preventDefault();
                 return false;
@@ -1109,7 +1204,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe seleccionar el tipo de documento'
+                    text: 'Debes seleccionar el tipo de documento'
                 })
                 event.preventDefault();
                 return false;
@@ -1118,16 +1213,16 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe ingresar el número de identificación'
+                    text: 'Debes ingresar el número de identificación'
                 })
                 event.preventDefault();
                 return false;
             }
-            if (ncedula.length < "7") {
+            if (ncedula.length < "5") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'El número de identificación debe tener por lo menos 7 dígitos'
+                    text: 'El número de identificación debe tener por lo menos 5 dígitos'
                 })
                 event.preventDefault();
                 return false;
@@ -1145,7 +1240,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe seleccionar el tipo de cita médica'
+                    text: 'Debes seleccionar el tipo de cita médica'
                 })
                 event.preventDefault();
                 return false;
@@ -1154,25 +1249,70 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe seleccionar el tipo de afiliación'
+                    text: 'Debes seleccionar el tipo de afiliación'
                 })
                 event.preventDefault();
                 return false;
             }
-            if (selectes == "0") {
+            if (factura == "EPS" & regi == '0') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe seleccionar una especialidad'
+                    text: 'Debes seleccionar el régimen de la EPS'
                 })
                 event.preventDefault();
                 return false;
             }
-            if (selectdr == "0") {
+            if (factura == "EPS" & entidad == '0') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe seleccionar un médico'
+                    text: 'Debes seleccionar la EPS'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (modo == "0" & cita == "Consulta especializada") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una modalidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (modo == "0" & cita == "Consulta medicina general") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una modalidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Ayudas diagnósticas" & ayuda == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la ayuda diagnóstica'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (selectes == "0" & cita == 'Consulta especializada') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (selectdr == "0" & cita == 'Consulta especializada') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar un médico'
                 })
                 event.preventDefault();
                 return false;
@@ -1181,7 +1321,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe seleccionar una fecha'
+                    text: 'Debes seleccionar una fecha'
                 })
                 event.preventDefault();
                 return false;
@@ -1190,7 +1330,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe seleccionar una hora'
+                    text: 'Debes seleccionar una hora'
                 })
                 event.preventDefault();
                 return false;
@@ -1199,7 +1339,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debe adjuntar archivo de orden médica o digitar número de autorización'
+                    text: 'Debes adjuntar archivo de orden médica o digitar número de autorización'
                 })
                 event.preventDefault();
                 return false;
@@ -1256,6 +1396,9 @@
             for (var i = 0; i < result.length; i++) {
                 if (select.value == result[i].Doctor) {
                     var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
                             <td>                              
                                 ${result[i].dia}                                
                             </td> 							
@@ -1317,7 +1460,7 @@
                     select.add(opt);
                 }
             }
-            $("#Doctores").prepend('<option selected="true" value="0">Seleccione profesional de la salud</option>');
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
         var result4 = [];
         async function consulta() {
@@ -1343,7 +1486,113 @@
             }
         }
 
-        var result4 = [];
+        async function ayuda() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/ayuda', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Ayudas;
+                opt.innerHTML = result4[i].Ayudas;
+                select.add(opt);
+            }
+
+        }
+
+        async function procedimiento() {
+            var con1 = document.getElementById('Procedimientos').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/procedimiento', options2);
+            result4 = await response2.json();
+            console.log(result4)
+            select = document.getElementById('Procedimientos');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Procedimientos;
+                opt.innerHTML = result4[i].Procedimientos;
+                select.add(opt);
+            }
+
+        }
+
+        async function especialidad(s1, s2) {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/ayuda', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('opciones');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Ayudas) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Especialidad;
+                    opt.innerHTML = result5[i].Especialidad;
+                    select.add(opt);
+                }
+            }
+            $("#opciones").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+        }
+
+        async function especialidad1(s1, s2) {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/procedimiento', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('opciones');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Procedimientos) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Especialidad;
+                    opt.innerHTML = result5[i].Especialidad;
+                    select.add(opt);
+                }
+            }
+            $("#opciones").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+        }
+
         async function eps() {
             var con1 = document.getElementById('entidad').value;
             const consulta2 = {
@@ -1366,6 +1615,32 @@
                 select.add(opt);
             }
         }
+
+        async function epsPrepagada() {
+            var con1 = document.getElementById('entidad').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/listaEPS', options2);
+            result4 = await response2.json();
+            select = document.getElementById('entidad');
+            for (var i = 0; i < result4.length; i++) {
+                if (result4[i].Prepagada == 'Si') {
+                    var opt = document.createElement('option');
+                    opt.value = result4[i].eps;
+                    opt.innerHTML = result4[i].eps;
+                    select.add(opt);
+                }
+            }            
+        }
+
     </script>
     <!--===== MAIN JS =====-->
     <script src="/js/main.js"></script>

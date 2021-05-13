@@ -101,7 +101,7 @@
           </h4>
           <hr class="my-4">
           <div class="text-center mb-2">
-            A continuación podrá realizar el proceso de adiciones y excepciones de los doctores del HUN
+            A continuación podrás realizar el proceso de adiciones o excepciones de los profesionales de la salud del HUN
           </div>
           <form class="form-box px-3">
             <div class="row">
@@ -110,16 +110,16 @@
                   <select class="custom-select mt-2" style="margin-right: 35px;" id="opciones" name="opciones"
                     onchange="doctors('opciones','Doctores')" onclick="vacio()" required>
                     <option value="0">
-                      Seleccione Especialidad
+                      Seleccionar Especialidad
                     </option>
                   </select>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px;">
                   <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
-                  onclick="buildTable()" onchange="vaciar()">
+                    onclick="buildTable()" onchange="vaciar()">
                     <option value="0">
-                      Seleccione Médico
+                      Seleccionar profesional de la salud
                     </option>
                   </select>
                 </div>
@@ -127,15 +127,15 @@
                 <div class="col-12 col-sm-12" style="margin-top: 20px;">
                   <select class="custom-select mt-2" style="margin-right: 35px;" id="type" name="type">
                     <option value="0">
-                      Seleccione tipo
+                      Seleccionar tipo
                     </option>
-                    <option value="Adicion">Adición</option>
-                    <option value="Excepcion">Excepción</option>
+                    <option value="Adición">Adición</option>
+                    <option value="Excepción">Excepción</option>
                   </select>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12">
-                  <label for="fecha" class="form-label" style="margin-top: 20px;">Fecha de la cita</label>
+                  <label for="fecha" class="form-label" style="margin-top: 20px;">Fecha</label>
                   <input class="form-control" id="fecha" name="fecha" autocomplete="off" onkeypress="return false">
                 </div>
               </div>
@@ -148,7 +148,7 @@
                       <th>Tipo</th>
                     </tr>
                   </thead>
-                  <tbody id="myTable">                   
+                  <tbody id="myTable">
                   </tbody>
                 </table>
               </div>
@@ -170,7 +170,7 @@
                         autocomplete="off" onkeydown="return false">
                     </div>
                     <div class="col">
-                      <label for="H2" class="form-label">Hora de finalización</label>
+                      <label for="H2" class="form-label">Hora de fin</label>
                       <input type="text" class="form-control" id="H2" name="H2" placeholder="Hora de Fin"
                         autocomplete="off" onkeydown="return false">
                     </div>
@@ -208,76 +208,6 @@
     </div>
   </div>
 
-  <!-- 
-  <div class="col-md-12" style="margin: 20px;">
-    <h1> Excepciones de doctores</h1>
-    <form method="POST" action="/createException">
-      <div class="col-6 col-sm-6" style="margin-top: 20px;">
-        <select class="custom-select mt-2" style="margin-right: 35px;" id="opciones" name="opciones"
-          onchange="doctors('opciones','Doctores')" required="true">
-          <option value="0">
-            Seleccione Especialidad
-          </option>
-        </select>
-      </div>
-      <div class="col-6 col-sm-6" style="margin-top: 20px;">
-        <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores">
-          <option value="0">
-            Seleccione Médico
-          </option>
-        </select>
-      </div>
-      <div class="col-6 col-sm-6" style="margin-top: 20px;">
-        <select class="custom-select mt-2" style="margin-right: 35px;" id="type" name="type">
-          <option value="0">
-            Seleccione tipo
-          </option>
-          <option value="Adicion">Adición</option>
-          <option value="Excepcion">Excepción</option>
-        </select>
-      </div>
-      <div class="col-6 col-sm-6">
-        <label for="fecha" class="form-label">Fecha de la cita</label>
-        <input class="form-control" id="fecha" name="fecha" autocomplete="off" onkeypress="return false">
-      </div>
-      <div class="row">
-        <div class="col">
-          <label for="H1" class="form-label">Hora Inicio</label>
-          <input class="form-control" id="H1" name="H1" placeholder="Hora de Inicio" autocomplete="off"
-            onkeydown="return false">
-        </div>
-        <div class="col">
-          <label for="H2" class="form-label">Hora De Fin</label>
-          <input class="form-control" id="H2" name="H2" placeholder="Hora de Fin" autocomplete="off"
-            onkeydown="return false">
-        </div>
-        <div class="w-100"></div>
-        <div class="col">
-          <input class="form-control" id="H3" name="H3" placeholder="Hora de Inicio" autocomplete="off"
-            onkeydown="return false">
-        </div>
-        <div class="col">
-          <input class="form-control" id="H4" name="H4" placeholder="Hora de Fin" autocomplete="off"
-            onkeydown="return false">
-        </div>
-        <div class="w-100"></div>
-        <div class="col">
-          <input class="form-control" id="H5" name="H5" placeholder="Hora de Inicio" autocomplete="off"
-            onkeydown="return false">
-        </div>
-        <div class="col">
-          <input class="form-control" id="H6" name="H6" placeholder="Hora de Fin" autocomplete="off"
-            onkeydown="return false">
-        </div>
-      </div>
-      <div class="w-100 d-none d-md-block"></div>
-      <div class="col-12 col-sm-12">
-        <button type="submit" class="btn btn-outline-primary" id="btnAgregar"
-          style="margin-left: 42%; margin-top: 50px; margin-bottom: 20px;">ML Payasita 😎</button>
-      </div>
-    </form>
-  </div> -->
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
     integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
     crossorigin="anonymous"></script>
@@ -298,13 +228,82 @@
   <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
   <script>
+
+    var date = new Date();
+    var year = date.getFullYear();
+    console.log(year)
+    if (year == '2021') {
+      natDays = [
+        [1, 1, 2021],
+        [1, 11, 2021],
+        [3, 22, 2021],
+        [4, 1, 2021],
+        [4, 2, 2021],
+        [5, 1, 2021],
+        [5, 17, 2021],
+        [6, 7, 2021],
+        [6, 14, 2021],
+        [7, 5, 2021],
+        [7, 20, 2021],
+        [8, 7, 2021],
+        [8, 16, 2021],
+        [10, 18, 2021],
+        [11, 1, 2021],
+        [11, 15, 2021],
+        [12, 8, 2021],
+        [12, 25, 2021]
+      ];
+    }
+    if (year == '2022') {
+      natDays = [
+        [1, 1, 2022],
+        [1, 10, 2022],
+        [3, 21, 2022],
+        [4, 14, 2022],
+        [4, 15, 2022],
+        [5, 1, 2022],
+        [5, 30, 2022],
+        [6, 20, 2022],
+        [6, 27, 2022],
+        [7, 4, 2022],
+        [7, 20, 2022],
+        [8, 7, 2022],
+        [8, 15, 2022],
+        [10, 17, 2022],
+        [11, 7, 2022],
+        [11, 14, 2022],
+        [12, 8, 2022],
+        [12, 25, 2022]
+      ];
+    }
+    function nationalDays(date) {
+      for (i = 0; i < natDays.length; i++) {
+        if (date.getMonth() == natDays[i][0] - 1 &&
+          date.getDate() == natDays[i][1]) {
+          return [false, natDays[i][2] + '_day'];
+        }
+      }
+      var day = date.getDay();
+      return [(day != 0)];
+    }
     $(function () {
       $("#fecha").datepicker({
         dateFormat: 'mm-dd-yy',
         minDate: new Date(),
-        maxDate: '+6m'
-      });
+        maxDate: '+6m',
+        monthNames: ['Enero', 'Febrero', 'Marzo',
+          'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre',
+          'Octubre', 'Noviembre', 'Diciembre'
+        ],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+          'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+        ],
+        dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+        beforeShowDay: nationalDays       
+      })
     });
+
     document.onload = loadFunctions();
     function loadFunctions() {
       consult();
@@ -332,7 +331,7 @@
     //LUNES
     $("#H1").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       minTime: '07:00',
       maxTime: '16:00',
       startTime: '0',
@@ -351,7 +350,7 @@
 
     $("#H2").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -367,7 +366,7 @@
 
     $("#H3").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -383,7 +382,7 @@
 
     $("#H4").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -399,7 +398,7 @@
 
     $("#H5").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -415,7 +414,7 @@
 
     $("#H6").timepicker({
       timeFormat: 'HH:mm:ss',
-      interval: 30,
+      interval: 20,
       maxTime: '16:30',
       startTime: '0',
       dynamic: false,
@@ -469,6 +468,76 @@
           text: 'Debe seleccionar una fecha'
         });
         return false;
+      } if (data.H1 == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H1 == '' & data.H2 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H1 !== '' & data.H2 == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de fin'
+        });
+        return false;
+      } if (data.H1 >= data.H2 & data.H1 !== '' & data.H2 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de fin debe ser mayor a la de inicio'
+        });
+        return false;
+      } if (data.H3 == '' & data.H4 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H4 == '' & data.H3 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de fin'
+        });
+        return false;
+      } if (data.H3 >= data.H4 & data.H3 !== '' & data.H4 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de fin debe ser mayor a la de inicio'
+        });
+        return false;
+      } if (data.H5 == '' & data.H6 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de inicio'
+        });
+        return false;
+      } if (data.H6 == '' & data.H5 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debe seleccionar la hora de fin'
+        });
+        return false;
+      } if (data.H5 >= data.H6 & data.H5 !== '' & data.H6 !== '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La hora de fin debe ser mayor a la de inicio'
+        });
+        return false;
       }
       return data;
     }
@@ -483,7 +552,9 @@
             '¡Buen trabajo!',
             '¡Se han enviado correctamente los datos!',
             'success'
-          );
+          ).then(function () {
+            window.location = "/admin/adminException";
+          });
         },
         error: function (error) {
           Swal.fire({

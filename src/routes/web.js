@@ -67,8 +67,10 @@ let initWebRoutes = (app) => {
     router.post('/update/:idpa', upload.array('images',1), userController.update); 
     // router.post('/survey', userController.Survey);
     router.post('/verifyUser', userController.verifyUser);
+    router.post('/ayuda', userController.ayuda);
+    router.post('/procedimiento', userController.procedimiento);
 
-
+    
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    
     router.get('/consultarCitas',conciliatorController.Citas);
     router.get('/aceptar/:idpa',conciliatorController.datosaceptar);

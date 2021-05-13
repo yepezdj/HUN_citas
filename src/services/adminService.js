@@ -1,7 +1,7 @@
 import connection from "../configs/connectDB";
 
 let createNewSchedule = async (horario) => {
-    const interval = "30";
+    const interval = "20";
     //console.log(horario);
     if (horario.hora_ini1 !== '' && horario.hora_fin1 !== '') {
         var view1 = {
@@ -75,7 +75,7 @@ let createNewSchedule = async (horario) => {
 };
 
 let createNewException = async (exception) => {
-    const interval = "30";
+    const interval = "20";
     //console.log(exception);
     if (exception.hora_ini1 !== '' && exception.hora_fin1 !== '') {  
 

@@ -46,7 +46,7 @@ let createNewUser = async (req, res) => {
 };
 
 let departamentos = (req, res) => {
-    connection.query('SELECT * FROM departamentos', (err, dat) => {
+    connection.query('SELECT * FROM departamentos ORDER BY Departamento ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
@@ -57,7 +57,7 @@ let departamentos = (req, res) => {
 };
 
 let municipio = (req, res) => {
-    connection.query('SELECT * FROM municipios', (err, dat) => {
+    connection.query('SELECT * FROM municipios ORDER BY Municipio ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }

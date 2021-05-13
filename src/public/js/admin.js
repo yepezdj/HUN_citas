@@ -51,7 +51,7 @@ async function doctors(s1, s2) {
             select.add(opt);
         }
     }
-    $("#Doctores").prepend('<option selected="true" value="0">Seleccione profesional de la salud</option>');
+    $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
 }
 
 
