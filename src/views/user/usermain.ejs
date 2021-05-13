@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -112,7 +113,7 @@
                                             <p class="centered">Completa todos los campos de la información del
                                                 paciente. <i class="bi bi-person-lines-fill"></i></p>
                                             <div class="row">
-                                                <div class="col-12 col-sm-6">
+                                                <div class="col-12 col-sm-6" style="display: none;">
                                                     <div class="form-input">
                                                         <label for="actual" class="form-label">Fecha y hora actual<label
                                                                 class="redText">*</label></label>
@@ -219,6 +220,14 @@
                                                             <option value="Pasaporte">Pasaporte</option>
                                                             <option value="Registro civil">Registro civil</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="fechaExp" class="form-label">Fecha de expedición
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaExp" name="fechaExp" type="date"
+                                                            autocomplete="off" onkeypress="return false">
                                                     </div>
                                                 </div>
                                             </div>
@@ -930,7 +939,7 @@
                     };
                     var response2 = await fetch('/verifyUser', options2);
                     console.log(response2);
-                    var hora = await response2.json();                    
+                    var hora = await response2.json();
                     console.log(hora);
                     select = document.getElementById('Horario');
                     $("#Horario").empty();
@@ -947,6 +956,14 @@
             })
         });
 
+        // $(function () {
+        //     $("#fechaExp").datepicker({
+        //         dateFormat: 'mm-dd-yy',
+        //         changeMonth: true,
+        //         changeYear: true
+        //     })
+        // });
+        
         function vaciarF() {
             $('#fecha').val('').datepicker("refresh");
             $("#Horario").empty();
