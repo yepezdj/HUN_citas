@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -226,8 +226,49 @@
                                                     <div class="form-input">
                                                         <label for="fechaExp" class="form-label">Fecha de expedición
                                                             <label class="redText">*</label></label>
-                                                        <input class="form-control" id="fechaExp" name="fechaExp" type="date"
-                                                            autocomplete="off" onkeypress="return false">
+                                                        <input class="form-control" id="fechaExp" name="fechaExp"
+                                                            type="date" autocomplete="off" onkeypress="return false">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Option" style="margin-top: 0px;"
+                                                            class="form-label">¿Eres extranjero?<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select"
+                                                            style="margin-right: 10px; margin-top: -10px;" id="Option"
+                                                            name="Option" required="true">
+                                                            <option value="0">Seleccionar una opción</option>
+                                                            <option value="1">Sí</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="display: none;" id="depa">
+                                                    <div class="form-input">
+                                                        <label for="Departamento" style="margin-top: 0px;"
+                                                            class="form-label">Lugar de expedición (Departamento)<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select"
+                                                            style="margin-right: 10px; margin-top: -10px;"
+                                                            id="Departamento" name="Departamento"
+                                                            onchange="departamento('Departamento','city')">
+                                                            <option value="0">Seleccionar departamento de residencia
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="display: none;" id="muni">
+                                                    <div class="form-input">
+                                                        <label for="city" style="margin-top: 20px;"
+                                                            class="form-label">Lugar de expedición (Municipio)<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select"
+                                                            style="margin-right: 10px; margin-top: -10px;" id="city"
+                                                            name="city">
+                                                            <option value="0">Seleccionar municipio de residencia
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -817,6 +858,7 @@
         document.onload = loadFunctions();
         function loadFunctions() {
 
+            consultaD();
             consult();
             // dateFormat()
             actual()
@@ -963,7 +1005,7 @@
         //         changeYear: true
         //     })
         // });
-        
+
         function vaciarF() {
             $('#fecha').val('').datepicker("refresh");
             $("#Horario").empty();
@@ -1025,6 +1067,19 @@
                 }
             });
         });
+
+        $(document).ready(function () {
+            $('#Option').on('change', function () {
+                if (this.value == '2') {
+                    $("#depa").show();
+                    $("#muni").show();
+                } else {
+                    $("#depa").hide();
+                    $("#muni").hide()
+                }
+            });
+        });
+
         $(document).ready(function () {
             $('#Modo').on('change', function () {
                 if (this.value == 'Presencial') {
@@ -1684,6 +1739,59 @@
                 }
             }
         }
+
+        async function departamento(s1, s2) {
+            var con1 = document.getElementById('Departamento').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/municipio', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('city');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Departamento) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Municipio;
+                    opt.innerHTML = result5[i].Municipio;
+                    select.add(opt);
+                }
+            }
+            $("#city").prepend('<option selected="true" value="0">Seleccionar municipio de residencia</option>');
+        }
+        var result4 = [];
+        async function consultaD() {
+            var con1 = document.getElementById('Departamento').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/departamentos', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Departamento');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Departamento;
+                opt.innerHTML = result4[i].Departamento;
+                select.add(opt);
+            }
+        }
+
 
     </script>
     <!--===== MAIN JS =====-->
