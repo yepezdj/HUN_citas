@@ -6,10 +6,11 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import connectFlash from "connect-flash";
 import session from "express-session";
+var cors = require('cors');
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
-
+app.use(cors());
 
 let app = express();
 

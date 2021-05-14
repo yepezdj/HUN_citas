@@ -9,7 +9,7 @@ import forgotpasswordController from "../controllers/forgotpasswordController"
 import resetPasswordController from "../controllers/resetPasswordController";
 import filesController from "../controllers/filesController";
 import multer from "multer";
-import path from "path"
+import path from "path";
 
 const storage = multer.diskStorage({ destination: '/uploads',
 filename: function (req, file, cb) {
