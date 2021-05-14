@@ -248,6 +248,41 @@ let agendar = async (req, res) => {
     var Estado = 'Pendiente';
     var descripcion = req.body.descripcion;
     var id = user.id;
+    var fecha_exp = req.body.fechaExp;
+    var direccion = req.body.direccion;
+    var barrio = req.body.direccion;
+    var departamento, municipio;
+    var cellphone1 = req.body.cellphone1;
+    var tele = req.body.tele;
+    var Option = req.body.Option;
+    var person = req.body.persona;
+    var actual = req.body.actual
+    
+    if(Option == '2'){
+        departamento = req.body.Departamento;
+        municipio = req.body.city;
+    } else{
+        departamento = 'No aplica';
+        municipio = 'No aplica';
+    }
+    
+    if(!cellphone1){
+        cellphone1 = 'No aplica';      
+    } else{
+        cellphone1 = cellphone1;       
+    }
+
+    if(!tele){
+        tele = 'No aplica';      
+    } else{
+        tele = tele;       
+    }
+
+    if(!person){
+        person = 'No aplica';      
+    } else{
+        person = person;       
+    }
 
     var p1 = req.body.options;
     var p2 = req.body.options1;
@@ -259,6 +294,12 @@ let agendar = async (req, res) => {
     var p8 = req.body.options7;
     var p9 = req.body.encuesta;
     var idp;
+
+    if(!p9){
+        p9 = 'No aplica';      
+    } else{
+        p9 = p9;       
+    }
 
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
@@ -323,7 +364,8 @@ let agendar = async (req, res) => {
 
     if (citaExist) {
         let idp = await userService.magic(espe, doctor, newdate, hora, linkOrden, name, lastname,
-            Cedula, id, descripcion, Estado, correo, Cita, Modo, Factura, autorizacion, entidad, regimen, number, tipo)
+            Cedula, id, descripcion, Estado, correo, Cita, Modo, Factura, autorizacion, entidad, regimen,
+            number, tipo, fecha_exp, direccion, barrio, departamento, municipio, cellphone1, tele, person, actual)
 
         await userService.survey(p1, p2, p3, p4, p5, p6, p7, p8, p9, idp);
 
