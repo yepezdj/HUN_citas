@@ -324,7 +324,7 @@ let agendar = async (req, res) => {
         linkOrden = `http://3.15.154.185:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
     } else {
-        linkOrden = 'El paciente no adjuntó orden médica';
+        linkOrden = `http://localhost/nofiles`;
         console.log(linkOrden);
     }
 

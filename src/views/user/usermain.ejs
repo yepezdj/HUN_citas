@@ -74,7 +74,7 @@
         <div class="row px-3" style="display: block; min-width: fit-content;" id="MyComponent">
             <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
                 <div class="card-body" style="display: block;">
-                    <form action="/add" method="POST" enctype="multipart/form-data">
+                    <form action="/add" method="POST" enctype="multipart/form-data" id="form">
                         <h4 class="title text-center mt-4">
                             Hola <%=user.name%>
                         </h4>
@@ -127,7 +127,8 @@
                                                                 class="redText">*</label></label>
                                                         <input type="text" class="form-control" id="Name" name="Name"
                                                             value="<%= user.name %>" placeholder="Ingresa los nombres"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" autocomplete="off">
+                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -280,22 +281,21 @@
                                                         <label for="Option" style="margin-top: 0px;"
                                                             class="form-label">¿Eres extranjero?<label
                                                                 class="redText">*</label></label>
-                                                        <select class="custom-select"
-                                                            style="margin-right: 10px; " id="Option"
-                                                            name="Option" required="true">
+                                                        <select class="custom-select" style="margin-right: 10px; "
+                                                            id="Option" name="Option" required="true">
                                                             <option value="0">Seleccionar una opción</option>
                                                             <option value="1">Sí</option>
                                                             <option value="2">No</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-sm-6" style="display: none; margin-bottom: 20px;" id="depa">
+                                                <div class="col-12 col-sm-6" style="display: none; margin-bottom: 20px;"
+                                                    id="depa">
                                                     <div class="form-input">
                                                         <label for="Departamento" style="margin-top: 0px;"
                                                             class="form-label">Lugar de expedición (Departamento)<label
                                                                 class="redText">*</label></label>
-                                                        <select class="custom-select"
-                                                            style="margin-right: 10px;"
+                                                        <select class="custom-select" style="margin-right: 10px;"
                                                             id="Departamento" name="Departamento"
                                                             onchange="departamento('Departamento','city')">
                                                             <option value="0">Seleccionar departamento de residencia
@@ -308,9 +308,8 @@
                                                         <label for="city" style="margin-top: 10px;"
                                                             class="form-label">Lugar de expedición (Municipio)<label
                                                                 class="redText">*</label></label>
-                                                        <select class="custom-select"
-                                                            style="margin-right: 10px; " id="city"
-                                                            name="city">
+                                                        <select class="custom-select" style="margin-right: 10px; "
+                                                            id="city" name="city">
                                                             <option value="0">Seleccionar municipio de residencia
                                                             </option>
                                                         </select>
@@ -318,7 +317,8 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6" style="margin-top: 0px;">
                                                     <div class="form-input">
-                                                        <label for="persona" class="form-label" style="margin-bottom: 15px;">Menciona un acompañante</label>
+                                                        <label for="persona" class="form-label"
+                                                            style="margin-bottom: 15px;">Menciona un acompañante</label>
                                                         <input type="text" class="form-control" id="persona"
                                                             name="persona"
                                                             placeholder="Ingresa los nombres y apellidos del acompañante"
@@ -407,7 +407,7 @@
                                                     </div>
                                                     <div class="col-12 col-sm-6">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <label for="Factura" class="form-label">¿Bajo que afiliacion
+                                                            <label for="Factura" class="form-label">¿Bajo que afiliación
                                                                 deseas solicitar esta cita?<label
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2"
@@ -444,7 +444,7 @@
                                                                 de salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2"
                                                                 style="margin-right: 20px;" id="entidad" name="entidad">
-                                                                <option value="0">Seleccionar EPS</option>
+                                                                <option value="0">Seleccionar la entidad</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -915,18 +915,17 @@
 
             consultaD();
             consult();
-            // dateFormat()
-            actual()
-
+            // dateFormat()  
+            $('input[type=number]').on('wheel', function (e) {
+                return false;
+            });
         }
 
-        // document.getElementById('fechaExp').max = new Date(new Date().getTime() -
-        //     new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+        document.getElementById('fechaExp').max = new Date(new Date().getTime() -
+            new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
 
-        function actual() {
-            // var FechaInicio = dateFormat();
-            // $('#actual').val(FechaInicio);
-        }
+
+
 
         //function dateFormat() {
         var date = new Date();
@@ -1087,7 +1086,7 @@
             $("#Procedimientos").empty();
             $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
             $("#entidad").empty();
-            $("#entidad").prepend('<option selected="true" value="0">Seleccionar EPS</option>');
+            $("#entidad").prepend('<option selected="true" value="0">Seleccionar la entidad</option>');
         }
 
         function encuesta() {
@@ -1285,13 +1284,31 @@
             var barrio = document.getElementById("barrio").value;
             var Tipo = document.getElementById("Tipo").value;
             var fecha_exp = document.getElementById("fechaExp").value;
-            var ncedula = document.getElementById("Cedula").value;
-            var ncedula1 = document.getElementById("Cedula1").value;
+
             var Option = document.getElementById("Option").value;
             var Departamento = document.getElementById("Departamento").value;
             var city = document.getElementById("city").value;
 
+            var ncedula = document.getElementById("Cedula").value;
+            var ncedula1 = document.getElementById("Cedula1").value;
+
+            var cita = document.getElementById("Cita").value;
+            var ayuda = document.getElementById("Ayudas").value;
+            var procedimiento = document.getElementById("Procedimientos").value;
+            var especialidad = document.getElementById("opciones").value;
+            var doctor = document.getElementById("Doctores").value;
+
+            var modo = document.getElementById("Modo").value;
+
+            var factura = document.getElementById("Factura").value;
+            var regi = document.getElementById("regimen").value;
+            var entidad = document.getElementById("entidad").value;
+
+            var fecha = document.getElementById("fecha").value;
             var hora = document.getElementById("Horario").value;
+
+            var fileo = document.getElementById("Orden").value;
+            var autorizacion = document.getElementById("autorizacion").value;
 
             if (name == "") {
                 Swal.fire({
@@ -1325,15 +1342,6 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Debes digitar el número de celular'
-                })
-                event.preventDefault();
-                return false;
-            }
-            if (number.length < "10") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Número de celular inválido'
                 })
                 event.preventDefault();
                 return false;
@@ -1428,12 +1436,173 @@
                 event.preventDefault();
                 return false;
             }
-            
+            if (cita == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de cita médica'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Ayudas diagnósticas" & ayuda == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de ayuda'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (ayuda !== "0" & especialidad == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (ayuda !== "0" & doctor == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Procedimiento ambulatorio" & procedimiento == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de procedimiento'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (procedimiento !== "0" & especialidad == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (procedimiento !== "0" & doctor == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (modo == "0" & cita == "Consulta especializada") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una modalidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Consulta especializada" & especialidad == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Consulta especializada" & doctor == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }            
+            if (modo == "0" & cita == "Consulta medicina general") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una modalidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de afiliación'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "EPS" & regi == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el régimen de la EPS'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "EPS" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la EPS'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "Prepagada" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la entidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "ARL" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la entidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (fecha == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una fecha'
+                })
+                event.preventDefault();
+                return false;
+            }
             if (hora == "0") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Debes seleccionar una hora'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (fileo == '' & autorizacion.length == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes adjuntar archivo de orden médica o digitar número de autorización'
                 })
                 event.preventDefault();
                 return false;

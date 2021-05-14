@@ -54,6 +54,7 @@ let initWebRoutes = (app) => {
     
     //RUTA DE ARCHIVOS SUBIDOS POR EL USUARIO
     router.get('/files/:id/:token', filesController.getFile);
+    router.get('/nofiles', filesController.getNoFile);
    
     //RUTAS PARA LA PÁGINA DE USUARIO    
     router.post('/datos',userController.datos);

@@ -50,6 +50,11 @@ let getFile = (req, res, next) => {
 
 };
 
+let getNoFile = (req, res, next) => {
+    return res.render("Nofile.ejs");
+}
+
 module.exports = {
-    getFile: getFile
+    getFile: getFile,
+    getNoFile: getNoFile
 }
