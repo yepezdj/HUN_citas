@@ -126,8 +126,7 @@
                                                         <label for="Name" class="form-label">Nombres del paciente <label
                                                                 class="redText">*</label></label>
                                                         <input type="text" class="form-control" id="Name" name="Name"
-                                                            value="<%= user.name %>" placeholder="Ingresa los nombres"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
+                                                            value="<%= user.name %>" placeholder="Ingresa los nombres"                                                            
                                                             autocomplete="off">
                                                     </div>
                                                 </div>
@@ -137,8 +136,7 @@
                                                             paciente <label class="redText">*</label></label>
                                                         <input type="text" class="form-control" id="Lastname"
                                                             name="Lastname" value="<%= user.last_name %>"
-                                                            placeholder="Ingresa los apellidos"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                                                            placeholder="Ingresa los apellidos">
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,8 +147,7 @@
                                                                 class="redText">*</label></label>
                                                         <input type="email" class="form-control" id="email" name="email"
                                                             value="<%= user.email %>"
-                                                            placeholder="Ingresa el correo electrónico"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                                                            placeholder="Ingresa el correo electrónico">
                                                     </div>
                                                     <div class="alert alert-danger"
                                                         style="margin-top: 5px; display: none;" id="emailNOTOK">
@@ -169,8 +166,7 @@
                                                         <label for="email1" class="form-label">Confirma el correo
                                                             electrónico <label class="redText">*</label></label>
                                                         <input type="email1" class="form-control" id="email1"
-                                                            name="email1" placeholder="Ingresa el correo electrónico"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                                                            name="email1" placeholder="Ingresa el correo electrónico">
                                                     </div>
                                                     <div class="alert alert-danger"
                                                         style="margin-top: 5px; display: none;" id="emailNOTOK1">
@@ -234,8 +230,7 @@
                                                         <input type="text" class="form-control" id="direccion"
                                                             name="direccion"
                                                             placeholder="Ej: Cra. 27 #59-42, Barranquilla, Atlántico"
-                                                            autocomplete="off"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -243,8 +238,7 @@
                                                         <label for="barrio">Barrio de
                                                             residencia<label class="redText">*</label></label></label>
                                                         <input type="text" class="form-control" id="barrio"
-                                                            name="barrio" placeholder="Ej: Los Andes" autocomplete="off"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                                                            name="barrio" placeholder="Ej: Los Andes" autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,8 +316,7 @@
                                                         <input type="text" class="form-control" id="persona"
                                                             name="persona"
                                                             placeholder="Ingresa los nombres y apellidos del acompañante"
-                                                            autocomplete="off"
-                                                            onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1204,6 +1197,24 @@
                     $("#especialidad").show();
                     $("#doctor").show();
                     $("#ayudas").hide();
+                } else if (this.value == 'Consulta medicina general') {
+                    medicina();
+                    $("#procedimiento").hide();
+                    $("#especialidad").hide();
+                    $("#doctor").show();
+                    $("#ayudas").hide();
+                } else if (this.value == 'Consulta odontología general') {
+                    medicinaOdont();
+                    $("#procedimiento").hide();
+                    $("#especialidad").hide();
+                    $("#doctor").show();
+                    $("#ayudas").hide();
+                } else if (this.value == 'Consulta odontología especializada') {
+                    especialidadOdont();
+                    $("#procedimiento").hide();
+                    $("#especialidad").show();
+                    $("#doctor").show();
+                    $("#ayudas").hide();
                 } else {
                     $("#procedimiento").hide();
                     $("#ayudas").hide();
@@ -1445,6 +1456,51 @@
                 event.preventDefault();
                 return false;
             }
+            if (factura == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de afiliación'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "EPS" & regi == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el régimen de la EPS'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "EPS" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la EPS'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "Prepagada" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la entidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "ARL" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la entidad'
+                })
+                event.preventDefault();
+                return false;
+            }
             if (cita == "Ayudas diagnósticas" & ayuda == "0") {
                 Swal.fire({
                     icon: 'error',
@@ -1525,6 +1581,24 @@
                 })
                 event.preventDefault();
                 return false;
+            } 
+            if (cita == "Consulta odontología especializada" & especialidad == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Consulta odontología especializada" & doctor == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
             }            
             if (modo == "0" & cita == "Consulta medicina general") {
                 Swal.fire({
@@ -1535,51 +1609,24 @@
                 event.preventDefault();
                 return false;
             }
-            if (factura == "0") {
+            if (doctor == "0" & cita == "Consulta medicina general") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debes seleccionar el tipo de afiliación'
+                    text: 'Debes seleccionar el profesional de la salud'
                 })
                 event.preventDefault();
                 return false;
-            }
-            if (factura == "EPS" & regi == '0') {
+            } 
+            if (doctor == "0" & cita == "Consulta odontología general") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debes seleccionar el régimen de la EPS'
+                    text: 'Debes seleccionar el profesional de la salud'
                 })
                 event.preventDefault();
                 return false;
-            }
-            if (factura == "EPS" & entidad == '0') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debes seleccionar la EPS'
-                })
-                event.preventDefault();
-                return false;
-            }
-            if (factura == "Prepagada" & entidad == '0') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debes seleccionar la entidad'
-                })
-                event.preventDefault();
-                return false;
-            }
-            if (factura == "ARL" & entidad == '0') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debes seleccionar la entidad'
-                })
-                event.preventDefault();
-                return false;
-            }
+            }            
             if (fecha == "") {
                 Swal.fire({
                     icon: 'error',
@@ -1615,329 +1662,6 @@
                 })
             }
         }
-
-        // function validar() {
-        //     //Se extre el formulario donde se encuentran contenidos los campos a través de su id
-        //     var name = document.getElementById("Name").value;
-        //     var lastname = document.getElementById("Lastname").value;
-        //     var email = document.getElementById("email").value;
-        //     var email1 = document.getElementById("email1").value;
-        //     var number = document.getElementById("number").value;
-        //     var number1 = document.getElementById("number1").value;
-        //     var Tipo = document.getElementById("Tipo").value;
-        //     var ncedula = document.getElementById("Cedula").value;
-        //     var ncedula1 = document.getElementById("Cedula1").value;
-        //     var cita = document.getElementById("Cita").value;
-        //     var factura = document.getElementById("Factura").value;
-        //     var ayuda = document.getElementById("Ayudas").value;
-        //     var modo = document.getElementById("Modo").value;
-        //     var selectes = document.getElementById("opciones").value; //Se extrea cada elemento
-        //     var selectdr = document.getElementById("Doctores").value;
-        //     var regi = document.getElementById("regimen").value;
-        //     var entidad = document.getElementById("entidad").value;
-        //     var fecha = document.getElementById("fecha").value;
-        //     var hora = document.getElementById("Horario").value;
-        //     var fileo = document.getElementById("Orden").value;
-        //     var autorizacion = document.getElementById("autorizacion").value;
-        //     var direccion = document.getElementById("direccion").value;
-        //     var barrio = document.getElementById("barrio").value;
-        //     var Option = document.getElementById("Option").value;
-        //     var Departamento = document.getElementById("Departamento").value;
-        //     var city = document.getElementById("city").value;
-        //     var fecha_exp = document.getElementById("fecha_exp").value;
-
-        //     console.log(fileo)
-        //     console.log(autorizacion)
-        //     console.log(typeof fileo)
-        //     console.log(typeof autorizacion)
-
-        //     if (name == "") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes escribir los nombres'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (lastname == "") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes escribir los apellidos'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (email1 !== email) {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Los correos no coinciden'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (number.length == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes digitar el número de celular'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (number.length < "10") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Número de celular inválido'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (number1 !== number) {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Los números de celular ingresados no coinciden'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (direccion == "" || barrio == "") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes ingresar tu dirección de residencia'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (Tipo == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar el tipo de documento'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (Tipo == "2" & Departamento == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar el lugar de expedición'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (Tipo == "2" & city == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar el lugar de expedición'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (fecha_exp == "") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar la fecha de expedición'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (Option == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes responder a si eres extranjero o no'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (ncedula.length == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes ingresar el número de identificación'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (ncedula.length < "5") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'El número de identificación debe tener por lo menos 5 dígitos'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (ncedula1 !== ncedula) {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'El número de identificación no coincide'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (cita == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar el tipo de cita médica'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (factura == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar el tipo de afiliación'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (factura == "EPS" & regi == '0') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar el régimen de la EPS'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (factura == "EPS" & entidad == '0') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar la EPS'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (modo == "0" & cita == "Consulta especializada") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar una modalidad'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (modo == "0" & cita == "Consulta medicina general") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar una modalidad'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (cita == "Ayudas diagnósticas" & ayuda == '0') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar la ayuda diagnóstica'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (selectes == "0" & cita == 'Ayudas diagnósticas') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar una especialidad'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (selectes == "0" & cita == 'Procedimiento ambulatorio') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar una especialidad'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (selectdr == "0" & cita == 'Procedimiento ambulatorio') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar un profesional de la salud'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (selectdr == "0" & cita == 'Ayudas diagnósticas') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar un profesional de la salud'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (selectes == "0" & cita == 'Consulta especializada') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar una especialidad'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (selectdr == "0" & cita == 'Consulta especializada') {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar un profesional de la salud'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (fecha == "") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar una fecha'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (hora == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes seleccionar una hora'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     if (fileo == '' & autorizacion.length == "0") {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             text: 'Debes adjuntar archivo de orden médica o digitar número de autorización'
-        //         })
-        //         event.preventDefault();
-        //         return false;
-        //     }
-        //     else {
-        //         Swal.fire({
-        //             icon: 'success',
-        //             title: '¡Buen trabajo!',
-        //             text: '¡Se han enviado correctamente los datos!'
-        //         })
-        //     }
-        // }
 
         function ValidateSize(file) {
             var FileSize = file.files[0].size / 1024 / 1024;
@@ -2021,6 +1745,7 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         });
+
         async function doctors(s1, s2) {
             var con1 = document.getElementById('opciones').value;
             const consulta2 = {
@@ -2048,7 +1773,37 @@
                 }
             }
             $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }  
+
+        async function odontologia(s1, s2) {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/odontologia', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Doctor;
+                    opt.innerHTML = result5[i].Doctor;
+                    select.add(opt);
+                }
+            }
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
+
         var result4 = [];
         async function consulta() {
             var con1 = document.getElementById('opciones').value;
@@ -2072,6 +1827,76 @@
                 select.add(opt);
             }
         }
+
+        async function especialidadOdont() {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/odontologiaE', options2);
+            result4 = await response2.json();
+            select = document.getElementById('opciones');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Especialidad;
+                opt.innerHTML = result4[i].Especialidad;
+                select.add(opt);
+            }
+        }
+
+        async function medicina() {
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/medicina', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Doctor;
+                opt.innerHTML = result4[i].Doctor;
+                select.add(opt);
+            }
+        }
+
+        async function medicinaOdont() {
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/medicinaOdont', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Doctor;
+                opt.innerHTML = result4[i].Doctor;
+                select.add(opt);
+            }
+        }
+
 
         async function ayuda() {
             var con1 = document.getElementById('Ayudas').value;

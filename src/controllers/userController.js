@@ -138,6 +138,50 @@ let espe = (req, res) => {
     });
 };
 
+let medicina = (req, res) => {
+    connection.query('SELECT Doctor FROM medicinageneral ORDER BY Doctor ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
+let medicinaOdont = (req, res) => {
+    connection.query('SELECT Doctor FROM odontologiageneral ORDER BY Doctor ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
+let odontologia = (req, res) => {
+    connection.query('SELECT Doctor, Especialidad FROM odontologiaespecializada ORDER BY Doctor ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
+let odontologiaE = (req, res) => {
+    connection.query('SELECT Especialidad FROM especializadadodon ORDER BY Especialidad ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
 let listaEPS = (req, res) => {
     connection.query('SELECT eps, Prepagada FROM eps ORDER BY eps ASC', (err, dat) => {
         if (err) {
@@ -321,7 +365,7 @@ let agendar = async (req, res) => {
         }
 
         const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
-        linkOrden = `http://3.15.154.185:8080/files/${user.id}/${tokenOrden}`;
+        linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
     } else {
         linkOrden = `http://localhost/nofiles`;
@@ -433,7 +477,7 @@ let update = async (req, res) => {
         }
 
         const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
-        linkOrden = `http://3.15.154.185:8080/files/${user.id}/${tokenOrden}`;
+        linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
 
         connection.query("UPDATE agendamiento SET Orden = ? WHERE idpa = ?", [linkOrden, req.params.idpa], (err, datos) => {
@@ -522,5 +566,9 @@ module.exports = {
     delate: delate,
     listaEPS: listaEPS,
     ayuda: ayuda,
-    procedimiento: procedimiento
+    procedimiento: procedimiento,
+    medicina: medicina,
+    medicinaOdont: medicinaOdont,
+    odontologia: odontologia,
+    odontologiaE: odontologiaE
 }

@@ -70,6 +70,10 @@ let initWebRoutes = (app) => {
     router.post('/verifyUser', userController.verifyUser);
     router.post('/ayuda', userController.ayuda);
     router.post('/procedimiento', userController.procedimiento);
+    router.post('/medicina', userController.medicina);
+    router.post('/medicinaOdont', userController.medicinaOdont);
+    router.post('/odontologia', userController.odontologia);
+    router.post('/odontologiaE', userController.odontologiaE);
 
     
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    
