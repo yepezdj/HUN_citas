@@ -10,11 +10,11 @@ var cors = require('cors');
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
-app.use(cors());
+
 
 let app = express();
 
-
+app.use(cors());
 // enable body parser post data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
