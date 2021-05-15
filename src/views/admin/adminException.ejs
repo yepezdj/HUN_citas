@@ -641,33 +641,33 @@
 
     }
 
-    // function buildTable() {
-    //   vaciar();
-    //   vacio();
-    //   console.log(result)
+    function buildTable() {
+      vaciar();
+      vacio();
+      console.log(result)
 
-    //   var table = document.getElementById('myTable');
-    //   select = document.getElementById('Doctores');
+      var table = document.getElementById('myTable');
+      select = document.getElementById('Doctores');
 
-    //   for (var i = 0; i < result.length; i++) {
-    //     if (select.value == result[i].Doctor) {
-    //       var row = `<tr>
-    //                         <td>                              
-    //                             ${result[i].fecha}                                
-    //                         </td> 							
-		// 				              	<td>                              
-    //                             ${result[i].hora_ini}                                
-    //                         </td> 
-    //                         <td>                              
-    //                             ${result[i].Tipo}                                
-    //                         </td>                                                         
-		// 			              </tr>`
+      for (var i = 0; i < result.length; i++) {
+        if (select.value == result[i].Doctor) {
+          var row = `<tr>
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+						              	<td>                              
+                                ${result[i].hora_ini}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].Tipo}                                
+                            </td>                                                         
+					              </tr>`
 
-    //       table.innerHTML += row
+          table.innerHTML += row
 
-    //     }
-    //   }
-    // }
+        }
+      }
+    }
 
     function vaciar() {
       document.getElementById('myTable').innerHTML = '';
