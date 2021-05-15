@@ -228,6 +228,11 @@
   <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
   <script>
+    document.onload = loadFunctions();
+    function loadFunctions() {
+      consult();      
+      // $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
+    }
 
     var date = new Date();
     var year = date.getFullYear();
@@ -302,14 +307,7 @@
         dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
         beforeShowDay: nationalDays       
       })
-    });
-
-    document.onload = loadFunctions();
-    function loadFunctions() {
-      consult();
-      admin();
-      $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
-    }
+    });    
 
     // async function admin() {
     //   var con1 = document.getElementById('btnAgregar').value;
