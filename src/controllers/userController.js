@@ -368,7 +368,7 @@ let agendar = async (req, res) => {
         linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
     } else {
-        linkOrden = `http://localhost/nofiles`;
+        linkOrden = `http://3.17.161.209:8080/nofiles`;
         console.log(linkOrden);
     }
 
