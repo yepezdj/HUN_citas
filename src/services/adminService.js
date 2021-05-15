@@ -8,8 +8,9 @@ let createNewSchedule = async (horario) => {
             dia: horario.dia,
             hora_ini: horario.hora_ini1,
             hora_fin: horario.hora_fin1,
-            Doctor: horario.doc,
-            Especialidad: horario.espec     
+            Tipo: horario.tipo,
+            Especialidad: horario.espec,
+            Doctor: horario.doc  
         }
         await saveViewSchedule(view1);
 
@@ -22,17 +23,18 @@ let createNewSchedule = async (horario) => {
             timeslots1.push(starttime);
         }
         timeslots1.pop();
-        console.log(timeslots1);
-        await saveSchedule(horario.dia, horario.doc, horario.espec, timeslots1);
-        console.log(timeslots1);
+        //console.log(timeslots1);
+        await saveSchedule(horario.dia, horario.doc, horario.espec, timeslots1, horario.tipo);
+        //console.log(timeslots1);
     }
     if (horario.hora_ini2 !== '' && horario.hora_fin2 !== '') {
         var view2 = {
             dia: horario.dia,
             hora_ini: horario.hora_ini2,
             hora_fin: horario.hora_fin2,
-            Doctor: horario.doc,
-            Especialidad: horario.espec     
+            Tipo: horario.tipo,
+            Especialidad: horario.espec,
+            Doctor: horario.doc      
         }
         await saveViewSchedule(view2);
 
@@ -45,7 +47,7 @@ let createNewSchedule = async (horario) => {
             timeslots2.push(starttime);
         }
         timeslots2.pop();
-        await saveSchedule(horario.dia, horario.doc, horario.espec, timeslots2);
+        await saveSchedule(horario.dia, horario.doc, horario.espec, timeslots2, horario.tipo);
         console.log(timeslots2);
     }
     if (horario.hora_ini3 !== '' && horario.hora_fin3 !== '') {
@@ -54,8 +56,9 @@ let createNewSchedule = async (horario) => {
             dia: horario.dia,
             hora_ini: horario.hora_ini3,
             hora_fin: horario.hora_fin3,
-            Doctor: horario.doc,
-            Especialidad: horario.espec     
+            Tipo: horario.tipo,
+            Especialidad: horario.espec,
+            Doctor: horario.doc      
         }
         await saveViewSchedule(view3);
 
@@ -68,7 +71,7 @@ let createNewSchedule = async (horario) => {
             timeslots3.push(starttime);
         }
         timeslots3.pop();
-        await saveSchedule(horario.dia, horario.doc, horario.espec, timeslots3);
+        await saveSchedule(horario.dia, horario.doc, horario.espec, timeslots3, horario.tipo);
         console.log(timeslots3);
     }
 
@@ -89,7 +92,7 @@ let createNewException = async (exception) => {
         }
         timeslots1.pop();
         //console.log(timeslots1);
-        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots1);
+        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots1, exception.tipo);
         console.log(timeslots1);
     }
     if (exception.hora_ini2 !== '' && exception.hora_fin2 !== '') {
@@ -102,7 +105,7 @@ let createNewException = async (exception) => {
             timeslots2.push(starttime);
         }
         timeslots2.pop();
-        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots2);
+        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots2, exception.tipo);
         console.log(timeslots2);
     }
     if (exception.hora_ini3 !== '' && exception.hora_fin3 !== '') {
@@ -116,21 +119,21 @@ let createNewException = async (exception) => {
             timeslots3.push(starttime);
         }
         timeslots3.pop();
-        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots3);
+        await saveException(exception.fecha, exception.type, exception.doc, exception.espec, timeslots3, exception.tipo);
         console.log(timeslots3);
     }
 
 };
 
-let saveSchedule = (dia, doc, espec, horas) => {
+let saveSchedule = (dia, doc, espec, horas, tipo) => {
     return new Promise(async (resolve, reject) =>{
         try {
             console.log(horas);
             //create a new account
             horas.forEach(element => {
                 connection.query(
-                    `INSERT INTO horarios (dia, hora_ini, Doctor, Especialidad) 
-                    VALUES ("${dia}", "${element}", "${doc}", "${espec}")`,
+                    `INSERT INTO horarios (dia, hora_ini, Tipo, Especialidad, Doctor) 
+                    VALUES ("${dia}", "${element}", "${tipo}", "${espec}", "${doc}")`,
                     function(err, rows) {
                         if (err) {
                             reject(false)   
@@ -146,7 +149,7 @@ let saveSchedule = (dia, doc, espec, horas) => {
     });
 }
 
-let saveException = (fecha, tipo, doc, espec, horas) => {
+let saveException = (fecha, type, doc, espec, horas, tipo) => {
     return new Promise(async (resolve, reject) =>{
         try {
             console.log(horas);
@@ -156,8 +159,8 @@ let saveException = (fecha, tipo, doc, espec, horas) => {
             //create a new account
             horas.forEach(element => {
                 connection.query(
-                    `INSERT INTO excepciones (fecha, hora_ini, Doctor, Especialidad, Tipo) 
-                    VALUES ("${newdate}", "${element}", "${doc}", "${espec}","${tipo}")`,
+                    `INSERT INTO excepciones (fecha, hora_ini, tipo_cita, Especialidad, Doctor, Tipo) 
+                    VALUES ("${newdate}", "${element}", "${tipo}", "${espec}", "${doc}", "${type}")`,
                     function(err, rows) {
                         if (err) {
                             console.log(err)

@@ -78,18 +78,860 @@
         </nav>
     </div>
 
+
+    <div class="container-flex">
+        <div class="row px-3" style="display: block; min-width: fit-content;" id="MyComponent">
+            <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+                <div class="card-body" style="display: block;">
+                    <form action="/update/<%= datos.idpa %>" method="POST" enctype="multipart/form-data" id="form">
+                        <h4 class="title text-center mt-4">
+                            Hola <%=user.name%>
+                        </h4>
+                        <hr class="my-4">
+                        <div class="text-center mb-2">
+                            A continuación podrá modificar toda la información requerida para el agendamiento de la cita
+                            médica. <br>
+                            Para esto, haz click en cada ventana y completa los 4 pasos.<br>
+                            <br>
+                            <strong class="font-italic" style="color: red;">RECUERDA QUE DEBES INGRESAR LOS DATOS DEL
+                                PACIENTE.</strong>
+                        </div>
+                        <hr class="my-4">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div>
+                                                <img src="/images/paso1.jpg" style="margin-left: 25px;" width="100px" />
+                                            </div>
+                                            <div class="col">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link btn-block text-left" type="button"
+                                                        data-toggle="collapse" data-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne" id="btnC1">
+                                                        INFORMACIÓN DEL PACIENTE
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-body" id="collapse1">
+                                            <p class="centered">Completa todos los campos de la información del
+                                                paciente. <i class="bi bi-person-lines-fill"></i></p>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Name" class="form-label">Nombres del paciente <label
+                                                                class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Name" name="Name"
+                                                            value="<%= datos.NombreP %>"
+                                                            placeholder="Ingresa los nombres" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Lastname" class="form-label">Apellidos del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Lastname"
+                                                            name="Lastname" value="<%= datos.ApellidoP %>"
+                                                            placeholder="Ingresa los apellidos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email" class="form-label">Correo electrónico <label
+                                                                class="redText">*</label></label>
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            value="<%= datos.Correo %>"
+                                                            placeholder="Ingresa el correo electrónico">
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <!-- <span id="emailOK"></span> -->
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email1" class="form-label">Confirma el correo
+                                                            electrónico <label class="redText">*</label></label>
+                                                        <input type="email1" class="form-control" id="email1"
+                                                            name="email1" placeholder="Ingresa el correo electrónico"
+                                                            value="<%= datos.Correo %>">
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOT">
+                                                        <small class="form-text" style="margin-left: 20px;">Los correos
+                                                            no coinciden</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number" class="form-label">Número de celular<label
+                                                                class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number"
+                                                            name="number" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Celular %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number1" class="form-label">Confirma el número de
+                                                            celular <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number1"
+                                                            name="number1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Celular %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="cellphone1">Otro número de celular
+                                                            (opcional)</label>
+                                                        <input type="number" class="form-control" id="cellphone1"
+                                                            name="cellphone1"
+                                                            placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                            step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.CelularOp %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="tele">Teléfono
+                                                            (opcional)</label>
+                                                        <input type="number" class="form-control" id="tele" name="tele"
+                                                            placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                            step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Telefono %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="fechaNac" class="form-label">Fecha de nacimiento
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaNac" name="fechaNac"
+                                                            type="text" autocomplete="off" onkeypress="return false"
+                                                            value="<%= datos.fecha_nac %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="direccion">Dirección de
+                                                            residencia<label class="redText">*</label></label></label>
+                                                        <input type="text" class="form-control" id="direccion"
+                                                            name="direccion"
+                                                            placeholder="Ej: Cra. 27 #59-42, Barranquilla, Atlántico"
+                                                            autocomplete="off" value="<%= datos.Direccion %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="barrio">Barrio de
+                                                            residencia<label class="redText">*</label></label></label>
+                                                        <input type="text" class="form-control" id="barrio"
+                                                            name="barrio" placeholder="Ej: Los Andes" autocomplete="off"
+                                                            value="<%= datos.Barrio %>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Tipo" class="form-label"
+                                                            style="margin-top: 20px;">Tipo de documento<label
+                                                                class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Tipo" name="Tipo"
+                                                            autocomplete="off" value="<%= datos.Tipo_documento %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="fechaExp" class="form-label"
+                                                            style="margin-top: 20px;">Fecha de expedición
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaExp" name="fechaExp"
+                                                            type="text" autocomplete="off" onkeypress="return false"
+                                                            value="<%= datos.fecha_exp %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" id="depa">
+                                                    <div class="form-input">
+                                                        <label for="Departamento" style="margin-top: 20px;"
+                                                            class="form-label">Lugar de expedición (Departamento)<label
+                                                                class="redText">*</label></label>
+                                                        <input class="form-control" id="Departamento"
+                                                            name="Departamento" type="text" autocomplete="off"
+                                                            onkeypress="return false" value="<%= datos.Departamento %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" id="muni">
+                                                    <div class="form-input">
+                                                        <label for="city" style="margin-top: 20px;"
+                                                            class="form-label">Lugar de expedición (Municipio)<label
+                                                                class="redText">*</label></label>
+                                                        <input class="form-control" id="city" name="city" type="text"
+                                                            autocomplete="off" onkeypress="return false"
+                                                            value="<%= datos.Municipio %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="persona" class="form-label"
+                                                            style="margin-top: 20px;">Menciona un acompañante</label>
+                                                        <input type="text" class="form-control" id="persona"
+                                                            name="persona"
+                                                            placeholder="Ingresa los nombres y apellidos del acompañante"
+                                                            autocomplete="off" value="<%= datos.Acompañante %>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula" class="form-label">N° de identificación del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula"
+                                                            name="Cedula" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.CedulaP %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula1" class="form-label">Confirme N° de
+                                                            identificación<label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula1"
+                                                            name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.CedulaP %>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div>
+                                                    <img src="/images/paso2.jpg" style="margin-left: 25px;"
+                                                        width="100px" />
+                                                </div>
+                                                <div class="col">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link btn-block text-left collapsed"
+                                                            type="button" data-toggle="collapse"
+                                                            data-target="#collapseTwo" aria-expanded="false"
+                                                            aria-controls="collapseTwo" id="btnC2">
+                                                            INFORMACIÓN DE LA CITA
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="card-body" id="collapse2" style="display: none;">
+                                                <p class="centered">Completa todos los campos de información acerca de
+                                                    la
+                                                    cita del paciente.
+                                                    <i class="bi bi-clipboard-plus"></i>
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" class="form-label">Tipo de cita <label
+                                                                    class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Cita"
+                                                                name="Cita" autocomplete="off"
+                                                                value="<%= datos.Cita %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Factura" class="form-label">¿Bajo que afiliación
+                                                                deseas solicitar esta cita?<label
+                                                                    class="redText">*</label></label>
+                                                                    <input type="text" class="form-control" id="Factura"
+                                                                    name="Factura" autocomplete="off"
+                                                                    value="<%= datos.Afiliacion %>">
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row" > -->
+                                                    <div class="col-12 col-sm-6" id="reg" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="regimen" class="form-label">Tipo de
+                                                                régimen<label class="redText">*</label></label>
+                                                                <input type="text" class="form-control" id="regimen"
+                                                                name="regimen" autocomplete="off"
+                                                                value="<%= datos.Regimen %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="eps" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="entidad" class="form-label">Entidad prestadora
+                                                                de salud<label class="redText">*</label></label>
+                                                                <input type="text" class="form-control" id="entidad"
+                                                                name="entidad" autocomplete="off"
+                                                                value="<%= datos.entidad %>">
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row"> -->
+                                                    <div class="col-12 col-sm-6" id="div" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Modo" class="form-label">Modalidad de la cita
+                                                                <label class="redText">*</label></label>
+                                                                <input type="text" class="form-control" id="Modo"
+                                                                name="Modo" autocomplete="off"
+                                                                value="<%= datos.Modo %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="ayudas" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Ayudas" class="form-label">Ayudas diagnósticas
+                                                                <label class="redText">*</label></label>
+                                                                <input type="text" class="form-control" id="Ayudas"
+                                                                name="Ayudas" autocomplete="off"
+                                                                value="<%= datos.Doctor %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="procedimiento"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Procedimientos"
+                                                                class="form-label">Procedimientos ambulatorios
+                                                                <label class="redText">*</label></label>
+                                                                <input type="text" class="form-control" id="procedimiento"
+                                                                name="procedimiento" autocomplete="off"
+                                                                value="<%= datos.Cita %>">
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row"> -->
+
+                                                    <div class="col-12 col-sm-6" id="especialidad"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" class="form-label">Especialidad <label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones" name="opciones"
+                                                                onchange="doctors('opciones','Doctores')"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores" name="Doctores"
+                                                                onclick="buildTable(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad2"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones2" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones2" name="opciones2"
+                                                                onchange="doctors2('opciones2','Doctores2')"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor2" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores2" name="Doctores2"
+                                                                onclick="buildTable2(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad3"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones3" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones3" name="opciones3"
+                                                                onchange="doctors3('opciones3','Doctores3')"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor3" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores3" name="Doctores3"
+                                                                onclick="buildTable4(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor4" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores4" name="Doctores4"
+                                                                onclick="buildTable5(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor5" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores5" name="Doctores5"
+                                                                onclick="buildTable6(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="display: none;" id="card3">
+                                        <div class="card-header" id="headingThree">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <img src="/images/pasoextra.jpg" style="margin-left: 25px;"
+                                                            width="130px" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <h2 class="mb-0">
+                                                            <button class="btn btn-link btn-block text-left collapsed"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree" id="btnC4">
+                                                                ENCUESTA DE RIESGO EPIDEMIOLÓGICO
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="collapse4" style="display: none;">
+                                            <div class="card-body">
+                                                <div class="text-center mb-2">
+                                                    Debido a que haz seleccionado la modalidad de cita presencial, dada
+                                                    la emergencia sanitaria
+                                                    deberás completar la siguiente encuesta para poder solicitar la
+                                                    cita.
+                                                </div>
+                                                <table id="conTable" class="table table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                1. ¿Has tenido fiebre?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options" id="option1"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options" id="option2"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                2. ¿Has presentado síntomas respiratorios:
+                                                                tos,dificultad
+                                                                para respirar, secreción nasal,pérdida del olfato,
+                                                                pérdida del
+                                                                gusto, cansancio, fatiga y/o dolor de garganta?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options1" id="option3"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options1" id="option4"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                3. ¿ Has sido diagnosticado con neumonía recientemente
+                                                                (en menos de 20 días)?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options2" id="option5"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options2" id="option6"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                4. ¿Alguna de las personas con las que convives ha
+                                                                presentado fiebre o los síntomas respiratorios antes
+                                                                mencionados?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options3" id="option7"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options3" id="option8"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                5. ¿Has viajado fuera del país los últimos 20 días?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options4" id="option9"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options4"
+                                                                            id="option10" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                6. ¿Eres personal de salud o trabajas en el área de
+                                                                la salud y has tenido contacto con pacientes con
+                                                                síntomas
+                                                                respiratorios?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options5"
+                                                                            id="option11" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options5"
+                                                                            id="option12" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                7. ¿Has tenido contacto en los últimos 20 días con
+                                                                pacientes a los se les haya diagnosticado coronavirus?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options6"
+                                                                            id="option13" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options6"
+                                                                            id="option14" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                8. ¿Has tenido contacto en los último 20 días con
+                                                                pacientes hospitalizados por neumonía, o descomposición
+                                                                de sus
+                                                                enfermedades de base?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options7"
+                                                                            id="option15" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options7"
+                                                                            id="option16" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                9. ANTECEDENTES PATOLÓGICOS NO CONTROLADOS O SIN
+                                                                MEDICACIÓN EN EL MOMENTO
+                                                                (Diabetes,Hipertesión,Respiratorios, Cardiovasculares,
+                                                                obesidad, entre otros)
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="encuesta"
+                                                                        class="form-label">Cuáles:</label>
+                                                                    <textarea class="form-control" id="encuesta"
+                                                                        name="encuesta" rows="3"></textarea>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <img src="/images/paso3.jpg" style="margin-left: 25px;"
+                                                            width="100px" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <h2 class="mb-0">
+                                                            <button class="btn btn-link btn-block text-left collapsed"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree" id="btnC3">
+                                                                AGENDAMIENTO
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="card-body" id="collapse3" style="display: none;">
+                                                    <p class="centered">Selecciona el horario de tu cita de acuerdo a la
+                                                        disponibilidad del profesional de la salud. <i
+                                                            class="bi bi-calendar-event"></i>
+                                                    </p>
+                                                    <div id="hide">
+                                                        <div class="text-center mb-2">
+                                                            Horarios habituales del profesional de la salud.
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="col-12 col-sm-12"
+                                                            style="height:300px; overflow-y: scroll;">
+                                                            <table class="table table-hover" id="tabla">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Profesional de la salud</th>
+                                                                        <th>Días disponibles</th>
+                                                                        <th>Horarios disponibles</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="myTable">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="fecha" class="form-label">Fecha de la
+                                                                        cita
+                                                                        <label class="redText">*</label></label>
+                                                                    <input class="form-control" id="fecha" name="fecha"
+                                                                        autocomplete="off" onkeypress="return false">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6" id="hide2">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="Horario" class="custom-label">Horas
+                                                                        disponibles
+                                                                        <label class="redText">*</label></label>
+                                                                    <select class="custom-select" id="Horario"
+                                                                        name="Horario">
+                                                                        <option value="0">Seleccionar la hora</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header" id="headingFour">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div>
+                                                            <img src="/images/paso4.jpg" style="margin-left: 25px;"
+                                                                width="100px" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="btn btn-link btn-block text-left collapsed"
+                                                                    type="button" data-toggle="collapse"
+                                                                    data-target="#collapseThree" aria-expanded="false"
+                                                                    aria-controls="collapseThree" id="btnC5">
+                                                                    INFORMACIÓN ADICIONAL
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="collapse5" style="display: none;">
+                                                    <div class="card-body">
+                                                        <p class="centered">Adjunta los archivos necesarios para la
+                                                            cita,
+                                                            como la
+                                                            orden
+                                                            médica ó el número de autorización. <i
+                                                                class="bi bi-archive"></i>
+                                                        </p>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <label for="Orden" class="custom-label">Orden médica (original)
+                                                            <i class="bi bi-paperclip"></i></label>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <input type="file" class="custom-file-input mt-2" id="Orden"
+                                                                name="images" accept="application/pdf"
+                                                                onchange="ValidateSize(this)" value="">
+                                                            <label class="custom-file-label mt-2"
+                                                                for="images">Seleccionar
+                                                                archivo
+                                                                de la
+                                                                orden
+                                                                médica</label>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <hr class="my-4">
+                                                        <div class="text-center mb-2">
+                                                            Ó
+                                                        </div>
+                                                        <div class="form-input">
+                                                            <label for="autorizacion" class="form-label">Digite número
+                                                                de autorización <label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="autorizacion"
+                                                                name="autorizacion"
+                                                                placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                                step="1" oninput="validity.valid||(value='');"
+                                                                style="margin-bottom: 50px;">
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="descripcion" class="form-label">Motivo de la
+                                                                consulta y anotaciones</label>
+                                                            <textarea class="form-control" id="descripcion"
+                                                                name="descripcion" rows="2"></textarea>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; text-align: center;">
+                                                            <button type="submit" class="btn btn-primary"
+                                                                id="btnAgregar" onclick="validar()">Solicitar
+                                                                cita</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="container-flex">
         <div class="row px-3">
             <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
                 <div class="card-body">
                     <form action="/update/<%= datos.idpa %>" method="POST" enctype="multipart/form-data">
-                        
+
                         <div class="text-center mb-2">
                             A continuación podrá modificar toda la información requerida para el agendamiento de la cita
-                            médica. <br>                            
+                            médica. <br>
                             Para esto, haz click en cada ventana y completa los 4 pasos.<br>
                             <br>
-                            <strong class="font-italic" style="color: red;">RECUERDE QUE DEBE INGRESAR LOS DATOS DEL PACIENTE.</strong>
+                            <strong class="font-italic" style="color: red;">RECUERDE QUE DEBE INGRESAR LOS DATOS DEL
+                                PACIENTE.</strong>
                         </div>
                         <hr class="my-4">
                         <div class="accordion" id="accordionExample">
@@ -121,7 +963,7 @@
                                                         <label for="Name" class="form-label">Nombres del paciente <label
                                                                 class="redText">*</label></label>
                                                         <input type="text" class="form-control" id="Name" name="Name"
-                                                        value="<%= datos.NombreP %>">
+                                                            value="<%= datos.NombreP %>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -139,7 +981,7 @@
                                                         <label for="email" class="form-label">Correo electrónico <label
                                                                 class="redText">*</label></label>
                                                         <input type="email" class="form-control" id="email" name="email"
-                                                        value="<%= datos.Correo %>">
+                                                            value="<%= datos.Correo %>">
                                                     </div>
                                                     <div class="alert alert-danger"
                                                         style="margin-top: 5px; display: none;" id="emailNOTOK">
@@ -184,7 +1026,8 @@
                                                                 class="redText">*</label></label>
                                                         <input type="number" class="form-control" id="number"
                                                             name="number" placeholder="Sin puntos ni comas ni guiones"
-                                                            min="0" step="1" oninput="validity.valid||(value='');" value="<%= datos.Celular %>">
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Celular %>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -193,7 +1036,8 @@
                                                             celular <label class="redText">*</label></label>
                                                         <input type="number" class="form-control" id="number1"
                                                             name="number1" placeholder="Sin puntos ni comas ni guiones"
-                                                            min="0" step="1" oninput="validity.valid||(value='');" value="<%= datos.Celular %>">
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Celular %>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,7 +1048,9 @@
                                                                 class="redText">*</label></label>
                                                         <select class="custom-select" style="margin-right: 20px;"
                                                             id="Tipo" name="Tipo">
-                                                            <option value="<%= datos.Tipo_documento %>"><%= datos.Tipo_documento %></option>
+                                                            <option value="<%= datos.Tipo_documento %>">
+                                                                <%= datos.Tipo_documento %>
+                                                            </option>
                                                             <option value="Cédula de ciudadanía">Cédula de ciudadanía
                                                             </option>
                                                             <option value="Cédula de extranjería">Cédula de extranjería
@@ -226,7 +1072,8 @@
                                                             paciente <label class="redText">*</label></label>
                                                         <input type="number" class="form-control" id="Cedula"
                                                             name="Cedula" placeholder="Sin puntos ni comas ni guiones"
-                                                            min="0" step="1" oninput="validity.valid||(value='');" value="<%= datos.CedulaP %>">
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.CedulaP %>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6" style="margin-top: 20px;">
@@ -235,7 +1082,8 @@
                                                             identificación<label class="redText">*</label></label>
                                                         <input type="number" class="form-control" id="Cedula1"
                                                             name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
-                                                            min="0" step="1" oninput="validity.valid||(value='');" value="<%= datos.CedulaP %>">
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.CedulaP %>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -276,7 +1124,8 @@
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Cita" name="Cita" onclick="encuesta()">
-                                                                <option value="<%= datos.Cita %>"><%= datos.Cita %>
+                                                                <option value="<%= datos.Cita %>">
+                                                                    <%= datos.Cita %>
                                                                 </option>
                                                                 <option value="Ayudas diagnósticas">Ayudas diagnósticas
                                                                 </option>
@@ -304,7 +1153,9 @@
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2"
                                                                 style="margin-right: 20px;" id="Factura" name="Factura">
-                                                                <option value="<%= datos.Afiliacion %>"><%= datos.Afiliacion %></option>
+                                                                <option value="<%= datos.Afiliacion %>">
+                                                                    <%= datos.Afiliacion %>
+                                                                </option>
                                                                 <option value="Prepagada">Prepagada</option>
                                                                 <option value="EPS">EPS</option>
                                                                 <option value="ARL">ARL</option>
@@ -316,26 +1167,29 @@
                                                 <div class="row" id="eps" style="display: none;">
                                                     <div class="col-12 col-sm-6">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <label for="regimen" class="form-label">Tipo de régimen<label
-                                                                    class="redText">*</label></label>
+                                                            <label for="regimen" class="form-label">Tipo de
+                                                                régimen<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="regimen" name="regimen">
-                                                                <option value="<%= datos.Regimen %>"><%= datos.Regimen %>
+                                                                <option value="<%= datos.Regimen %>">
+                                                                    <%= datos.Regimen %>
                                                                 </option>
                                                                 <option value="Subsidiado">Subsidiado
                                                                 </option>
-                                                                <option value="Contributivo">Contributivo                                                                    
-                                                                </option>                                                               
+                                                                <option value="Contributivo">Contributivo
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <label for="entidad" class="form-label">Entidad prestadora de salud<label
-                                                                    class="redText">*</label></label>
+                                                            <label for="entidad" class="form-label">Entidad prestadora
+                                                                de salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2"
                                                                 style="margin-right: 20px;" id="entidad" name="entidad">
-                                                                <option value="<%= datos.entidad %>"><%= datos.entidad %></option>                                                                
+                                                                <option value="<%= datos.entidad %>">
+                                                                    <%= datos.entidad %>
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -348,7 +1202,9 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Modo" name="Modo" onclick="encuesta()">
-                                                                <option value="<%= datos.Modo %>"><%= datos.Modo %></option>
+                                                                <option value="<%= datos.Modo %>">
+                                                                    <%= datos.Modo %>
+                                                                </option>
                                                                 <option value="Virtual">Virtual</option>
                                                                 <option value="Presencial">Presencial</option>
                                                             </select>
@@ -366,7 +1222,9 @@
                                                                 name="opciones"
                                                                 onchange="doctors('opciones','Doctores')"
                                                                 onclick="vacio(), vaciarF()" required="true">
-                                                                <option value="<%= datos.Especialidad %>"><%= datos.Especialidad %></option>
+                                                                <option value="<%= datos.Especialidad %>">
+                                                                    <%= datos.Especialidad %>
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -380,7 +1238,8 @@
                                                                 style="margin-right: 35px;" id="Doctores"
                                                                 name="Doctores" onclick="buildTable(), vacioF()"
                                                                 onchange="vaciar()">
-                                                                <option value="<%= datos.Doctor %>"><%= datos.Doctor %>
+                                                                <option value="<%= datos.Doctor %>">
+                                                                    <%= datos.Doctor %>
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -388,7 +1247,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="card">
                                         <div class="card-header" id="headingThree">
                                             <div class="row">
@@ -414,13 +1273,14 @@
                                                     <div id="row">
                                                         <div class="col-12 col-sm-6">
                                                             <label class="form-label"
-                                                                style="margin-left: 20px; margin-right: 20px;">¿Desea conservar la
+                                                                style="margin-left: 20px; margin-right: 20px;">¿Desea
+                                                                conservar la
                                                                 misma
                                                                 fecha y hora?</label>
                                                         </div>
                                                         <div class="col-8 col-sm-2">
-                                                            <select class="custom-select mt-2" style="margin: 20px;" id="Option"
-                                                                name="Option">
+                                                            <select class="custom-select mt-2" style="margin: 20px;"
+                                                                id="Option" name="Option">
                                                                 <option value="0">Sí</option>
                                                                 <option value="1">No</option>
                                                             </select>
@@ -498,7 +1358,7 @@
                                                             médica ó número de autorización. <i
                                                                 class="bi bi-archive"></i>
                                                         </p>
-                                                        <div class="w-100 d-none d-md-block"></div>                                                       
+                                                        <div class="w-100 d-none d-md-block"></div>
                                                         <label class="form-label mt-2">Orden médica <a href="#"
                                                                 onclick="window.open('<%= datos.Orden %>', '_blank', 'fullscreen=yes'); return false;">
                                                                 <i class="far fa-eye"></i>
@@ -539,14 +1399,17 @@
                                                             <input type="number" class="form-control" id="autorizacion"
                                                                 name="autorizacion"
                                                                 placeholder="Sin puntos ni comas ni guiones" min="0"
-                                                                step="1" oninput="validity.valid||(value='');" style="margin-bottom: 50px;" value="<%= datos.Autorizacion %>">
+                                                                step="1" oninput="validity.valid||(value='');"
+                                                                style="margin-bottom: 50px;"
+                                                                value="<%= datos.Autorizacion %>">
                                                         </div>
-                                                        <div class="w-100 d-none d-md-block"></div>                                                        
-                                                         <div class="form-input" style="margin-top: 20px;">
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input" style="margin-top: 20px;">
                                                             <label for="descripcion" class="form-label">Motivo de la
                                                                 consulta y notas</label>
                                                             <textarea class="form-control" id="descripcion"
-                                                                name="descripcion" rows="2"><%= datos.Descripcion %></textarea>
+                                                                name="descripcion"
+                                                                rows="2"><%= datos.Descripcion %></textarea>
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="form-input"
@@ -618,7 +1481,7 @@
                     date.getDate() == natDays[i][1]) {
                     return [false, natDays[i][2] + '_day'];
                 }
-            }            
+            }
             var day = date.getDay();
             return [(day != 0)];
         }
@@ -964,14 +1827,14 @@
                 return false;
             }
             if (!fileo & autorizacion.length == "0") {
-                 Swal.fire({
+                Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Debe adjuntar archivo de orden médica o digitar número de autorización'
-                 })
-                 event.preventDefault();
-                 return false;
-	        } else {
+                })
+                event.preventDefault();
+                return false;
+            } else {
                 Swal.fire({
                     icon: 'success',
                     title: '¡Buen trabajo!',
@@ -993,7 +1856,7 @@
                 return false;
             }
         }
-       
+
         var result = [];
         var result3 = [];
         async function consult() {

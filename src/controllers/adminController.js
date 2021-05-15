@@ -27,7 +27,53 @@ let getException = (req, res) =>{
 	} 
 }
 
+let Ver_Horario = (req, res) =>{
+    if (req.session.admin) {
+        connection.query('SELECT dia, hora_ini, hora_fin, Tipo, Especialidad, Doctor FROM ver_horarios', (err, info) => {
+            if (err) {
+                res.json(err);
+            }
+            /* console.log(datos); */
+            res.render('./admin/admindoctorhorario.ejs', {
+                user: req.session.context,
+                info: info,
+                //user: req.user
+            });
+        });
+        // return res.render("./admin/adminmain.ejs", {
+        //     user: req.session.context
+        // });
+	} else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+	} 
+}
+
 let createException = async (req, res) => {
+
+    var doctor, espe;
+    var Cita = req.body.cita;
+    if(Cita == 'Consulta especializada'){
+        doctor = req.body.Doctores;
+        espe = req.body.opciones;
+    } else if(Cita == 'Procedimiento ambulatorio'){
+        doctor = req.body.Doctores2;
+        espe = req.body.opciones2;
+    } else if(Cita == 'Consulta odontología especializada'){
+        doctor = req.body.Doctores3;
+        espe = req.body.opciones3;
+    } else if(Cita == 'Ayudas diagnósticas'){
+        doctor = req.body.Ayudas;
+        espe = 'No aplica';
+    } else if(Cita == 'Consulta medicina general'){
+        doctor = req.body.Doctores4;
+        espe = 'No aplica';
+    } else if(Cita == 'Consulta odontología general'){
+        doctor = req.body.Doctores5;
+        espe = 'No aplica';
+    }
+
     let exception = {
         hora_ini1: req.body.H1,
         hora_fin1: req.body.H2,
@@ -35,8 +81,9 @@ let createException = async (req, res) => {
         hora_fin2: req.body.H4,
         hora_ini3: req.body.H5,
         hora_fin3: req.body.H6,
-        doc: req.body.Doctores,
-        espec: req.body.opciones,
+        tipo: Cita,        
+        espec: espe,
+        doc: doctor,
         fecha: req.body.fecha,
         type: req.body.type,
     };
@@ -50,6 +97,28 @@ let createException = async (req, res) => {
 
 let createAdmin = async (req, res) =>{
 
+
+    var doctor, espe;
+    var Cita = req.body.cita;
+    if(Cita == 'Consulta especializada'){
+        doctor = req.body.Doctores;
+        espe = req.body.opciones;
+    } else if(Cita == 'Procedimiento ambulatorio'){
+        doctor = req.body.Doctores2;
+        espe = req.body.opciones2;
+    } else if(Cita == 'Consulta odontología especializada'){
+        doctor = req.body.Doctores3;
+        espe = req.body.opciones3;
+    } else if(Cita == 'Ayudas diagnósticas'){
+        doctor = req.body.Ayudas;
+        espe = 'No aplica';
+    } else if(Cita == 'Consulta medicina general'){
+        doctor = req.body.Doctores4;
+        espe = 'No aplica';
+    } else if(Cita == 'Consulta odontología general'){
+        doctor = req.body.Doctores5;
+        espe = 'No aplica';
+    }
     let horario = {
         hora_ini1: req.body.H1,
         hora_fin1: req.body.H2,
@@ -57,11 +126,12 @@ let createAdmin = async (req, res) =>{
         hora_fin2: req.body.H4,
         hora_ini3: req.body.H5,
         hora_fin3: req.body.H6,
-        doc: req.body.Doctores,
-        espec: req.body.opciones,
+        tipo: Cita,        
+        espec: espe,
+        doc: doctor,
         dia: req.body.Dia
-    };    
-    
+    };   
+    console.log(horario)
     await adminService.createNewSchedule(horario);
    
     res.redirect("/admin/adminmain");
@@ -171,5 +241,6 @@ module.exports = {
     exceptions: exceptions,
     CitasAdmin: CitasAdmin,
     editA: editA,
-    updateA: updateA   
+    updateA: updateA,
+    Ver_Horario: Ver_Horario   
 }

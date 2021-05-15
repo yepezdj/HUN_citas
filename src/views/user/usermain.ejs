@@ -57,7 +57,8 @@
 
                 <div class="nav__list">
                     <a href="/consultar" class="nav__link">
-                        <i class='bx bx-folder nav__icon'></i>
+                        <i class='bx bx-folder nav__icon' data-toggle="tooltip" data-placement="right"
+                            data-type="danger" title="Consultar estado de la solicitud"></i>
                         <span class="nav__name">Consultar estado de <br>
                             solicitud</span>
                     </a>
@@ -113,20 +114,12 @@
                                             <p class="centered">Completa todos los campos de la información del
                                                 paciente. <i class="bi bi-person-lines-fill"></i></p>
                                             <div class="row">
-                                                <div class="col-12 col-sm-6" style="display: none;">
-                                                    <div class="form-input">
-                                                        <label for="actual" class="form-label">Fecha y hora actual<label
-                                                                class="redText">*</label></label>
-                                                        <input type="text" class="form-control" id="actual"
-                                                            name="actual" value="">
-                                                    </div>
-                                                </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="Name" class="form-label">Nombres del paciente <label
                                                                 class="redText">*</label></label>
                                                         <input type="text" class="form-control" id="Name" name="Name"
-                                                            value="<%= user.name %>" placeholder="Ingresa los nombres"                                                            
+                                                            value="<%= user.name %>" placeholder="Ingresa los nombres"
                                                             autocomplete="off">
                                                     </div>
                                                 </div>
@@ -225,6 +218,14 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
+                                                        <label for="fechaNac" class="form-label">Fecha de nacimiento
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaNac" name="fechaNac"
+                                                            type="date" autocomplete="off" onkeypress="return false">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
                                                         <label for="direccion">Dirección de
                                                             residencia<label class="redText">*</label></label></label>
                                                         <input type="text" class="form-control" id="direccion"
@@ -238,14 +239,16 @@
                                                         <label for="barrio">Barrio de
                                                             residencia<label class="redText">*</label></label></label>
                                                         <input type="text" class="form-control" id="barrio"
-                                                            name="barrio" placeholder="Ej: Los Andes" autocomplete="off">
+                                                            name="barrio" placeholder="Ej: Los Andes"
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="Tipo" class="form-label">Tipo de documento<label
+                                                        <label for="Tipo" class="form-label"
+                                                            style="margin-top: 20px;">Tipo de documento<label
                                                                 class="redText">*</label></label>
                                                         <select class="custom-select" style="margin-right: 20px;"
                                                             id="Tipo" name="Tipo">
@@ -264,7 +267,8 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="fechaExp" class="form-label">Fecha de expedición
+                                                        <label for="fechaExp" class="form-label"
+                                                            style="margin-top: 20px;">Fecha de expedición
                                                             <label class="redText">*</label></label>
                                                         <input class="form-control" id="fechaExp" name="fechaExp"
                                                             type="date" autocomplete="off" onkeypress="return false">
@@ -272,7 +276,7 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="Option" style="margin-top: 0px;"
+                                                        <label for="Option" style="margin-top: 20px;"
                                                             class="form-label">¿Eres extranjero?<label
                                                                 class="redText">*</label></label>
                                                         <select class="custom-select" style="margin-right: 10px; "
@@ -283,10 +287,9 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-sm-6" style="display: none; margin-bottom: 20px;"
-                                                    id="depa">
+                                                <div class="col-12 col-sm-6" style="display: none;" id="depa">
                                                     <div class="form-input">
-                                                        <label for="Departamento" style="margin-top: 0px;"
+                                                        <label for="Departamento" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Departamento)<label
                                                                 class="redText">*</label></label>
                                                         <select class="custom-select" style="margin-right: 10px;"
@@ -299,7 +302,7 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6" style="display: none;" id="muni">
                                                     <div class="form-input">
-                                                        <label for="city" style="margin-top: 10px;"
+                                                        <label for="city" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Municipio)<label
                                                                 class="redText">*</label></label>
                                                         <select class="custom-select" style="margin-right: 10px; "
@@ -309,10 +312,10 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-sm-6" style="margin-top: 0px;">
+                                                <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="persona" class="form-label"
-                                                            style="margin-bottom: 15px;">Menciona un acompañante</label>
+                                                            style="margin-top: 20px;">Menciona un acompañante</label>
                                                         <input type="text" class="form-control" id="persona"
                                                             name="persona"
                                                             placeholder="Ingresa los nombres y apellidos del acompañante"
@@ -460,7 +463,8 @@
                                                             <label for="Ayudas" class="form-label">Ayudas diagnósticas
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Ayudas" name="Ayudas">
+                                                                id="Ayudas" name="Ayudas"
+                                                                onclick="buildTable3(), vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar ayuda diagnóstica</option>
                                                             </select>
                                                         </div>
@@ -473,7 +477,7 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Procedimientos" name="Procedimientos"
-                                                                onchange="especialidad1('Procedimientos','opciones')">
+                                                                onchange="especialidad2('Procedimientos','opciones2')">
                                                                 <option value="0">Seleccionar procedimiento ambulatorio
                                                                 </option>
                                                             </select>
@@ -503,6 +507,84 @@
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Doctores" name="Doctores"
                                                                 onclick="buildTable(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad2"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones2" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones2" name="opciones2"
+                                                                onchange="doctors2('opciones2','Doctores2')"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor2" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores2" name="Doctores2"
+                                                                onclick="buildTable2(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad3"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones3" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones3" name="opciones3"
+                                                                onchange="doctors3('opciones3','Doctores3')"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor3" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores3" name="Doctores3"
+                                                                onclick="buildTable4(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor4" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores4" name="Doctores4"
+                                                                onclick="buildTable5(), vacioF()" onchange="vaciar()">
+                                                                <option value="0">Seleccionar profesional de la salud
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor5" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Doctores5" name="Doctores5"
+                                                                onclick="buildTable6(), vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -907,6 +989,10 @@
 
             consultaD();
             consult();
+            consult2();
+            consult4();
+            consult5();
+            consult6();
             // dateFormat()  
             $('input[type=number]').on('wheel', function (e) {
                 return false;
@@ -915,28 +1001,27 @@
 
         document.getElementById('fechaExp').max = new Date(new Date().getTime() -
             new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+        document.getElementById('fechaNac').max = new Date(new Date().getTime() -
+            new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
 
 
+        $('[data-toggle="tooltip"]').each(function () {
+            var options = {
+                html: true
+            };
+
+            if ($(this)[0].hasAttribute('data-type')) {
+                options['template'] =
+                    '<div class="tooltip ' + $(this).attr('data-type') + '" role="tooltip">' +
+                    '	<div class="tooltip-arrow"></div>' +
+                    '	<div class="tooltip-inner"></div>' +
+                    '</div>';
+            }
+
+            $(this).tooltip(options);
+        });
 
 
-        //function dateFormat() {
-        var date = new Date();
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        var hour = date.getHours();
-        var min = date.getMinutes();
-        var sec = date.getSeconds();
-
-        month = (month < 10) ? "0" + month : month;
-        day = (day < 10) ? "0" + day : day;
-        hour = (hour < 10) ? "0" + hour : hour;
-        min = (min < 10) ? "0" + min : min;
-        sec = (sec < 10) ? "0" + sec : sec;
-
-        var actualidad = year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
-        $('#actual').val(actualidad);
-        //}
 
         var date = new Date();
         var year = date.getFullYear();
@@ -1013,10 +1098,32 @@
                 onSelect: async function (date) {
                     console.log(date)
                     var con1 = document.getElementById('fecha').value;
-                    var EspeDoc = document.getElementById('opciones').value;
-                    var nameDoc = document.getElementById('Doctores').value;
+                    var tipo = document.getElementById('Cita').value;
+                    var EspeDoc, nameDoc;
+                    if (tipo == 'Procedimiento ambulatorio') {
+                        EspeDoc = document.getElementById('opciones2').value;
+                        nameDoc = document.getElementById('Doctores2').value;
+                    } else if (tipo == 'Consulta especializada') {
+                        EspeDoc = document.getElementById('opciones').value;
+                        nameDoc = document.getElementById('Doctores').value;
+                    } else if (tipo == 'Consulta odontología especializada') {
+                        EspeDoc = document.getElementById('opciones3').value;
+                        nameDoc = document.getElementById('Doctores3').value;
+                    } else if (tipo == 'Ayudas diagnósticas') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Ayudas').value;
+                    } else if (tipo == 'Consulta medicina general') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Doctores4').value;
+                    } else if (tipo == 'Consulta odontología general') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Doctores5').value;
+                    }
+
+
                     const consulta2 = {
                         con: con1,
+                        tipo: tipo,
                         EspeDoc: EspeDoc,
                         nameDoc: nameDoc,
                         date: date
@@ -1072,6 +1179,18 @@
             $("#opciones").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
             $("#Doctores").empty();
             $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#opciones2").empty();
+            $("#opciones2").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+            $("#Doctores2").empty();
+            $("#Doctores2").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#opciones3").empty();
+            $("#opciones3").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+            $("#Doctores3").empty();
+            $("#Doctores3").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#Doctores4").empty();
+            $("#Doctores4").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#Doctores5").empty();
+            $("#Doctores5").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
 
         function limpiarAfiliacion() {
@@ -1184,41 +1303,83 @@
                     $("#doctor").show();
                     $("#ayudas").hide();
                     $("#procedimiento").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
                 } else if (this.value == 'Ayudas diagnósticas') {
                     ayuda();
                     $("#ayudas").show();
                     $("#especialidad").hide();
                     $("#doctor").hide();
                     $("#procedimiento").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
                 } else if (this.value == 'Procedimiento ambulatorio') {
                     procedimiento();
                     $("#procedimiento").show();
-                    $("#especialidad").show();
-                    $("#doctor").show();
+                    $("#especialidad2").show();
+                    $("#doctor2").show();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
                     $("#ayudas").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
                 } else if (this.value == 'Consulta medicina general') {
                     medicina();
+                    $("#doctor4").show();
                     $("#procedimiento").hide();
                     $("#especialidad").hide();
-                    $("#doctor").show();
+                    $("#doctor").hide();
                     $("#ayudas").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor5").hide();
                 } else if (this.value == 'Consulta odontología general') {
                     medicinaOdont();
+                    $("#doctor5").show();
                     $("#procedimiento").hide();
                     $("#especialidad").hide();
-                    $("#doctor").show();
+                    $("#doctor").hide();
                     $("#ayudas").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
                 } else if (this.value == 'Consulta odontología especializada') {
                     especialidadOdont();
+                    $("#especialidad3").show();
+                    $("#doctor3").show();
                     $("#procedimiento").hide();
-                    $("#especialidad").show();
-                    $("#doctor").show();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
                     $("#ayudas").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
                 } else {
                     $("#procedimiento").hide();
                     $("#ayudas").hide();
                     $("#especialidad").hide();
-                    $("#doctor").hide()
+                    $("#doctor").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
                 }
             });
         });
@@ -1307,6 +1468,13 @@
             var procedimiento = document.getElementById("Procedimientos").value;
             var especialidad = document.getElementById("opciones").value;
             var doctor = document.getElementById("Doctores").value;
+            var especialidad2 = document.getElementById("opciones2").value;
+            var doctor2 = document.getElementById("Doctores2").value;
+            var especialidad3 = document.getElementById("opciones3").value;
+            var doctor3 = document.getElementById("Doctores3").value;
+            var doctor4 = document.getElementById("Doctores4").value;
+            var doctor5 = document.getElementById("Doctores5").value;
+
 
             var modo = document.getElementById("Modo").value;
 
@@ -1509,24 +1677,6 @@
                 event.preventDefault();
                 return false;
             }
-            if (ayuda !== "0" & especialidad == "0") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debes seleccionar la especialidad'
-                })
-                event.preventDefault();
-                return false;
-            }
-            if (ayuda !== "0" & doctor == "0") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debes seleccionar el profesional de la salud'
-                })
-                event.preventDefault();
-                return false;
-            }
             if (cita == "Procedimiento ambulatorio" & procedimiento == "0") {
                 Swal.fire({
                     icon: 'error',
@@ -1536,7 +1686,7 @@
                 event.preventDefault();
                 return false;
             }
-            if (procedimiento !== "0" & especialidad == "0") {
+            if (procedimiento !== "0" & especialidad2 == "0") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -1545,7 +1695,7 @@
                 event.preventDefault();
                 return false;
             }
-            if (procedimiento !== "0" & doctor == "0") {
+            if (procedimiento !== "0" & doctor2 == "0") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -1558,7 +1708,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Debes seleccionar una modalidad'
+                    text: 'Debes seleccionar la modalidad de la cita'
                 })
                 event.preventDefault();
                 return false;
@@ -1580,8 +1730,8 @@
                 })
                 event.preventDefault();
                 return false;
-            } 
-            if (cita == "Consulta odontología especializada" & especialidad == "0") {
+            }
+            if (cita == "Consulta odontología especializada" & especialidad3 == "0") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -1590,25 +1740,25 @@
                 event.preventDefault();
                 return false;
             }
-            if (cita == "Consulta odontología especializada" & doctor == "0") {
+            if (cita == "Consulta odontología especializada" & doctor3 == "0") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Debes seleccionar el profesional de la salud'
-                })
-                event.preventDefault();
-                return false;
-            }            
-            if (modo == "0" & cita == "Consulta medicina general") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Debes seleccionar una modalidad'
                 })
                 event.preventDefault();
                 return false;
             }
-            if (doctor == "0" & cita == "Consulta medicina general") {
+            if (modo == "0" & cita == "Consulta medicina general") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la modalidad de la cita'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (doctor4 == "0" & cita == "Consulta medicina general") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -1616,8 +1766,8 @@
                 })
                 event.preventDefault();
                 return false;
-            } 
-            if (doctor == "0" & cita == "Consulta odontología general") {
+            }
+            if (doctor5 == "0" & cita == "Consulta odontología general") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -1625,7 +1775,7 @@
                 })
                 event.preventDefault();
                 return false;
-            }            
+            }
             if (fecha == "") {
                 Swal.fire({
                     icon: 'error',
@@ -1677,8 +1827,72 @@
             }
         }
 
-        var result = [];
-        var result3 = [];
+
+
+        //Se crea una función para que el nombre de los documentos cargados 
+        //en los inputs de tipo file se muestren en la página, a través de si id
+        $(document).ready(function () {
+            $("#Orden").on('change', function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+            $("#Imagen").on('change', function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        });
+
+        //+++++++++++ CARGA A LOS SELECT PARA CONSULTA MEDICINA ESPECIALIZADA +++++++++++++++++//
+        async function consulta() {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/agenda', options2);
+            result4 = await response2.json();
+            select = document.getElementById('opciones');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Especialidad;
+                opt.innerHTML = result4[i].Especialidad;
+                select.add(opt);
+            }
+        }
+        async function doctors(s1, s2) {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/doctor', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Nombres;
+                    opt.innerHTML = result5[i].Nombres;
+                    select.add(opt);
+                }
+            }
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
         async function consult() {
             var con1 = document.getElementById('Doctores').value;
             const consulta2 = {
@@ -1720,6 +1934,7 @@
                 }
             }
         }
+        //+++++++++++ LIMPIAR TABLAS PARA CONSULTA ESPECIALIZADA +++++++++++++++++//
         function vaciarU() {
             document.getElementById('TableUser').innerHTML = '';
         }
@@ -1732,195 +1947,8 @@
         function vacio() {
             document.getElementById('myTable').innerHTML = '';
         }
-        //Se crea una función para que el nombre de los documentos cargados 
-        //en los inputs de tipo file se muestren en la página, a través de si id
-        $(document).ready(function () {
-            $("#Orden").on('change', function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-            $("#Imagen").on('change', function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-        });
 
-        async function doctors(s1, s2) {
-            var con1 = document.getElementById('opciones').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/doctor', options2);
-            result5 = await response2.json();
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-            s2.innerHTML = "";
-            select = document.getElementById('Doctores');
-            for (var i = 0; i < result5.length; i++) {
-                if (s1.value == result5[i].Especialidad) {
-                    var opt = document.createElement('option');
-                    opt.value = result5[i].Nombres;
-                    opt.innerHTML = result5[i].Nombres;
-                    select.add(opt);
-                }
-            }
-            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
-        }  
-
-        async function odontologia(s1, s2) {
-            var con1 = document.getElementById('opciones').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/odontologia', options2);
-            result5 = await response2.json();
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-            s2.innerHTML = "";
-            select = document.getElementById('Doctores');
-            for (var i = 0; i < result5.length; i++) {
-                if (s1.value == result5[i].Especialidad) {
-                    var opt = document.createElement('option');
-                    opt.value = result5[i].Doctor;
-                    opt.innerHTML = result5[i].Doctor;
-                    select.add(opt);
-                }
-            }
-            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
-        }
-
-        var result4 = [];
-        async function consulta() {
-            var con1 = document.getElementById('opciones').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/agenda', options2);
-            result4 = await response2.json();
-            select = document.getElementById('opciones');
-            for (var i = 0; i < result4.length; i++) {
-                var opt = document.createElement('option');
-                opt.value = result4[i].Especialidad;
-                opt.innerHTML = result4[i].Especialidad;
-                select.add(opt);
-            }
-        }
-
-        async function especialidadOdont() {
-            var con1 = document.getElementById('opciones').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/odontologiaE', options2);
-            result4 = await response2.json();
-            select = document.getElementById('opciones');
-            for (var i = 0; i < result4.length; i++) {
-                var opt = document.createElement('option');
-                opt.value = result4[i].Especialidad;
-                opt.innerHTML = result4[i].Especialidad;
-                select.add(opt);
-            }
-        }
-
-        async function medicina() {
-            var con1 = document.getElementById('Doctores').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/medicina', options2);
-            result4 = await response2.json();
-            select = document.getElementById('Doctores');
-            for (var i = 0; i < result4.length; i++) {
-                var opt = document.createElement('option');
-                opt.value = result4[i].Doctor;
-                opt.innerHTML = result4[i].Doctor;
-                select.add(opt);
-            }
-        }
-
-        async function medicinaOdont() {
-            var con1 = document.getElementById('Doctores').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/medicinaOdont', options2);
-            result4 = await response2.json();
-            select = document.getElementById('Doctores');
-            for (var i = 0; i < result4.length; i++) {
-                var opt = document.createElement('option');
-                opt.value = result4[i].Doctor;
-                opt.innerHTML = result4[i].Doctor;
-                select.add(opt);
-            }
-        }
-
-
-        async function ayuda() {
-            var con1 = document.getElementById('Ayudas').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/ayuda', options2);
-            result4 = await response2.json();
-            select = document.getElementById('Ayudas');
-            for (var i = 0; i < result4.length; i++) {
-                var opt = document.createElement('option');
-                opt.value = result4[i].Ayudas;
-                opt.innerHTML = result4[i].Ayudas;
-                select.add(opt);
-            }
-
-        }
-
+        //+++++++++++ CARGA A LOS SELECT PARA PROCEDIMIENTOS AMBULATORIOS +++++++++++++++++//
         async function procedimiento() {
             var con1 = document.getElementById('Procedimientos').value;
             const consulta2 = {
@@ -1945,38 +1973,8 @@
             }
 
         }
-
-        // async function especialidad(s1, s2) {
-        //     var con1 = document.getElementById('opciones').value;
-        //     const consulta2 = {
-        //         con: con1
-        //     };
-        //     const options2 = {
-        //         method: "POST",
-        //         body: JSON.stringify(consulta2),
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         }
-        //     };
-        //     const response2 = await fetch('/ayuda', options2);
-        //     result5 = await response2.json();
-        //     var s1 = document.getElementById(s1);
-        //     var s2 = document.getElementById(s2);
-        //     s2.innerHTML = "";
-        //     select = document.getElementById('opciones');
-        //     for (var i = 0; i < result5.length; i++) {
-        //         if (s1.value == result5[i].Ayudas) {
-        //             var opt = document.createElement('option');
-        //             opt.value = result5[i].Especialidad;
-        //             opt.innerHTML = result5[i].Especialidad;
-        //             select.add(opt);
-        //         }
-        //     }
-        //     $("#opciones").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
-        // }
-
-        async function especialidad1(s1, s2) {
-            var con1 = document.getElementById('opciones').value;
+        async function especialidad2(s1, s2) {
+            var con1 = document.getElementById('opciones2').value;
             const consulta2 = {
                 con: con1
             };
@@ -1992,7 +1990,7 @@
             var s1 = document.getElementById(s1);
             var s2 = document.getElementById(s2);
             s2.innerHTML = "";
-            select = document.getElementById('opciones');
+            select = document.getElementById('opciones2');
             for (var i = 0; i < result5.length; i++) {
                 if (s1.value == result5[i].Procedimientos) {
                     var opt = document.createElement('option');
@@ -2001,8 +1999,371 @@
                     select.add(opt);
                 }
             }
-            $("#opciones").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+            $("#opciones2").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
         }
+        async function doctors2(s1, s2) {
+            var con1 = document.getElementById('opciones2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/doctor_procedimiento', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Nombres;
+                    opt.innerHTML = result5[i].Nombres;
+                    select.add(opt);
+                }
+            }
+            $("#Doctores2").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+        async function consult2() {
+            var con1 = document.getElementById('Doctores2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable2()
+        }
+        function buildTable2() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+        //+++++++++++ CARGA A LOS SELECT PARA LAS AYUDAS DIAGNÓSTICAS +++++++++++++++++//
+        async function ayuda() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/ayuda', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Ayudas;
+                opt.innerHTML = result4[i].Ayudas;
+                select.add(opt);
+            }
+
+        }
+        async function consult3() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable3()
+        }
+        function buildTable3() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+
+        //+++++++++++ CARGA A LOS SELECT PARA LA CONSULTA PARA ODONTOLOGÍA ESPECIALIZADA +++++++++++++++++//
+        async function especialidadOdont() {
+            var con1 = document.getElementById('opciones3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/odontologiaE', options2);
+            result4 = await response2.json();
+            select = document.getElementById('opciones3');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Especialidad;
+                opt.innerHTML = result4[i].Especialidad;
+                select.add(opt);
+            }
+        }
+        async function doctors3(s1, s2) {
+            var con1 = document.getElementById('opciones3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/odontologiaespecializada', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Doctor;
+                    opt.innerHTML = result5[i].Doctor;
+                    select.add(opt);
+                }
+            }
+            $("#Doctores3").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+        async function consult4() {
+            var con1 = document.getElementById('Doctores3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable4()
+        }
+        function buildTable4() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+        //+++++++++++ CARGA A LOS SELECT PARA LA CONSULTA PARA ODONTOLOGÍA ESPECIALIZADA +++++++++++++++++//
+        async function medicina() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/medicina', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Doctor;
+                opt.innerHTML = result4[i].Doctor;
+                select.add(opt);
+            }
+        }
+        async function consult5() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable5()
+        }
+        function buildTable5() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+
+
+        //+++++++++++ CARGA A LOS SELECT PARA LA CONSULTA PARA ODONTOLOGÍA GENERAL+++++++++++++++++//
+        async function medicinaOdont() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/medicinaOdont', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Doctor;
+                opt.innerHTML = result4[i].Doctor;
+                select.add(opt);
+            }
+        }
+        async function consult6() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable6()
+        }
+        function buildTable6() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+
 
         async function eps() {
             var con1 = document.getElementById('entidad').value;

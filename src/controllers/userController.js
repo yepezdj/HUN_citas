@@ -17,37 +17,16 @@ let getUser = (req, res) => {
 
 let verifyUser = async (req, res) => {
 
-    const holiday2021 = ['01-01-2021', // Año Nuevo
-        '01-11-2021', // Día de los Reyes Magos
-        '03-22-2021', // Día de San José
-        '04-01-2021', // Jueves Santo
-        '04-02-2021', // Viernes Santo
-        '05-01-2021', // Día del Trabajador
-        '05-17-2021', // Día de la Ascensión
-        '06-07-2021', // Corpus Cristi
-        '06-14-2021', // Sagrado Corazón
-        '07-05-2021', // San Pedro y San Pablo
-        '07-20-2021', // Día de la Independencia
-        '08-07-2021', // Batalla de Boyacá
-        '08-16-2021', // La asunción de la Virgen
-        '10-18-2021', // Día de la Raza
-        '11-01-2021', // Día de los Difuntos
-        '11-15-2021', // Independencia de Cartagena
-        '12-08-2021', // Día de la Inmaculada Concepción
-        '12-25-2021', // Navidad
-    ];
-
-
     var fecha = req.body.date;
     console.log(fecha);
-    var festivo = (holiday2021.indexOf(fecha) > -1);
 
     var nameDoc = req.body.nameDoc;
     console.log(nameDoc);
     var EspeDoc = req.body.EspeDoc;
     console.log(EspeDoc);
     var date = new Date(fecha); //dia en palabras
-
+    var tipo = req.body.tipo;
+    console.log(tipo)
     var day = date.getDay();
     //var year = date.getFullYear();
 
@@ -55,74 +34,73 @@ let verifyUser = async (req, res) => {
     // if (day === 6 || day === 0) {
     //     console.log('es finde');
     // } else 
-    if (!festivo) {
-        var pos = 0;
-        //si no es festivo
 
-        //traer horarios disponibles ++++
-        let schedule = await userService.bringSchedule(day, nameDoc, EspeDoc);
-        pos = 0;
-        var vec_hora_ini = [];
+    var pos = 0;
+    //si no es festivo
 
-        Object.keys(schedule).forEach(function (key) {
-            vec_hora_ini[pos] = schedule[key].hora_ini;
-            pos++;
-        });
-        console.log('schedule');
-        console.log(vec_hora_ini);
+    //traer horarios disponibles ++++
+    let schedule = await userService.bringSchedule(day, nameDoc, EspeDoc, tipo);
+    pos = 0;
+    var vec_hora_ini = [];
 
-        //CITAS PROGRAMADAS y  CITAS PENDIENTES ---
-        let apointment = await userService.consultApo(fecha, nameDoc, EspeDoc);
-        pos = 0;
-        var vec_apointment = [];
+    Object.keys(schedule).forEach(function (key) {
+        vec_hora_ini[pos] = schedule[key].hora_ini;
+        pos++;
+    });
+    console.log('schedule');
+    console.log(vec_hora_ini);
 
-        Object.keys(apointment).forEach(function (key) {
-            vec_apointment[pos] = apointment[key].hora_ini;
-            pos++;
-        });
-        console.log('citas');
-        console.log(vec_apointment);
+    //CITAS PROGRAMADAS y  CITAS PENDIENTES ---
+    let apointment = await userService.consultApo(fecha, nameDoc, EspeDoc, tipo);
+    pos = 0;
+    var vec_apointment = [];
 
-        //VER EXCEPCIONES-------------
-        let exception = await userService.consultException(fecha, nameDoc, EspeDoc, 'Excepcion');
-        pos = 0;
-        var vec_exception = [];
+    Object.keys(apointment).forEach(function (key) {
+        vec_apointment[pos] = apointment[key].hora_ini;
+        pos++;
+    });
+    console.log('citas');
+    console.log(vec_apointment);
 
-        Object.keys(exception).forEach(function (key) {
-            vec_exception[pos] = exception[key].hora_ini;
-            pos++;
-        });
-        console.log('exception');
-        console.log(vec_exception);
+    //VER EXCEPCIONES-------------
+    let exception = await userService.consultException(fecha, nameDoc, EspeDoc, 'Excepcion', tipo);
+    pos = 0;
+    var vec_exception = [];
 
-        //VER ADICIONES+++++++++
-        let adicion = await userService.consultException(fecha, nameDoc, EspeDoc, 'Adicion');
-        pos = 0;
-        var vec_adicion = [];
-        Object.keys(adicion).forEach(function (key) {
-            vec_adicion[pos] = adicion[key].hora_ini;
-            pos++;
-        });
-        console.log('adicion');
-        console.log(vec_adicion);
+    Object.keys(exception).forEach(function (key) {
+        vec_exception[pos] = exception[key].hora_ini;
+        pos++;
+    });
+    console.log('exception');
+    console.log(vec_exception);
 
-        ///VECTOR A MOSTRAR
-        var vec_hora_ini = vec_hora_ini.concat(vec_adicion);
-        var vec_hora_ini = vec_hora_ini.filter((item, pos) => vec_hora_ini.indexOf(item) === pos)
+    //VER ADICIONES+++++++++
+    let adicion = await userService.consultException(fecha, nameDoc, EspeDoc, 'Adicion', tipo);
+    pos = 0;
+    var vec_adicion = [];
+    Object.keys(adicion).forEach(function (key) {
+        vec_adicion[pos] = adicion[key].hora_ini;
+        pos++;
+    });
+    console.log('adicion');
+    console.log(vec_adicion);
 
-        vec_hora_ini = vec_hora_ini.filter(function (element) {
-            return !vec_exception.includes(element);
-        });
-        vec_hora_ini = vec_hora_ini.filter(function (element) {
-            return !vec_apointment.includes(element);
-        });
-        console.log('total');
-        // console.log(vec_hora_ini);
-        var hora = vec_hora_ini
-        res.end(JSON.stringify(hora));
-        console.log(hora)
-        // return vec_hora_ini;
-    }
+    ///VECTOR A MOSTRAR
+    var vec_hora_ini = vec_hora_ini.concat(vec_adicion);
+    var vec_hora_ini = vec_hora_ini.filter((item, pos) => vec_hora_ini.indexOf(item) === pos)
+
+    vec_hora_ini = vec_hora_ini.filter(function (element) {
+        return !vec_exception.includes(element);
+    });
+    vec_hora_ini = vec_hora_ini.filter(function (element) {
+        return !vec_apointment.includes(element);
+    });
+    console.log('total');
+    // console.log(vec_hora_ini);
+    var hora = vec_hora_ini
+    res.end(JSON.stringify(hora));
+    console.log(hora)
+    // return vec_hora_ini;
     // return res.redirect("/user/usermain");
 }
 
@@ -172,7 +150,18 @@ let odontologia = (req, res) => {
 };
 
 let odontologiaE = (req, res) => {
-    connection.query('SELECT Especialidad FROM especializadadodon ORDER BY Especialidad ASC', (err, dat) => {
+    connection.query('SELECT Especialidad FROM espe_odontologia ORDER BY Especialidad ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
+let odontologiaespecializada = (req, res) => {
+    connection.query('SELECT Doctor, Especialidad FROM odontologiaespecializada ORDER BY Doctor ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
@@ -195,7 +184,7 @@ let listaEPS = (req, res) => {
 
 
 let ayuda = (req, res) => {
-    connection.query('SELECT Ayudas, Especialidad FROM ayudasdiagnosticas ORDER BY Ayudas ASC', (err, dat) => {
+    connection.query('SELECT Ayudas FROM ayudas_diagnosticas ORDER BY Ayudas ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
@@ -215,6 +204,17 @@ let procedimiento = (req, res) => {
         /* console.log(result4) */
     });
 };
+let doctor_procedimiento = (req, res) => {
+    connection.query('SELECT Nombres, Especialidad FROM proc_amb_doctor ORDER BY Nombres ASC', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result4 = dat
+        res.end(JSON.stringify(result4));
+        /* console.log(result4) */
+    });
+};
+
 
 //Se extraen los nombres de los médicos y se convierten en formato json
 let dr = (req, res) => {
@@ -244,6 +244,7 @@ let tabla = (req, res) => {
             /* console.log(datos); */
             res.render('./user/usertable.ejs', {
                 data: datos,
+                user: req.session.context
                 //user: req.user
             });
         });
@@ -277,55 +278,76 @@ let agendar = async (req, res) => {
     var lastname = req.body.Lastname;
     var Cedula = req.body.Cedula;
     var correo = req.body.email;
-    var doctor = req.body.Doctores;
-    var espe = req.body.opciones;
+    
     var hora = req.body.Horario;
     var fecha = req.body.fecha;
     var number = req.body.number;
     var tipo = req.body.Tipo;
     var user = req.session.context;
 
-    // var Orden = req.body.Orden;
-    // var Imagen = req.body.Imagen; 
-    var Cita = req.body.Cita;
+    // var type = "proc_amb";
+    
     var Factura = req.body.Factura;
     var Estado = 'Pendiente';
     var descripcion = req.body.descripcion;
     var id = user.id;
     var fecha_exp = req.body.fechaExp;
+    var fecha_nac = req.body.fechaNac;
     var direccion = req.body.direccion;
-    var barrio = req.body.direccion;
+    var barrio = req.body.Barrio;
     var departamento, municipio;
     var cellphone1 = req.body.cellphone1;
     var tele = req.body.tele;
     var Option = req.body.Option;
     var person = req.body.persona;
-    var actual = req.body.actual
+
     
-    if(Option == '2'){
+    var doctor, espe;
+    var Cita = req.body.Cita;
+    if(Cita == 'Consulta especializada'){
+        doctor = req.body.Doctores;
+        espe = req.body.opciones;
+    } else if(Cita == 'Procedimiento ambulatorio'){
+        doctor = req.body.Doctores2;
+        espe = req.body.opciones2;
+    } else if(Cita == 'Consulta odontología especializada'){
+        doctor = req.body.Doctores3;
+        espe = req.body.opciones3;
+    } else if(Cita == 'Ayudas diagnósticas'){
+        doctor = req.body.Ayudas;
+        espe = 'No aplica';
+    } else if(Cita == 'Consulta medicina general'){
+        doctor = req.body.Doctores4;
+        espe = 'No aplica';
+    } else if(Cita == 'Consulta odontología general'){
+        doctor = req.body.Doctores5;
+        espe = 'No aplica';
+    }
+
+    if (Option == '2') {
         departamento = req.body.Departamento;
         municipio = req.body.city;
-    } else{
+    } else {
         departamento = 'No aplica';
         municipio = 'No aplica';
     }
-    
-    if(!cellphone1){
-        cellphone1 = 'No aplica';      
-    } else{
-        cellphone1 = cellphone1;       
+
+    if (!cellphone1) {
+        cellphone1 = 'No aplica';
+    } else {
+        cellphone1 = cellphone1;
     }
 
-    if(!tele){
-        tele = 'No aplica';      
-    } else{
-        tele = tele;       
+    if (!tele) {
+        tele = 'No aplica';
+    } else {
+        tele = tele;
     }
 
-    if(!person){
-        person = 'No aplica';      
-    } else{
-        person = person;       
+    if (!person) {
+        person = 'No aplica';
+    } else {
+        person = person;
     }
 
     var p1 = req.body.options;
@@ -339,10 +361,17 @@ let agendar = async (req, res) => {
     var p9 = req.body.encuesta;
     var idp;
 
-    if(!p9){
-        p9 = 'No aplica';      
+    if (!p9) {
+        p9 = 'No aplica';
+    } else {
+        p9 = p9;
+    }
+
+    var procedimiento = req.body.procedimiento;
+    if(procedimiento == '0'){
+        procedimiento = 'No aplica'
     } else{
-        p9 = p9;       
+        procedimiento = req.body.procedimiento
     }
 
     var datearray = fecha.split("-");
@@ -364,7 +393,9 @@ let agendar = async (req, res) => {
             id: user.id
         }
 
-        const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
+        const tokenOrden = jwt.sign(payloadOrden, secret, {
+            expiresIn: '100 years'
+        });
         linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
     } else {
@@ -404,12 +435,12 @@ let agendar = async (req, res) => {
     console.log(datos);
     console.log(hora)
 
-    let citaExist = await userService.availabilityConsult(espe, doctor, newdate, hora);
+    let citaExist = await userService.availabilityConsult(Cita, espe, doctor, newdate, hora);
 
     if (citaExist) {
         let idp = await userService.magic(espe, doctor, newdate, hora, linkOrden, name, lastname,
             Cedula, id, descripcion, Estado, correo, Cita, Modo, Factura, autorizacion, entidad, regimen,
-            number, tipo, fecha_exp, direccion, barrio, departamento, municipio, cellphone1, tele, person, actual)
+            number, tipo, fecha_exp, direccion, barrio, departamento, municipio, cellphone1, tele, person, fecha_nac, procedimiento);
 
         await userService.survey(p1, p2, p3, p4, p5, p6, p7, p8, p9, idp);
 
@@ -424,15 +455,22 @@ let agendar = async (req, res) => {
 let edit = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion, Tipo_documento FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    if (req.session.user) {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion, Tipo_documento, DATE_FORMAT(fecha_exp, "%Y-%m-%d") fecha_exp, Direccion, Barrio, Departamento, Municipio, CelularOp, Telefono, Acompañante, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
         console.log(datos);
         res.render('./user/useredit.ejs', {
-            datos: datos[0]
+            datos: datos[0],
+            user: req.session.context
         });
     });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
 };
 
 //Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
@@ -570,5 +608,7 @@ module.exports = {
     medicina: medicina,
     medicinaOdont: medicinaOdont,
     odontologia: odontologia,
-    odontologiaE: odontologiaE
+    odontologiaE: odontologiaE,
+    doctor_procedimiento: doctor_procedimiento,
+    odontologiaespecializada: odontologiaespecializada
 }

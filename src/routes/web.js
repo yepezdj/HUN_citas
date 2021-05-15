@@ -70,10 +70,12 @@ let initWebRoutes = (app) => {
     router.post('/verifyUser', userController.verifyUser);
     router.post('/ayuda', userController.ayuda);
     router.post('/procedimiento', userController.procedimiento);
+    router.post('/doctor_procedimiento', userController.doctor_procedimiento);
     router.post('/medicina', userController.medicina);
     router.post('/medicinaOdont', userController.medicinaOdont);
     router.post('/odontologia', userController.odontologia);
     router.post('/odontologiaE', userController.odontologiaE);
+    router.post('/odontologiaespecializada', userController.odontologiaespecializada);
 
     
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    
@@ -91,6 +93,7 @@ let initWebRoutes = (app) => {
     router.post('/createException',  adminController.createException); 
     router.post('/exceptions',  adminController.exceptions); 
     router.get('/consultarCitasAdmin',adminController.CitasAdmin); 
+    router.get('/consultarHorariosAdmin',adminController.Ver_Horario); 
     router.get('/updateA/:idpa', upload.array('images',1), adminController.editA);
     router.post('/updateA/:idpa', upload.array('images',1), adminController.updateA);
    
