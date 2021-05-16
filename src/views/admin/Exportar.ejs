@@ -90,23 +90,54 @@
             <table id="conTable" class="table table-bordered table-responsive">
                 <thead>
                     <tr>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Correo electrónico</th>
-                        <th>Celular</th>
-                        <th>Tipo de identificación</th>
-                        <th>N° de identificación</th>
-                        <th>Especialidad</th>
-                        <th>Doctor</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Cita</th>
-                        <th>Afiliación</th>
-                        <th>Entidad</th>
-                        <th>Régimen</th>
-                        <th>Modalidad</th>
-                        <th>Anexos</th>
-                        <th>Autorización</th>
+                        <th>SEDE</th>
+                        <th>AÑO_CITA</th>
+                        <th>MES_CITA</th>
+                        <th>ESTADO_CITA</th>
+                        <th>FACTURA</th>
+                        <th>VALOR_FACTURA</th>
+                        <th>NUMERO_CITA</th>
+                        <th>NRO_INGRESO</th>
+                        <th>ID_PACIENTE</th>
+                        <th>TIPO_ID</th>
+                        <th>NOMBRE_PACIENTE</th>
+                        <th>SEXO</th>
+                        <th>FECHA_NACIMIENTO</th>
+                        <th>EDAD_ATENCION</th>
+                        <th>DIRECCION</th>
+                        <th>TELEFONO</th>
+                        <th>ID_CONTRATO_CITA</th>
+                        <th>DESCRIPCION_CONTRATO_CITA</th>
+                        <th>ID_CONTRATO_FACTURA</th>
+                        <th>DESCRIPCION_CONTRATO_CITA</th>
+                        <th>NIT_TERCERO</th>
+                        <th>RAZON_SOCIAL</th>
+                        <th>CONSULTORIO</th>
+                        <th>ID_MEDICO</th>
+                        <th>NOMBRE_MEDICO</th>
+                        <th>ESPECIALIDAD</th>
+                        <th>FECHA_ASIGNACION</th>
+                        <th>NRO_DIAS_OPORTUNIDAD</th>
+                        <th>FECHA_SOL_PACIENTE</th>
+                        <th>NRO_DIAS_ASIGNACION</th>
+                        <th>FOLIO</th>
+                        <th>CODIGO_DIAGNOSTICO</th>
+                        <th>DESCRIPCION DIAGNOSTICO</th>
+                        <th>ID_PROCEDIMIENTO</th>
+                        <th>NOMBRE_PROCEDIMIENTO</th>
+                        <th>FECHA_RESERVA_CITA</th>
+                        <th>FECHA_CITA</th>
+                        <th>FECHA_CONFIRMA_CITA</th>
+                        <th>FECHA_FACTURADA_CITA</th>
+                        <th>FECHA_ATENCION_CITA</th>
+                        <th>CODIGO_USR</th>
+                        <th>CODIGO_USR2</th>
+                        <th>USUARIO_ASIGNA_CITA</th>
+                        <th>PRIMER_NOMBRE</th>
+                        <th>SEGUNDO_NOMBRE</th>
+                        <th>PRIMER_APELLIDO</th>
+                        <th>SEGUNDO_APELLIDO</th>
+                        <th>NOMBRE_AUTORIZA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,61 +149,150 @@
                             <% for(var i=0; i < info.length; i++) { %>
 
                                 <td>
-                                    <%= info[i].NombreP %>
+                                   Sede principal hospital
                                 </td>
                                 <td>
-                                    <%= info[i].ApellidoP %>
+                                    <%= info[i].año %>
                                 </td>
                                 <td>
-                                    <%= info[i].Correo %>
+                                   
                                 </td>
                                 <td>
-                                    <%= info[i].Celular %>
+                                    <%= info[i].Estado %>
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                    <%= info[i].idu %>
                                 </td>
                                 <td>
                                     <%= info[i].Tipo_documento %>
                                 </td>
                                 <td>
-                                    <%= info[i].CedulaP %>
+                                    <%= info[i].NombreP %> <%= info[i].ApellidoP %>
                                 </td>
                                 <td>
-                                    <%= info[i].Especialidad %>
+                                    <%= info[i].sexo %>
+                                </td>
+                                <td>
+                                    <%= info[i].fecha_nac %>
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                    <%= info[i].Direccion %> <%= info[i].Barrio %>
+                                </td>                                
+                                <td>
+                                    <%= info[i].Celular %>
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
                                 </td>
                                 <td>
                                     <%= info[i].Doctor %>
                                 </td>
                                 <td>
+                                    <%= info[i].Especialidad %>
+                                </td>
+                                <td>
                                     <%= info[i].fecha %>
                                 </td>
                                 <td>
-                                    <%= info[i].hora_ini %>
+                                   
+                                </td>
+                                <td>
+                                    <%= info[i].hora_solicitud %>
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
                                 </td>
                                 <td>
                                     <%= info[i].Cita %>
                                 </td>
                                 <td>
-                                    <%= info[i].Afiliacion %>
+                                    <%= info[i].hora_solicitud %>
                                 </td>
                                 <td>
-                                    <%= info[i].entidad %>
+                                    <%= info[i].fecha %>
                                 </td>
                                 <td>
-                                    <%= info[i].Regimen %>
+                                   
                                 </td>
                                 <td>
-                                    <%= info[i].Modo %>
-                                </td>
-                                <td> <a href="#" class="btn btn-warning"
-                                        onclick="window.open('<%= info[i].Orden %>', '_blank', 'fullscreen=yes'); return false;">
-                                        <i class="far fa-file-pdf"></i>
-                                    </a>
-
+                                   
                                 </td>
                                 <td>
-                                    <%= info[i].Autorizacion %>
+                                    <%= info[i].fecha %>
                                 </td>
-
-                    </tr>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                    <%= user.name %> <%= user.last_name %>
+                                </td>
+                                <td>
+                                    <%= info[i].NombreP %>
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                    <%= info[i].ApellidoP %>
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                   
+                                </td>
+                            </tr>
                     <% } %>
                         <% } %>
                 </tbody>

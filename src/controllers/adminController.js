@@ -172,7 +172,7 @@ let CitasAdmin = (req, res) => {
 
 let ExportarAdmin = (req, res) => {
     if (req.session.admin) {
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Modo, Afiliacion, Cita FROM agendamiento WHERE Estado = "Aceptada"', (err, info) => {
+        connection.query('SELECT agendamiento.idpa, agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.Celular, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Estado, agendamiento.idu, agendamiento.Especialidad, agendamiento.Doctor, DATE_FORMAT(agendamiento.fecha, "%d-%m-%Y") fecha, DATE_FORMAT(agendamiento.fecha, "%Y") año, DATE_FORMAT(agendamiento.hora_solicitud, "%d-%m-%Y") hora_solicitud, DATE_FORMAT(agendamiento.fecha_nac, "%d-%m-%Y") fecha_nac, agendamiento.hora_ini, agendamiento.Orden, agendamiento.Tipo_documento, agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Cita, agendamiento.Direccion, agendamiento.Barrio, user.sexo FROM agendamiento INNER JOIN user WHERE agendamiento.idu = user.id AND agendamiento.Estado = "Aceptada"', (err, info) => {
             if (err) {
                 res.json(err);
             }
