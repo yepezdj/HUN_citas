@@ -6,11 +6,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- ===== BOX ICONS ===== -->
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <!-- ===== CSS ===== -->
   <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ===== BOOTSTRAP ===== -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/users.css">
-  <link rel="stylesheet" href="/lib/jquery/jquery.datetimepicker.min.css">
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+      </script>
+
+<!-- ===== SWEETALERT2 ===== -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+<!-- ===== DATEPICKER ===== -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
 </head>
 
 <body>
@@ -37,154 +57,156 @@
                 A continuación podrás completar toda la información tu registro.
               </div>
               <hr class="my-4">
-              <form method="POST" action="/register">
-                <div class="row">
-                  <div class="col-lg-6 my-4">
-                    <div class="form-group mb-4">
-                      <label for="nombre" class="font-weight-bold">Nombres</label>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Ingresa tus nombres"
-                        required>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="email" class="font-weight-bold">Apellidos</label>
-                      <input type="text" class="form-control" id="last_name " name="last_name"
-                        placeholder="Ingresa tus apellidos" required>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="Tipo" class="form-label">Tipo de documento<label class="redText">*</label></label>
-                      <select class="custom-select" style="margin-right: 20px;" id="Tipo" name="Tipo" required>
-                        <option value="0">Seleccionar tipo de documento</option>
-                        <option value="Cédula de ciudadanía">Cédula de ciudadanía
-                        </option>
-                        <option value="Cédula de extranjería">Cédula de extranjería
-                        </option>
-                        <option value="NIT">NIT</option>
-                        <option value="Tarjeta de identitidad">Tarjeta de
-                          identitidad</option>
-                        <option value="Pasaporte">Pasaporte</option>
-                        <option value="Registro civil">Registro civil</option>
-                      </select>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="fecha_exp" class="font-weight-bold">Fecha de expedición</label>
-                      <input class="form-control" id="fecha_exp" name="fecha_exp" type="date" min='1900-01-01'
-                        placeholder="Ingresa tu fecha de expedición" autocomplete="off">
-                      <span class="validity"></span>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="direccion" class="font-weight-bold">Dirección de residencia</label>
-                      <input type="text" class="form-control" id="direccion" name="direccion"
-                        placeholder="Ej: Cra. 27 #59-42, Barranquilla, Atlántico" autocomplete="off" required>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="barrio" class="font-weight-bold">Barrio de residencia</label>
-                      <input type="text" class="form-control" id="barrio" name="barrio" placeholder="Ej: Los Andes"
-                        autocomplete="off" required>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="cedula" class="font-weight-bold">Número de identificación</label>
-                      <input type="tel" class="form-control" id="cedula" name="cedula" pattern="[0-9]{10}"
-                        placeholder="Sin puntos ni comas ni guiones" autocomplete="off" required>
-                    </div>
-                    <div class="form-group mb-0">
-                      <label for="sexo" class="font-weight-bold">Género</label>
-                    </div>
-                    <div class="form-group mb-4">
-                      <div class="btn-group btn-group-toggle toggle" data-toggle="buttons">
-                        <label class="btn active">
-                          <input type="radio" name="sexo" id="masculino" value="masculino" checked> Masculino
-                        </label>
-                        <label class="btn open-btn">
-                          <input type="radio" name="sexo" id="femenino" value="femenino"> Femenino
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="fecha_nac" class="font-weight-bold">Fecha de nacimiento</label>
-                      <input class="form-control" id="fecha_nac" name="fecha_nac" type="date" min='1900-01-01'
-                        placeholder="Ingresa tu fecha de nacimiento" autocomplete="off">
-                      <span class="validity"></span>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="cellphone" class="font-weight-bold">Número de celular</label>
-                      <input type="tel" class="form-control" id="cellphone" name="cellphone"
-                        placeholder="Ingresa tu celular" autocomplete="off" pattern="[0-9]{10}">
+              <!-- <form method="POST" action="/register"> -->
+              <div class="row">
+                <div class="col-lg-6 my-4">
+                  <div class="form-group mb-4">
+                    <label for="nombre" class="font-weight-bold">Nombres</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Ingresa tus nombres"
+                      required>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="apellido" class="font-weight-bold">Apellidos</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ingresa tus nombres"
+                      required>
+                  </div>                  
+                  <div class="form-group mb-4">
+                    <label for="Tipo" class="form-label">Tipo de documento<label class="redText">*</label></label>
+                    <select class="custom-select" style="margin-right: 20px;" id="Tipo" name="Tipo" required>
+                      <option value="0">Seleccionar tipo de documento</option>
+                      <option value="Cédula de ciudadanía">Cédula de ciudadanía
+                      </option>
+                      <option value="Cédula de extranjería">Cédula de extranjería
+                      </option>
+                      <option value="NIT">NIT</option>
+                      <option value="Tarjeta de identitidad">Tarjeta de
+                        identitidad</option>
+                      <option value="Pasaporte">Pasaporte</option>
+                      <option value="Registro civil">Registro civil</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="cedula" class="font-weight-bold">Número de identificación</label>
+                    <input type="number" class="form-control" id="cedula" name="cedula" min="0" step="1"
+                      oninput="validity.valid||(value='');" placeholder="Sin puntos ni comas ni guiones"
+                      autocomplete="off" required>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="fecha_exp" class="font-weight-bold">Fecha de expedición</label>
+                    <input class="form-control" id="fecha_exp" name="fecha_exp" type="date" min='1900-01-01'
+                      placeholder="Ingresa tu fecha de expedición" autocomplete="off">
+                    <span class="validity"></span>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="direccion" class="font-weight-bold">Dirección de residencia</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion"
+                      placeholder="Ej: Cra. 27 #59-42, Barranquilla, Atlántico" autocomplete="off" required>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="barrio" class="font-weight-bold">Barrio de residencia</label>
+                    <input type="text" class="form-control" id="barrio" name="barrio" placeholder="Ej: Los Andes"
+                      autocomplete="off" required>
+                  </div>
+                  <div class="form-group mb-0">
+                    <label for="sexo" class="font-weight-bold">Género</label>
+                  </div>
+                  <div class="form-group mb-4">
+                    <div class="btn-group btn-group-toggle toggle" data-toggle="buttons">
+                      <label class="btn active">
+                        <input type="radio" name="sexo" id="masculino" value="masculino" checked> Masculino
+                      </label>
+                      <label class="btn open-btn">
+                        <input type="radio" name="sexo" id="femenino" value="femenino"> Femenino
+                      </label>
                     </div>
                   </div>
-                  <div class="col-lg-6 my-4">
-                    <div class="form-group mb-4">
-                      <label for="cellphone1" class="font-weight-bold">Otro número de celular (opcional)</label>
-                      <input type="tel" class="form-control" id="cellphone1" name="cellphone1"
-                        placeholder="Ingresa tu celular" autocomplete="off" pattern="[0-9]{10}">
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="tele" class="font-weight-bold">Teléfono (opcional)</label>
-                      <input type="tel" class="form-control" id="tele" name="tele" placeholder="Ingresa tu teléfono"
-                        autocomplete="off" pattern="[0-9]{10}">
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="email" class="font-weight-bold">Correo electrónico</label>
-                      <input type="email" class="form-control" id="email" name="email"
-                        placeholder="Ingresa tu correo electrónico">
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="Option" style="margin-top: 0px;" class="form-label">¿Eres extranjero?<label
-                          class="redText">*</label></label>
-                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="Option"
-                        name="Option" required="true">
-                        <option value="0">Seleccionar una opción</option>
-                        <option value="1">Sí</option>
-                        <option value="2">No</option>
-                      </select>
-                    </div>
-                    <div class="form-group mb-4" style="display: none;" id="depa">
-                      <label for="Departamento" style="margin-top: 0px;" class="form-label">Departamento de
-                        residencia<label class="redText">*</label></label>
-                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="Departamento"
-                        name="Departamento" onchange="departamento('Departamento','city')">
-                        <option value="0">Seleccionar departamento de residencia</option>
-                      </select>
-                    </div>
-                    <div class="form-group mb-4" style="display: none;" id="muni">
-                      <label for="city" style="margin-top: 0px;" class="form-label">Municipio de residencia<label
-                          class="redText">*</label></label>
-                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="city"
-                        name="city">
-                        <option value="0">Seleccionar municipio de residencia</option>
-                      </select>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="Optioneps" style="margin-top: 0px;" class="form-label">¿Tienes EPS?<label
-                          class="redText">*</label></label>
-                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="Optioneps"
-                        name="Optioneps" required="true">
-                        <option value="0">Seleccionar una opción</option>
-                        <option value="1">Sí</option>
-                        <option value="2">No</option>
-                      </select>
-                    </div>
-                    <div class="form-group mb-4" style="display: none;" id="entidad">
-                      <label for="eps" style="margin-top: 0px;" class="form-label">EPS<label
-                          class="redText">*</label></label>
-                      <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="eps" name="eps">
-                        <option value="0">Seleccionar EPS</option>
-                      </select>
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="password" class="font-weight-bold">Contraseña</label>
-                      <input type="password" class="form-control" id="password" name="password"
-                        placeholder="Ingresa tu Contraseña">
-                      <small class="form-text text-muted">La contraseña debe tener al menos 8 caracteres.</small>
-                    </div>
-                    <div class="form-group mb-4" style="margin-top: -20px;">
-                      <label for="password" class="font-weight-bold">Confirmar contraseña</label>
-                      <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword"
-                        placeholder="Confirma tu contraseña">
-                    </div>
+                  <div class="form-group mb-4">
+                    <label for="fecha_nac" class="font-weight-bold">Fecha de nacimiento</label>
+                    <input class="form-control" id="fecha_nac" name="fecha_nac" type="date" min='1900-01-01'
+                      placeholder="Ingresa tu fecha de nacimiento" autocomplete="off">
+                    <span class="validity"></span>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="cellphone" class="font-weight-bold">Número de celular</label>
+                    <input type="number" class="form-control" id="cellphone" name="cellphone"
+                      placeholder="Ingresa tu celular" autocomplete="off" min="0" step="1"
+                      oninput="validity.valid||(value='');">
                   </div>
                 </div>
-                <button type="submit" id="btn" class="btn btn-block">REGISTRARTE</button>
-              </form>
+                <div class="col-lg-6 my-4">
+                  <div class="form-group mb-4">
+                    <label for="cellphone1" class="font-weight-bold">Otro número de celular (opcional)</label>
+                    <input type="number" class="form-control" id="cellphone1" name="cellphone1"
+                      placeholder="Ingresa tu celular" autocomplete="off" min="0" step="1"
+                      oninput="validity.valid||(value='');">
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="tele" class="font-weight-bold">Teléfono (opcional)</label>
+                    <input type="number" class="form-control" id="tele" name="tele" placeholder="Ingresa tu teléfono"
+                      autocomplete="off" min="0" step="1" oninput="validity.valid||(value='');">
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="email" class="font-weight-bold">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                      placeholder="Ingresa tu correo electrónico">
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="Option" style="margin-top: 0px;" class="form-label">¿Eres extranjero?<label
+                        class="redText">*</label></label>
+                    <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="Option"
+                      name="Option" required="true">
+                      <option value="0">Seleccionar una opción</option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-4" style="display: none;" id="depa">
+                    <label for="Departamento" style="margin-top: 0px;" class="form-label">Departamento de
+                      residencia<label class="redText">*</label></label>
+                    <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="Departamento"
+                      name="Departamento" onchange="departamento('Departamento','city')">
+                      <option value="0">Seleccionar departamento de residencia</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-4" style="display: none;" id="muni">
+                    <label for="city" style="margin-top: 0px;" class="form-label">Municipio de residencia<label
+                        class="redText">*</label></label>
+                    <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="city" name="city">
+                      <option value="0">Seleccionar municipio de residencia</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="Optioneps" style="margin-top: 0px;" class="form-label">¿Tienes EPS?<label
+                        class="redText">*</label></label>
+                    <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="Optioneps"
+                      name="Optioneps" required="true">
+                      <option value="0">Seleccionar una opción</option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-4" style="display: none;" id="entidad">
+                    <label for="eps" style="margin-top: 0px;" class="form-label">EPS<label
+                        class="redText">*</label></label>
+                    <select class="custom-select" style="margin-right: 10px; margin-top: -10px;" id="eps" name="eps">
+                      <option value="0">Seleccionar EPS</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="password" class="font-weight-bold">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                      placeholder="Ingresa tu Contraseña">
+                    <small class="form-text text-muted">La contraseña debe tener al menos 8 caracteres.</small>
+                  </div>
+                  <div class="form-group mb-4" style="margin-top: -20px;">
+                    <label for="password" class="font-weight-bold">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword"
+                      placeholder="Confirma tu contraseña">
+                  </div>
+                </div>
+              </div>
+              <button type="submit" id="btn" class="btn btn-block">REGISTRARTE</button>
+              <!-- </form> -->
               <hr class="my-4">
               <div class="text-center mb-2">
                 ¿Ya tienes una cuenta?
@@ -204,11 +226,24 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
+    integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
     </script>
-  <script src="/lib/jquery/jquery.js"></script>
-  <script src="/lib/jquery/jquery.datetimepicker.full.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+  <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script src="/lib/jquery/jquery.js"></script>
+  <script src="/lib/jquery/jquery.datetimepicker.full.js"></script> -->
+  <!-- ===== DATEPICKER ===== -->
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+
+
   <script>
     document.onload = loadFunctions();
     function loadFunctions() {
@@ -330,6 +365,209 @@
         opt.innerHTML = result4[i].eps;
         select.add(opt);
       }
+    }
+
+    $('#btn').click(function () {
+      let data = recuperarDatosFormulario();
+      console.log(data)
+      if (!data) {
+        console.log('error')
+      } else {
+        agregarRegistro(data);
+      }
+    })
+
+    function recuperarDatosFormulario() {
+      let data = {
+        name: $('#name').val(),
+        last_name: $('#last_name').val(),
+        Tipo: $('#Tipo').val(),
+        cedula: $('#cedula').val(),
+        fecha_exp: $('#fecha_exp').val(),
+        direccion: $('#direccion').val(),
+        barrio: $('#barrio').val(),
+        sexo: $('input[name="sexo"]:checked').val(),
+        fecha_nac: $('#fecha_nac').val(),
+        cellphone: $('#cellphone').val(),
+        cellphone1: $('#cellphone1').val(),
+        tele: $('#tele').val(),
+        email: $('#email').val(),
+        Option: $('#Option').val(),
+        departamento: $('#Departamento').val(),
+        municipio: $('#city').val(),
+        Optioneps: $('#Optioneps').val(),
+        eps: $('#eps').val(),
+        password: $('#password').val(),
+        password1: $('#confirmationPassword').val()
+      };
+      if (data.name == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tus nombres'
+        });
+        return false;
+      }
+      if (data.last_name == "") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tus apellidos'
+        });
+        return false;
+      }
+      if (data.Tipo == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes seleccionar el tipo de documento'
+        });
+        return false;
+      }
+      if (data.cedula == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar el número de identificación'
+        });
+        return false;
+      }
+      if (data.fecha_exp == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes seleccionar la fecha de expedición'
+        });
+        return false;
+      }
+      if (data.direccion == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tu dirección de residencia'
+        });
+        return false;
+      }
+      if (data.barrio == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tu barrio de residencia'
+        });
+        return false;
+      }
+      if (data.fecha_nac == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes seleccionar tu fecha de nacimiento'
+        });
+        return false;
+      }
+      if (data.cellphone == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tu número de celular'
+        });
+        return false;
+      }
+      if (data.email == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tu correo electrónico'
+        });
+        return false;
+      }
+      if (data.Option == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes responder si eres extranjero o no'
+        });
+        return false;
+      }
+      if (data.Option == '2' & data.departamento == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes seleccionar el departamento de residencia'
+        });
+        return false;
+      }
+      if (data.Option == '2' & data.municipio == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes seleccionar la ciudad de residencia'
+        });
+        return false;
+      }
+      if (data.Optioneps == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes responder si tienes o no tienes EPS'
+        });
+        return false;
+      }
+      if (data.Optioneps == '1' & data.eps == '0') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes seleccionar tu EPS'
+        });
+        return false;
+      }
+      if (data.password == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar la contraseña'
+        });
+        return false;
+      }
+      if (data.password.length < '8') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La contraseña debe tener al menos 8 caracteres'
+        });
+        return false;
+      }
+      if (data.password !== data.password1) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Las contraseñas ingresadas no coinciden'
+        });
+        return false;
+      }
+      return data;
+    }
+    function agregarRegistro(data) {
+      $.ajax({
+        type: 'POST',
+        url: '/register',
+        data: data,
+        success: function (msg) {
+          Swal.fire(
+            '¡Buen trabajo!',
+            '¡Te has registrado correctamente!',
+            'success'
+          ).then(function () {
+            window.location = "/login";
+          });
+        },
+        error: function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error'
+          })
+        }
+      });
     }
   </script>
 </body>

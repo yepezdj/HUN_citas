@@ -161,9 +161,9 @@ tbody tr:nth-child(odd) {
     color: #525355 !important;
   }
 
-.custom-file-input{
+/* .custom-file-input{
   border:2px solid#008DCA !important;   
-}
+} */
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -172,11 +172,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-.custom-file-label::after { 
+/* .custom-file-label::after { 
   content: "Subir" !important;
   border:2px solid#008DCA !important;  
   background: #c0e1f0 !important;
-}
+} */
 
 select{
 	appearance: none;

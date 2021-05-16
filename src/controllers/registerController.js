@@ -10,24 +10,24 @@ let getPageRegister = (req, res) => {
 
 let createNewUser = async (req, res) => {
     //validate required fields
-    let errorsArr = [];
-    let validationErrors = validationResult(req);
-    if (!validationErrors.isEmpty()) {
-        let errors = Object.values(validationErrors.mapped());
-        errors.forEach((item) => {
-            errorsArr.push(item.msg);
-        });
-        req.flash("errors", errorsArr);
-        return res.redirect("/register");
-    }
+    // let errorsArr = [];
+    // let validationErrors = validationResult(req);
+    // if (!validationErrors.isEmpty()) {
+    //     let errors = Object.values(validationErrors.mapped());
+    //     errors.forEach((item) => {
+    //         errorsArr.push(item.msg);
+    //     });
+    //     req.flash("errors", errorsArr);
+    //     return res.redirect("/register");
+    // }
     var departamento, municipio, eps;
     var cellphone1 = req.body.cellphone1;
     var tele = req.body.tele;
     var Option = req.body.Option;
     var Optioneps = req.body.Optioneps;
     if(Option == '2'){
-        departamento = req.body.Departamento;
-        municipio = req.body.city;
+        departamento = req.body.departamento;
+        municipio = req.body.municipio;
     } else{
         departamento = 'No aplica';
         municipio = 'No aplica';

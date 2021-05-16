@@ -24,7 +24,7 @@
     <!-- ===== JQUERY ===== -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
+        </script>
 
     <title>Admin</title>
 </head>
@@ -77,129 +77,132 @@
                 A continuación podrás mirar los horarios y las execepciones de los profesionales de la salud
             </div>
 
+            <hr class="my-4">
             <h4 class="title text-center mt-4">
                 Horarios del personal
             </h4>
+            <hr class="my-4">
+            <div style="height:500px; overflow-y: scroll;">
+                <table id="conTable" class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Acciones</th>
+                            <th>Tipo</th>
+                            <th>Especalidad</th>
+                            <th>Profesional</th>
+                            <th>Dia</th>
+                            <th>Hora de inicio</th>
+                            <th>Hora de fin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            <table id="conTable" class="table table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        <th>Acciones</th>
-                        <th>Tipo</th>
-                        <th>Especalidad</th>
-                        <th>Profesional</th>
-                        <th>Dia</th>
-                        <th>Hora de inicio</th>
-                        <th>Hora de fin</th>
-                    </tr>
-                </thead>
-                <tbody>
+                        <% if (data1) { %>
+                            <!-- Es el nombre que se le dió a los datos obtenidos en el controller.list -->
 
-                    <% if (data1) { %>
-                    <!-- Es el nombre que se le dió a los datos obtenidos en el controller.list -->
+                            <% for(var i=0; i < data1.length; i++) { %>
 
-                    <% for(var i=0; i < data1.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <a href="/deleteHora/<%= data1[i].idHorario %>"
+                                                    class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <%= data1[i].Tipo %>
+                                    </td>
+                                    <td>
+                                        <%= data1[i].Especialidad %>
+                                    </td>
+                                    <td>
+                                        <%= data1[i].Doctor %>
+                                    </td>
+                                    <td>
+                                        <%= data1[i].dia %>
+                                    </td>
+                                    <td>
+                                        <%= data1[i].hora_ini %>
+                                    </td>
+                                    <td>
+                                        <%= data1[i].hora_fin %>
+                                    </td>
+                                </tr>
 
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <a href="/deleteHora/<%= data1[i].idHorario %>" class="btn btn-danger"><i
-                                            class="far fa-trash-alt"></i></a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <%= data1[i].Tipo %>
-                        </td>
-                        <td>
-                            <%= data1[i].Especialidad %>
-                        </td>
-                        <td>
-                            <%= data1[i].Doctor %>
-                        </td>
-                        <td>
-                            <%= data1[i].dia %>
-                        </td>
-                        <td>
-                            <%= data1[i].hora_ini %>
-                        </td>
-                        <td>
-                            <%= data1[i].hora_fin %>
-                        </td>
-                    </tr>
+                                <% } %>
+                                    <% } %>
 
-                    <% } %>
-                    <% } %>
+                    </tbody>
 
-                </tbody>
-
-            </table>
-
+                </table>
+            </div>
+            <hr class="my-4">
             <h4 class="title text-center mt-4">
                 Execepciones del personal
             </h4>
+            <hr class="my-4">
+            <div style="height:500px; overflow-y: scroll;">
+                <table id="conTable2" class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Acciones</th>
+                            <th>Tipo</th>
+                            <th>Especalidad</th>
+                            <th>Profesional</th>
+                            <th>Hora de inicio</th>
+                            <th>Hora de fin</th>
+                            <th>Fecha</th>
+                            <th>Clase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            <table id="conTable2" class="table table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        <th>Acciones</th>
-                        <th>Tipo</th>
-                        <th>Especalidad</th>
-                        <th>Profesional</th>
-                        <th>Hora de inicio</th>
-                        <th>Hora de fin</th>
-                        <th>Fecha</th>
-                        <th>Clase</th>
-                    </tr>
-                </thead>
-                <tbody>
+                        <% if (data2) { %>
+                            <!-- Es el nombre que se le dió a los datos obtenidos en el controller.list -->
 
-                    <% if (data2) { %>
-                    <!-- Es el nombre que se le dió a los datos obtenidos en el controller.list -->
+                            <% for(var i=0; i < data2.length; i++) { %>
 
-                    <% for(var i=0; i < data2.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <a href="/deleteExcep/<%= data2[i].idExcepcion %>"
+                                                    class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <%= data2[i].tipo_cita %>
+                                    </td>
+                                    <td>
+                                        <%= data2[i].Especialidad %>
+                                    </td>
+                                    <td>
+                                        <%= data2[i].Doctor %>
+                                    </td>
+                                    <td>
+                                        <%= data2[i].hora_ini %>
+                                    </td>
+                                    <td>
+                                        <%= data2[i].hora_fin %>
+                                    </td>
+                                    <td>
+                                        <%= data2[i].fecha %>
+                                    </td>
+                                    <td>
+                                        <%= data2[i].Tipo %>
+                                    </td>
+                                </tr>
 
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <a href="/deleteExcep/<%= data2[i].idExcepcion %>" class="btn btn-danger"><i
-                                            class="far fa-trash-alt"></i></a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <%= data2[i].tipo_cita %>
-                        </td>
-                        <td>
-                            <%= data2[i].Especialidad %>
-                        </td>
-                        <td>
-                            <%= data2[i].Doctor %>
-                        </td>
-                        <td>
-                            <%= data2[i].hora_ini %>
-                        </td>
-                        <td>
-                            <%= data2[i].hora_fin %>
-                        </td>
-                        <td>
-                            <%= data2[i].fecha %>
-                        </td>
-                        <td>
-                            <%= data2[i].Tipo %>
-                        </td>
-                    </tr>
+                                <% } %>
+                                    <% } %>
 
-                    <% } %>
-                    <% } %>
+                    </tbody>
 
-                </tbody>
-
-            </table>
-
-            
+                </table>
+            </div>
         </div>
     </div>
     <!--===== MAIN JS =====-->
@@ -213,6 +216,8 @@
     <script>
         $(document).ready(function () {
             $('#conTable').DataTable({
+                "scrollY": "200px",
+                "scrollCollapse": true,
                 language: {
                     processing: "Búsqueda en curso...",
                     search: "Buscar:",
