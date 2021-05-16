@@ -312,6 +312,26 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                
+                                                    <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                        <div class="form-input">
+                                                            <label for="Cedula" class="form-label">N° de identificación del
+                                                                paciente <label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="Cedula"
+                                                                name="Cedula" placeholder="Sin puntos ni comas ni guiones"
+                                                                min="0" step="1" oninput="validity.valid||(value='');">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                        <div class="form-input">
+                                                            <label for="Cedula1" class="form-label">Confirme N° de
+                                                                identificación<label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="Cedula1"
+                                                                name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
+                                                                min="0" step="1" oninput="validity.valid||(value='');">
+                                                        </div>
+                                                    </div>
+                                                
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="persona" class="form-label"
@@ -323,26 +343,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
-                                                    <div class="form-input">
-                                                        <label for="Cedula" class="form-label">N° de identificación del
-                                                            paciente <label class="redText">*</label></label>
-                                                        <input type="number" class="form-control" id="Cedula"
-                                                            name="Cedula" placeholder="Sin puntos ni comas ni guiones"
-                                                            min="0" step="1" oninput="validity.valid||(value='');">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
-                                                    <div class="form-input">
-                                                        <label for="Cedula1" class="form-label">Confirme N° de
-                                                            identificación<label class="redText">*</label></label>
-                                                        <input type="number" class="form-control" id="Cedula1"
-                                                            name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
-                                                            min="0" step="1" oninput="validity.valid||(value='');">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -991,6 +992,7 @@
             consult();
             consult2();
             consult4();
+            consult3();
             consult5();
             consult6();
             // dateFormat()  
@@ -1194,8 +1196,8 @@
         }
 
         function limpiarAfiliacion() {
-            $("#Procedimientos").empty();
-            $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
+            // $("#Procedimientos").empty();
+            // $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
             $("#entidad").empty();
             $("#entidad").prepend('<option selected="true" value="0">Seleccionar la entidad</option>');
         }
@@ -1826,8 +1828,6 @@
                 return false;
             }
         }
-
-
 
         //Se crea una función para que el nombre de los documentos cargados 
         //en los inputs de tipo file se muestren en la página, a través de si id

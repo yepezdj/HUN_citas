@@ -814,7 +814,7 @@
       let data = {
         cita: $('#Cita').val(),
         procedimientos: $('#Procedimientos').val(),
-        ayudas: $('#Ayudas').val(),
+        Ayudas: $('#Ayudas').val(),
         opciones: $('#opciones').val(),
         Doctores: $('#Doctores').val(),
         opciones2: $('#opciones2').val(),
@@ -888,7 +888,7 @@
           text: 'Debes seleccionar un profesional de la salud'
         });
         return false;
-      } if (data.ayudas == '0' & data.cita == 'Ayudas diagnósticas') {
+      } if (data.Ayudas == '0' & data.cita == 'Ayudas diagnósticas') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

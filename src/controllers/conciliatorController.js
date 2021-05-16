@@ -158,19 +158,23 @@ let Citas = (req, res) => {
 let editC = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Tipo_documento, DATE_FORMAT(fecha_exp, "%Y-%m-%d") fecha_exp, Direccion, Barrio, Departamento, Municipio, CelularOp, Telefono, Acompañante, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac, Procedimiento FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
         console.log(datos);
         res.render('./conciliator/Reprogramar.ejs', {
-            datos: datos[0]
+            datos: datos[0],
+            user: req.session.context
         });
     });
 };
 
 //Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
 let updateC = async (req, res) => {
+    const datos = req.body;
+    console.log('alo')
+    console.log(datos)
     const id = req.params.idpa;
     var name = req.body.Name;
     var lastname = req.body.Lastname;
@@ -180,6 +184,7 @@ let updateC = async (req, res) => {
     var espe = req.body.opciones;
     var hora = req.body.Horario;
     var fecha = req.body.fecha1;
+    
 
     var Cita = req.body.Cita;
     var Factura = req.body.Factura;
@@ -189,7 +194,8 @@ let updateC = async (req, res) => {
     var datearray = fecha.split("-");
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
     // console.log(fecha)
-    console.log(newdate)
+    console.log('aló')
+    
 
     var Modo;
     if (Cita == "Ayudas diagnósticas" || Cita == "Proceso de dermatología") {
@@ -208,14 +214,20 @@ let updateC = async (req, res) => {
       </a>`;
     gmailController.sendEmailNormal(correo, 'Reprogramación de cita médica-HUN', body)
 
-    connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ?, Descripcion = ?, Cita = ?, Modo = ? WHERE idpa = ?", [newdate, hora, descripcion, Cita, Modo, id], (err, datos) => {
-        if (err) {
-            res.json(err);
-        }
+    if (req.session.admin) {
+        connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ? WHERE idpa = ?", [newdate, hora, id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
 
-        console.log(datos);
-        return res.redirect('/consultarCitas');
-    });
+            console.log(datos);
+            return res.redirect('/consultarCitas');
+        });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
 };
 
 

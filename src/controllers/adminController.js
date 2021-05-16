@@ -3,31 +3,31 @@ import adminService from "../services/adminService";
 import gmailController from "../controllers/gmailController";
 
 
-let getAdmin = (req, res) =>{
+let getAdmin = (req, res) => {
     if (req.session.admin) {
         return res.render("./admin/adminmain.ejs", {
             user: req.session.context
         });
-	} else {
+    } else {
         return res.render("login.ejs", {
             errors: req.session.context
         });
-	} 
+    }
 }
 
-let getException = (req, res) =>{
+let getException = (req, res) => {
     if (req.session.admin) {
         return res.render("./admin/adminException.ejs", {
             user: req.session.context
         });
-	} else {
+    } else {
         return res.render("login.ejs", {
             errors: req.session.context
         });
-	} 
+    }
 }
 
-let Ver_Horario = (req, res) =>{
+let Ver_Horario = (req, res) => {
     if (req.session.admin) {
         connection.query('SELECT dia, hora_ini, hora_fin, Tipo, Especialidad, Doctor FROM ver_horarios', (err, info) => {
             if (err) {
@@ -43,33 +43,33 @@ let Ver_Horario = (req, res) =>{
         // return res.render("./admin/adminmain.ejs", {
         //     user: req.session.context
         // });
-	} else {
+    } else {
         return res.render("login.ejs", {
             errors: req.session.context
         });
-	} 
+    }
 }
 
 let createException = async (req, res) => {
 
     var doctor, espe;
     var Cita = req.body.cita;
-    if(Cita == 'Consulta especializada'){
+    if (Cita == 'Consulta especializada') {
         doctor = req.body.Doctores;
         espe = req.body.opciones;
-    } else if(Cita == 'Procedimiento ambulatorio'){
+    } else if (Cita == 'Procedimiento ambulatorio') {
         doctor = req.body.Doctores2;
         espe = req.body.opciones2;
-    } else if(Cita == 'Consulta odontología especializada'){
+    } else if (Cita == 'Consulta odontología especializada') {
         doctor = req.body.Doctores3;
         espe = req.body.opciones3;
-    } else if(Cita == 'Ayudas diagnósticas'){
+    } else if (Cita == 'Ayudas diagnósticas') {
         doctor = req.body.Ayudas;
         espe = 'No aplica';
-    } else if(Cita == 'Consulta medicina general'){
+    } else if (Cita == 'Consulta medicina general') {
         doctor = req.body.Doctores4;
         espe = 'No aplica';
-    } else if(Cita == 'Consulta odontología general'){
+    } else if (Cita == 'Consulta odontología general') {
         doctor = req.body.Doctores5;
         espe = 'No aplica';
     }
@@ -81,7 +81,7 @@ let createException = async (req, res) => {
         hora_fin2: req.body.H4,
         hora_ini3: req.body.H5,
         hora_fin3: req.body.H6,
-        tipo: Cita,        
+        tipo: Cita,
         espec: espe,
         doc: doctor,
         fecha: req.body.fecha,
@@ -95,27 +95,27 @@ let createException = async (req, res) => {
 }
 
 
-let createAdmin = async (req, res) =>{
+let createAdmin = async (req, res) => {
 
 
     var doctor, espe;
     var Cita = req.body.cita;
-    if(Cita == 'Consulta especializada'){
+    if (Cita == 'Consulta especializada') {
         doctor = req.body.Doctores;
         espe = req.body.opciones;
-    } else if(Cita == 'Procedimiento ambulatorio'){
+    } else if (Cita == 'Procedimiento ambulatorio') {
         doctor = req.body.Doctores2;
         espe = req.body.opciones2;
-    } else if(Cita == 'Consulta odontología especializada'){
+    } else if (Cita == 'Consulta odontología especializada') {
         doctor = req.body.Doctores3;
         espe = req.body.opciones3;
-    } else if(Cita == 'Ayudas diagnósticas'){
+    } else if (Cita == 'Ayudas diagnósticas') {
         doctor = req.body.Ayudas;
         espe = 'No aplica';
-    } else if(Cita == 'Consulta medicina general'){
+    } else if (Cita == 'Consulta medicina general') {
         doctor = req.body.Doctores4;
         espe = 'No aplica';
-    } else if(Cita == 'Consulta odontología general'){
+    } else if (Cita == 'Consulta odontología general') {
         doctor = req.body.Doctores5;
         espe = 'No aplica';
     }
@@ -126,14 +126,14 @@ let createAdmin = async (req, res) =>{
         hora_fin2: req.body.H4,
         hora_ini3: req.body.H5,
         hora_fin3: req.body.H6,
-        tipo: Cita,        
+        tipo: Cita,
         espec: espe,
         doc: doctor,
         dia: req.body.Dia
-    };   
+    };
     console.log(horario)
     await adminService.createNewSchedule(horario);
-   
+
     res.redirect("/admin/adminmain");
 }
 
@@ -152,34 +152,35 @@ let exceptions = (req, res) => {
 
 let CitasAdmin = (req, res) => {
     if (req.session.admin) {
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Modo, Afiliacion, Cita FROM agendamiento WHERE Estado = "Aceptada"',(err,info) => {
-            if(err){
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Modo, Afiliacion, Cita FROM agendamiento WHERE Estado = "Aceptada"', (err, info) => {
+            if (err) {
                 res.json(err);
             }
-                console.log(info);
-                res.render('./admin/adminAppoitments.ejs', {
-                    info: info,
-                    user: req.session.context
-                    //user: req.user
-                });
-        });      
-	} else {
+            console.log(info);
+            res.render('./admin/adminAppoitments.ejs', {
+                info: info,
+                user: req.session.context
+                //user: req.user
+            });
+        });
+    } else {
         return res.render("login.ejs", {
             errors: req.session.context
         });
-	} 
+    }
 };
 
 let editA = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Tipo_documento, Celular, Autorizacion, DATE_FORMAT(fecha_exp, "%Y-%m-%d") fecha_exp, Direccion, Barrio, Departamento, Municipio, CelularOp, Telefono, Acompañante, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac, Procedimiento FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
         console.log(datos);
         res.render('./admin/adminReprogramar.ejs', {
-            datos: datos[0]
+            datos: datos[0],
+            user: req.session.context
         });
     });
 };
@@ -223,17 +224,23 @@ let updateA = async (req, res) => {
       </a>`;
     gmailController.sendEmailNormal(correo, 'Reprogramación de cita médica-HUN', body)
 
-    connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ?, Descripcion = ?, Cita = ?, Modo = ? WHERE idpa = ?", [newdate, hora, descripcion, Cita, Modo, id], (err, datos) => {
-        if (err) {
-            res.json(err);
-        }
+    if (req.session.admin) {
+        connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ?, Descripcion = ?, Cita = ?, Modo = ? WHERE idpa = ?", [newdate, hora, descripcion, Cita, Modo, id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
 
-        console.log(datos);
-        return res.redirect('/consultarCitasAdmin');
-    });
+            console.log(datos);
+            return res.redirect('/consultarCitasAdmin');
+        });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
 };
 
-module.exports = {    
+module.exports = {
     getAdmin: getAdmin,
     createAdmin: createAdmin,
     createException: createException,
@@ -242,5 +249,5 @@ module.exports = {
     CitasAdmin: CitasAdmin,
     editA: editA,
     updateA: updateA,
-    Ver_Horario: Ver_Horario   
+    Ver_Horario: Ver_Horario
 }

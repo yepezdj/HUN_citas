@@ -284,9 +284,7 @@ let agendar = async (req, res) => {
     var number = req.body.number;
     var tipo = req.body.Tipo;
     var user = req.session.context;
-
-    // var type = "proc_amb";
-    
+   
     var Factura = req.body.Factura;
     var Estado = 'Pendiente';
     var descripcion = req.body.descripcion;
@@ -294,7 +292,7 @@ let agendar = async (req, res) => {
     var fecha_exp = req.body.fechaExp;
     var fecha_nac = req.body.fechaNac;
     var direccion = req.body.direccion;
-    var barrio = req.body.Barrio;
+    var barrio = req.body.barrio;
     var departamento, municipio;
     var cellphone1 = req.body.cellphone1;
     var tele = req.body.tele;
@@ -367,11 +365,11 @@ let agendar = async (req, res) => {
         p9 = p9;
     }
 
-    var procedimiento = req.body.procedimiento;
-    if(procedimiento == '0'){
+    var procedimiento = req.body.Procedimientos;
+    if(!procedimiento){
         procedimiento = 'No aplica'
     } else{
-        procedimiento = req.body.procedimiento
+        procedimiento = req.body.Procedimientos
     }
 
     var datearray = fecha.split("-");
@@ -456,7 +454,7 @@ let edit = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
     if (req.session.user) {
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion, Tipo_documento, DATE_FORMAT(fecha_exp, "%Y-%m-%d") fecha_exp, Direccion, Barrio, Departamento, Municipio, CelularOp, Telefono, Acompañante, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion, Tipo_documento, DATE_FORMAT(fecha_exp, "%Y-%m-%d") fecha_exp, Direccion, Barrio, Departamento, Municipio, CelularOp, Telefono, Acompañante, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac, Procedimiento FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -503,6 +501,28 @@ let update = async (req, res) => {
     let JWT_SECRET = process.env.JWT_SECRET;
     const secret = JWT_SECRET;
 
+    var direccion = req.body.direccion;
+    var barrio = req.body.barrio;
+    var cellphone1 = req.body.cellphone1;
+    var tele = req.body.tele;
+    var person = req.body.persona;
+    if (!cellphone1) {
+        cellphone1 = 'No aplica';
+    } else {
+        cellphone1 = cellphone1;
+    }
+
+    if (!tele) {
+        tele = 'No aplica';
+    } else {
+        tele = tele;
+    }
+
+    if (!person) {
+        person = 'No aplica';
+    } else {
+        person = person;
+    }
 
     //IMAGEN Y ORDEN SUBIDAS
     if (req.files[0]) {
@@ -568,7 +588,7 @@ let update = async (req, res) => {
         regimen = 'No aplica';
     }
 
-    connection.query("UPDATE agendamiento SET NombreP = ?, ApellidoP = ?, CedulaP = ?, Especialidad = ?, Doctor = ?, Descripcion = ?, Cita = ?, Afiliacion = ?, Modo = ?, Correo = ?, entidad = ?, Regimen = ?, Tipo_documento = ?, Celular = ?, Autorizacion = ? WHERE idpa = ?", [name, lastname, Cedula, espe, doctor, descripcion, Cita, Factura, Modo, correo, entidad, regimen, tipo, number, autorizacion, req.params.idpa], (err, datos) => {
+    connection.query("UPDATE agendamiento SET NombreP = ?, ApellidoP = ?, CedulaP = ?, Especialidad = ?, Doctor = ?, Descripcion = ?, Cita = ?, Afiliacion = ?, Modo = ?, Correo = ?, entidad = ?, Regimen = ?, Tipo_documento = ?, Celular = ?, Autorizacion = ?, Direccion = ?, Barrio = ?, CelularOp = ?, Telefono = ? WHERE idpa = ?", [name, lastname, Cedula, espe, doctor, descripcion, Cita, Factura, Modo, correo, entidad, regimen, tipo, number, autorizacion, direccion, barrio, cellphone1, tele, req.params.idpa], (err, datos) => {
         if (err) {
             res.json(err);
         }
