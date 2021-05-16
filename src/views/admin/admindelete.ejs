@@ -20,7 +20,8 @@
     <!-- ===== DATATABLES ===== -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
-
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/scroller/2.0.3/css/scroller.dataTables.css" />
     <!-- ===== JQUERY ===== -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
@@ -212,7 +213,7 @@
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
-
+    <script type="text/javascript" src="https://cdn.datatables.net/scroller/2.0.3/js/dataTables.scroller.js"></script>
     <script>
         $(document).ready(function () {
             $('#conTable').DataTable({
@@ -224,7 +225,7 @@
                     lengthMenu: "Mostrar _MENU_ registros",
                     info: "Página _PAGE_ de _PAGES_",
                     infoEmpty: "No hay registros disponibles",
-                    infoFiltered: "(filtrado de _MAX_ total elementos)",
+                    infoFiltered: "(filtrado de _MAX_ elementos)",
                     zeroRecords: "No hay registros con este criterio de búsqueda",
                     infoPostFix: "",
                     loadingRecords: "Cargando...",
@@ -251,7 +252,7 @@
                     lengthMenu: "Mostrar _MENU_ registros",
                     info: "Página _PAGE_ de _PAGES_",
                     infoEmpty: "No hay registros disponibles",
-                    infoFiltered: "(filtrado de _MAX_ total elementos)",
+                    infoFiltered: "(filtrado de _MAX_ elementos)",
                     zeroRecords: "No hay registros con este criterio de búsqueda",
                     infoPostFix: "",
                     loadingRecords: "Cargando...",

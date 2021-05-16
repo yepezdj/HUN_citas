@@ -391,9 +391,7 @@ let agendar = async (req, res) => {
             id: user.id
         }
 
-        const tokenOrden = jwt.sign(payloadOrden, secret, {
-            expiresIn: '100 years'
-        });
+        const tokenOrden = jwt.sign(payloadOrden, secret);
         linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
     } else {
@@ -534,7 +532,7 @@ let update = async (req, res) => {
             id: user.id
         }
 
-        const tokenOrden = jwt.sign(payloadOrden, secret, { expiresIn: '100 years' });
+        const tokenOrden = jwt.sign(payloadOrden, secret);
         linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
 

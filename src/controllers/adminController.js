@@ -170,6 +170,26 @@ let CitasAdmin = (req, res) => {
     }
 };
 
+let ExportarAdmin = (req, res) => {
+    if (req.session.admin) {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Modo, Afiliacion, Cita FROM agendamiento WHERE Estado = "Aceptada"', (err, info) => {
+            if (err) {
+                res.json(err);
+            }
+            console.log(info);
+            res.render('./admin/Exportar.ejs', {
+                info: info,
+                user: req.session.context
+                //user: req.user
+            });
+        });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
+};
+
 let editA = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
@@ -320,5 +340,6 @@ module.exports = {
     Ver_Horario: Ver_Horario,
     tableHorario: tableHorario,
     deleteHorario: deleteHorario,
-    deleteException: deleteException
+    deleteException: deleteException,
+    ExportarAdmin: ExportarAdmin
 }

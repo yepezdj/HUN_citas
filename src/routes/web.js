@@ -93,6 +93,7 @@ let initWebRoutes = (app) => {
     router.post('/createException',  adminController.createException); 
     router.post('/exceptions',  adminController.exceptions); 
     router.get('/consultarCitasAdmin',adminController.CitasAdmin); 
+    router.get('/consultarExportar',adminController.ExportarAdmin); 
     router.get('/consultarHorariosAdmin',adminController.Ver_Horario); 
     router.get('/updateA/:idpa', upload.array('images',1), adminController.editA);
     router.post('/updateA/:idpa', upload.array('images',1), adminController.updateA);
