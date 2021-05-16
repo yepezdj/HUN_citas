@@ -80,9 +80,9 @@ let initWebRoutes = (app) => {
     
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    
     router.get('/consultarCitas',conciliatorController.Citas);
-    router.get('/aceptar/:idpa',conciliatorController.datosaceptar);
+    router.get('/consultar/:idpa',conciliatorController.datosaceptar);
     router.post('/aceptar/:idpa',conciliatorController.aceptar);
-    router.get('/declinar/:idpa',conciliatorController.datosdeclinar);
+    // router.get('/declinar/:idpa',conciliatorController.datosdeclinar);
     router.post('/declinar/:idpa',conciliatorController.declinar);
     router.get('/updateC/:idpa', upload.array('images',1), conciliatorController.editC);
     router.post('/updateC/:idpa', upload.array('images',1), conciliatorController.updateC);
@@ -96,7 +96,10 @@ let initWebRoutes = (app) => {
     router.get('/consultarHorariosAdmin',adminController.Ver_Horario); 
     router.get('/updateA/:idpa', upload.array('images',1), adminController.editA);
     router.post('/updateA/:idpa', upload.array('images',1), adminController.updateA);
-   
+    router.get('/deleteHora/:idHorario',adminController.deleteHorario);
+    router.get('/deleteHorario',adminController.tableHorario);
+    router.get('/deleteExcep/:idExcepcion',adminController.deleteException);
+
     return app.use("/", router);
 };
 

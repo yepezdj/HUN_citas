@@ -1,11 +1,12 @@
 import connection from "../configs/connectDB";
+import conciliatorService from "../services/conciliatorService";
 import gmailController from "../controllers/gmailController";
 
 let getConciliator = (req, res) => {
     if (req.session.conciliator) {
         connection.query(`SELECT agendamiento.idpa,agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Especialidad, agendamiento.Doctor, 
-        DATE_FORMAT(agendamiento.fecha, "%Y-%m-%d") fecha, agendamiento.hora_ini, agendamiento.Cita, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Orden, agendamiento.Tipo_documento, 
-        agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, encuesta.P1, encuesta.P2, encuesta.P3, encuesta.P4, encuesta.P5, encuesta.P6, encuesta.P7,
+        DATE_FORMAT(agendamiento.fecha, "%Y-%m-%d") fecha, DATE_FORMAT(agendamiento.fecha_nac, "%Y-%m-%d") fecha_nac, agendamiento.hora_ini, agendamiento.Cita, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Orden, agendamiento.Tipo_documento, 
+        agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, DATE_FORMAT(agendamiento.hora_solicitud, "%Y-%m-%d %H:%i:%S") hora_solicitud, encuesta.P1, encuesta.P2, encuesta.P3, encuesta.P4, encuesta.P5, encuesta.P6, encuesta.P7,
         encuesta.P8, encuesta.P9 FROM agendamiento INNER JOIN encuesta WHERE agendamiento.idpa = encuesta.idpa AND agendamiento.Estado = "Pendiente"`, (err, info) => {
             if (err) {
                 res.json(err);
@@ -27,7 +28,7 @@ let getConciliator = (req, res) => {
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
 let datosaceptar = (req, res) => {
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Cita, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Cita, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Procedimiento, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -38,52 +39,27 @@ let datosaceptar = (req, res) => {
     });
 };
 
-let aceptar = (req, res) => {
+let aceptar = async (req, res) => {
 
     const estado = 'Aceptada';
-    const user = req.session.context;
-    const correo = req.body.correo;
-    const nombre = req.body.Name;
-    const apellido = req.body.Lastname;
-    const doctor = req.body.doctor;
-    const fecha = req.body.fechaI;
-    const hora = req.body.horaI;
-    const descripcion = req.body.descripcion;
+    const datos = req.body;
+    const id = req.body.id;
+    console.log(datos)
+    
+    let variablesAceptar = {
+        correo: req.body.correo,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        doctor: req.body.doctor,
+        fecha: req.body.fecha,
+        hora: req.body.hora,
+        descripcion: req.body.descripcion,        
+    };
+    console.log(variablesAceptar);
 
-    var body;
-    if (!descripcion) {
-        body = `<h4>Estimado/a ${nombre} ${apellido}</h4>
-        <div class="text-center mb-2">
-    Se le informa que su cita médica ha sido aceptada con el/la ${doctor} para el ${fecha} a las ${hora}
-    </div>
-    <hr class="my-4">
-    <div class="text-center mb-2">
-      ¿Tiene alguna inquietud al respecto? Favor comunicarse a la línea
-      <a href="#" class="register-link">
-      (57) (5) 3858131
-      </a>
-      </div>`;
-    } else {
-        body = `<h4>Estimado/a ${nombre} ${apellido}</h4>
-        <div class="text-center mb-2">
-    Se le informa que su cita médica ha sido aceptada con el/la ${doctor} para el ${fecha} a las ${hora}
-    <hr class="my-4">
-    </div>
-    <div class="text-center mb-2">
-    ${descripcion}
-    </div>
-    <hr class="my-4">
-    <div class="text-center mb-2">
-      ¿Tiene alguna inquietud al respecto? Favor comunicarse a la línea
-      <a href="#" class="register-link">
-      (57) (5) 3858131
-      </a>
-      </div>`
-            ;
-    }
-    gmailController.sendEmailNormal(correo, 'Solicitud de cita médica-HUN', body)
+    await conciliatorService.EmailAceptar(variablesAceptar);
 
-    connection.query(`UPDATE agendamiento SET Estado = "${estado}" WHERE agendamiento.idpa = "${req.params.idpa}"`, (err, datos) => {
+    connection.query(`UPDATE agendamiento SET Estado = "${estado}" WHERE agendamiento.idpa = "${id}"`, (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -93,39 +69,40 @@ let aceptar = (req, res) => {
 };
 
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
-let datosdeclinar = (req, res) => {
-    const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
-        if (err) {
-            res.json(err);
-        }
-        console.log(datos);
-        res.render('./conciliator/declinar.ejs', {
-            datos: datos[0]
-        });
-    });
-};
+// let datosdeclinar = (req, res) => {
+//     const id = req.params.idpa;
+//     connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+//         if (err) {
+//             res.json(err);
+//         }
+//         console.log(datos);
+//         res.render('./conciliator/declinar.ejs', {
+//             datos: datos[0]
+//         });
+//     });
+// };
 
-let declinar = (req, res) => {
+let declinar = async (req, res) => {
 
     const estado = 'Rechazada';
-    const correo = req.body.correo;
-    const nombre = req.body.Name;
-    const apellido = req.body.Lastname;
-    const doctor = req.body.doctor;
-    const descripcion = req.body.descripcion;
-    console.log(descripcion)
-    const body = `<h4>Estimado/a ${nombre} ${apellido}</h4>
-    Se le informa que su cita médica ha sido rechada por la/s siguiente/es razón/es: ${descripcion}
-    <hr class="my-4">
-    <div class="text-center mb-2">
-      ¿Tiene alguna inquietud al respecto? Favor comunicarse a la línea
-      <a href="#" class="register-link">
-      (57) (5) 3858131
-      </a>`;
-    gmailController.sendEmailNormal(correo, 'Solicitud de cita médica-HUN', body)
+    const datos = req.body;
+    const id = req.body.id;
+    console.log(datos)
+    
+    let variablesDeclinar = {
+        correo: req.body.correo,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        doctor: req.body.doctor,
+        fecha: req.body.fecha,
+        hora: req.body.hora,
+        descripcion: req.body.descripcion,        
+    };
+    console.log(variablesDeclinar);
 
-    connection.query('DELETE FROM agendamiento WHERE idpa = ?', [req.params.idpa], (err, datos) => {
+    await conciliatorService.EmailDeclinar(variablesDeclinar);
+
+    connection.query('DELETE FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }
@@ -137,7 +114,7 @@ let declinar = (req, res) => {
 
 let Citas = (req, res) => {
     if (req.session.conciliator) {
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Cita, Modo, Afiliacion, Orden, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE Estado = "Aceptada"', (err, info) => {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Correo, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Cita, Modo, Afiliacion, Orden, Tipo_documento, Celular, Autorizacion, entidad, Regimen, fecha_nac FROM agendamiento WHERE Estado = "Aceptada"', (err, info) => {
             if (err) {
                 res.json(err);
             }
@@ -235,7 +212,7 @@ module.exports = {
     getConciliator: getConciliator,
     datosaceptar: datosaceptar,
     aceptar: aceptar,
-    datosdeclinar: datosdeclinar,
+    // datosdeclinar: datosdeclinar,
     declinar: declinar,
     Citas: Citas,
     editC: editC,

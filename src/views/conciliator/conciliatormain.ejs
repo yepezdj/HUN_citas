@@ -88,10 +88,12 @@
             <table id="conTable" class="table table-bordered table-responsive">
                 <thead>
                     <tr>
+                        <th>Hora de solicitud</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Correo electrónico</th>
                         <th>Celular</th>
+                        <th>Fecha de nacimiento</th>
                         <th>Tipo de identificación</th>
                         <th>N° de identificación</th>
                         <th>Especialidad</th>
@@ -106,8 +108,7 @@
                         <th>Anexos</th> 
                         <th>Autorización</th> 
                         <th>Riesgo epidemiológico</th>  
-                        <th>Aceptar solicitud</th>
-                        <th>Declinar solicitud</th>
+                        <th>Consultar solicitud</th>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -119,6 +120,9 @@
                             <% for(var i=0; i < info.length; i++) { %>
 
                                 <td>
+                                    <%= info[i].hora_solicitud %>
+                                </td>
+                                <td>
                                     <%= info[i].NombreP %>
                                 </td>
                                 <td>
@@ -129,6 +133,9 @@
                                 </td>
                                 <td>
                                     <%= info[i].Celular %>
+                                </td>
+                                <td>
+                                    <%= info[i].fecha_nac %>
                                 </td>
                                 <td>
                                     <%= info[i].Tipo_documento %>
@@ -186,11 +193,8 @@
                                         <% } %>
                                 </td>
                                 <td>
-                                    <a href="/aceptar/<%= info[i].idpa %>" class="btn btn-success">Aceptar</a>
-                                </td>
-                                <td>
-                                    <a href="/declinar/<%= info[i].idpa %>" class="btn btn-danger">Declinar</a>
-                                </td>
+                                    <a href="/consultar/<%= info[i].idpa %>" class="btn btn-info"><i class="fab fa-searchengin"></i></a>
+                                </td>                              
 
                     </tr>
                     <% } %>

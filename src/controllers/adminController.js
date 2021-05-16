@@ -240,6 +240,74 @@ let updateA = async (req, res) => {
     }
 };
 
+let tableHorario = async (req, res) => {
+
+    var data1;
+    var data2;
+    if (req.session.admin) {
+
+        data1 = await adminService.query_ver_horarios();
+        data2 = await adminService.query_ver_excepciones();
+    
+        console.log(data1)
+        console.log(data2)
+        res.render('./admin/admindelete.ejs', {
+            data1: data1,
+            data2: data2,
+            user: req.session.context
+        });
+    } else {
+        return res.redirect("/login");
+    }
+};
+
+
+let deleteHorario = (req, res) => {
+    const id = req.params.idHorario;
+    try {
+        connection.query('DELETE FROM ver_horarios WHERE idHorario = ?', [id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            //console.log(datos);  
+        });
+        connection.query('DELETE FROM horarios WHERE id_view = ?', [id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            //console.log(datos); 
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+
+    res.redirect('/deleteHorario');
+};
+
+let deleteException = (req, res) => {
+    const id = req.params.idExcepcion;
+    try {
+        connection.query('DELETE FROM ver_excepciones WHERE idExcepcion = ?', [id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            //console.log(datos);  
+        });
+        connection.query('DELETE FROM excepciones WHERE id_view = ?', [id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            //console.log(datos); 
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+
+    res.redirect('/deleteHorario');
+};
+
 module.exports = {
     getAdmin: getAdmin,
     createAdmin: createAdmin,
@@ -249,5 +317,8 @@ module.exports = {
     CitasAdmin: CitasAdmin,
     editA: editA,
     updateA: updateA,
-    Ver_Horario: Ver_Horario
+    Ver_Horario: Ver_Horario,
+    tableHorario: tableHorario,
+    deleteHorario: deleteHorario,
+    deleteException: deleteException
 }
