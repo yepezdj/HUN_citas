@@ -380,7 +380,7 @@
                                                             <label for="Cita" class="form-label">Tipo de cita <label
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Cita" name="Cita" onchange="limpiar()">
+                                                                id="Cita" name="Cita" onchange="limpiar(), vaciar()" onclick="vacio()">
                                                                 <option value="0">Seleccionar tipo de cita médica
                                                                 </option>
                                                                 <option value="Ayudas diagnósticas">Ayudas diagnósticas
@@ -478,7 +478,7 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Procedimientos" name="Procedimientos"
-                                                                onchange="especialidad2('Procedimientos','opciones2')">
+                                                                onchange="especialidad2('Procedimientos','opciones2'), limpiarMed()"  onclick="vacio(), vaciarF()">
                                                                 <option value="0">Seleccionar procedimiento ambulatorio
                                                                 </option>
                                                             </select>
@@ -507,7 +507,7 @@
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Doctores" name="Doctores"
-                                                                onclick="buildTable(), vacioF()" onchange="vaciar()">
+                                                                onclick="vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -533,7 +533,7 @@
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Doctores2" name="Doctores2"
-                                                                onclick="buildTable2(), vacioF()" onchange="vaciar()">
+                                                                onclick="vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -559,7 +559,7 @@
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Doctores3" name="Doctores3"
-                                                                onclick="buildTable4(), vacioF()" onchange="vaciar()">
+                                                                onclick="vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -572,7 +572,7 @@
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Doctores4" name="Doctores4"
-                                                                onclick="buildTable5(), vacioF()" onchange="vaciar()">
+                                                                onclick="vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -585,7 +585,7 @@
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Doctores5" name="Doctores5"
-                                                                onclick="buildTable6(), vacioF()" onchange="vaciar()">
+                                                                onclick="vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -1195,6 +1195,11 @@
             $("#Doctores5").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
 
+        function limpiarMed(){
+            $("#Doctores2").empty();
+            $("#Doctores2").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+
         function limpiarAfiliacion() {
             // $("#Procedimientos").empty();
             // $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
@@ -1386,8 +1391,35 @@
             });
         });
 
-        document.getElementById('Ayudas').addEventListener('click', function () {
+        const ayudas = document.getElementById('Ayudas');
+        ayudas.addEventListener('click', function () {
+            console.log('ayuda')
+           buildTable3()
+        });
+        const doc = document.getElementById('Doctores');
+        doc.addEventListener('click', function () {
+            console.log('ayuda')
            buildTable()
+        });
+        const doc2 = document.getElementById('Doctores2');
+        doc2.addEventListener('click', function () {
+            console.log('ayuda')
+           buildTable2()
+        });
+        const doc3 = document.getElementById('Doctores3');
+        doc3.addEventListener('click', function () {
+            console.log('ayuda')
+           buildTable4()
+        });
+        const doc4 = document.getElementById('Doctores4');
+        doc4.addEventListener('click', function () {
+            console.log('ayuda')
+           buildTable5()
+        });
+        const doc5 = document.getElementById('Doctores5');
+        doc5.addEventListener('click', function () {
+            console.log('ayuda')
+           buildTable6()
         });
 
         $('#btnC1').click(function () {
