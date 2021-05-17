@@ -465,7 +465,7 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Ayudas" name="Ayudas"
-                                                                onclick="buildTable3(), vacioF()" onchange="vaciar()">
+                                                                onclick="vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar ayuda diagnóstica</option>
                                                             </select>
                                                         </div>
@@ -507,7 +507,7 @@
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Doctores" name="Doctores"
-                                                                onchange="buildTable(), vacioF()" onchange="vaciar()">
+                                                                onclick="buildTable(), vacioF()" onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -1384,6 +1384,10 @@
                     $("#doctor5").hide();
                 }
             });
+        });
+
+        document.getElementById('Ayudas').addEventListener('click', function () {
+           buildTable()
         });
 
         $('#btnC1').click(function () {
