@@ -149,28 +149,53 @@
                             <% for(var i=0; i < info.length; i++) { %>
 
                                 <td>
-                                   Sede principal hospital
+                                    Sede principal hospital
                                 </td>
                                 <td>
                                     <%= info[i].año %>
                                 </td>
                                 <td>
-                                   
+                                    <% switch (info[i].mes) { case 'January' : %>
+                                        Enero
+                                        <% break; case 'February' : %>
+                                            Febrero
+                                            <% break; case 'March' : %>
+                                                Marzo                                                
+                                                    <% break; case 'April' : %>
+                                                        Abril                                                       
+                                                            <% break; case 'May' : %>
+                                                                Mayo                                                               
+                                                                    <% break; case 'June' : %>
+                                                                        Junio                                                                      
+                                                                            <% break; case 'July' : %>
+                                                                                Julio                                                                              
+                                                                                    <% break; case 'August' : %>
+                                                                                        Agosto                                                                                     
+                                                                                            <% break; case 'September' : %>
+                                                                                                Septiembre                                                                                             
+                                                                                                    <% break; case 'October' : %>
+                                                                                                        Octubre                                                                                                       
+                                                                                                            <% break; case 'November' : %>
+                                                                                                                Noviembre                                                                                                                
+                                                                                                                    <% break; case 'December' : %>
+                                                                                                                        Diciembre
+                                                                                                                        <% break; } %>
+
                                 </td>
                                 <td>
                                     <%= info[i].Estado %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
                                     <%= info[i].idu %>
@@ -179,7 +204,8 @@
                                     <%= info[i].Tipo_documento %>
                                 </td>
                                 <td>
-                                    <%= info[i].NombreP %> <%= info[i].ApellidoP %>
+                                    <%= info[i].NombreP %>
+                                        <%= info[i].ApellidoP %>
                                 </td>
                                 <td>
                                     <%= info[i].sexo %>
@@ -188,37 +214,38 @@
                                     <%= info[i].fecha_nac %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                    <%= info[i].Direccion %> <%= info[i].Barrio %>
-                                </td>                                
+                                    <%= info[i].Direccion %>
+                                        <%= info[i].Barrio %>
+                                </td>
                                 <td>
                                     <%= info[i].Celular %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
                                     <%= info[i].Doctor %>
@@ -230,25 +257,25 @@
                                     <%= info[i].fecha %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
                                     <%= info[i].hora_solicitud %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
                                     <%= info[i].Cita %>
@@ -260,39 +287,40 @@
                                     <%= info[i].fecha %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
                                     <%= info[i].fecha %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                    <%= user.name %> <%= user.last_name %>
+                                    <%= user.name %>
+                                        <%= user.last_name %>
                                 </td>
                                 <td>
                                     <%= info[i].NombreP %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
                                     <%= info[i].ApellidoP %>
                                 </td>
                                 <td>
-                                   
+
                                 </td>
                                 <td>
-                                   
+
                                 </td>
-                            </tr>
+                    </tr>
                     <% } %>
                         <% } %>
                 </tbody>
