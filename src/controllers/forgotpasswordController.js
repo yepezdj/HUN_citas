@@ -33,7 +33,7 @@ let aa = (req, res, next) => {
                 id: user.id
             }
             const token = jwt.sign(payload, secret,{expiresIn: '30m'});
-            const link =`http://localhost/reset-password/${user.id}/${token}`;
+            const link =`http://3.17.161.209:8080/reset-password/${user.id}/${token}`;
             console.log(link);
             const body = `<h4>Estimado/a</h4>
             Para recuperar la contraseña de su cuenta, por favor acceder al siguiente link:
