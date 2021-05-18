@@ -53,7 +53,8 @@ let aceptar = async (req, res) => {
         doctor: req.body.doctor,
         fecha: req.body.fecha,
         hora: req.body.hora,
-        descripcion: req.body.descripcion,        
+        descripcion: req.body.descripcion,  
+        Cita: req.body.Cita      
     };
     console.log(variablesAceptar);
 
@@ -97,6 +98,7 @@ let declinar = async (req, res) => {
         fecha: req.body.fecha,
         hora: req.body.hora,
         descripcion: req.body.descripcion,        
+        Cita: req.body.Cita 
     };
     console.log(variablesDeclinar);
 
