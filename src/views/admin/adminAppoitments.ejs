@@ -53,7 +53,7 @@
         <nav class="nav">
             <div>
                 <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
-                    <i class='bx bx-layer nav__logo-icon'></i>
+                    <i class="bi bi-house nav__logo-icon"></i> 
                     <span class="nav__logo-name">
                         Hospital<br>
                         Universidad del<br>
@@ -63,16 +63,28 @@
 
                 <div class="nav__list">
                     <a href="/admin/adminmain" class="nav__link">
-                        <i class='bx bx-folder nav__icon'></i>
-                        <span class="nav__name">Horario de medicos</span>
+                      <i class="bi bi-calendar2-plus nav__icon"></i>
+                      <span class="nav__name">Crear horarios</span>
                     </a>
-                </div>
-                <div class="nav__list">
+                  </div>                  
+                  <div class="nav__list">
+                    <a href="/deleteHorario" class="nav__link">
+                      <i class="bi bi-search nav__icon"></i>
+                      <span class="nav__name">Consultar horarios</span>
+                    </a>
+                  </div>   
+                  <div class="nav__list">
+                    <a href="/consultarExportarA" class="nav__link">
+                      <i class="bi bi-file-earmark-excel nav__icon"></i>
+                      <span class="nav__name">Exportar citas</span>
+                    </a>
+                  </div>   
+                  <div class="nav__list">
                     <a href="/admin/adminException" class="nav__link">
-                        <i class='bx bx-folder nav__icon'></i>
-                        <span class="nav__name">Excepciones</span>
+                      <i class="bi bi-calendar-plus nav__icon"></i>
+                      <span class="nav__name">Excepciones/Adiciones</span>
                     </a>
-                </div>
+                  </div>
             </div>
             <a href="#" onclick="logOut()" class="nav__link">
                 <i class='bx bx-log-out nav__icon'></i>
@@ -89,7 +101,7 @@
             </h4>
             <hr class="my-4">
             <div class="text-center mb-2">
-                A continuación podrás revisar las citas médicas agendadas hasta la fecha
+                A continuación podrás revisar las citas médicas reservadas hasta la fecha
             </div>
             <table id="conTable" class="table table-bordered table-responsive">
                 <thead>

@@ -287,6 +287,7 @@ let agendar = async (req, res) => {
    
     var Factura = req.body.Factura;
     var Estado = 'Pendiente';
+    var agendada = 'No';
     var descripcion = req.body.descripcion;
     var id = user.id;
     var fecha_exp = req.body.fechaExp;
@@ -436,7 +437,7 @@ let agendar = async (req, res) => {
     if (citaExist) {
         let idp = await userService.magic(espe, doctor, newdate, hora, linkOrden, name, lastname,
             Cedula, id, descripcion, Estado, correo, Cita, Modo, Factura, autorizacion, entidad, regimen,
-            number, tipo, fecha_exp, direccion, barrio, departamento, municipio, cellphone1, tele, person, fecha_nac, procedimiento);
+            number, tipo, fecha_exp, direccion, barrio, departamento, municipio, cellphone1, tele, person, fecha_nac, procedimiento, agendada);
 
         await userService.survey(p1, p2, p3, p4, p5, p6, p7, p8, p9, idp);
 

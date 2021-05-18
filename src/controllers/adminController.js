@@ -172,7 +172,7 @@ let CitasAdmin = (req, res) => {
 
 let ExportarAdmin = (req, res) => {
     if (req.session.admin) {
-        connection.query('SELECT agendamiento.idpa, agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.Celular, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Estado, agendamiento.idu, agendamiento.Especialidad, agendamiento.Doctor, DATE_FORMAT(agendamiento.fecha, "%d-%m-%Y") fecha, DATE_FORMAT(agendamiento.fecha, "%Y") año, DATE_FORMAT(agendamiento.fecha, "%M") mes, DATE_FORMAT(agendamiento.hora_solicitud, "%d-%m-%Y") hora_solicitud, DATE_FORMAT(agendamiento.fecha_nac, "%d-%m-%Y") fecha_nac, agendamiento.hora_ini, agendamiento.Orden, agendamiento.Tipo_documento, agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Cita, agendamiento.Direccion, agendamiento.Barrio, user.sexo FROM agendamiento INNER JOIN user WHERE agendamiento.idu = user.id AND agendamiento.Estado = "Aceptada"', (err, info) => {
+        connection.query('SELECT agendamiento.idpa, agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.Celular, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Estado, agendamiento.idu, agendamiento.Especialidad, agendamiento.Doctor, DATE_FORMAT(agendamiento.fecha, "%d-%m-%Y") fecha, DATE_FORMAT(agendamiento.fecha, "%Y") año, DATE_FORMAT(agendamiento.fecha, "%M") mes, DATE_FORMAT(agendamiento.hora_solicitud, "%d-%m-%Y") hora_solicitud, DATE_FORMAT(agendamiento.fecha_nac, "%d-%m-%Y") fecha_nac, agendamiento.hora_ini, agendamiento.Orden, agendamiento.Tipo_documento, agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Cita, agendamiento.Direccion, agendamiento.Barrio, user.sexo FROM agendamiento INNER JOIN user WHERE agendamiento.idu = user.id AND agendamiento.Estado = "Aceptada" AND agendamiento.Agendada = "No"', (err, info) => {
             if (err) {
                 res.json(err);
             }
@@ -182,6 +182,28 @@ let ExportarAdmin = (req, res) => {
                 user: req.session.context
                 //user: req.user
             });
+        });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
+};
+
+let updateExportA = async (req, res) => {
+   
+    var id = req.body.id;    
+    console.log(id)
+    var agendada = 'Si';
+
+    if (req.session.admin) {
+        connection.query("UPDATE agendamiento SET Agendada = ? WHERE idpa = ?", [agendada, id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+
+            console.log(datos);
+            return res.redirect('/consultarExportarA');
         });
     } else {
         return res.render("login.ejs", {
@@ -341,5 +363,6 @@ module.exports = {
     tableHorario: tableHorario,
     deleteHorario: deleteHorario,
     deleteException: deleteException,
-    ExportarAdmin: ExportarAdmin
+    ExportarAdmin: ExportarAdmin,
+    updateExportA: updateExportA
 }

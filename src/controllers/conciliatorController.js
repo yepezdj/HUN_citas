@@ -191,7 +191,7 @@ let updateC = async (req, res) => {
       </a>`;
     gmailController.sendEmailNormal(correo, 'Reprogramación de cita médica-HUN', body)
 
-    if (req.session.admin) {
+    if (req.session.conciliator) {
         connection.query("UPDATE agendamiento SET fecha = ?, hora_ini = ? WHERE idpa = ?", [newdate, hora, id], (err, datos) => {
             if (err) {
                 res.json(err);
@@ -207,6 +207,48 @@ let updateC = async (req, res) => {
     }
 };
 
+let ExportarConciliator = (req, res) => {
+    if (req.session.conciliator) {
+        connection.query('SELECT agendamiento.idpa, agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.Celular, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Estado, agendamiento.idu, agendamiento.Especialidad, agendamiento.Doctor, DATE_FORMAT(agendamiento.fecha, "%d-%m-%Y") fecha, DATE_FORMAT(agendamiento.fecha, "%Y") año, DATE_FORMAT(agendamiento.fecha, "%M") mes, DATE_FORMAT(agendamiento.hora_solicitud, "%d-%m-%Y") hora_solicitud, DATE_FORMAT(agendamiento.fecha_nac, "%d-%m-%Y") fecha_nac, agendamiento.hora_ini, agendamiento.Orden, agendamiento.Tipo_documento, agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Cita, agendamiento.Direccion, agendamiento.Barrio, user.sexo FROM agendamiento INNER JOIN user WHERE agendamiento.idu = user.id AND agendamiento.Estado = "Aceptada" AND agendamiento.Agendada = "No"', (err, info) => {
+            if (err) {
+                res.json(err);
+            }
+            console.log(info);
+            res.render('./conciliator/conciliatorExportar.ejs', {
+                info: info,
+                user: req.session.context
+                //user: req.user
+            });
+        });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
+};
+
+let updateExport = async (req, res) => {
+   
+    //const id = req.params.idpa;
+    var id = req.body.id;    
+    console.log(id)
+    var agendada = 'Si';
+
+    if (req.session.conciliator) {
+        connection.query("UPDATE agendamiento SET Agendada = ? WHERE idpa = ?", [agendada, id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+
+            console.log(datos);            
+            return res.redirect('/consultarExportarC');
+        });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
+};
 
 module.exports = {
     getConciliator: getConciliator,
@@ -216,6 +258,8 @@ module.exports = {
     declinar: declinar,
     Citas: Citas,
     editC: editC,
-    updateC: updateC
+    updateC: updateC,
+    ExportarConciliator: ExportarConciliator,
+    updateExport: updateExport
 }
 

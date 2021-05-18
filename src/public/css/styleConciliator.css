@@ -42,6 +42,12 @@ body{
   text-align: center !important;
 }
 
+.tooltip.danger .tooltip-inner          { background-color:    #d9534f !important; }
+.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #d9534f !important; }
+.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #d9534f !important; }
+.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #d9534f !important; }
+.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #d9534f !important; }
+
 
 a{
   text-decoration: none;
