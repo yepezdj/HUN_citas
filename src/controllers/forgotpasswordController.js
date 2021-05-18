@@ -35,8 +35,18 @@ let aa = (req, res, next) => {
             const token = jwt.sign(payload, secret,{expiresIn: '30m'});
             const link =`http://localhost/reset-password/${user.id}/${token}`;
             console.log(link);
+            const body = `<h4>Estimado/a</h4>
+            Para recuperar la contraseña de su cuenta, por favor acceder al siguiente link:
+            <hr class="my-4">
+            ${link}
+            <hr class="my-4">
+            <div class="text-center mb-2">
+              ¿Tiene alguna inquietud al respecto? Favor comunicarse a la línea
+              <a href="#" class="register-link">
+              (57) (5) 3858131
+              </a>`;
 
-            gmailController.sendEmailNormal(user.email, 'Recuperar contraseña NOMBRE DE LA APP Hospital Universidad del Norte',link)
+            gmailController.sendEmailNormal(user.email, 'Recuperar contraseña Hospital Universidad del Norte',body)
             //res.send('El link para recuperar la contraseña ha sido enviado a tu email.');
             req.session.fperror = {msg: (`El link para recuperar la contraseña ha sido enviado a tu email.`)};
             return res.redirect("/forgot-passwordRest");
