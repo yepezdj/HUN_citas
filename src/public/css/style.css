@@ -88,6 +88,8 @@ select{
     position: relative;    
 }
 
-
+input{
+  border:2px solid#008DCA !important; 
+}
 
 /* RUTAS */

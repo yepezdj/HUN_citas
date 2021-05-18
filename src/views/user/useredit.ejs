@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="shortcut icon" href="https://genfavicon.com/tmp/icon_d1490e0ca97a4e19828ac691e5ef8be0.ico">
+
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -54,28 +56,37 @@
         <nav class="nav">
             <div>
                 <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
-                    <i class="bi bi-house nav__logo-icon"></i> 
+                    <i class="bi bi-house nav__logo-icon"></i>
                     <span class="nav__logo-name">
                         Hospital<br>
                         Universidad del<br>
                         Norte
                     </span>
                 </a>
+                <div class="nav__list">
+                    <a href="/user/usermain" class="nav__link">
+                        <i class="bi bi-calendar-week nav__icon"></i>
+                        <span class="nav__name">Solicitar cita</span>
+                    </a>
+                </div>
 
                 <div class="nav__list">
-
                     <a href="/consultar" class="nav__link">
-                        <i class='bx bx-folder nav__icon'></i>
-                        <span class="nav__name">Consultar estado de solicitud</span>
+                        <i class="bi bi-search nav__icon" data-toggle="tooltip" data-placement="right"
+                            data-type="danger" title="Consultar estado de la solicitud"></i>
+                        <span class="nav__name">Consultar estado de <br>
+                            solicitud</span>
                     </a>
-
                 </div>
             </div>
-            <a href="#" onclick="logOut()" class="nav__link">
-                <i class='bx bx-log-out nav__icon'></i>
-                <span class="nav__name">Cerrar sesión</span>
-            </a>
-        </nav>
+
+
+    </div>
+    <a href="#" onclick="logOut()" class="nav__link">
+        <i class='bx bx-log-out nav__icon'></i>
+        <span class="nav__name">Cerrar sesión</span>
+    </a>
+    </nav>
     </div>
 
 
@@ -264,7 +275,8 @@
                                                             style="margin-top: 20px;">Tipo de documento<label
                                                                 class="redText">*</label></label>
                                                         <input type="text" class="form-control" id="Tipo" name="Tipo"
-                                                            autocomplete="off" value="<%= datos.Tipo_documento %>" readonly>
+                                                            autocomplete="off" value="<%= datos.Tipo_documento %>"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -284,7 +296,8 @@
                                                                 class="redText">*</label></label>
                                                         <input class="form-control" id="Departamento"
                                                             name="Departamento" type="text" autocomplete="off"
-                                                            onkeypress="return false" value="<%= datos.Departamento %>" readonly>
+                                                            onkeypress="return false" value="<%= datos.Departamento %>"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6" id="muni">
@@ -300,11 +313,13 @@
                                                 <div class="row">
                                                     <div class="col-12 col-sm-6" style="margin-top: 20px;">
                                                         <div class="form-input">
-                                                            <label for="Cedula" class="form-label">N° de identificación del
+                                                            <label for="Cedula" class="form-label">N° de identificación
+                                                                del
                                                                 paciente <label class="redText">*</label></label>
                                                             <input type="number" class="form-control" id="Cedula"
-                                                                name="Cedula" placeholder="Sin puntos ni comas ni guiones"
-                                                                min="0" step="1" oninput="validity.valid||(value='');"
+                                                                name="Cedula"
+                                                                placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                                step="1" oninput="validity.valid||(value='');"
                                                                 value="<%= datos.CedulaP %>">
                                                         </div>
                                                     </div>
@@ -313,23 +328,25 @@
                                                             <label for="Cedula1" class="form-label">Confirme N° de
                                                                 identificación<label class="redText">*</label></label>
                                                             <input type="number" class="form-control" id="Cedula1"
-                                                                name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
-                                                                min="0" step="1" oninput="validity.valid||(value='');"
+                                                                name="Cedula1"
+                                                                placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                                step="1" oninput="validity.valid||(value='');"
                                                                 value="<%= datos.CedulaP %>">
                                                         </div>
                                                     </div>
-                                                <div class="col-12 col-sm-6">
-                                                    <div class="form-input">
-                                                        <label for="persona" class="form-label"
-                                                            style="margin-top: 20px;">Menciona un acompañante</label>
-                                                        <input type="text" class="form-control" id="persona"
-                                                            name="persona"
-                                                            placeholder="Ingresa los nombres y apellidos del acompañante"
-                                                            autocomplete="off" value="<%= datos.Acompañante %>">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input">
+                                                            <label for="persona" class="form-label"
+                                                                style="margin-top: 20px;">Menciona un
+                                                                acompañante</label>
+                                                            <input type="text" class="form-control" id="persona"
+                                                                name="persona"
+                                                                placeholder="Ingresa los nombres y apellidos del acompañante"
+                                                                autocomplete="off" value="<%= datos.Acompañante %>">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
+
                                             </div>
                                         </div>
                                     </div>
@@ -367,8 +384,8 @@
                                                             <label for="Cita" class="form-label">Tipo de cita <label
                                                                     class="redText">*</label></label>
                                                             <input type="text" class="form-control" id="Cita"
-                                                                name="Cita" autocomplete="off"
-                                                                value="<%= datos.Cita %>" readonly>
+                                                                name="Cita" autocomplete="off" value="<%= datos.Cita %>"
+                                                                readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6">
@@ -408,8 +425,8 @@
                                                             <label for="Modo" class="form-label">Modalidad de la cita
                                                                 <label class="redText">*</label></label>
                                                             <input type="text" class="form-control" id="Modo"
-                                                                name="Modo" autocomplete="off"
-                                                                value="<%= datos.Modo %>" readonly>
+                                                                name="Modo" autocomplete="off" value="<%= datos.Modo %>"
+                                                                readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6" id="ayudas" style="display: none;">
@@ -548,7 +565,7 @@
                                                                 conservar la
                                                                 misma
                                                                 fecha y hora?</label>
-                                                        </div>                                                        
+                                                        </div>
                                                         <div class="col-8 col-sm-2">
                                                             <select class="custom-select mt-2" style="margin: 20px;"
                                                                 id="Option" name="Option">
@@ -559,53 +576,59 @@
                                                     </div>
                                                     <div class="w-100 d-none d-md-block"></div>
                                                     <div id="hide" style="display: none;">
-                                                    <p class="centered">Selecciona el horario de la cita de acuerdo a la
-                                                        disponibilidad del profesional de la salud (Recuerda hacer click en el nombre del profesional de la salud o en dado caso de la ayuda diagnóstica). <i
-                                                            class="bi bi-calendar-event"></i>
-                                                    </p>
-                                                    <div id="hide">
-                                                        <div class="text-center mb-2">
-                                                            Horarios habituales del profesional de la salud.
-                                                        </div>
-                                                        <div class="w-100 d-none d-md-block"></div>
-                                                        <div class="col-12 col-sm-12"
-                                                            style="height:300px; overflow-y: scroll;">
-                                                            <table class="table table-hover" id="tabla">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Profesional de la salud</th>
-                                                                        <th>Días disponibles</th>
-                                                                        <th>Horarios disponibles</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="myTable">
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="w-100 d-none d-md-block"></div>
-                                                        <div class="row">
-                                                            <div class="col-12 col-sm-6">
-                                                                <div class="form-input" style="margin-top: 20px;">
-                                                                    <label for="fecha" class="form-label">Fecha de la
-                                                                        cita
-                                                                        <label class="redText">*</label></label>
-                                                                    <input class="form-control" id="fecha" name="fecha"
-                                                                        autocomplete="off" onkeypress="return false">
+                                                        <p class="centered">Selecciona el horario de la cita de acuerdo
+                                                            a la
+                                                            disponibilidad del profesional de la salud (Recuerda hacer
+                                                            click en el nombre del profesional de la salud o en dado
+                                                            caso de la ayuda diagnóstica). <i
+                                                                class="bi bi-calendar-event"></i>
+                                                        </p>
+                                                        <div id="hide">
+                                                            <div class="text-center mb-2">
+                                                                Horarios habituales del profesional de la salud.
+                                                            </div>
+                                                            <div class="w-100 d-none d-md-block"></div>
+                                                            <div class="col-12 col-sm-12"
+                                                                style="height:300px; overflow-y: scroll;">
+                                                                <table class="table table-hover" id="tabla">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Profesional de la salud</th>
+                                                                            <th>Días disponibles</th>
+                                                                            <th>Horarios disponibles</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="myTable">
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="w-100 d-none d-md-block"></div>
+                                                            <div class="row">
+                                                                <div class="col-12 col-sm-6">
+                                                                    <div class="form-input" style="margin-top: 20px;">
+                                                                        <label for="fecha" class="form-label">Fecha de
+                                                                            la
+                                                                            cita
+                                                                            <label class="redText">*</label></label>
+                                                                        <input class="form-control" id="fecha"
+                                                                            name="fecha" autocomplete="off"
+                                                                            onkeypress="return false">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-sm-6" id="hide2">
+                                                                    <div class="form-input" style="margin-top: 20px;">
+                                                                        <label for="Horario" class="custom-label">Horas
+                                                                            disponibles
+                                                                            <label class="redText">*</label></label>
+                                                                        <select class="custom-select" id="Horario"
+                                                                            name="Horario">
+                                                                            <option value="0">Seleccionar la hora
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12 col-sm-6" id="hide2">
-                                                                <div class="form-input" style="margin-top: 20px;">
-                                                                    <label for="Horario" class="custom-label">Horas
-                                                                        disponibles
-                                                                        <label class="redText">*</label></label>
-                                                                    <select class="custom-select" id="Horario"
-                                                                        name="Horario">
-                                                                        <option value="0">Seleccionar la hora</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -639,6 +662,10 @@
                                                             orden
                                                             médica ó el número de autorización. <i
                                                                 class="bi bi-archive"></i>
+                                                            <br>
+                                                            <strong class="font-italic">Ten en cuenta que el archivo
+                                                                tiene que estar en formato pdf y su tamaño no puede
+                                                                exceder los 3MB.</strong>
                                                         </p>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <label class="form-label mt-2">Orden médica <a href="#"
@@ -717,8 +744,8 @@
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
-           
-            consult();           
+
+            consult();
         }
 
         var date = new Date();
@@ -878,7 +905,7 @@
         $('#btnC1').click(function () {
             $('#collapse1').toggle();
         });
-        $('#btnC2').click(function () {            
+        $('#btnC2').click(function () {
             $('#collapse2').toggle();
             cita();
         });
@@ -900,21 +927,21 @@
             if (emailRegex.test(campo.value)) {
                 $("#emailOK").show();
                 $("#emailNOTOK").hide();
-                $("#emailOK").hide();                             
+                $("#emailOK").hide();
             } else {
                 $("#emailNOTOK").show();
-                $("#emailOK").hide();                
+                $("#emailOK").hide();
             }
         });
         document.getElementById('email1').addEventListener('input', function () {
             campo = event.target;
             valido = document.getElementById('emailOK1');
-           
+
             emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
             if (emailRegex.test(campo.value)) {
                 $("#emailOK1").show();
                 $("#emailNOTOK1").hide();
-                $("#emailOK1").hide();                              
+                $("#emailOK1").hide();
             } else {
                 $("#emailNOTOK1").show();
                 $("#emailOK1").hide();
@@ -1008,7 +1035,7 @@
                 $("#doctor5").hide();
             }
         }
-      
+
         async function consult() {
             var con1 = document.getElementById('Doctores').value;
             const consulta2 = {
@@ -1072,7 +1099,7 @@
             var hora = document.getElementById("Horario").value;
             var fileo = document.getElementById("Orden").value;
             var autorizacion = document.getElementById("autorizacion").value;
-            
+
 
             var option = document.getElementById("Option").value;
 
@@ -1234,7 +1261,7 @@
             }
         }
 
-       
+
         function vaciarU() {
             document.getElementById('TableUser').innerHTML = '';
         }
@@ -1255,9 +1282,9 @@
             $("#Orden").on('change', function () {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });           
+            });
         });
-     
+
 
     </script>
     <!--===== MAIN JS =====-->

@@ -156,6 +156,10 @@ tbody tr:nth-child(odd) {
     border:2px solid#008DCA !important;   
   }
 
+  #fecha[readonly]{
+    background-color: transparent !important;     
+  }
+
  input:focus::placeholder{
     font-family: var(--body-font);
     color: #525355 !important;

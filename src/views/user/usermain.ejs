@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+ 
+    <link rel="shortcut icon" href="https://genfavicon.com/tmp/icon_d1490e0ca97a4e19828ac691e5ef8be0.ico">
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -47,7 +48,7 @@
         <nav class="nav">
             <div>
                 <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
-                    <i class="bi bi-house nav__logo-icon"></i> 
+                    <i class="bi bi-house nav__logo-icon"></i>
                     <span class="nav__logo-name">
                         Hospital<br>
                         Universidad del<br>
@@ -58,7 +59,7 @@
                 <div class="nav__list">
                     <a href="/consultar" class="nav__link">
                         <i class="bi bi-search nav__icon" data-toggle="tooltip" data-placement="right"
-                        data-type="danger" title="Consultar estado de la solicitud"></i>                        
+                            data-type="danger" title="Consultar estado de la solicitud"></i>
                         <span class="nav__name">Consultar estado de <br>
                             solicitud</span>
                     </a>
@@ -312,26 +313,26 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                
-                                                    <div class="col-12 col-sm-6" style="margin-top: 20px;">
-                                                        <div class="form-input">
-                                                            <label for="Cedula" class="form-label">N° de identificación del
-                                                                paciente <label class="redText">*</label></label>
-                                                            <input type="number" class="form-control" id="Cedula"
-                                                                name="Cedula" placeholder="Sin puntos ni comas ni guiones"
-                                                                min="0" step="1" oninput="validity.valid||(value='');">
-                                                        </div>
+
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula" class="form-label">N° de identificación del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula"
+                                                            name="Cedula" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
                                                     </div>
-                                                    <div class="col-12 col-sm-6" style="margin-top: 20px;">
-                                                        <div class="form-input">
-                                                            <label for="Cedula1" class="form-label">Confirme N° de
-                                                                identificación<label class="redText">*</label></label>
-                                                            <input type="number" class="form-control" id="Cedula1"
-                                                                name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
-                                                                min="0" step="1" oninput="validity.valid||(value='');">
-                                                        </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula1" class="form-label">Confirme N° de
+                                                            identificación<label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula1"
+                                                            name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
                                                     </div>
-                                                
+                                                </div>
+
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="persona" class="form-label"
@@ -343,7 +344,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -380,7 +381,8 @@
                                                             <label for="Cita" class="form-label">Tipo de cita <label
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Cita" name="Cita" onchange="limpiar(), vaciar()" onclick="vacio()">
+                                                                id="Cita" name="Cita" onchange="limpiar(), vaciar()"
+                                                                onclick="vacio()">
                                                                 <option value="0">Seleccionar tipo de cita médica
                                                                 </option>
                                                                 <option value="Ayudas diagnósticas">Ayudas diagnósticas
@@ -464,8 +466,8 @@
                                                             <label for="Ayudas" class="form-label">Ayudas diagnósticas
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Ayudas" name="Ayudas"
-                                                                onclick="vacioF()" onchange="vaciar()">
+                                                                id="Ayudas" name="Ayudas" onclick="vacioF()"
+                                                                onchange="vaciar()">
                                                                 <option value="0">Seleccionar ayuda diagnóstica</option>
                                                             </select>
                                                         </div>
@@ -478,7 +480,8 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Procedimientos" name="Procedimientos"
-                                                                onchange="especialidad2('Procedimientos','opciones2'), limpiarMed()"  onclick="vacio(), vaciarF()">
+                                                                onchange="especialidad2('Procedimientos','opciones2'), limpiarMed()"
+                                                                onclick="vacio(), vaciarF()">
                                                                 <option value="0">Seleccionar procedimiento ambulatorio
                                                                 </option>
                                                             </select>
@@ -506,8 +509,8 @@
                                                             <label for="Cita" class="form-label">Profesional de la
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Doctores" name="Doctores"
-                                                                onclick="vacioF()" onchange="vaciar()">
+                                                                id="Doctores" name="Doctores" onclick="vacioF()"
+                                                                onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -532,8 +535,8 @@
                                                             <label for="Cita" class="form-label">Profesional de la
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Doctores2" name="Doctores2"
-                                                                onclick="vacioF()" onchange="vaciar()">
+                                                                id="Doctores2" name="Doctores2" onclick="vacioF()"
+                                                                onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -558,8 +561,8 @@
                                                             <label for="Cita" class="form-label">Profesional de la
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Doctores3" name="Doctores3"
-                                                                onclick="vacioF()" onchange="vaciar()">
+                                                                id="Doctores3" name="Doctores3" onclick="vacioF()"
+                                                                onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -571,8 +574,8 @@
                                                             <label for="Cita" class="form-label">Profesional de la
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Doctores4" name="Doctores4"
-                                                                onclick="vacioF()" onchange="vaciar()">
+                                                                id="Doctores4" name="Doctores4" onclick="vacioF()"
+                                                                onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -584,8 +587,8 @@
                                                             <label for="Cita" class="form-label">Profesional de la
                                                                 salud<label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Doctores5" name="Doctores5"
-                                                                onclick="vacioF()" onchange="vaciar()">
+                                                                id="Doctores5" name="Doctores5" onclick="vacioF()"
+                                                                onchange="vaciar()">
                                                                 <option value="0">Seleccionar profesional de la salud
                                                                 </option>
                                                             </select>
@@ -619,7 +622,7 @@
                                         <div id="collapse4" style="display: none;">
                                             <div class="card-body">
                                                 <div class="text-center mb-2">
-                                                    Debido a que haz seleccionado la modalidad de cita presencial, dada
+                                                    Debido a que has seleccionado la modalidad de cita presencial, dada
                                                     la emergencia sanitaria
                                                     deberás completar la siguiente encuesta para poder solicitar la
                                                     cita.
@@ -835,12 +838,14 @@
                                             <div>
                                                 <div class="card-body" id="collapse3" style="display: none;">
                                                     <p class="centered">Selecciona el horario de la cita de acuerdo a la
-                                                        disponibilidad del profesional de la salud (Recuerda hacer click en el nombre del profesional de la salud o en dado caso de la ayuda diagnóstica). <i
-                                                            class="bi bi-calendar-event"></i>
+                                                        disponibilidad del profesional de la salud (Recuerda hacer click
+                                                        en el nombre del profesional de la salud o en dado caso de la
+                                                        ayuda diagnóstica). <i class="bi bi-calendar-event"></i>
                                                     </p>
                                                     <div id="hide">
                                                         <div class="text-center mb-2">
-                                                            Horarios habituales del profesional de la salud (Debes tener antes seleccionado al profesional).
+                                                            Horarios habituales del profesional de la salud (Debes tener
+                                                            antes seleccionado al profesional).
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="col-12 col-sm-12"
@@ -865,7 +870,7 @@
                                                                         cita
                                                                         <label class="redText">*</label></label>
                                                                     <input class="form-control" id="fecha" name="fecha"
-                                                                        autocomplete="off" onkeypress="return false">
+                                                                        autocomplete="off" onkeypress="return false" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-sm-6" id="hide2">
@@ -913,7 +918,12 @@
                                                             orden
                                                             médica ó el número de autorización. <i
                                                                 class="bi bi-archive"></i>
+                                                            <br>
+                                                            <strong class="font-italic">Ten en cuenta que el archivo
+                                                                tiene que estar en formato pdf y su tamaño no puede
+                                                                exceder los 3MB.</strong>
                                                         </p>
+
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <label for="Orden" class="custom-label">Orden médica (original)
                                                             <i class="bi bi-paperclip"></i></label>
@@ -1195,7 +1205,7 @@
             $("#Doctores5").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
 
-        function limpiarMed(){
+        function limpiarMed() {
             $("#Doctores2").empty();
             $("#Doctores2").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
@@ -1394,32 +1404,32 @@
         const ayudas = document.getElementById('Ayudas');
         ayudas.addEventListener('click', function () {
             console.log('ayuda')
-           buildTable3()
+            buildTable3()
         });
         const doc = document.getElementById('Doctores');
         doc.addEventListener('click', function () {
             console.log('ayuda')
-           buildTable()
+            buildTable()
         });
         const doc2 = document.getElementById('Doctores2');
         doc2.addEventListener('click', function () {
             console.log('ayuda')
-           buildTable2()
+            buildTable2()
         });
         const doc3 = document.getElementById('Doctores3');
         doc3.addEventListener('click', function () {
             console.log('ayuda')
-           buildTable4()
+            buildTable4()
         });
         const doc4 = document.getElementById('Doctores4');
         doc4.addEventListener('click', function () {
             console.log('ayuda')
-           buildTable5()
+            buildTable5()
         });
         const doc5 = document.getElementById('Doctores5');
         doc5.addEventListener('click', function () {
             console.log('ayuda')
-           buildTable6()
+            buildTable6()
         });
 
         $('#btnC1').click(function () {
