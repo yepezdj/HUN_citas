@@ -84,6 +84,25 @@ tbody tr:nth-child(odd) {
   border: 0 !important; 
 }
 
+table > tbody:empty {
+  position: relative;
+  display: table-caption;
+  caption-side: bottom;
+  min-height: 50px;
+  background-color: transparent;
+  text-align: center;
+}
+table > tbody:empty:before {
+  content: 'Recuerda hacer click en el nombre del profesional de la salud o en dado caso de la ayuda diagnóstica.';
+  color: red;
+  position: absolute;
+  font-size: 14px;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .tooltip.danger .tooltip-inner          { background-color:    #d9534f !important; }
 .tooltip.danger.top > .tooltip-arrow    { border-top-color:    #d9534f !important; }
 .tooltip.danger.right > .tooltip-arrow  { border-right-color:  #d9534f !important; }
