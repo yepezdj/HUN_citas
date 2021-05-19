@@ -59,6 +59,25 @@ body{
   color: white;
 }
 
+table > tbody:empty {
+  position: relative;
+  display: table-caption;
+  caption-side: bottom;
+  min-height: 50px;
+  background-color: transparent;
+  text-align: center;
+}
+table > tbody:empty:before {
+  content: 'Recuerda hacer click en el nombre del profesional de la salud o en dado caso de la ayuda diagnóstica.';
+  color: red;
+  position: absolute;
+  font-size: 14px;
+  left: 0;
+  right: 0;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
 /* .modal {
   z-index: 100000 !important;
 } */

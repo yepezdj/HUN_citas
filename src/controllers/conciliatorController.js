@@ -45,7 +45,7 @@ let aceptar = async (req, res) => {
     const datos = req.body;
     const id = req.body.id;
     console.log(datos)
-    
+
     let variablesAceptar = {
         correo: req.body.correo,
         nombre: req.body.nombre,
@@ -53,8 +53,8 @@ let aceptar = async (req, res) => {
         doctor: req.body.doctor,
         fecha: req.body.fecha,
         hora: req.body.hora,
-        descripcion: req.body.descripcion,  
-        Cita: req.body.Cita      
+        descripcion: req.body.descripcion,
+        Cita: req.body.Cita
     };
     console.log(variablesAceptar);
 
@@ -89,7 +89,7 @@ let declinar = async (req, res) => {
     const datos = req.body;
     const id = req.body.id;
     console.log(datos)
-    
+
     let variablesDeclinar = {
         correo: req.body.correo,
         nombre: req.body.nombre,
@@ -97,8 +97,8 @@ let declinar = async (req, res) => {
         doctor: req.body.doctor,
         fecha: req.body.fecha,
         hora: req.body.hora,
-        descripcion: req.body.descripcion,        
-        Cita: req.body.Cita 
+        descripcion: req.body.descripcion,
+        Cita: req.body.Cita
     };
     console.log(variablesDeclinar);
 
@@ -163,7 +163,8 @@ let updateC = async (req, res) => {
     var espe = req.body.opciones;
     var hora = req.body.Horario;
     var fecha = req.body.fecha1;
-    
+    var ayuda = req.body.Ayudas;
+
 
     var Cita = req.body.Cita;
     var Factura = req.body.Factura;
@@ -174,7 +175,7 @@ let updateC = async (req, res) => {
     var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
     // console.log(fecha)
     console.log('aló')
-    
+
 
     var Modo;
     if (Cita == "Ayudas diagnósticas" || Cita == "Proceso de dermatología") {
@@ -183,7 +184,17 @@ let updateC = async (req, res) => {
         Modo = req.body.Modo;
     }
 
-    const body = `<h4>Estimado/a ${name} ${lastname}</h4>
+    if (Cita == 'Ayudas diagnósticas') {
+        const body = `<h4>Estimado/a ${name} ${lastname}</h4>
+    Se le informa que ha sido reprogramada su ayuda diagnóstica de ${ayuda} para el ${newdate} a las ${hora}
+    <hr class="my-4">
+    <div class="text-center mb-2">
+      ¿Tiene alguna inquietud al respecto? Favor comunicarse a la línea
+      <a href="#" class="register-link">
+      (57) (5) 3858131
+      </a>`;
+    } else {
+        const body = `<h4>Estimado/a ${name} ${lastname}</h4>
     Se le informa que su cita médica ha sido reprogramada con el/la ${doctor} para el ${newdate} a las ${hora}
     <hr class="my-4">
     <div class="text-center mb-2">
@@ -191,6 +202,7 @@ let updateC = async (req, res) => {
       <a href="#" class="register-link">
       (57) (5) 3858131
       </a>`;
+    }
     gmailController.sendEmailNormal(correo, 'Reprogramación de cita médica-HUN', body)
 
     if (req.session.conciliator) {
@@ -230,9 +242,9 @@ let ExportarConciliator = (req, res) => {
 };
 
 let updateExport = async (req, res) => {
-   
+
     //const id = req.params.idpa;
-    var id = req.body.id;    
+    var id = req.body.id;
     console.log(id)
     var agendada = 'Si';
 
@@ -242,7 +254,7 @@ let updateExport = async (req, res) => {
                 res.json(err);
             }
 
-            console.log(datos);            
+            console.log(datos);
             return res.redirect('/consultarExportarC');
         });
     } else {
