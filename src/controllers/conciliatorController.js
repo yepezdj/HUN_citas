@@ -184,8 +184,9 @@ let updateC = async (req, res) => {
         Modo = req.body.Modo;
     }
 
-    if (Cita == 'Ayudas diagnósticas') {
-        const body = `<h4>Estimado/a ${name} ${lastname}</h4>
+    var body;
+    if (Cita == "Ayudas diagnósticas") {
+        body = `<h4>Estimado/a ${name} ${lastname}</h4>
     Se le informa que ha sido reprogramada su ayuda diagnóstica de ${ayuda} para el ${newdate} a las ${hora}
     <hr class="my-4">
     <div class="text-center mb-2">
@@ -194,7 +195,7 @@ let updateC = async (req, res) => {
       (57) (5) 3858131
       </a>`;
     } else {
-        const body = `<h4>Estimado/a ${name} ${lastname}</h4>
+        body = `<h4>Estimado/a ${name} ${lastname}</h4>
     Se le informa que su cita médica ha sido reprogramada con el/la ${doctor} para el ${newdate} a las ${hora}
     <hr class="my-4">
     <div class="text-center mb-2">
