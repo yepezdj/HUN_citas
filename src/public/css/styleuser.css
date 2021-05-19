@@ -179,6 +179,10 @@ table > tbody:empty:before {
     background-color: transparent !important;     
   }
 
+  #fecha1[readonly]{
+    background-color: transparent !important;     
+  }
+  
  input:focus::placeholder{
     font-family: var(--body-font);
     color: #525355 !important;

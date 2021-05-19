@@ -78,6 +78,15 @@ table > tbody:empty:before {
   transform: translateY(-50%);
 }
 
+/* input{
+  color: #008DCA;
+  border:2px solid#008DCA !important;   
+} */
+
+#fecha[readonly]{
+  background-color: transparent !important;     
+}
+
 /* .modal {
   z-index: 100000 !important;
 } */
