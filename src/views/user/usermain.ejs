@@ -495,20 +495,17 @@
                                                     <div class="col-12 col-sm-6" id="especialidad"
                                                         style="display: none;">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <div class="parent">
-                                                                <div class="child">
-                                                                    <label for="Cita" class="form-label">Especialidad
-                                                                        <label class="redText">*</label></label>
-                                                                    <select class="custom-select mt-2"
-                                                                        style="margin-top: 20px;" id="opciones"
-                                                                        name="opciones"
-                                                                        onchange="doctors('opciones','Doctores')"
-                                                                        onclick="vacio(), vaciarF()">
-                                                                        <option value="0">Seleccionar especialidad
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
+
+                                                            <label for="Cita" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones" name="opciones"
+                                                                onchange="doctors('opciones','Doctores')"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar especialidad
+                                                                </option>
+                                                            </select>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6" id="doctor" style="display: none;">
@@ -516,12 +513,18 @@
                                                             style="margin-top: 20px; margin-bottom: 20px;">
                                                             <label for="Cita" class="form-label">Profesional de la
                                                                 salud<label class="redText">*</label></label>
-                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Doctores" name="Doctores" onclick="vacioF()"
-                                                                onchange="vaciar()">
-                                                                <option value="0">Seleccionar profesional de la salud
-                                                                </option>
-                                                            </select>
+                                                            <div class="parent">
+                                                                <div class="child">
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="Doctores"
+                                                                        name="Doctores" onclick="vacioF()"
+                                                                        onchange="vaciar()">
+                                                                        <option value="0">Seleccionar profesional de la
+                                                                            salud
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6" id="especialidad2"
@@ -1028,7 +1031,7 @@
         function loadFunctions() {
 
             consultaD();
-
+            //consult();
             consult2();
             consult4();
             consult3();
@@ -1196,6 +1199,18 @@
             })
         });
 
+
+
+        const parent = document.querySelector(".parent");
+        parent.addEventListener("click", function (e) {
+            const child = e.target.matches(".child, .child *");
+            if (child) { // If child is click
+
+                console.log('hpta castigo divino')
+                consult()
+
+            }
+        });
         var result = [];
         async function consult() {
             var con1 = document.getElementById('Doctores').value;
@@ -1213,39 +1228,31 @@
             console.log(response2)
             result = await response2.json();
             console.log(result)
-            //buildTable()
+            buildTable()
         }
-        const parent = document.querySelector(".parent");
-        parent.addEventListener("click", function (e) {
-            const child = e.target.matches(".child, .child *");
-            if (child) { // If child is click
-
-                async function buildTable() {
-                    vaciar();
-                    vacio();
-                    console.log(result)
-                    var table = document.getElementById('myTable');
-                    select = document.getElementById('Doctores');
-                    for (var i = 0; i < result.length; i++) {
-                        if (select.value == result[i].Doctor) {
-                            var row = `<tr>
+        function buildTable() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
                             <td>                              
                                 ${result[i].Doctor}                                
                             </td> 
                             <td>                              
                                 ${result[i].dia}                                
                             </td> 							
-							<td>                              
+                			<td>                              
                                 ${result[i].hora_ini} - ${result[i].hora_fin}                                
                             </td>                                                          
-					  </tr>`
-                            table.innerHTML += row
-                        }
-                    }
+                	  </tr>`
+                    table.innerHTML += row
                 }
             }
-        });
-
+        }
         // $(function () {
         //     $("#fechaExp").datepicker({
         //         dateFormat: 'mm-dd-yy',
@@ -1481,36 +1488,36 @@
             });
         });
 
-        const ayudas = document.getElementById('Ayudas');
-        ayudas.addEventListener('click', function () {
-            console.log('ayuda')
-            buildTable3()
-        });
-        const doc = document.getElementById('Doctores');
-        doc.addEventListener('click', function () {
-            console.log('ayuda')
-            buildTable()
-        });
-        const doc2 = document.getElementById('Doctores2');
-        doc2.addEventListener('click', function () {
-            console.log('ayuda')
-            buildTable2()
-        });
-        const doc3 = document.getElementById('Doctores3');
-        doc3.addEventListener('click', function () {
-            console.log('ayuda')
-            buildTable4()
-        });
-        const doc4 = document.getElementById('Doctores4');
-        doc4.addEventListener('click', function () {
-            console.log('ayuda')
-            buildTable5()
-        });
-        const doc5 = document.getElementById('Doctores5');
-        doc5.addEventListener('click', function () {
-            console.log('ayuda')
-            buildTable6()
-        });
+        // const ayudas = document.getElementById('Ayudas');
+        // ayudas.addEventListener('click', function () {
+        //     console.log('ayuda')
+        //     buildTable3()
+        // });
+        // const doc = document.getElementById('Doctores');
+        // doc.addEventListener('click', function () {
+        //     console.log('ayuda')
+        //     buildTable()
+        // });
+        // const doc2 = document.getElementById('Doctores2');
+        // doc2.addEventListener('click', function () {
+        //     console.log('ayuda')
+        //     buildTable2()
+        // });
+        // const doc3 = document.getElementById('Doctores3');
+        // doc3.addEventListener('click', function () {
+        //     console.log('ayuda')
+        //     buildTable4()
+        // });
+        // const doc4 = document.getElementById('Doctores4');
+        // doc4.addEventListener('click', function () {
+        //     console.log('ayuda')
+        //     buildTable5()
+        // });
+        // const doc5 = document.getElementById('Doctores5');
+        // doc5.addEventListener('click', function () {
+        //     console.log('ayuda')
+        //     buildTable6()
+        // });
 
         $('#btnC1').click(function () {
             $('#collapse1').toggle();
