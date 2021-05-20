@@ -99,10 +99,15 @@
                         <th>Hora de solicitud</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
+                        <th>Género</th>
+                        <th>Dirección de residencia</th>
                         <th>Correo electrónico</th>
                         <th>Celular</th>
+                        <th>Celular de respaldo</th>
+                        <th>Teléfono</th>
                         <th>Fecha de nacimiento</th>
                         <th>Tipo de identificación</th>
+                        <th>Lugar de expedición</th>
                         <th>N° de identificación</th>
                         <th>Especialidad</th>
                         <th>Doctor</th>
@@ -115,6 +120,7 @@
                         <th>Modalidad</th>
                         <th>Anexos</th> 
                         <th>Autorización</th> 
+                        <th>Acompañante</th> 
                         <th>Riesgo epidemiológico</th>  
                         <th>Consultar solicitud</th>                        
                     </tr>
@@ -137,16 +143,31 @@
                                     <%= info[i].ApellidoP %>
                                 </td>
                                 <td>
+                                    <%= info[i].sexo %>
+                                </td>
+                                <td>
+                                    <%= info[i].Direccion %>-<%= info[i].Barrio %>
+                                </td>
+                                <td>
                                     <%= info[i].Correo %>
                                 </td>
                                 <td>
                                     <%= info[i].Celular %>
                                 </td>
                                 <td>
+                                    <%= info[i].CelularOp %>
+                                </td>
+                                <td>
+                                    <%= info[i].Telefono %>
+                                </td>
+                                <td>
                                     <%= info[i].fecha_nac %>
                                 </td>
                                 <td>
                                     <%= info[i].Tipo_documento %>
+                                </td>
+                                <td>
+                                    <%= info[i].Municipio %>
                                 </td>
                                 <td>
                                     <%= info[i].CedulaP %>
@@ -186,6 +207,9 @@
                                 </td>
                                 <td>
                                     <%= info[i].Autorizacion %>
+                                </td>
+                                <td>
+                                    <%= info[i].Acompañante %>
                                 </td>
                                 <td> <% if (info[i].P1 == 'Sí' || info[i].P2 == 'Sí' || info[i].P3 == 'Sí' || info[i].P4 == 'Sí' || info[i].P5 == 'Sí' || info[i].P6 == 'Sí' || info[i].P7 == 'Sí' || info[i].P8 == 'Sí') { %>
                                     <div class="text-center mb-2">

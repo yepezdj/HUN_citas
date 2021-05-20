@@ -6,8 +6,8 @@ let getConciliator = (req, res) => {
     if (req.session.conciliator) {
         connection.query(`SELECT agendamiento.idpa,agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Especialidad, agendamiento.Doctor, 
         DATE_FORMAT(agendamiento.fecha, "%Y-%m-%d") fecha, DATE_FORMAT(agendamiento.fecha_nac, "%Y-%m-%d") fecha_nac, agendamiento.hora_ini, agendamiento.Cita, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Orden, agendamiento.Tipo_documento, 
-        agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, DATE_FORMAT(agendamiento.hora_solicitud, "%Y-%m-%d %H:%i:%S") hora_solicitud, encuesta.P1, encuesta.P2, encuesta.P3, encuesta.P4, encuesta.P5, encuesta.P6, encuesta.P7,
-        encuesta.P8, encuesta.P9 FROM agendamiento INNER JOIN encuesta WHERE agendamiento.idpa = encuesta.idpa AND agendamiento.Estado = "Pendiente"`, (err, info) => {
+        agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, DATE_FORMAT(agendamiento.hora_solicitud, "%Y-%m-%d %H:%i:%S") hora_solicitud, agendamiento.Direccion, agendamiento.Barrio, agendamiento.Municipio, agendamiento.CelularOp, agendamiento.Telefono, agendamiento.Acompañante, encuesta.P1, encuesta.P2, encuesta.P3, encuesta.P4, encuesta.P5, encuesta.P6, encuesta.P7,
+        encuesta.P8, encuesta.P9, user.sexo FROM agendamiento INNER JOIN encuesta ON agendamiento.idpa = encuesta.idpa INNER JOIN user ON agendamiento.idu = user.id WHERE agendamiento.Estado = "Pendiente"`, (err, info) => {
             if (err) {
                 res.json(err);
             }

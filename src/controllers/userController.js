@@ -250,7 +250,7 @@ let tabla = (req, res) => {
         var id = user.id;
         /* console.log(cedula); */
         // console.log(req.session.user)
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Cita, Afiliacion, Modo, Estado, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idu = ?', id, (err, datos) => {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Cita, Afiliacion, Modo, Estado, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Direccion, Barrio, CelularOp, Telefono, Acompañante, Municipio FROM agendamiento WHERE idu = ?', id, (err, datos) => {
             if (err) {
                 res.json(err);
             }

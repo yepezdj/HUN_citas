@@ -84,8 +84,12 @@
                         <th>Acciones</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
+                        <th>Dirección de residencia</th>
                         <th>Celular</th>
+                        <th>Celular de respaldo</th>
+                        <th>Teléfono</th>
                         <th>Tipo de identificación</th>
+                        <th>Lugar de expedición</th>
                         <th>N° de identificación</th>
                         <th>Especialidad</th>
                         <th>Doctor</th>
@@ -97,7 +101,8 @@
                         <th>Régimen</th>
                         <th>Modalidad</th>
                         <th>Orden</th> 
-                        <th>Autorización</th>                                             
+                        <th>Autorización</th>
+                        <th>Acompañante</th>                                             
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -130,10 +135,22 @@
                                     <%= data[i].ApellidoP %>
                                 </td>
                                 <td>
+                                    <%= data[i].Direccion %>- <%= data[i].Barrio %>
+                                </td>
+                                <td>
                                     <%= data[i].Celular %>
                                 </td>
                                 <td>
+                                    <%= data[i].CelularOp %>
+                                </td>
+                                <td>
+                                    <%= data[i].Telefono %>
+                                </td>
+                                <td>
                                     <%= data[i].Tipo_documento %>
+                                </td>
+                                <td>
+                                    <%= data[i].Municipio %>
                                 </td>
                                 <td>
                                     <%= data[i].CedulaP %>
@@ -173,6 +190,9 @@
                                 </td>   
                                 <td>
                                     <%= data[i].Autorizacion %>
+                                </td>  
+                                <td>
+                                    <%= data[i].Acompañante %>
                                 </td>                                                          
                                 <td>
                                     <% switch (data[i].Estado) { case 'Pendiente' : %>

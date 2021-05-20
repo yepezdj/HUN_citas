@@ -201,7 +201,7 @@
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="cellphone1">Otro número de celular
-                                                            (opcional)</label>
+                                                            <label class="redText">*</label></label>
                                                         <input type="number" class="form-control" id="cellphone1"
                                                             name="cellphone1"
                                                             placeholder="Sin puntos ni comas ni guiones" min="0"
@@ -336,7 +336,7 @@
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="persona" class="form-label"
-                                                            style="margin-top: 20px;">Menciona un acompañante</label>
+                                                            style="margin-top: 20px;">Menciona un acompañante (Opcional)</label>
                                                         <input type="text" class="form-control" id="persona"
                                                             name="persona"
                                                             placeholder="Ingresa los nombres y apellidos del acompañante"
@@ -1515,6 +1515,7 @@
             var email1 = document.getElementById("email1").value;
             var number = document.getElementById("number").value;
             var number1 = document.getElementById("number1").value;
+            var cellphone1 = document.getElementById("cellphone1").value;
             var direccion = document.getElementById("direccion").value;
             var barrio = document.getElementById("barrio").value;
             var Tipo = document.getElementById("Tipo").value;
@@ -1593,6 +1594,15 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Los números de celular ingresados no coinciden'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if(cellphone1 == ''){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes ingresar otro número de celular'
                 })
                 event.preventDefault();
                 return false;
@@ -1858,7 +1868,7 @@
                 event.preventDefault();
                 return false;
             }
-            if (fileo == '' & autorizacion.length == "0") {
+            if (fileo == '' & autorizacion.length == "0" & factura !== "Particular") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
