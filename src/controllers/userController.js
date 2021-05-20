@@ -228,6 +228,19 @@ let dr = (req, res) => {
     });
 };
 
+let verExcepciones = (req, res) => {
+
+    connection.query('SELECT DATE_FORMAT(fecha, "%Y-%m-%d") fecha, Tipo, Doctor, hora_ini, hora_fin, Especialidad FROM ver_excepciones WHERE Tipo = "Adición"', (err, dat) => {
+        if (err) {
+            res.json(err);
+        }
+        var result = dat
+        res.end(JSON.stringify(result));
+        /* console.log(result) */
+    });
+
+};
+
 //Se extraen campos de la tabla agendamiento y son enviados a la página tabla para posteriormente ser mostrados
 let tabla = (req, res) => {
 
@@ -629,5 +642,6 @@ module.exports = {
     odontologia: odontologia,
     odontologiaE: odontologiaE,
     doctor_procedimiento: doctor_procedimiento,
-    odontologiaespecializada: odontologiaespecializada
+    odontologiaespecializada: odontologiaespecializada,
+    verExcepciones: verExcepciones
 }

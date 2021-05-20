@@ -28,6 +28,7 @@
 body{
   position: relative;  
   background: url(../images/regis.png);
+  background-repeat: no-repeat;
   margin: var(--header-height) 0 0 0;
   padding: 0 1rem;
   font-family: var(--body-font) !important;
@@ -48,7 +49,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 #btn{
     background-color: #008DCA !important;
-    color: white;
+    color: white;    
+    margin-top: 20px !important;
 }
 
 .toggle .btn {
@@ -84,12 +86,19 @@ select{
   	border: 0;	
     color: #4646cc;    
 	  font-size: 16px;	
-	  border:2px solid#008DCA !important;    
+	  border:2px solid#008DCA !important; 
+    border-radius: 20px !important;   
     position: relative;    
+}
+
+label{
+  margin-top: 20px !important;
 }
 
 input{
   border:2px solid#008DCA !important; 
+  border-radius: 20px !important;
+  padding-left: 20px !important;
 }
 
 /* RUTAS */

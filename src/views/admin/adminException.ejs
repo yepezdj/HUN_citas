@@ -1177,7 +1177,7 @@
       select = document.getElementById('Doctores');
 
       for (var i = 0; i < result.length; i++) {
-        if (select.value == result[i].Doctor) {
+        if (select.value == result[i].Doctor) {          
           var row = `<tr>
                             <td>                              
                                 ${result[i].fecha}                                
@@ -1404,9 +1404,6 @@
         }
       }
     }
-
-
-
 
     function vaciar() {
       document.getElementById('myTable').innerHTML = '';

@@ -65,7 +65,7 @@ let initWebRoutes = (app) => {
     router.post('/listaEPS',userController.listaEPS);
     router.get('/delete/:idpa',userController.delate); 
     router.get('/update/:idpa', upload.array('images',1), userController.edit);
-    router.post('/update/:idpa', upload.array('images',1), userController.update); 
+    router.post('/update/:idpa', upload.array('images',1), userController.update);     
     // router.post('/survey', userController.Survey);
     router.post('/verifyUser', userController.verifyUser);
     router.post('/ayuda', userController.ayuda);
@@ -76,6 +76,7 @@ let initWebRoutes = (app) => {
     router.post('/odontologia', userController.odontologia);
     router.post('/odontologiaE', userController.odontologiaE);
     router.post('/odontologiaespecializada', userController.odontologiaespecializada);
+    router.post('/verExcepciones',  userController.verExcepciones); 
 
     
     //RUTAS PARA LA PÁGINA DE CONCILIADOR    

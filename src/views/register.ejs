@@ -12,7 +12,7 @@
   <!-- ===== BOX ICONS ===== -->
   <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   <!-- ===== CSS ===== -->
   <link rel="stylesheet" href="/css/style.css">
@@ -20,16 +20,16 @@
   <!-- ===== BOOTSTRAP ===== -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-      </script>
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
 
-<!-- ===== SWEETALERT2 ===== -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+  <!-- ===== SWEETALERT2 ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
-<!-- ===== DATEPICKER ===== -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- ===== DATEPICKER ===== -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
 
@@ -38,6 +38,79 @@
 <body>
 
   <div class="container">
+    <div class="row px-3">
+      <div class="col-lg-10 col-xl-6 card flex-row mx-auto px-0">
+        <!-- <div class=" d-none d-md-flex">
+          <img src="/images/login.jpg" alt="">
+        </div> -->
+        <div class="card-body">
+          <h4 class="title text-center mt-4">
+            Bienvenido a la página de registro
+          </h4>
+          <div>
+            <% if(errors !==" " ) {%>
+              <% errors.forEach(function(item) { %>
+                <div class="alert alert-danger">
+                  <%- item %>
+                </div>
+                <%})%>
+                  <%}%>
+          </div>
+          <form class="form-box px-3" method="POST" action="/login">
+            <div class="form-input">
+              <span><i class="fa fa-envelope-o"></i></span>
+              <label for="nombre" class="font-weight-bold">Nombres</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Ingresa tus nombres" required>
+            </div>
+            <div class="form-input">
+              <label for="apellido" class="font-weight-bold">Apellidos</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name"
+                      placeholder="Ingresa tus apellidos" required>
+            </div>
+            <div class="form-input">
+              <label for="sexo" class="font-weight-bold">Género</label>
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="btn-group btn-group-toggle toggle" data-toggle="buttons">
+                <label class="btn active">
+                  <input type="radio" name="sexo" id="masculino" value="masculino" checked> Masculino
+                </label>
+                <label class="btn open-btn">
+                  <input type="radio" name="sexo" id="femenino" value="femenino"> Femenino
+                </label>
+              </div>
+            </div>
+            <div class="form-input">
+              <label for="password" class="font-weight-bold">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                      placeholder="Ingresa tu Contraseña">
+                    <small class="form-text text-muted">La contraseña debe tener al menos 8 caracteres.</small>
+            </div>
+            <div class="form-input">
+              <label for="password" class="font-weight-bold">Confirmar contraseña</label>
+              <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword"
+                placeholder="Confirma tu contraseña">
+            </div>
+
+            <div class="mb-3">
+              <button type="submit" class="btn btn-block" id="btn">
+                REGISTRARTE
+              </button>
+            </div>
+          </form>
+          
+          <hr class="my-4">
+              <div class="text-center mb-2">
+                ¿Ya tienes una cuenta?
+                <a href="/login" class="register-link">
+                  Inicia sesión aquí.
+                </a>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container">
     <div class="row">
       <div class="col-lg-12 my-4">
         <div class="card rounded-0">
@@ -58,9 +131,9 @@
               <div class="text-center mb-2">
                 A continuación podrás completar toda la información de tu registro.
               </div>
-              <hr class="my-4">
+              <hr class="my-4"> -->
               <!-- <form method="POST" action="/register"> -->
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-lg-6 my-4">
                   <div class="form-group mb-4">
                     <label for="nombre" class="font-weight-bold">Nombres</label>
@@ -69,9 +142,9 @@
                   </div>
                   <div class="form-group mb-4">
                     <label for="apellido" class="font-weight-bold">Apellidos</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ingresa tus apellidos"
-                      required>
-                  </div>                  
+                    <input type="text" class="form-control" id="last_name" name="last_name"
+                      placeholder="Ingresa tus apellidos" required>
+                  </div>
                   <div class="form-group mb-4">
                     <label for="Tipo" class="font-weight-bold">Tipo de documento<label class="redText">*</label></label>
                     <select class="custom-select" style="margin-right: 20px;" id="Tipo" name="Tipo" required>
@@ -207,9 +280,9 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" id="btn" class="btn btn-block">REGISTRARTE</button>
+              <button type="submit" id="btn" class="btn btn-block">REGISTRARTE</button> -->
               <!-- </form> -->
-              <hr class="my-4">
+              <!-- <hr class="my-4">
               <div class="text-center mb-2">
                 ¿Ya tienes una cuenta?
                 <a href="/login" class="register-link">
@@ -221,7 +294,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <!-- Toggle button -->
@@ -247,17 +320,17 @@
 
 
   <script>
-    document.onload = loadFunctions();
-    function loadFunctions() {
-      consulta();
-      eps();
-    }
+    // document.onload = loadFunctions();
+    // function loadFunctions() {
+    //   consulta();
+    //   eps();
+    // }
 
-    document.getElementById('fecha_nac').max = new Date(new Date().getTime() -
-      new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+    // document.getElementById('fecha_nac').max = new Date(new Date().getTime() -
+    //   new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
 
-    document.getElementById('fecha_exp').max = new Date(new Date().getTime() -
-      new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+    // document.getElementById('fecha_exp').max = new Date(new Date().getTime() -
+    //   new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
 
     var password = document.getElementById("password")
       , confirm_password = document.getElementById("confirmationPassword");
@@ -271,103 +344,103 @@
     password.onchange = validatePassword;
     confirmationPassword.onkeyup = validatePassword;
 
-    $(document).ready(function () {
-      $('#Option').on('change', function () {
-        if (this.value == '2') {
-          $("#depa").show();
-          $("#muni").show();
-        } else {
-          $("#depa").hide();
-          $("#muni").hide()
-        }
-      });
-    });
+    // $(document).ready(function () {
+    //   $('#Option').on('change', function () {
+    //     if (this.value == '2') {
+    //       $("#depa").show();
+    //       $("#muni").show();
+    //     } else {
+    //       $("#depa").hide();
+    //       $("#muni").hide()
+    //     }
+    //   });
+    // });
 
-    $(document).ready(function () {
-      $('#Optioneps').on('change', function () {
-        if (this.value == '1') {
-          $("#entidad").show();
-        } else {
-          $("#entidad").hide();
-        }
-      });
-    });
+    // $(document).ready(function () {
+    //   $('#Optioneps').on('change', function () {
+    //     if (this.value == '1') {
+    //       $("#entidad").show();
+    //     } else {
+    //       $("#entidad").hide();
+    //     }
+    //   });
+    // });
 
-    async function departamento(s1, s2) {
-      var con1 = document.getElementById('Departamento').value;
-      const consulta2 = {
-        con: con1
-      };
-      const options2 = {
-        method: "POST",
-        body: JSON.stringify(consulta2),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const response2 = await fetch('/municipio', options2);
-      result5 = await response2.json();
-      var s1 = document.getElementById(s1);
-      var s2 = document.getElementById(s2);
-      s2.innerHTML = "";
-      select = document.getElementById('city');
-      for (var i = 0; i < result5.length; i++) {
-        if (s1.value == result5[i].Departamento) {
-          var opt = document.createElement('option');
-          opt.value = result5[i].Municipio;
-          opt.innerHTML = result5[i].Municipio;
-          select.add(opt);
-        }
-      }
-      $("#city").prepend('<option selected="true" value="0">Seleccionar municipio de residencia</option>');
-    }
-    var result4 = [];
-    async function consulta() {
-      var con1 = document.getElementById('Departamento').value;
-      const consulta2 = {
-        con: con1
-      };
-      const options2 = {
-        method: "POST",
-        body: JSON.stringify(consulta2),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const response2 = await fetch('/departamentos', options2);
-      result4 = await response2.json();
-      select = document.getElementById('Departamento');
-      for (var i = 0; i < result4.length; i++) {
-        var opt = document.createElement('option');
-        opt.value = result4[i].Departamento;
-        opt.innerHTML = result4[i].Departamento;
-        select.add(opt);
-      }
-    }
+    // async function departamento(s1, s2) {
+    //   var con1 = document.getElementById('Departamento').value;
+    //   const consulta2 = {
+    //     con: con1
+    //   };
+    //   const options2 = {
+    //     method: "POST",
+    //     body: JSON.stringify(consulta2),
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     }
+    //   };
+    //   const response2 = await fetch('/municipio', options2);
+    //   result5 = await response2.json();
+    //   var s1 = document.getElementById(s1);
+    //   var s2 = document.getElementById(s2);
+    //   s2.innerHTML = "";
+    //   select = document.getElementById('city');
+    //   for (var i = 0; i < result5.length; i++) {
+    //     if (s1.value == result5[i].Departamento) {
+    //       var opt = document.createElement('option');
+    //       opt.value = result5[i].Municipio;
+    //       opt.innerHTML = result5[i].Municipio;
+    //       select.add(opt);
+    //     }
+    //   }
+    //   $("#city").prepend('<option selected="true" value="0">Seleccionar municipio de residencia</option>');
+    // }
+    // var result4 = [];
+    // async function consulta() {
+    //   var con1 = document.getElementById('Departamento').value;
+    //   const consulta2 = {
+    //     con: con1
+    //   };
+    //   const options2 = {
+    //     method: "POST",
+    //     body: JSON.stringify(consulta2),
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     }
+    //   };
+    //   const response2 = await fetch('/departamentos', options2);
+    //   result4 = await response2.json();
+    //   select = document.getElementById('Departamento');
+    //   for (var i = 0; i < result4.length; i++) {
+    //     var opt = document.createElement('option');
+    //     opt.value = result4[i].Departamento;
+    //     opt.innerHTML = result4[i].Departamento;
+    //     select.add(opt);
+    //   }
+    // }
 
-    var result4 = [];
-    async function eps() {
-      var con1 = document.getElementById('eps').value;
-      const consulta2 = {
-        con: con1
-      };
-      const options2 = {
-        method: "POST",
-        body: JSON.stringify(consulta2),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const response2 = await fetch('/listaEPS', options2);
-      result4 = await response2.json();
-      select = document.getElementById('eps');
-      for (var i = 0; i < result4.length; i++) {
-        var opt = document.createElement('option');
-        opt.value = result4[i].eps;
-        opt.innerHTML = result4[i].eps;
-        select.add(opt);
-      }
-    }
+    // var result4 = [];
+    // async function eps() {
+    //   var con1 = document.getElementById('eps').value;
+    //   const consulta2 = {
+    //     con: con1
+    //   };
+    //   const options2 = {
+    //     method: "POST",
+    //     body: JSON.stringify(consulta2),
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     }
+    //   };
+    //   const response2 = await fetch('/listaEPS', options2);
+    //   result4 = await response2.json();
+    //   select = document.getElementById('eps');
+    //   for (var i = 0; i < result4.length; i++) {
+    //     var opt = document.createElement('option');
+    //     opt.value = result4[i].eps;
+    //     opt.innerHTML = result4[i].eps;
+    //     select.add(opt);
+    //   }
+    // }
 
     $('#btn').click(function () {
       let data = recuperarDatosFormulario();
@@ -383,22 +456,22 @@
       let data = {
         name: $('#name').val(),
         last_name: $('#last_name').val(),
-        Tipo: $('#Tipo').val(),
-        cedula: $('#cedula').val(),
-        fecha_exp: $('#fecha_exp').val(),
-        direccion: $('#direccion').val(),
-        barrio: $('#barrio').val(),
+        // Tipo: $('#Tipo').val(),
+        // cedula: $('#cedula').val(),
+        // fecha_exp: $('#fecha_exp').val(),
+        // direccion: $('#direccion').val(),
+        // barrio: $('#barrio').val(),
         sexo: $('input[name="sexo"]:checked').val(),
-        fecha_nac: $('#fecha_nac').val(),
-        cellphone: $('#cellphone').val(),
-        cellphone1: $('#cellphone1').val(),
-        tele: $('#tele').val(),
+        // fecha_nac: $('#fecha_nac').val(),
+        // cellphone: $('#cellphone').val(),
+        // cellphone1: $('#cellphone1').val(),
+        //tele: $('#tele').val(),
         email: $('#email').val(),
-        Option: $('#Option').val(),
-        departamento: $('#Departamento').val(),
-        municipio: $('#city').val(),
-        Optioneps: $('#Optioneps').val(),
-        eps: $('#eps').val(),
+        // Option: $('#Option').val(),
+        // departamento: $('#Departamento').val(),
+        // municipio: $('#city').val(),
+        // Optioneps: $('#Optioneps').val(),
+        // eps: $('#eps').val(),
         password: $('#password').val(),
         password1: $('#confirmationPassword').val()
       };
@@ -418,62 +491,62 @@
         });
         return false;
       }
-      if (data.Tipo == '0') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes seleccionar el tipo de documento'
-        });
-        return false;
-      }
-      if (data.cedula == '') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes ingresar el número de identificación'
-        });
-        return false;
-      }
-      if (data.fecha_exp == '') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes seleccionar la fecha de expedición'
-        });
-        return false;
-      }
-      if (data.direccion == '') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes ingresar tu dirección de residencia'
-        });
-        return false;
-      }
-      if (data.barrio == '') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes ingresar tu barrio de residencia'
-        });
-        return false;
-      }
-      if (data.fecha_nac == '') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes seleccionar tu fecha de nacimiento'
-        });
-        return false;
-      }
-      if (data.cellphone == '') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes ingresar tu número de celular'
-        });
-        return false;
-      }
+      // if (data.Tipo == '0') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes seleccionar el tipo de documento'
+      //   });
+      //   return false;
+      // }
+      // if (data.cedula == '') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes ingresar el número de identificación'
+      //   });
+      //   return false;
+      // }
+      // if (data.fecha_exp == '') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes seleccionar la fecha de expedición'
+      //   });
+      //   return false;
+      // }
+      // if (data.direccion == '') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes ingresar tu dirección de residencia'
+      //   });
+      //   return false;
+      // }
+      // if (data.barrio == '') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes ingresar tu barrio de residencia'
+      //   });
+      //   return false;
+      // }
+      // if (data.fecha_nac == '') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes seleccionar tu fecha de nacimiento'
+      //   });
+      //   return false;
+      // }
+      // if (data.cellphone == '') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes ingresar tu número de celular'
+      //   });
+      //   return false;
+      // }
       if (data.email == '') {
         Swal.fire({
           icon: 'error',
@@ -482,46 +555,46 @@
         });
         return false;
       }
-      if (data.Option == '0') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes responder si eres extranjero o no'
-        });
-        return false;
-      }
-      if (data.Option == '2' & data.departamento == '0') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes seleccionar el departamento de residencia'
-        });
-        return false;
-      }
-      if (data.Option == '2' & data.municipio == '0') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes seleccionar la ciudad de residencia'
-        });
-        return false;
-      }
-      if (data.Optioneps == '0') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes responder si tienes o no tienes EPS'
-        });
-        return false;
-      }
-      if (data.Optioneps == '1' & data.eps == '0') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes seleccionar tu EPS'
-        });
-        return false;
-      }
+      // if (data.Option == '0') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes responder si eres extranjero o no'
+      //   });
+      //   return false;
+      // }
+      // if (data.Option == '2' & data.departamento == '0') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes seleccionar el departamento de residencia'
+      //   });
+      //   return false;
+      // }
+      // if (data.Option == '2' & data.municipio == '0') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes seleccionar la ciudad de residencia'
+      //   });
+      //   return false;
+      // }
+      // if (data.Optioneps == '0') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes responder si tienes o no tienes EPS'
+      //   });
+      //   return false;
+      // }
+      // if (data.Optioneps == '1' & data.eps == '0') {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: 'Debes seleccionar tu EPS'
+      //   });
+      //   return false;
+      // }
       if (data.password == '') {
         Swal.fire({
           icon: 'error',

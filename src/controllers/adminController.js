@@ -364,5 +364,5 @@ module.exports = {
     deleteHorario: deleteHorario,
     deleteException: deleteException,
     ExportarAdmin: ExportarAdmin,
-    updateExportA: updateExportA
+    updateExportA: updateExportA   
 }

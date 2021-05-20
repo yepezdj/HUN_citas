@@ -838,7 +838,7 @@
                                             <div>
                                                 <div class="card-body" id="collapse3" style="display: none;">
                                                     <p class="centered">Selecciona el horario de la cita de acuerdo a la
-                                                        disponibilidad del profesional de la salud. <i class="bi bi-calendar-event"></i>
+                                                        disponibilidad del profesional de la salud/Ayuda diagnóstica. <i class="bi bi-calendar-event"></i>
                                                     </p>
                                                     <div id="hide">
                                                         <div class="text-center mb-2">
@@ -850,12 +850,30 @@
                                                             <table class="table table-hover" id="tabla">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Profesional de la salud</th>
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica</th>
                                                                         <th>Días disponibles</th>
                                                                         <th>Horarios disponibles</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody id="myTable">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="col-12 col-sm-12"
+                                                            style="height:300px; overflow-y: scroll; display: none;" id="adiciones">
+                                                            <table class="table table-hover" id="tabla1">
+                                                                <thead>
+                                                                    <tr> <!-- encabezado de tabla -->
+                                                                        <td colspan="3">Horarios extraordinarios</td> 
+                                                                     </tr>
+                                                                    <tr> 
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica</th>                                                                       
+                                                                        <th>Fechas disponibles</th>
+                                                                        <th>Horarios disponibles</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="Table">
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -1002,6 +1020,7 @@
             consult3();
             consult5();
             consult6();
+            // adicion();
             // dateFormat()  
             $('input[type=number]').on('wheel', function (e) {
                 return false;
@@ -1936,6 +1955,8 @@
             }
             $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
+
+        var result = [];
         async function consult() {
             var con1 = document.getElementById('Doctores').value;
             const consulta2 = {
@@ -1979,16 +2000,19 @@
         }
         //+++++++++++ LIMPIAR TABLAS PARA CONSULTA ESPECIALIZADA +++++++++++++++++//
         function vaciarU() {
-            document.getElementById('TableUser').innerHTML = '';
+            document.getElementById('Table').innerHTML = '';
         }
         function vacioU() {
-            document.getElementById('TableUser').innerHTML = '';
+            document.getElementById('Table').innerHTML = '';
         }
         function vaciar() {
             document.getElementById('myTable').innerHTML = '';
         }
         function vacio() {
             document.getElementById('myTable').innerHTML = '';
+        }
+        function desaparecer() {
+            $("#adiciones").hide();
         }
 
         //+++++++++++ CARGA A LOS SELECT PARA PROCEDIMIENTOS AMBULATORIOS +++++++++++++++++//
@@ -2508,6 +2532,91 @@
             }
         }
 
+        // async function adicion() {
+        //     var con1 = document.getElementById('Doctores').value;
+        //     const consulta2 = {
+        //         con: con1
+        //     };
+        //     const options2 = {
+        //         method: "POST",
+        //         body: JSON.stringify(consulta2),
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         }
+        //     };
+        //     const response2 = await fetch('/verExcepciones', options2);
+        //     console.log(response2)
+        //     result = await response2.json();
+        //     console.log(result)
+        //     buildTableU()
+        // }
+        // function buildTableU() {
+        //     vaciarU();
+        //     vacioU();
+        //     console.log(result)
+        //     var table = document.getElementById('Table');
+        //     select = document.getElementById('Doctores');
+        //     for (var i = 0; i < result.length; i++) {
+        //         if (select.value == result[i].Doctor) {
+        //             $("#adiciones").show();
+        //             var row = `<tr>
+        //                     <td>                              
+        //                         ${result[i].Doctor}                                
+        //                     </td> 
+        //                     <td>                              
+        //                         ${result[i].fecha}                                
+        //                     </td> 							
+		// 					<td>                              
+        //                         ${result[i].hora_ini} - ${result[i].hora_fin}                                
+        //                     </td>                                                          
+		// 			  </tr>`
+        //             table.innerHTML += row
+        //         }
+        //     }
+        // }
+
+        // async function adicion2() {
+        //     var con1 = document.getElementById('Doctores2').value;
+        //     const consulta2 = {
+        //         con: con1
+        //     };
+        //     const options2 = {
+        //         method: "POST",
+        //         body: JSON.stringify(consulta2),
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         }
+        //     };
+        //     const response2 = await fetch('/verExcepciones', options2);
+        //     console.log(response2)
+        //     result = await response2.json();
+        //     console.log(result)
+        //     buildTableU()
+        // }
+        // function buildTableU2() {
+        //     vaciarU();
+        //     vacioU();
+        //     console.log(result)
+        //     var table = document.getElementById('Table');
+        //     select = document.getElementById('Doctores2');
+        //     for (var i = 0; i < result.length; i++) {
+        //         if (select.value == result[i].Doctor) {
+        //             $("#adiciones").show();
+        //             var row = `<tr>
+        //                     <td>                              
+        //                         ${result[i].Doctor}                                
+        //                     </td> 
+        //                     <td>                              
+        //                         ${result[i].fecha}                                
+        //                     </td> 							
+		// 					<td>                              
+        //                         ${result[i].hora_ini} - ${result[i].hora_fin}                                
+        //                     </td>                                                          
+		// 			  </tr>`
+        //             table.innerHTML += row
+        //         }
+        //     }
+        // }
 
     </script>
     <!--===== MAIN JS =====-->
