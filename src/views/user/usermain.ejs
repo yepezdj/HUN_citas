@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- 
+
     <link rel="shortcut icon" href="https://genfavicon.com/tmp/icon_d1490e0ca97a4e19828ac691e5ef8be0.ico">
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
@@ -186,7 +186,8 @@
                                                                 class="redText">*</label></label>
                                                         <input type="number" class="form-control" id="number"
                                                             name="number" placeholder="Sin puntos ni comas ni guiones"
-                                                            min="0" step="1" oninput="validity.valid||(value='');" value="<%= user.cellphone %>">
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= user.cellphone %>">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
@@ -336,7 +337,8 @@
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
                                                         <label for="persona" class="form-label"
-                                                            style="margin-top: 20px;">Menciona un acompañante (Opcional)</label>
+                                                            style="margin-top: 20px;">Menciona un acompañante
+                                                            (Opcional)</label>
                                                         <input type="text" class="form-control" id="persona"
                                                             name="persona"
                                                             placeholder="Ingresa los nombres y apellidos del acompañante"
@@ -493,14 +495,20 @@
                                                     <div class="col-12 col-sm-6" id="especialidad"
                                                         style="display: none;">
                                                         <div class="form-input" style="margin-top: 20px;">
-                                                            <label for="Cita" class="form-label">Especialidad <label
-                                                                    class="redText">*</label></label>
-                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="opciones" name="opciones"
-                                                                onchange="doctors('opciones','Doctores')"
-                                                                onclick="vacio(), vaciarF()">
-                                                                <option value="0">Seleccionar especialidad</option>
-                                                            </select>
+                                                            <div class="parent">
+                                                                <div class="child">
+                                                                    <label for="Cita" class="form-label">Especialidad
+                                                                        <label class="redText">*</label></label>
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="opciones"
+                                                                        name="opciones"
+                                                                        onchange="doctors('opciones','Doctores')"
+                                                                        onclick="vacio(), vaciarF()">
+                                                                        <option value="0">Seleccionar especialidad
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6" id="doctor" style="display: none;">
@@ -838,11 +846,12 @@
                                             <div>
                                                 <div class="card-body" id="collapse3" style="display: none;">
                                                     <p class="centered">Selecciona el horario de la cita de acuerdo a la
-                                                        disponibilidad del profesional de la salud/Ayuda diagnóstica. <i class="bi bi-calendar-event"></i>
+                                                        disponibilidad del profesional de la salud/Ayuda diagnóstica. <i
+                                                            class="bi bi-calendar-event"></i>
                                                     </p>
                                                     <div id="hide">
                                                         <div class="text-center mb-2">
-                                                            
+
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="col-12 col-sm-12"
@@ -850,7 +859,8 @@
                                                             <table class="table table-hover" id="tabla">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Profesional de la salud/Ayuda diagnóstica</th>
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica
+                                                                        </th>
                                                                         <th>Días disponibles</th>
                                                                         <th>Horarios disponibles</th>
                                                                     </tr>
@@ -861,14 +871,17 @@
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="col-12 col-sm-12"
-                                                            style="height:300px; overflow-y: scroll; display: none;" id="adiciones">
+                                                            style="height:300px; overflow-y: scroll; display: none;"
+                                                            id="adiciones">
                                                             <table class="table table-hover" id="tabla1">
                                                                 <thead>
-                                                                    <tr> <!-- encabezado de tabla -->
-                                                                        <td colspan="3">Horarios extraordinarios</td> 
-                                                                     </tr>
-                                                                    <tr> 
-                                                                        <th>Profesional de la salud/Ayuda diagnóstica</th>                                                                       
+                                                                    <tr>
+                                                                        <!-- encabezado de tabla -->
+                                                                        <td colspan="3">Horarios extraordinarios</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica
+                                                                        </th>
                                                                         <th>Fechas disponibles</th>
                                                                         <th>Horarios disponibles</th>
                                                                     </tr>
@@ -885,7 +898,8 @@
                                                                         cita
                                                                         <label class="redText">*</label></label>
                                                                     <input class="form-control" id="fecha" name="fecha"
-                                                                        autocomplete="off" onkeypress="return false" readonly>
+                                                                        autocomplete="off" onkeypress="return false"
+                                                                        readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-sm-6" id="hide2">
@@ -1014,7 +1028,7 @@
         function loadFunctions() {
 
             consultaD();
-            consult();
+
             consult2();
             consult4();
             consult3();
@@ -1180,6 +1194,55 @@
                     return false;
                 },
             })
+        });
+
+        const parent = document.querySelector(".parent");
+        parent.addEventListener("click", function (e) {
+            const child = e.target.matches(".child, .child *");
+            if (child) { // If child is click
+                var result = [];
+                async function consult() {
+                    var con1 = document.getElementById('Doctores').value;
+                    const consulta2 = {
+                        con: con1
+                    };
+                    const options2 = {
+                        method: "POST",
+                        body: JSON.stringify(consulta2),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    };
+                    const response2 = await fetch('/datos', options2);
+                    console.log(response2)
+                    result = await response2.json();
+                    console.log(result)
+                    buildTable()
+                }
+                function buildTable() {
+                    vaciar();
+                    vacio();
+                    console.log(result)
+                    var table = document.getElementById('myTable');
+                    select = document.getElementById('Doctores');
+                    for (var i = 0; i < result.length; i++) {
+                        if (select.value == result[i].Doctor) {
+                            var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                            table.innerHTML += row
+                        }
+                    }
+                }
+            }
         });
 
         // $(function () {
@@ -1598,7 +1661,7 @@
                 event.preventDefault();
                 return false;
             }
-            if(cellphone1 == ''){
+            if (cellphone1 == '') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -1966,48 +2029,7 @@
             $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
         }
 
-        var result = [];
-        async function consult() {
-            var con1 = document.getElementById('Doctores').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/datos', options2);
-            console.log(response2)
-            result = await response2.json();
-            console.log(result)
-            buildTable()
-        }
-        function buildTable() {
-            vaciar();
-            vacio();
-            console.log(result)
-            var table = document.getElementById('myTable');
-            select = document.getElementById('Doctores');
-            for (var i = 0; i < result.length; i++) {
-                if (select.value == result[i].Doctor) {
-                    var row = `<tr>
-                            <td>                              
-                                ${result[i].Doctor}                                
-                            </td> 
-                            <td>                              
-                                ${result[i].dia}                                
-                            </td> 							
-							<td>                              
-                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
-                            </td>                                                          
-					  </tr>`
-                    table.innerHTML += row
-                }
-            }
-        }
+
         //+++++++++++ LIMPIAR TABLAS PARA CONSULTA ESPECIALIZADA +++++++++++++++++//
         function vaciarU() {
             document.getElementById('Table').innerHTML = '';
