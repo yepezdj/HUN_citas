@@ -10,61 +10,14 @@ let getPageRegister = (req, res) => {
 
 let createNewUser = async (req, res) => {
     //validate required fields
-    // let errorsArr = [];
-    // let validationErrors = validationResult(req);
-    // if (!validationErrors.isEmpty()) {
-    //     let errors = Object.values(validationErrors.mapped());
-    //     errors.forEach((item) => {
-    //         errorsArr.push(item.msg);
-    //     });
-    //     req.flash("errors", errorsArr);
-    //     return res.redirect("/register");
-    // }
-    var departamento, municipio, eps;
-    var cellphone1 = req.body.cellphone1;
-    var tele = req.body.tele;
-    var Option = req.body.Option;
-    var Optioneps = req.body.Optioneps;
-    if(Option == '2'){
-        departamento = req.body.departamento;
-        municipio = req.body.municipio;
-    } else{
-        departamento = 'No aplica';
-        municipio = 'No aplica';
-    }
-    if(Optioneps == '1'){
-        eps = req.body.eps;      
-    } else{
-        eps = 'No aplica';       
-    }
-    if(!cellphone1){
-        cellphone1 = 'No aplica';      
-    } else{
-        cellphone1 = cellphone1;       
-    }
-    if(!tele){
-        tele = 'No aplica';      
-    } else{
-        tele = tele;       
-    }
+  
     //create a new user
     try{
         let newUser = {
             name: req.body.name,
-            last_name: req.body.last_name,
-            Tipo: req.body.Tipo,            
-            cedula: req.body.cedula,
-            fecha_exp: req.body.fecha_exp,
-            sexo: req.body.sexo,
-            fecha_nac: req.body.fecha_nac,
-            departamento: departamento,
-            municipio: municipio,  
-            direccion: req.body.direccion,  
-            barrio: req.body.barrio,        
-            eps: eps,
-            cellphone: req.body.cellphone,
-            cellphone1: cellphone1,
-            tele: tele,
+            last_name: req.body.last_name,            
+            sexo: req.body.sexo,            
+            cellphone: req.body.cellphone,           
             email: req.body.email,
             password: req.body.password
         };

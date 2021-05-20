@@ -16,21 +16,10 @@ let createNewUser = (user) => {
                     name: user.name,
                     last_name: user.last_name,
                     email: user.email,
-                    password: hash,
-                    departamento: user.departamento,
-                    municipio: user.municipio,
-                    fecha_nac: user.fecha_nac,
-                    cellphone: user.cellphone,
-                    cedula: user.cedula, 
-                    eps: user.eps,
+                    password: hash,                    
+                    cellphone: user.cellphone,                 
                     sexo: user.sexo,
-                    role: 'user',
-                    Tipo: user.Tipo, 
-                    Direccion: user.direccion,  
-                    Barrio: user.barrio,           
-                    cellphone1: user.cellphone1,
-                    telefono: user.tele,               
-                    fecha_exp: user.fecha_exp                           
+                    role: 'user'                                              
                 };
                 console.log('ola');
                 console.log(userItem);
