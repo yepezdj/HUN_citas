@@ -500,8 +500,8 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="opciones" name="opciones"
-                                                                onchange="doctors('opciones','Doctores')"
-                                                                onclick="vacio(), vaciarF()">
+                                                                onchange="doctors('opciones','Doctores'), vacio()"
+                                                                onclick="vaciarF()">
                                                                 <option value="0">Seleccionar especialidad
                                                                 </option>
                                                             </select>
@@ -1230,7 +1230,7 @@
             console.log(result)
             buildTable()
         }
-        function buildTable() {
+        async function buildTable() {
             vaciar();
             vacio();
             console.log(result)
