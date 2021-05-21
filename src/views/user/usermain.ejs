@@ -294,16 +294,14 @@
                                                         <label for="Departamento" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Departamento)<label
                                                                 class="redText">*</label></label>
-                                                        <div class="parent7">
-                                                            <div class="child7">
+                                                        
                                                                 <select class="custom-select"
                                                                     style="margin-right: 10px;" id="Departamento"
-                                                                    name="Departamento">
+                                                                    name="Departamento" onchange="departamento('Departamento', 'city')">
                                                                     <option value="0">Seleccionar lugar de expedición
                                                                     </option>
                                                                 </select>
-                                                            </div>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6" style="display: none;" id="muni">
@@ -2636,16 +2634,6 @@
         }
 
 
-        const parent7 = document.querySelector(".parent7");
-        parent7.addEventListener("change", function (e) {
-            const child7 = e.target.matches(".child7, .child7 *");
-            if (child7) { // If child is click
-
-                console.log('hpta castigo divino')
-                departamento('Departamento', 'city')
-
-            }
-        });
         async function departamento(s1, s2) {
             var con1 = document.getElementById('Departamento').value;
             const consulta2 = {
