@@ -297,7 +297,7 @@
                                                         <select class="custom-select" style="margin-right: 10px;"
                                                             id="Departamento" name="Departamento"
                                                             onchange="departamento('Departamento','city')">
-                                                            <option value="0">Seleccionar departamento de residencia
+                                                            <option value="0">Seleccionar lugar de expedición
                                                             </option>
                                                         </select>
                                                     </div>
@@ -307,11 +307,15 @@
                                                         <label for="city" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Municipio)<label
                                                                 class="redText">*</label></label>
-                                                        <select class="custom-select" style="margin-right: 10px; "
-                                                            id="city" name="city">
-                                                            <option value="0">Seleccionar municipio de residencia
-                                                            </option>
-                                                        </select>
+                                                        <div class="parent5">
+                                                            <div class="child5">
+                                                                <select class="custom-select"
+                                                                    style="margin-right: 10px; " id="city" name="city">
+                                                                    <option value="0">Seleccionar lugar de expedición
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -2556,7 +2560,7 @@
                 select.add(opt);
             }
         }
-        
+
         async function eps() {
             var con1 = document.getElementById('entidad').value;
             const consulta2 = {
@@ -2605,6 +2609,41 @@
             }
         }
 
+        var result4 = [];
+        async function consultaD() {
+            var con1 = document.getElementById('Departamento').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/departamentos', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Departamento');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Departamento;
+                opt.innerHTML = result4[i].Departamento;
+                select.add(opt);
+            }
+        }
+
+
+        const parent7 = document.querySelector(".parent7");
+        parent7.addEventListener("change", function (e) {
+            const child7 = e.target.matches(".child7, .child7 *");
+            if (child7) { // If child is click
+
+                console.log('hpta castigo divino')
+                departamento()
+
+            }
+        });
         async function departamento(s1, s2) {
             var con1 = document.getElementById('Departamento').value;
             const consulta2 = {
@@ -2633,30 +2672,7 @@
             }
             $("#city").prepend('<option selected="true" value="0">Seleccionar municipio de residencia</option>');
         }
-        var result4 = [];
-        async function consultaD() {
-            var con1 = document.getElementById('Departamento').value;
-            const consulta2 = {
-                con: con1
-            };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/departamentos', options2);
-            result4 = await response2.json();
-            select = document.getElementById('Departamento');
-            for (var i = 0; i < result4.length; i++) {
-                var opt = document.createElement('option');
-                opt.value = result4[i].Departamento;
-                opt.innerHTML = result4[i].Departamento;
-                select.add(opt);
-            }
-        }
-
+        
         // async function adicion() {
         //     var con1 = document.getElementById('Doctores').value;
         //     const consulta2 = {
