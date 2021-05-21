@@ -1202,7 +1202,7 @@
 
 
         const parent = document.querySelector(".parent");
-        parent.addEventListener("click", function (e) {
+        parent.addEventListener("change", function (e) {
             const child = e.target.matches(".child, .child *");
             if (child) { // If child is click
 
@@ -1225,15 +1225,15 @@
                 }
             };
             const response2 = await fetch('/datos', options2);
-            console.log(response2)
+            // console.log(response2)
             result = await response2.json();
             console.log(result)
             buildTable()
         }
-        async function buildTable() {
+        function buildTable() {
             vaciar();
             vacio();
-            console.log(result)
+            //console.log(result)
             var table = document.getElementById('myTable');
             select = document.getElementById('Doctores');
             for (var i = 0; i < result.length; i++) {
