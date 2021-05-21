@@ -294,12 +294,16 @@
                                                         <label for="Departamento" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Departamento)<label
                                                                 class="redText">*</label></label>
-                                                        <select class="custom-select" style="margin-right: 10px;"
-                                                            id="Departamento" name="Departamento"
-                                                            onchange="departamento('Departamento','city')">
-                                                            <option value="0">Seleccionar lugar de expedición
-                                                            </option>
-                                                        </select>
+                                                        <div class="parent7">
+                                                            <div class="child7">
+                                                                <select class="custom-select"
+                                                                    style="margin-right: 10px;" id="Departamento"
+                                                                    name="Departamento">
+                                                                    <option value="0">Seleccionar lugar de expedición
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6" style="display: none;" id="muni">
@@ -307,15 +311,13 @@
                                                         <label for="city" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Municipio)<label
                                                                 class="redText">*</label></label>
-                                                        <div class="parent5">
-                                                            <div class="child5">
-                                                                <select class="custom-select"
-                                                                    style="margin-right: 10px; " id="city" name="city">
-                                                                    <option value="0">Seleccionar lugar de expedición
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
+
+                                                        <select class="custom-select" style="margin-right: 10px; "
+                                                            id="city" name="city">
+                                                            <option value="0">Seleccionar lugar de expedición
+                                                            </option>
+                                                        </select>
+
                                                     </div>
                                                 </div>
 
@@ -2640,7 +2642,7 @@
             if (child7) { // If child is click
 
                 console.log('hpta castigo divino')
-                departamento()
+                departamento('Departamento', 'city')
 
             }
         });
@@ -2672,7 +2674,7 @@
             }
             $("#city").prepend('<option selected="true" value="0">Seleccionar municipio de residencia</option>');
         }
-        
+
         // async function adicion() {
         //     var con1 = document.getElementById('Doctores').value;
         //     const consulta2 = {
