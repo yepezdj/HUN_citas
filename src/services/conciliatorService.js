@@ -35,7 +35,7 @@ let EmailAceptar = async (variablesAceptar) => {
         if (variablesAceptar.Cita == 'Ayudas diagnósticas') {
             body = `<h4>Estimado/a ${variablesAceptar.nombre} ${variablesAceptar.apellido}</h4>
         <div class="text-center mb-2">
-    Se le informa que su cita médica ha sido aceptada para el ${variablesAceptar.fecha} a las ${variablesAceptar.hora}    
+    Se le informa que su ayuda diagnóstica ha sido aceptada para el ${variablesAceptar.fecha} a las ${variablesAceptar.hora}    
     <hr class="my-4">
     </div>
     <div class="text-center mb-2">
@@ -79,7 +79,7 @@ let EmailDeclinar = async (variablesDeclinar) => {
         if (variablesDeclinar.Cita == 'Ayudas diagnósticas') {
             body = `<h4>Estimado/a ${variablesDeclinar.nombre} ${variablesDeclinar.apellido}</h4>
         <div class="text-center mb-2">
-    Se le informa que su solicitud de cita médica ha sido rechazada para el ${variablesDeclinar.fecha} a las ${variablesDeclinar.hora}
+    Se le informa que su ayuda diagnóstica ha sido rechazada para el ${variablesDeclinar.fecha} a las ${variablesDeclinar.hora}
     </div>
     <hr class="my-4">
     <div class="text-center mb-2">
@@ -103,7 +103,7 @@ let EmailDeclinar = async (variablesDeclinar) => {
         if (variablesDeclinar.Cita == 'Ayudas diagnósticas') {
             body = `<h4>Estimado/a ${variablesDeclinar.nombre} ${variablesDeclinar.apellido}</h4>
         <div class="text-center mb-2">
-    Se le informa que su solicitud de cita médica ha sido rechazada para el ${variablesDeclinar.fecha} a las ${variablesDeclinar.hora}
+    Se le informa que su solicitud de ayuda diagnóstica ha sido rechazada para el ${variablesDeclinar.fecha} a las ${variablesDeclinar.hora}
     <hr class="my-4">
     </div>
     <div class="text-center mb-2">

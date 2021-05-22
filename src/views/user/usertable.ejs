@@ -84,6 +84,8 @@
                         <th>Acciones</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
+                        <th>Género</th>
+                        <th>Estado civil</th>
                         <th>Dirección de residencia</th>
                         <th>Celular</th>
                         <th>Celular de respaldo</th>
@@ -102,8 +104,9 @@
                         <th>Modalidad</th>
                         <th>Orden</th> 
                         <th>Autorización</th>
-                        <th>Acompañante</th>                                             
-                        <th>Estado</th>
+                        <th>Acompañante</th>  
+                        <th>Anotaciones</th>                                           
+                        <th>Estado</th>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -133,6 +136,12 @@
                                 </td>
                                 <td>
                                     <%= data[i].ApellidoP %>
+                                </td>
+                                <td>
+                                    <%= data[i].Genero %>
+                                </td>
+                                <td>
+                                    <%= data[i].Estado_civil %>
                                 </td>
                                 <td>
                                     <%= data[i].Direccion %>- <%= data[i].Barrio %>
@@ -193,7 +202,10 @@
                                 </td>  
                                 <td>
                                     <%= data[i].Acompañante %>
-                                </td>                                                          
+                                </td>    
+                                <td>
+                                    <%= data[i].Descripcion %>
+                                </td>                                                       
                                 <td>
                                     <% switch (data[i].Estado) { case 'Pendiente' : %>
                                         <span class="badge bg-warning text-dark">

@@ -172,7 +172,7 @@ let CitasAdmin = (req, res) => {
 
 let ExportarAdmin = (req, res) => {
     if (req.session.admin) {
-        connection.query('SELECT agendamiento.idpa, agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.Celular, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Estado, agendamiento.idu, agendamiento.Especialidad, agendamiento.Doctor, DATE_FORMAT(agendamiento.fecha, "%d-%m-%Y") fecha, DATE_FORMAT(agendamiento.fecha, "%Y") año, DATE_FORMAT(agendamiento.fecha, "%M") mes, DATE_FORMAT(agendamiento.hora_solicitud, "%d-%m-%Y") hora_solicitud, DATE_FORMAT(agendamiento.fecha_nac, "%d-%m-%Y") fecha_nac, agendamiento.hora_ini, agendamiento.Orden, agendamiento.Tipo_documento, agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Cita, agendamiento.Direccion, agendamiento.Barrio, user.sexo FROM agendamiento INNER JOIN user WHERE agendamiento.idu = user.id AND agendamiento.Estado = "Aceptada" AND agendamiento.Agendada = "No"', (err, info) => {
+        connection.query('SELECT agendamiento.idpa, agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.Celular, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Estado, agendamiento.idu, agendamiento.Especialidad, agendamiento.Doctor, DATE_FORMAT(agendamiento.fecha, "%d-%m-%Y") fecha, DATE_FORMAT(agendamiento.fecha, "%Y") año, DATE_FORMAT(agendamiento.fecha, "%M") mes, DATE_FORMAT(agendamiento.hora_solicitud, "%d-%m-%Y") hora_solicitud, DATE_FORMAT(agendamiento.fecha_nac, "%d-%m-%Y") fecha_nac, agendamiento.hora_ini, agendamiento.Orden, agendamiento.Tipo_documento, agendamiento.Celular, agendamiento.Autorizacion, agendamiento.entidad, agendamiento.Regimen, agendamiento.Modo, agendamiento.Afiliacion, agendamiento.Cita, agendamiento.Direccion, agendamiento.Barrio, agendamiento.Genero, user.sexo FROM agendamiento INNER JOIN user WHERE agendamiento.idu = user.id AND agendamiento.Estado = "Aceptada" AND agendamiento.Agendada = "No"', (err, info) => {
             if (err) {
                 res.json(err);
             }
@@ -256,7 +256,18 @@ let updateA = async (req, res) => {
         Modo = req.body.Modo;
     }
 
-    const body = `<h4>Estimado/a ${name} ${lastname}</h4>
+    var body;
+    if (Cita == "Ayudas diagnósticas") {
+        body = `<h4>Estimado/a ${name} ${lastname}</h4>
+    Se le informa que ha sido reprogramada su ayuda diagnóstica de ${ayuda} para el ${newdate} a las ${hora}
+    <hr class="my-4">
+    <div class="text-center mb-2">
+      ¿Tiene alguna inquietud al respecto? Favor comunicarse a la línea
+      <a href="#" class="register-link">
+      (57) (5) 3858131
+      </a>`;
+    } else {
+        body = `<h4>Estimado/a ${name} ${lastname}</h4>
     Se le informa que su cita médica ha sido reprogramada con el/la ${doctor} para el ${newdate} a las ${hora}
     <hr class="my-4">
     <div class="text-center mb-2">
@@ -264,6 +275,7 @@ let updateA = async (req, res) => {
       <a href="#" class="register-link">
       (57) (5) 3858131
       </a>`;
+    }
     gmailController.sendEmailNormal(correo, 'Reprogramación de cita médica-HUN', body)
 
     if (req.session.admin) {

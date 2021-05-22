@@ -250,7 +250,7 @@ let tabla = (req, res) => {
         var id = user.id;
         /* console.log(cedula); */
         // console.log(req.session.user)
-        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Cita, Afiliacion, Modo, Estado, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Direccion, Barrio, CelularOp, Telefono, Acompañante, Municipio FROM agendamiento WHERE idu = ?', id, (err, datos) => {
+        connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Cita, Afiliacion, Modo, Estado, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Direccion, Barrio, CelularOp, Telefono, Acompañante, Municipio, Descripcion, Estado_civil, Genero FROM agendamiento WHERE idu = ?', id, (err, datos) => {
             if (err) {
                 res.json(err);
             }
@@ -289,6 +289,8 @@ let agendar = async (req, res) => {
     const datos = req.body;
     var name = req.body.Name;
     var lastname = req.body.Lastname;
+    var sexo = req.body.sexo;
+    var estado = req.body.estado;
     var Cedula = req.body.Cedula;
     var correo = req.body.email;
     
@@ -450,7 +452,7 @@ let agendar = async (req, res) => {
     if (citaExist) {
         let idp = await userService.magic(espe, doctor, newdate, hora, linkOrden, name, lastname,
             Cedula, id, descripcion, Estado, correo, Cita, Modo, Factura, autorizacion, entidad, regimen,
-            number, tipo, fecha_exp, direccion, barrio, departamento, municipio, cellphone1, tele, person, fecha_nac, procedimiento, agendada);
+            number, tipo, fecha_exp, direccion, barrio, departamento, municipio, cellphone1, tele, person, fecha_nac, procedimiento, agendada, sexo, estado);
 
         await userService.survey(p1, p2, p3, p4, p5, p6, p7, p8, p9, idp);
 
@@ -466,7 +468,7 @@ let edit = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
     if (req.session.user) {
-    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion, Tipo_documento, DATE_FORMAT(fecha_exp, "%Y-%m-%d") fecha_exp, Direccion, Barrio, Departamento, Municipio, CelularOp, Telefono, Acompañante, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac, Procedimiento FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+    connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%m-%d-%Y") fecha, hora_ini, Orden, Descripcion, Correo, Cita, Afiliacion, Modo, Celular, entidad, Regimen, Autorizacion, Tipo_documento, DATE_FORMAT(fecha_exp, "%Y-%m-%d") fecha_exp, Direccion, Barrio, Departamento, Municipio, CelularOp, Telefono, Acompañante, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac, Procedimiento, Genero, Estado_civil FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
         if (err) {
             res.json(err);
         }

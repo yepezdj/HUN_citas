@@ -136,8 +136,42 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
+                                                    <label for="sexo">Género<label class="redText">*</label></label>
+                                                    <div class="w-100 d-none d-md-block"></div>
+                                                    <div class="btn-group btn-group-toggle toggle"
+                                                        data-toggle="buttons">
+                                                        <label class="btn active">
+                                                            <input type="radio" name="sexo" id="masculino"
+                                                                value="Masculino" checked> Masculino
+                                                        </label>
+                                                        <label class="btn open-btn">
+                                                            <input type="radio" name="sexo" id="femenino"
+                                                                value="Femenino"> Femenino
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="email" class="form-label">Correo electrónico <label
+                                                        <label for="estado" class="form-label">Estado civil<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select" style="margin-right: 20px;"
+                                                            id="estado" name="estado">
+                                                            <option value="0">Seleccionar estado civil</option>
+                                                            <option value="Soltero/a">Soltero/a</option>
+                                                            <option value="Casado/a">Casado/a</option>
+                                                            <option value="NIT">NIT</option>
+                                                            <option value="Unión libre">Unión libre</option>
+                                                            <option value="Separado/a">Separado/a</option>
+                                                            <option value="Divorciado/a">Divorciado/a</option>
+                                                            <option value="Viudo/a">Viudo/a</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email" class="form-label" style="margin-top: 20px;">Correo electrónico <label
                                                                 class="redText">*</label></label>
                                                         <input type="email" class="form-control" id="email" name="email"
                                                             value="<%= user.email %>"
@@ -157,7 +191,7 @@
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-input">
-                                                        <label for="email1" class="form-label">Confirma el correo
+                                                        <label for="email1" class="form-label" style="margin-top: 20px;">Confirma el correo
                                                             electrónico <label class="redText">*</label></label>
                                                         <input type="email1" class="form-control" id="email1"
                                                             name="email1" placeholder="Ingresa el correo electrónico">
@@ -294,14 +328,15 @@
                                                         <label for="Departamento" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Departamento)<label
                                                                 class="redText">*</label></label>
-                                                        
-                                                                <select class="custom-select"
-                                                                    style="margin-right: 10px;" id="Departamento"
-                                                                    name="Departamento" onchange="departamento('Departamento', 'city')", onblur="departamento('Departamento', 'city')">
-                                                                    <option value="0">Seleccionar lugar de expedición
-                                                                    </option>
-                                                                </select>
-                                                       
+
+                                                        <select class="custom-select" style="margin-right: 10px;"
+                                                            id="Departamento" name="Departamento"
+                                                            onchange="departamento('Departamento', 'city')" ,
+                                                            onblur="departamento('Departamento', 'city')">
+                                                            <option value="0">Seleccionar lugar de expedición
+                                                            </option>
+                                                        </select>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6" style="display: none;" id="muni">
@@ -883,7 +918,7 @@
                                             <div>
                                                 <div class="card-body" id="collapse3" style="display: none;">
                                                     <p class="centered">Selecciona el horario de la cita de acuerdo a la
-                                                        disponibilidad del profesional de la salud/Ayuda diagnóstica. <i
+                                                        <strong> disponibilidad </strong> del profesional de la salud/Ayuda diagnóstica. <i
                                                             class="bi bi-calendar-event"></i>
                                                     </p>
                                                     <div id="hide">
@@ -893,7 +928,7 @@
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="col-12 col-sm-12"
                                                             style="height:300px; overflow-y: scroll;">
-                                                            <table class="table table-hover" id="tabla">
+                                                            <table class="table table-hover table-bordered" id="tabla">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Profesional de la salud/Ayuda diagnóstica
@@ -1879,6 +1914,7 @@
         function validar() {
             var name = document.getElementById("Name").value;
             var lastname = document.getElementById("Lastname").value;
+            var estado = document.getElementById("estado").value;
             var email = document.getElementById("email").value;
             var email1 = document.getElementById("email1").value;
             var number = document.getElementById("number").value;
@@ -1935,6 +1971,15 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Debes escribir los apellidos'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (estado == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el estado civil'
                 })
                 event.preventDefault();
                 return false;

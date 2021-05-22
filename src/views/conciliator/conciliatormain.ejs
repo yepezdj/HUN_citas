@@ -98,7 +98,9 @@
                     <tr>
                         <th>Hora de solicitud</th>
                         <th>Nombres</th>
-                        <th>Apellidos</th>              
+                        <th>Apellidos</th> 
+                        <th>Género</th>
+                        <th>Estado civil</th>              
                         <th>Dirección de residencia</th>
                         <th>Correo electrónico</th>
                         <th>Celular</th>
@@ -119,7 +121,8 @@
                         <th>Modalidad</th>
                         <th>Anexos</th> 
                         <th>Autorización</th> 
-                        <th>Acompañante</th> 
+                        <th>Acompañante</th>
+                        <th>Anotaciones</th> 
                         <th>Riesgo epidemiológico</th>  
                         <th>Consultar solicitud</th>                        
                     </tr>
@@ -141,7 +144,12 @@
                                 <td>
                                     <%= info[i].ApellidoP %>
                                 </td>
-                            
+                                <td>
+                                    <%= info[i].Genero %>
+                                </td>
+                                <td>
+                                    <%= info[i].Estado_civil %>
+                                </td>
                                 <td>
                                     <%= info[i].Direccion %>-<%= info[i].Barrio %>
                                 </td>
@@ -207,6 +215,9 @@
                                 </td>
                                 <td>
                                     <%= info[i].Acompañante %>
+                                </td>
+                                <td>
+                                    <%= info[i].Descripcion %>
                                 </td>
                                 <td> <% if (info[i].P1 == 'Sí' || info[i].P2 == 'Sí' || info[i].P3 == 'Sí' || info[i].P4 == 'Sí' || info[i].P5 == 'Sí' || info[i].P6 == 'Sí' || info[i].P7 == 'Sí' || info[i].P8 == 'Sí') { %>
                                     <div class="text-center mb-2">
