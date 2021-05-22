@@ -28,15 +28,21 @@ let getConciliator = (req, res) => {
 //Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
 let datosaceptar = (req, res) => {
     const id = req.params.idpa;
-    connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Cita, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Procedimiento, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
-        if (err) {
-            res.json(err);
-        }
-        console.log(datos);
-        res.render('./conciliator/aceptar.ejs', {
-            datos: datos[0]
+    if (req.session.conciliator) {
+        connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Cita, Modo, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Procedimiento, DATE_FORMAT(fecha_nac, "%Y-%m-%d") fecha_nac FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
+            if (err) {
+                res.json(err);
+            }
+            console.log(datos);
+            res.render('./conciliator/aceptar.ejs', {
+                datos: datos[0]
+            });
         });
-    });
+    } else {
+        return res.render("login.ejs", {
+            errors: req.session.context
+        });
+    }
 };
 
 let aceptar = async (req, res) => {

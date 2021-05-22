@@ -139,7 +139,7 @@
                                                     <label for="sexo">Género<label class="redText">*</label></label>
                                                     <div class="w-100 d-none d-md-block"></div>
                                                     <div class="btn-group btn-group-toggle toggle"
-                                                        data-toggle="buttons">
+                                                        data-toggle="buttons" style="margin-bottom: 20px;">
                                                         <label class="btn active">
                                                             <input type="radio" name="sexo" id="masculino"
                                                                 value="Masculino" checked> Masculino
@@ -328,15 +328,12 @@
                                                         <label for="Departamento" style="margin-top: 20px;"
                                                             class="form-label">Lugar de expedición (Departamento)<label
                                                                 class="redText">*</label></label>
-
                                                         <select class="custom-select" style="margin-right: 10px;"
                                                             id="Departamento" name="Departamento"
-                                                            onchange="departamento('Departamento', 'city')" ,
-                                                            onblur="departamento('Departamento', 'city')">
+                                                            onchange="departamento('Departamento', 'city')">
                                                             <option value="0">Seleccionar lugar de expedición
                                                             </option>
                                                         </select>
-
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6" style="display: none;" id="muni">
