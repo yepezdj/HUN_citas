@@ -139,7 +139,7 @@ let createAdmin = async (req, res) => {
 
 let exceptions = (req, res) => {
 
-    connection.query('SELECT DATE_FORMAT(fecha, "%Y-%m-%d") fecha, Tipo, Doctor, hora_ini, Especialidad FROM excepciones', (err, dat) => {
+    connection.query('SELECT DATE_FORMAT(fecha, "%Y-%m-%d") fecha, Tipo, Doctor, hora_ini, hora_fin, Especialidad FROM ver_excepciones', (err, dat) => {
         if (err) {
             res.json(err);
         }
