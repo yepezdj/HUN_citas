@@ -2,7 +2,7 @@ import connection from "../configs/connectDB";
 import adminService from "../services/adminService";
 import gmailController from "../controllers/gmailController";
 
-
+//RUTA PARA LA PÁGINA DE PRINCIPAL DEL MÓDULO ADMINISTRATIVO
 let getAdmin = (req, res) => {
     if (req.session.admin) {
         return res.render("./admin/adminmain.ejs", {
@@ -32,17 +32,12 @@ let Ver_Horario = (req, res) => {
         connection.query('SELECT dia, hora_ini, hora_fin, Tipo, Especialidad, Doctor FROM ver_horarios', (err, info) => {
             if (err) {
                 res.json(err);
-            }
-            /* console.log(datos); */
+            }        
             res.render('./admin/admindoctorhorario.ejs', {
                 user: req.session.context,
-                info: info,
-                //user: req.user
+                info: info               
             });
-        });
-        // return res.render("./admin/adminmain.ejs", {
-        //     user: req.session.context
-        // });
+        });      
     } else {
         return res.render("login.ejs", {
             errors: req.session.context
@@ -227,7 +222,7 @@ let editA = async (req, res) => {
     });
 };
 
-//Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
+//FUNCIÓN PARA LA REPROGRAMACIÓN DE CITAS Y ENVÍO DE CORREO
 let updateA = async (req, res) => {
     const id = req.params.idpa;
     var name = req.body.Name;
@@ -315,7 +310,7 @@ let tableHorario = async (req, res) => {
     }
 };
 
-
+//FUNCIÓN PARA ELIMINAR LOS HORARIOS HABITUALES DE LOS PROFESIONALES DE LA SALUD/AYUDAS DIAGNÓSTICAS
 let deleteHorario = (req, res) => {
     const id = req.params.idHorario;
     try {
@@ -339,6 +334,7 @@ let deleteHorario = (req, res) => {
     res.redirect('/deleteHorario');
 };
 
+//FUNCIÓN PARA ELIMINAR LAS ADICIONES/EXCEPCIONES DE LOS PROFESIONALES DE LA SALUD/AYUDAS DIAGNÓSTICAS
 let deleteException = (req, res) => {
     const id = req.params.idExcepcion;
     try {

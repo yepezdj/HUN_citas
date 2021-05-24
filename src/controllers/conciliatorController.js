@@ -2,6 +2,7 @@ import connection from "../configs/connectDB";
 import conciliatorService from "../services/conciliatorService";
 import gmailController from "../controllers/gmailController";
 
+//FUNCIÓN PARA LA PÁGINA PRINCIPAL DEL MÓDULO DE CONCILIADOR
 let getConciliator = (req, res) => {
     if (req.session.conciliator) {
         connection.query(`SELECT agendamiento.idpa,agendamiento.NombreP, agendamiento.ApellidoP, agendamiento.CedulaP, agendamiento.Correo, agendamiento.Especialidad, agendamiento.Doctor, 
@@ -25,7 +26,7 @@ let getConciliator = (req, res) => {
     }
 }
 
-//Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
+//SE EXTRAEN LOS DATOS DE LA TABLA DE AGENDAMIENTO PARA POSTERIORMENTE MOSTRARLOS EN LA PÁGINA
 let datosaceptar = (req, res) => {
     const id = req.params.idpa;
     if (req.session.conciliator) {
@@ -45,6 +46,7 @@ let datosaceptar = (req, res) => {
     }
 };
 
+//FUNCIÓN PARA ACEPTAR LA SOLICITUD DE CITA DEL PACIENTE Y ENVIAR CORREO
 let aceptar = async (req, res) => {
 
     const estado = 'Aceptada';
@@ -75,20 +77,7 @@ let aceptar = async (req, res) => {
 
 };
 
-//Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
-// let datosdeclinar = (req, res) => {
-//     const id = req.params.idpa;
-//     connection.query('SELECT idpa, NombreP, ApellidoP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Correo, Tipo_documento, Celular, Autorizacion, entidad, Regimen FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
-//         if (err) {
-//             res.json(err);
-//         }
-//         console.log(datos);
-//         res.render('./conciliator/declinar.ejs', {
-//             datos: datos[0]
-//         });
-//     });
-// };
-
+//FUNCIÓN PARA DECLINAR LA SOLICITUD DE CITA DEL PACIENTE Y ENVIAR CORREO
 let declinar = async (req, res) => {
 
     const estado = 'Rechazada';
@@ -155,7 +144,7 @@ let editC = async (req, res) => {
     });
 };
 
-//Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
+//FUNCIÓN PARA LA REPROGRAMACIÓN DE CITAS Y ENVÍO DE CORREO
 let updateC = async (req, res) => {
     const datos = req.body;
     console.log('alo')
@@ -274,8 +263,7 @@ let updateExport = async (req, res) => {
 module.exports = {
     getConciliator: getConciliator,
     datosaceptar: datosaceptar,
-    aceptar: aceptar,
-    // datosdeclinar: datosdeclinar,
+    aceptar: aceptar,   
     declinar: declinar,
     Citas: Citas,
     editC: editC,

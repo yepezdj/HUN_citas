@@ -11,6 +11,7 @@ import filesController from "../controllers/filesController";
 import multer from "multer";
 import path from "path";
 
+//PARA ALMACENAR LOS ARCHIVOS QUE SON SUBIDOS POR LOS USUARIOS
 const storage = multer.diskStorage({ destination: '/home/ubuntu/HUN_citas/uploads',
 filename: function (req, file, cb) {
     cb(null, 'Archivo'+'-'+Date.now()+
@@ -22,30 +23,28 @@ const upload = multer({
     storage: storage
 });
 
-//initPassportLocalUser();
-
 let router = express.Router();
 
 
 let initWebRoutes = (app) => {
-    //LOGIN
+    //RUTAS PARA LA PÁGINA DE LOGIN
     router.get("/", loginController.getLoginPage);
     router.get("/login", loginController.getLoginPage);
     router.post("/login", loginController.postLogin);
     router.post("/logout", loginController.postLogOut);
 
-    //REGISTER
+    //RUTAS PARA LA PÁGINA DE REGISTRO
     router.get("/register", registerController.getPageRegister);
     router.post("/register", auth.validateRegister, registerController.createNewUser);
     router.post("/departamentos", registerController.departamentos);
     router.post("/municipio", registerController.municipio);
 
-    //ROUTES
+    //RUTAS QUE REDIRECCIONAN A LA PÁGINA PRINCIPAL DE CADA MÓDULO
     router.get("/user/usermain", userController.getUser);
     router.get("/admin/adminmain", adminController.getAdmin);
     router.get("/conciliator/conciliatormain", conciliatorController.getConciliator);
     
-    //FORGOT AND RESET PASSWORD ROUTES
+    //RUTAS PARA FORGOT AND RESET PASSWORD 
     router.get('/forgot-passwordRest', forgotpasswordController.Rest);
     router.get('/forgot-password', forgotpasswordController.a);
     router.post('/forgot-password', forgotpasswordController.aa);
@@ -65,8 +64,7 @@ let initWebRoutes = (app) => {
     router.post('/listaEPS',userController.listaEPS);
     router.get('/delete/:idpa',userController.delate); 
     router.get('/update/:idpa', upload.array('images',1), userController.edit);
-    router.post('/update/:idpa', upload.array('images',1), userController.update);     
-    // router.post('/survey', userController.Survey);
+    router.post('/update/:idpa', upload.array('images',1), userController.update);
     router.post('/verifyUser', userController.verifyUser);
     router.post('/ayuda', userController.ayuda);
     router.post('/procedimiento', userController.procedimiento);
@@ -84,8 +82,7 @@ let initWebRoutes = (app) => {
     router.get('/consultar/:idpa',conciliatorController.datosaceptar);
     router.get('/consultarExportarC',conciliatorController.ExportarConciliator); 
     router.post('/updateExport',conciliatorController.updateExport); 
-    router.post('/aceptar/:idpa',conciliatorController.aceptar);
-    // router.get('/declinar/:idpa',conciliatorController.datosdeclinar);
+    router.post('/aceptar/:idpa',conciliatorController.aceptar);    
     router.post('/declinar/:idpa',conciliatorController.declinar);
     router.get('/updateC/:idpa', upload.array('images',1), conciliatorController.editC);
     router.post('/updateC/:idpa', upload.array('images',1), conciliatorController.updateC);

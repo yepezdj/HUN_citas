@@ -153,9 +153,13 @@
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="ayudas">
-                  <select class="custom-select mt-2" style="margin-top: 20px;" id="Ayudas" name="Ayudas" onclick="consult3()">
-                    <option value="0">Seleccionar ayuda diagnóstica</option>
-                  </select>
+                  <div class="parent4">
+                    <div class="child4">
+                      <select class="custom-select mt-2" style="margin-top: 20px;" id="Ayudas" name="Ayudas">
+                        <option value="0">Seleccionar ayuda diagnóstica</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="especialidad">
@@ -168,12 +172,15 @@
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="doctor">
-                  <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
-                    onclick="consult()">
-                    <option value="0">
-                      Seleccionar profesional de la salud
-                    </option>
-                  </select>
+                  <div class="parent">
+                    <div class="child">
+                      <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores">
+                        <option value="0">
+                          Seleccionar profesional de la salud
+                        </option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="especialidad2">
@@ -184,11 +191,14 @@
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="doctor2">
-                  <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores2" name="Doctores2"
-                    onclick="consult2()">
-                    <option value="0">Seleccionar profesional de la salud
-                    </option>
-                  </select>
+                  <div class="parent2">
+                    <div class="child2">
+                      <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores2" name="Doctores2">
+                        <option value="0">Seleccionar profesional de la salud
+                        </option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="especialidad3">
@@ -199,24 +209,36 @@
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="doctor3">
-                  <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores3" name="Doctores3" onclick="consult4()">
-                    <option value="0">Seleccionar profesional de la salud
-                    </option>
-                  </select>
+                  <div class="parent3">
+                    <div class="child3">
+                      <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores3" name="Doctores3">
+                        <option value="0">Seleccionar profesional de la salud
+                        </option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="doctor4">
-                  <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores4" name="Doctores4" onclick="consult5()">
-                    <option value="0">Seleccionar profesional de la salud
-                    </option>
-                  </select>
+                  <div class="parent5">
+                    <div class="child5">
+                      <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores4" name="Doctores4">
+                        <option value="0">Seleccionar profesional de la salud
+                        </option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px; display: none;" id="doctor5">
-                  <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores5" name="Doctores5" onclick="consult6()">
-                    <option value="0">Seleccionar profesional de la salud
-                    </option>
-                  </select>
+                  <div class="parent6">
+                    <div class="child6">
+                      <select class="custom-select mt-2" style="margin-top: 20px;" id="Doctores5" name="Doctores5">
+                        <option value="0">Seleccionar profesional de la salud
+                        </option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12" style="margin-top: 20px;">
@@ -231,7 +253,8 @@
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-12 col-sm-12">
                   <label for="fecha" class="form-label" style="margin-top: 20px;">Fecha</label>
-                  <input class="form-control" id="fecha" name="fecha" autocomplete="off" onkeypress="return false" readonly>
+                  <input class="form-control" id="fecha" name="fecha" autocomplete="off" onkeypress="return false"
+                    readonly>
                 </div>
               </div>
               <div class="col-12 col-sm-6" style="height:300px; overflow-y: scroll;">
@@ -326,9 +349,6 @@
     document.onload = loadFunctions();
     function loadFunctions() {
 
-      consult()
-
-      // $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
     }
 
     var date = new Date();
@@ -1109,37 +1129,15 @@
       });
     }
 
-    // $(document).ready(function () {
-    //   $('#tabla').DataTable({
-    //     scrollY: '50vh',
-    //     scrollCollapse: true,
-    //     paging: false,
-    //     language: {
-    //       processing: "Búsqueda en curso...",
-    //       search: "Buscar:",
-    //       lengthMenu: "Mostrar _MENU_ registros",
-    //       info: "Página _PAGE_ de _PAGES_",
-    //       infoEmpty: "No hay registros disponibles",
-    //       infoFiltered: "(filtrado de _MAX_ total elementos)",
-    //       zeroRecords: "No hay registros con este criterio de búsqueda",
-    //       infoPostFix: "",
-    //       loadingRecords: "Cargando...",
-    //       emptyTable: "La tabla aún no contiene registros",
-    //       paginate: {
-    //         first: "Primero",
-    //         previous: "Anterior",
-    //         next: "Siguiente",
-    //         last: "último"
-    //       },
-    //       aria: {
-    //         sortAscending: ": Ordenar de forma ascendente",
-    //         sortDescending: ": Ordenar de forma descendente"
-    //       }
-    //     }
-    //   });
+    const parent = document.querySelector(".parent");
+    parent.addEventListener("change", function (e) {
+      const child = e.target.matches(".child, .child *");
+      if (child) { // If child is click
 
-    // });
+        consult()
 
+      }
+    });
     var result = [];
     async function consult() {
       var con1 = document.getElementById('Doctores').value;
@@ -1177,7 +1175,7 @@
       select = document.getElementById('Doctores');
 
       for (var i = 0; i < result.length; i++) {
-        if (select.value == result[i].Doctor) {          
+        if (select.value == result[i].Doctor) {
           var row = `<tr>
                             <td>                              
                                 ${result[i].fecha}                                
@@ -1196,6 +1194,15 @@
       }
     }
 
+    const parent2 = document.querySelector(".parent2");
+    parent2.addEventListener("change", function (e) {
+      const child2 = e.target.matches(".child2, .child2 *");
+      if (child2) { // If child is click
+
+        consult2()
+
+      }
+    });
     async function consult2() {
       var con1 = document.getElementById('Doctores2').value;
       const consulta2 = {
@@ -1237,6 +1244,16 @@
         }
       }
     }
+
+    const parent4 = document.querySelector(".parent4");
+    parent4.addEventListener("change", function (e) {
+      const child4 = e.target.matches(".child4, .child4 *");
+      if (child4) { // If child is click
+
+        consult3()
+
+      }
+    });
     async function consult3() {
       var con1 = document.getElementById('Ayudas').value;
       const consulta2 = {
@@ -1279,6 +1296,15 @@
       }
     }
 
+    const parent3 = document.querySelector(".parent3");
+    parent3.addEventListener("change", function (e) {
+      const child3 = e.target.matches(".child3, .child3 *");
+      if (child3) { // If child is click
+
+        consult4()
+
+      }
+    });
     async function consult4() {
       var con1 = document.getElementById('Doctores3').value;
       const consulta2 = {
@@ -1321,6 +1347,15 @@
       }
     }
 
+    const parent5 = document.querySelector(".parent5");
+    parent5.addEventListener("change", function (e) {
+      const child5 = e.target.matches(".child5, .child5 *");
+      if (child5) { // If child is click
+
+        consult5()
+
+      }
+    });
     async function consult5() {
       var con1 = document.getElementById('Doctores4').value;
       const consulta2 = {
@@ -1363,6 +1398,15 @@
       }
     }
 
+    const parent6 = document.querySelector(".parent6");
+    parent6.addEventListener("change", function (e) {
+      const child6 = e.target.matches(".child6, .child6 *");
+      if (child6) { // If child is click
+
+        consult6()
+
+      }
+    });
     async function consult6() {
       var con1 = document.getElementById('Doctores5').value;
       const consulta2 = {

@@ -2,6 +2,7 @@ import connection from "../configs/connectDB";
 import userService from "../services/userService";
 import jwt from "jsonwebtoken";
 
+//FUNCIÓN PARA LA PÁGINA PRINCIPAL DEL MÓDULO USUARIO
 let getUser = (req, res) => {
     if (req.session.user) {
         return res.render("./user/usermain.ejs", {
@@ -24,21 +25,14 @@ let verifyUser = async (req, res) => {
     console.log(nameDoc);
     var EspeDoc = req.body.EspeDoc;
     console.log(EspeDoc);
-    var date = new Date(fecha); //dia en palabras
+    var date = new Date(fecha); //DÍA EN PALABRAS
     var tipo = req.body.tipo;
     console.log(tipo)
     var day = date.getDay();
-    //var year = date.getFullYear();
-
-    //Verificar si es dia se semana 'mm-dd-yy'
-    // if (day === 6 || day === 0) {
-    //     console.log('es finde');
-    // } else 
-
+  
     var pos = 0;
-    //si no es festivo
-
-    //traer horarios disponibles ++++
+    
+    //TRAER HORARIOS DISPONIBLES ++++
     let schedule = await userService.bringSchedule(day, nameDoc, EspeDoc, tipo);
     pos = 0;
     var vec_hora_ini = [];
@@ -96,23 +90,21 @@ let verifyUser = async (req, res) => {
         return !vec_apointment.includes(element);
     });
     console.log('total');
-    // console.log(vec_hora_ini);
+    
     var hora = vec_hora_ini
     res.end(JSON.stringify(hora));
     console.log(hora)
-    // return vec_hora_ini;
-    // return res.redirect("/user/usermain");
+    
 }
 
-//Se extraen las especialidades y se convierten en formato json
+//SE EXTRAEN LAS ESPECIALIDADES Y SE CONVIERTE EN FORMATO JSON
 let espe = (req, res) => {
     connection.query('SELECT Especialidad FROM especialidades ORDER BY Especialidad ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));        
     });
 };
 
@@ -122,8 +114,7 @@ let medicina = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));       
     });
 };
 
@@ -133,8 +124,7 @@ let medicinaOdont = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));        
     });
 };
 
@@ -144,8 +134,7 @@ let odontologia = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));      
     });
 };
 
@@ -155,8 +144,7 @@ let odontologiaE = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));       
     });
 };
 
@@ -166,8 +154,7 @@ let odontologiaespecializada = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));       
     });
 };
 
@@ -177,8 +164,7 @@ let listaEPS = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));        
     });
 };
 
@@ -189,8 +175,7 @@ let ayuda = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));        
     });
 };
 
@@ -200,31 +185,28 @@ let procedimiento = (req, res) => {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));        
     });
 };
+
 let doctor_procedimiento = (req, res) => {
     connection.query('SELECT Nombres, Especialidad FROM proc_amb_doctor ORDER BY Nombres ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
         var result4 = dat
-        res.end(JSON.stringify(result4));
-        /* console.log(result4) */
+        res.end(JSON.stringify(result4));        
     });
 };
 
 
-//Se extraen los nombres de los médicos y se convierten en formato json
 let dr = (req, res) => {
     connection.query('SELECT Especialidad, Nombres FROM doctor ORDER BY Nombres ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }
         var result5 = dat
-        res.end(JSON.stringify(result5));
-        /* console.log(result5) */
+        res.end(JSON.stringify(result5));       
     });
 };
 
@@ -235,30 +217,25 @@ let verExcepciones = (req, res) => {
             res.json(err);
         }
         var result = dat
-        res.end(JSON.stringify(result));
-        /* console.log(result) */
+        res.end(JSON.stringify(result));       
     });
-
 };
 
-//Se extraen campos de la tabla agendamiento y son enviados a la página tabla para posteriormente ser mostrados
+//FUNCIÓN PARA MOSTRAR DATOS DE LA SOLICITUD DE CITA DEL USUARIO EN LA TABLA
 let tabla = (req, res) => {
 
     if (req.session.user) {
         var user = req.session.context;
-        /* console.log(user) */
         var id = user.id;
-        /* console.log(cedula); */
-        // console.log(req.session.user)
+       
         connection.query('SELECT idpa, NombreP, ApellidoP, CedulaP, Especialidad, Doctor, DATE_FORMAT(fecha, "%Y-%m-%d") fecha, hora_ini, Orden, Cita, Afiliacion, Modo, Estado, Tipo_documento, Celular, Autorizacion, entidad, Regimen, Direccion, Barrio, CelularOp, Telefono, Acompañante, Municipio, Descripcion, Estado_civil, Genero FROM agendamiento WHERE idu = ?', id, (err, datos) => {
             if (err) {
                 res.json(err);
             }
-            /* console.log(datos); */
+           
             res.render('./user/usertable.ejs', {
                 data: datos,
-                user: req.session.context
-                //user: req.user
+                user: req.session.context               
             });
         });
     } else {
@@ -268,7 +245,7 @@ let tabla = (req, res) => {
     }
 };
 
-//Se extraen todos los campos de la tabla que contiene la información de los horarios y se convierten en formato json
+
 let datos = (req, res) => {
 
     connection.query('SELECT * FROM ver_horarios', (err, dat) => {
@@ -276,15 +253,12 @@ let datos = (req, res) => {
             res.json(err);
         }
         var result = dat
-        res.end(JSON.stringify(result));
-        /* console.log(result) */
+        res.end(JSON.stringify(result));       
     });
 
 };
 
-
-
-//Se extraen mediante el req.body los elementos llenandos en la página para insertarlos en la tabla agendamiento
+//FUNCIÓN PARA EXTRAER LOS CAMPOS DILIGENCIADOS POR LOS USUARIOS PARA LA SOLICITUD DE CITA MÉDICA E INSERTARLOS EN LA BASE DE DATOS
 let agendar = async (req, res) => {
     const datos = req.body;
     var name = req.body.Name;
@@ -397,7 +371,7 @@ let agendar = async (req, res) => {
     const secret = JWT_SECRET;
 
 
-    //IMAGEN Y ORDEN SUBIDAS
+    //ORDEN SUBIDA
     if (req.files[0]) {
         var Orden = req.files[0].path;
         console.log(Orden);
@@ -463,7 +437,7 @@ let agendar = async (req, res) => {
     }
 }
 
-//Se extraen los campos de la tabla agendamiento para posteriormente mostrarlos en la página edit
+
 let edit = async (req, res) => {
     var user = req.session.context;
     const id = req.params.idpa;
@@ -485,7 +459,7 @@ let edit = async (req, res) => {
     }
 };
 
-//Se actualiza la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
+//FUNCIÓN PARA ACTUALIZAR INFORMACIÓN SI EL USUARIO DECIDE EDITAR LA INFORMACIÓN CONTENIDA EN LA TABLA
 let update = async (req, res) => {
     const id = req.params.idpa;
     var name = req.body.Name;
@@ -538,7 +512,7 @@ let update = async (req, res) => {
         person = person;
     }
 
-    //IMAGEN Y ORDEN SUBIDAS
+    //ORDEN SUBIDA
     if (req.files[0]) {
         var Orden = req.files[0].path;
         console.log(Orden);
@@ -556,8 +530,7 @@ let update = async (req, res) => {
             if (err) {
                 res.json(err);
             }
-            console.log(datos);
-            // return res.redirect('/consultar');
+            console.log(datos);           
         });
     } else {
         // linkOrden = 'El paciente no adjuntó orden médica';
@@ -569,8 +542,7 @@ let update = async (req, res) => {
             if (err) {
                 res.json(err);
             }
-            console.log(datos);
-            // return res.redirect('/consultar');
+            console.log(datos);           
         });
     }
 
@@ -612,7 +584,7 @@ let update = async (req, res) => {
     });
 };
 
-//Se elemina la fila de la tabla teniendo en cuenta el parámetro del id y se recarga la página
+//FUNCIÓN PARA ELIMINAR REGISTROS DE LA TABLA DEL USUARIO
 let delate = (req, res) => {
     const id = req.params.idpa;
     connection.query('DELETE FROM agendamiento WHERE idpa = ?', [id], (err, datos) => {
@@ -624,7 +596,7 @@ let delate = (req, res) => {
     });
 };
 
-//Se exportan las variables que contienen las funciones 
+//SE EXPORTAN LAS FUNCIONES
 module.exports = {
     getUser: getUser,
     verifyUser: verifyUser,
