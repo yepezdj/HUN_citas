@@ -211,8 +211,8 @@ let dr = (req, res) => {
 };
 
 let verExcepciones = (req, res) => {
-
-    connection.query('SELECT DATE_FORMAT(fecha, "%Y-%m-%d") fecha, Tipo, Doctor, hora_ini, hora_fin, Especialidad FROM ver_excepciones WHERE Tipo = "Adición"', (err, dat) => {
+   
+    connection.query('SELECT DATE_FORMAT(fecha, "%Y-%m-%d") fecha, Tipo, Doctor, hora_ini, hora_fin, Especialidad FROM ver_excepciones WHERE Tipo = "Adición" AND fecha >= DATE(NOW()) ORDER BY fecha ASC', (err, dat) => {
         if (err) {
             res.json(err);
         }

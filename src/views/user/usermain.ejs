@@ -419,7 +419,7 @@
                                                             <label for="Cita" class="form-label">Tipo de cita <label
                                                                     class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
-                                                                id="Cita" name="Cita" onchange="limpiar(), vaciar()"
+                                                                id="Cita" name="Cita" onchange="limpiar(), vaciar(), desaparecer()"
                                                                 onclick="vacio()">
                                                                 <option value="0">Seleccionar tipo de cita médica
                                                                 </option>
@@ -508,7 +508,7 @@
                                                                     <select class="custom-select mt-2"
                                                                         style="margin-top: 20px;" id="Ayudas"
                                                                         name="Ayudas" onclick="vacioF()"
-                                                                        onchange="vaciar()">
+                                                                        onchange="vaciar(), desaparecer()">
                                                                         <option value="0">Seleccionar ayuda diagnóstica
                                                                         </option>
                                                                     </select>
@@ -524,7 +524,7 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="Procedimientos" name="Procedimientos"
-                                                                onchange="especialidad2('Procedimientos','opciones2'), limpiarMed()"
+                                                                onchange="especialidad2('Procedimientos','opciones2'), limpiarMed(), desaparecer()"
                                                                 onclick="vacio(), vaciarF()">
                                                                 <option value="0">Seleccionar procedimiento ambulatorio
                                                                 </option>
@@ -542,7 +542,7 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="opciones" name="opciones"
-                                                                onchange="doctors('opciones','Doctores'), vacio()"
+                                                                onchange="doctors('opciones','Doctores'), vacio(), desaparecer()"
                                                                 onclick="vaciarF()">
                                                                 <option value="0">Seleccionar especialidad
                                                                 </option>
@@ -560,7 +560,7 @@
                                                                     <select class="custom-select mt-2"
                                                                         style="margin-top: 20px;" id="Doctores"
                                                                         name="Doctores" onclick="vacioF()"
-                                                                        onchange="vaciar()">
+                                                                        onchange="vaciar(), desaparecer()">
                                                                         <option value="0">Seleccionar profesional de la
                                                                             salud
                                                                         </option>
@@ -576,7 +576,7 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="opciones2" name="opciones2"
-                                                                onchange="doctors2('opciones2','Doctores2'), vacio()"
+                                                                onchange="doctors2('opciones2','Doctores2'), vacio(), desaparecer()"
                                                                 onclick="vaciarF()">
                                                                 <option value="0">Seleccionar especialidad</option>
                                                             </select>
@@ -592,7 +592,7 @@
                                                                     <select class="custom-select mt-2"
                                                                         style="margin-top: 20px;" id="Doctores2"
                                                                         name="Doctores2" onclick="vacioF()"
-                                                                        onchange="vaciar()">
+                                                                        onchange="vaciar(), desaparecer()">
                                                                         <option value="0">Seleccionar profesional de la
                                                                             salud
                                                                         </option>
@@ -608,7 +608,7 @@
                                                                 <label class="redText">*</label></label>
                                                             <select class="custom-select mt-2" style="margin-top: 20px;"
                                                                 id="opciones3" name="opciones3"
-                                                                onchange="doctors3('opciones3','Doctores3'), vacio()"
+                                                                onchange="doctors3('opciones3','Doctores3'), vacio(), desaparecer()"
                                                                 onclick="vaciarF()">
                                                                 <option value="0">Seleccionar especialidad</option>
                                                             </select>
@@ -624,7 +624,7 @@
                                                                     <select class="custom-select mt-2"
                                                                         style="margin-top: 20px;" id="Doctores3"
                                                                         name="Doctores3" onclick="vacioF()"
-                                                                        onchange="vaciar()">
+                                                                        onchange="vaciar(), desaparecer()">
                                                                         <option value="0">Seleccionar profesional de la
                                                                             salud
                                                                         </option>
@@ -643,7 +643,7 @@
                                                                     <select class="custom-select mt-2"
                                                                         style="margin-top: 20px;" id="Doctores4"
                                                                         name="Doctores4" onclick="vacioF()"
-                                                                        onchange="vaciar()">
+                                                                        onchange="vaciar(), desaparecer()">
                                                                         <option value="0">Seleccionar profesional de la
                                                                             salud
                                                                         </option>
@@ -662,7 +662,7 @@
                                                                     <select class="custom-select mt-2"
                                                                         style="margin-top: 20px;" id="Doctores5"
                                                                         name="Doctores5" onclick="vacioF()"
-                                                                        onchange="vaciar()">
+                                                                        onchange="vaciar(), desaparecer()">
                                                                         <option value="0">Seleccionar profesional de la
                                                                             salud
                                                                         </option>
@@ -940,13 +940,13 @@
                                                         </div>
                                                         <div class="w-100 d-none d-md-block"></div>
                                                         <div class="col-12 col-sm-12"
-                                                            style="height:300px; overflow-y: scroll; display: none;"
+                                                            style="height:300px; overflow-y: scroll; display: none; margin-top: 20px;"
                                                             id="adiciones">
-                                                            <table class="table table-hover" id="tabla1">
+                                                            <table class="table table-hover table-bordered" id="tabla1">
                                                                 <thead>
                                                                     <tr>
                                                                         <!-- encabezado de tabla -->
-                                                                        <td colspan="3">Horarios extraordinarios</td>
+                                                                        <td colspan="3" id="col">Horarios extraordinarios</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Profesional de la salud/Ayuda diagnóstica
@@ -1265,7 +1265,8 @@
             const child = e.target.matches(".child, .child *");
             if (child) { // If child is click
                 
-                consult()
+                consult();
+                adicion()
 
             }
         });
@@ -1311,13 +1312,57 @@
                 }
             }
         }
+        async function adicion() {
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTableU()
+        }
+        function buildTableU() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                } 
+            }
+        }
+
 
         const parent2 = document.querySelector(".parent2");
         parent2.addEventListener("change", function (e) {
             const child2 = e.target.matches(".child2, .child2 *");
             if (child2) { // If child is click
                
-                consult2()
+                consult2();
+                adicion2()
 
             }
         });
@@ -1362,13 +1407,56 @@
                 }
             }
         }
+        async function adicion2() {
+            var con1 = document.getElementById('Doctores2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU2()
+        }
+        function buildTableU2() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
 
         const parent3 = document.querySelector(".parent3");
         parent3.addEventListener("change", function (e) {
             const child3 = e.target.matches(".child3, .child3 *");
             if (child3) { // If child is click
 
-                consult4()
+                consult4();
+                adicion4()
 
             }
         });
@@ -1413,13 +1501,56 @@
                 }
             }
         }
+        async function adicion4() {
+            var con1 = document.getElementById('Doctores3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU4()
+        }
+        function buildTableU4() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
 
         const parent4 = document.querySelector(".parent4");
         parent4.addEventListener("change", function (e) {
             const child4 = e.target.matches(".child4, .child4 *");
             if (child4) { // If child is click
        
-                consult3()
+                consult3();
+                adicion3()
 
             }
         });
@@ -1464,13 +1595,56 @@
                 }
             }
         }
+        async function adicion3() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU3()
+        }
+        function buildTableU3() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
 
         const parent5 = document.querySelector(".parent5");
         parent5.addEventListener("change", function (e) {
             const child5 = e.target.matches(".child5, .child5 *");
             if (child5) { // If child is click
            
-                consult5()
+                consult5();
+                adicion5()
 
             }
         });
@@ -1515,13 +1689,56 @@
                 }
             }
         }
+        async function adicion5() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU5()
+        }
+        function buildTableU5() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
 
         const parent6 = document.querySelector(".parent6");
         parent6.addEventListener("change", function (e) {
             const child6 = e.target.matches(".child6, .child6 *");
             if (child6) { // If child is click
                
-                consult6()
+                consult6();
+                adicion6()
 
             }
         });
@@ -1557,6 +1774,47 @@
                             </td> 
                             <td>                              
                                 ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion6() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU6()
+        }
+        function buildTableU6() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
                             </td> 							
 							<td>                              
                                 ${result[i].hora_ini} - ${result[i].hora_fin}                                
@@ -2661,92 +2919,8 @@
             $("#city").prepend('<option selected="true" value="0">Seleccionar municipio de residencia</option>');
         }
 
-        // async function adicion() {
-        //     var con1 = document.getElementById('Doctores').value;
-        //     const consulta2 = {
-        //         con: con1
-        //     };
-        //     const options2 = {
-        //         method: "POST",
-        //         body: JSON.stringify(consulta2),
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         }
-        //     };
-        //     const response2 = await fetch('/verExcepciones', options2);
-        //     console.log(response2)
-        //     result = await response2.json();
-        //     console.log(result)
-        //     buildTableU()
-        // }
-        // function buildTableU() {
-        //     vaciarU();
-        //     vacioU();
-        //     console.log(result)
-        //     var table = document.getElementById('Table');
-        //     select = document.getElementById('Doctores');
-        //     for (var i = 0; i < result.length; i++) {
-        //         if (select.value == result[i].Doctor) {
-        //             $("#adiciones").show();
-        //             var row = `<tr>
-        //                     <td>                              
-        //                         ${result[i].Doctor}                                
-        //                     </td> 
-        //                     <td>                              
-        //                         ${result[i].fecha}                                
-        //                     </td> 							
-		// 					<td>                              
-        //                         ${result[i].hora_ini} - ${result[i].hora_fin}                                
-        //                     </td>                                                          
-		// 			  </tr>`
-        //             table.innerHTML += row
-        //         }
-        //     }
-        // }
-
-        // async function adicion2() {
-        //     var con1 = document.getElementById('Doctores2').value;
-        //     const consulta2 = {
-        //         con: con1
-        //     };
-        //     const options2 = {
-        //         method: "POST",
-        //         body: JSON.stringify(consulta2),
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         }
-        //     };
-        //     const response2 = await fetch('/verExcepciones', options2);
-        //     console.log(response2)
-        //     result = await response2.json();
-        //     console.log(result)
-        //     buildTableU()
-        // }
-        // function buildTableU2() {
-        //     vaciarU();
-        //     vacioU();
-        //     console.log(result)
-        //     var table = document.getElementById('Table');
-        //     select = document.getElementById('Doctores2');
-        //     for (var i = 0; i < result.length; i++) {
-        //         if (select.value == result[i].Doctor) {
-        //             $("#adiciones").show();
-        //             var row = `<tr>
-        //                     <td>                              
-        //                         ${result[i].Doctor}                                
-        //                     </td> 
-        //                     <td>                              
-        //                         ${result[i].fecha}                                
-        //                     </td> 							
-		// 					<td>                              
-        //                         ${result[i].hora_ini} - ${result[i].hora_fin}                                
-        //                     </td>                                                          
-		// 			  </tr>`
-        //             table.innerHTML += row
-        //         }
-        //     }
-        // }
-
+        
+        
     </script>
     <!--===== MAIN JS =====-->
     <script src="/js/main.js"></script>

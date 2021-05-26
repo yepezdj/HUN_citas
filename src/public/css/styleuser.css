@@ -97,6 +97,30 @@ body{
 }
 
 
+
+#tabla1 {
+  margin-top: 30px;
+  z-index: 100000 !important;
+  background: transparent !important; 
+  text-align: center; 
+}
+
+#col{
+  background-color: #008DCA;
+  color: white;
+}
+
+#tabla1 th {
+  /* border-style: none; */
+  /* border: 0 !important;  */
+  background-color: #008DCA;
+  color: white;
+}
+
+#tabla1 tbody tr:nth-child(odd) {
+  background-color: rgb(228, 239, 245);
+}
+
 table > tbody:empty {
   position: relative;
   display: table-caption;
@@ -116,6 +140,16 @@ table > tbody:empty:before {
   transform: translateY(-50%);
 }
 
+#tabla1 > tbody:empty:before {
+  content: 'No hay excepciones para este profesional de la salud/ayuda diagnóstica';
+  color: red;
+  position: absolute;
+  font-size: 14px;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 .tooltip.danger .tooltip-inner          { background-color:    #d9534f !important; }
 .tooltip.danger.top > .tooltip-arrow    { border-top-color:    #d9534f !important; }
