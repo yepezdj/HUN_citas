@@ -4,7 +4,7 @@ let validateRegister = [
     check("email", "Correo invalido").isEmail().trim(),
 
     check("password", "Contraseña invalida. Debe tener al menos 8 caracteres")
-    .isLength( {max: 250}),
+    .isLength( {min: 8,max: 250}),
 
     check("confirmationPassword", "Las contraseñas no coinciden")
     .custom((value, { req }) => {

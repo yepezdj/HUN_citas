@@ -16,14 +16,10 @@ let createNewUser = (user) => {
                     name: user.name,
                     last_name: user.last_name,
                     email: user.email,
-                    password: hash,
-                    city: user.city,
-                    fecha_nac: user.fecha_nac,
-                    cellphone: user.cellphone,
-                    cedula: user.cedula,         
-                    eps: user.eps,
+                    password: hash,                    
+                    cellphone: user.cellphone,                 
                     sexo: user.sexo,
-                    role: 'user'                
+                    role: 'user'                                              
                 };
                 console.log('ola');
                 console.log(userItem);
@@ -32,7 +28,7 @@ let createNewUser = (user) => {
                     ' INSERT INTO user set ? ', userItem,
                     function(err, rows) {
                         if (err) {
-                            reject(false)
+                            reject(`No se pudo crear el usuario`)
                         }
                         resolve("Create a new user successful");
                     }

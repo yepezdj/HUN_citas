@@ -1,114 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== BOX ICONS ===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="/css/styles.css">
+    <link rel="shortcut icon" href="https://genfavicon.com/tmp/icon_d1490e0ca97a4e19828ac691e5ef8be0.ico">
 
-        <!-- ===== BOOTSTRAP ===== -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
- 
-        <!-- ===== JQUERY ===== -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-         crossorigin="anonymous"></script>
+    <!-- ===== BOX ICONS ===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/styles.css">
 
-         <!-- ===== OTRAS LIBERÍAS DE BOOTSTRAP ===== -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-         crossorigin="anonymous"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-         crossorigin="anonymous"></script>
-        <title>Conciliador</title>
-    </head>
-    <body id="body-pd">
-        <header class="header" id="header">
-            <div class="header__toggle">
-                <i class='bx bx-menu' id="header-toggle"></i>
-            </div>
+    <!-- ===== BOOTSTRAP ===== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-            <div class="header__img">
-                <img src="/images/HUN.jpg" alt="">
-            </div>
-        </header>
+    <!-- ===== JQUERY ===== -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
 
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div>
-                    <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
-                        <i class='bx bx-layer nav__logo-icon'></i>
-                        <span class="nav__logo-name">
-                            Hospital<br> 
-                            Universidad del<br>
-                            Norte
-                        </span>
-                    </a>
-                   
-                </div>
-                <a href="#" onclick="logOut()" class="nav__link">
-                    <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Cerrar sesión</span>
-                </a>
-            </nav>
+    <!-- ===== OTRAS LIBERÍAS DE BOOTSTRAP ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>Conciliador</title>
+</head>
+
+<body id="body-pd" style="background:  url(../images/regis.png);">
+    <header class="header" id="header">
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
         </div>
-       
-        <div class="container mt-5">
-            <div class="row mt-5">
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="card border-primary">
-                        <div class="card-body" style="width: 300px; height: 350px; margin: 30px;">
-                            <form action="/aceptar/<%= datos.idpa %>" method="POST"> <!-- Se está mostrando un dato único, por eso se coloca como parámetro el id -->
-                                <div class="mb-4" style="margin: 50px;">
-                                    <label for="Name" class="form-label">Nombres del paciente</label>
-                                    <input type="text" class="form-control" id="Name" name="Name" value="<%= datos.NombreP %>">
-                                  </div>
-                                  <div class="mb-4" style="margin: 50px">
-                                    <label for="Lastname" class="form-label">Apellidos del paciente</label>
-                                    <input type="text" class="form-control" id="Lastname" name="Lastname" value="<%= datos.ApellidoP %>">
-                                  </div>  
-                                  <div class="mb-4" style="margin: 50px">
-                                    <label for="correo" class="form-label">Correo electrónico del paciente</label>
-                                    <input type="text" class="form-control" id="correo" name="correo" value="<%= datos.Correo %>">
-                                  </div>
-                                  <div class="mb-4" style="margin: 50px">
-                                    <label for="especialidad" class="form-label">Especialidad elegida</label>
-                                    <input type="text" class="form-control" id="especialidad" name="especialidad" value="<%= datos.Especialidad %>">
-                                  </div>  
-                                  <div class="mb-4" style="margin: 50px">
-                                    <label for="doctor" class="form-label">Médico elegido</label>
-                                    <input type="text" class="form-control" id="doctor" name="doctor" value="<%= datos.Doctor %>">
-                                  </div> 
-                                  <div class="mb-4" style="margin: 50px">
-                                    <label for="fechaI" class="form-label">Hora de inicio</label>
-                                    <input type="text" class="form-control" id="fechaI" name="fechaI" value="<%= datos.FechaInicio %>">
-                                  </div> 
-                                  <div class="mb-4" style="margin: 50px">
-                                    <label for="fechaF" class="form-label">Fecha de fin</label>
-                                    <input type="text" class="form-control" id="fechaF" name="fechaF" value="<%= datos.FechaFin %>">
-                                  </div>          
-                                                             
-                                <div class="form-group3 mt-5">
-                                <button type="submit" class="btn btn-outline-primary btn-block">Enviar información</button>
-                                </div>
-                            </form>
+
+        <div class="header__img">
+            <img src="/images/HUN.jpg" alt="">
+        </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
+                    <i class="bi bi-house nav__logo-icon"></i> 
+                    <span class="nav__logo-name">
+                        Hospital<br>
+                        Universidad del<br>
+                        Norte
+                    </span>
+                </a>
+
+                <div class="nav__list">
+                    <a href="/conciliator/conciliatormain" class="nav__link">
+                        <i class="bi bi-clipboard nav__icon"></i>
+                        <span class="nav__name">Solicitud de citas</span>
+                    </a>
+                </div>
+
+                <div class="nav__list">
+                    <a href="/consultarCitas" class="nav__link">
+                        <i class="bi bi-clipboard-check nav__icon"></i>
+                        <span class="nav__name">Citas aceptadas</span>
+                    </a>
+                </div>
+
+                <div class="nav__list">
+                    <a href="/consultarExportarC" class="nav__link">
+                        <i class="bi bi-file-earmark-excel nav__icon"></i>
+                      <span class="nav__name">Exportar citas</span>
+                    </a>
+                  </div> 
+
+            </div>
+            <a href="#" onclick="logOut()" class="nav__link">
+                <i class='bx bx-log-out nav__icon'></i>
+                <span class="nav__name">Cerrar sesión</span>
+            </a>
+        </nav>
+    </div>
+
+    <div class="container-flex" style="margin-top: 40px;">
+        <div class="row px-3" style="display: block; min-width: fit-content;" id="MyComponent">
+            <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+                <div class="card-body" style="display: block;">
+                    <!-- <h7 class="title text-center mt-4">
+                        A continuación podrás observar detalladamente los datos del paciente y enviarle las
+                        recomendaciones adecuadas
+                    </h7> -->
+                    <hr class="my-4">
+                    <!-- <form action="/consultar/<%= datos.idpa %>" method="POST"> -->
+                    <h5 class="title text-center mt-4">
+                        Datos personales del paciente
+                    </h5>
+                    <hr class="my-4">
+                    <div class="form-input" style="margin-top: 20px; display: none;">
+                        <label for="id" class="form-label">Identificador</label>
+                        <input type="text" class="form-control" id="id" name="id" value="<%= datos.idpa %>" readonly>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="Name" class="form-label">Nombres del paciente</label>
+                                <input type="text" class="form-control" id="Name" name="Name"
+                                    value="<%= datos.NombreP %>" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="Lastname" class="form-label">Apellidos del paciente</label>
+                                <input type="text" class="form-control" id="Lastname" name="Lastname"
+                                    value="<%= datos.ApellidoP %>" readonly>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="correo" class="form-label">Correo electrónico del paciente</label>
+                                <input type="text" class="form-control" id="correo" name="correo"
+                                    value="<%= datos.Correo %>" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="cellphone class=" form-label">Celular del paciente</label>
+                                <input type="text" class="form-control" id="cellphone" name="cellphone"
+                                    value="<%= datos.Celular %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <h5 class="title text-center mt-4">
+                        Datos de la cita del paciente
+                    </h5>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="especialidad" class="form-label">Especialidad elegida</label>
+                                <input type="text" class="form-control" id="especialidad" name="especialidad"
+                                    value="<%= datos.Especialidad %>" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="doctor" class="form-label">Médico elegido</label>
+                                <input type="text" class="form-control" id="doctor" name="doctor"
+                                    value="<%= datos.Doctor %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="fechaI" class="form-label">Fecha</label>
+                                <input type="text" class="form-control" id="fechaI" name="fechaI"
+                                    value="<%= datos.fecha %>" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="horaI" class="form-label">Hora</label>
+                                <input type="text" class="form-control" id="horaI" name="horaI"
+                                    value="<%= datos.hora_ini %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="Cita" class="form-label">Cita</label>
+                                <input type="text" class="form-control" id="Cita" name="Cita" value="<%= datos.Cita %>"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <div class="form-input" style="margin-top: 20px;">
+                                <label for="Modo" class="form-label">Modalidad</label>
+                                <input type="text" class="form-control" id="Modo" name="Modo" value="<%= datos.Modo %>"
+                                    readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <h5 class="title text-center mt-4">
+                        Información al paciente
+                    </h5>
+                    <hr class="my-4">
+                    <div class="form-input" style="margin-top: 20px;">
+                        <label for="descripcion" class="form-label">Recomendaciones</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="10"></textarea>
+                    </div>
+                    <div class="w-100 d-none d-md-block"></div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-outline-success btn-block text-uppercase" id="btnAceptar">
+                                Aceptar  <i class="fas fa-check-square"></i>
+                            </button>
+                        </div>                        
+                        <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-outline-danger btn-block text-uppercase" id="btnDeclinar">
+                                Declinar  <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
+                <!-- </form> -->
             </div>
         </div>
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
+        integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $('#btnAceptar').click(function () {
+            let data = recuperarDatosFormulario();
+            console.log(data)
+            if (!data) {
+                console.log('error')
+            } else {
+                agregarRegistro(data);
+            }
+        })
 
-        <!--===== MAIN JS =====-->
-        <script src="/js/main.js"></script>
+        function recuperarDatosFormulario() {
+            let data = {
+                id: $('#id').val(),
+                correo: $('#correo').val(),
+                nombre: $('#Name').val(),
+                apellido: $('#Lastname').val(),
+                doctor: $('#doctor').val(),
+                fecha: $('#fechaI').val(),
+                hora: $('#horaI').val(),
+                Cita: $('#Cita').val(),
+                descripcion: $('#descripcion').val()
 
-    </body>
+            };
+            return data
+        }
+
+        function agregarRegistro(data) {
+            $.ajax({
+                type: 'POST',
+                url: '/aceptar/:idpa',
+                data: data,
+                success: function (msg) {
+                    Swal.fire(
+                        '¡Buen trabajo!',
+                        '¡Se han enviado correctamente los datos!',
+                        'success'
+                    ).then(function () {
+                        window.location = "/conciliator/conciliatormain";
+                    });
+                },
+                error: function (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Hubo un error'
+                    })
+                }
+            });
+        }
+
+        $('#btnDeclinar').click(function () {
+            let data = DatosFormulario();
+            console.log(data)
+            if (!data) {
+                console.log('error')
+            } else {
+                eliminarRegistro(data);
+            }
+        })
+
+        function DatosFormulario() {
+            let data = {
+                id: $('#id').val(),
+                correo: $('#correo').val(),
+                nombre: $('#Name').val(),
+                apellido: $('#Lastname').val(),
+                doctor: $('#doctor').val(),
+                fecha: $('#fechaI').val(),
+                hora: $('#horaI').val(),
+                descripcion: $('#descripcion').val()
+
+            };
+            return data
+        }
+
+        function eliminarRegistro(data) {
+            $.ajax({
+                type: 'POST',
+                url: '/declinar/:idpa',
+                data: data,
+                success: function (msg) {
+                    Swal.fire(
+                        '¡Buen trabajo!',
+                        '¡Se han enviado correctamente los datos!',
+                        'success'
+                    ).then(function () {
+                        window.location = "/conciliator/conciliatormain";
+                    });
+                },
+                error: function (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Hubo un error'
+                    })
+                }
+            });
+        }
+
+
+    </script>
+
+    <!--===== MAIN JS =====-->
+    <script src="/js/main.js"></script>
+
+</body>
+
 </html>

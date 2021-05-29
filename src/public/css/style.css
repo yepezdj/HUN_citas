@@ -1,21 +1,108 @@
-/* REGISTRO Y LOGIN */
-.red {
-    border: 1px solid red;
+/* REGISTRO*/
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Aleo:wght@400;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root{
+  --header-height: 3rem;
+  --nav-width: 68px;
+
+  /*===== Colors =====*/
+  --first-color: #008DCA;
+  --first-color-light: #99d1e9;
+  --white-color: #F7F6FB;
+  
+  /*===== Font and typography =====*/
+  --body-font: 'Aleo';
+  --normal-font-size: 1rem;
+  
+  /*===== z index =====*/
+  --z-fixed: 100;
 }
 
-.green {
-    border: 1px solid green;
+/*===== BASE =====*/
+*,::before,::after{
+  box-sizing: border-box;
 }
 
-.image-left {
-    background-image: url("../images/flavida.jpeg");
-    height: 600px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
-    opacity: 0.9;
-    border-radius: 3px;
+body{
+  position: relative;  
+  background: url(../images/regis.png);
+  background-repeat: no-repeat;
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-family: var(--body-font) !important;
+  font-size: var(--normal-font-size);
+  transition: .5s;
+}
+
+#card{
+  border-radius: 20px !important;
+}
+
+input{
+  /* border: none !important;   */
+  border-color: #008DCA !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+#btn{
+    background-color: #008DCA !important;
+    color: white;    
+    margin-top: 20px !important;
+}
+
+.toggle .btn {
+  cursor: pointer;
+  background: #ffffff;
+  transition: background 0.2s, color 0.2s;
+  border: 2px solid #008DCA;
+  user-select: none;
+  color: black;
+}
+
+.toggle .active {
+  border: 2px solid #008DCA;
+  background: #008DCA;
+  color: white;
+}
+
+select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select{
+    width: 100%;    
+	  display: inline-block;	
+	  cursor: pointer;  	
+  	outline: 0; 
+  	border: 0;	
+    color: #4646cc;    
+	  font-size: 16px;	
+	  border:2px solid#008DCA !important; 
+    border-radius: 20px !important;   
+    position: relative;    
+}
+
+label{
+  margin-top: 20px !important;
+}
+
+input{
+  border:2px solid#008DCA !important; 
+  border-radius: 20px !important;
+  padding-left: 20px !important;
 }
 
 /* RUTAS */

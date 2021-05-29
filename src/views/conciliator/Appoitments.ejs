@@ -9,6 +9,9 @@
 
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 
     <!-- ===== CSS ===== -->
     <link rel="stylesheet" href="/css/styleConciliator.css">
@@ -17,13 +20,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-
-    <!-- ===== DATATABLES ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 
     <!-- ===== JQUERY ===== -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -49,6 +48,7 @@
         <div class="header__img">
             <img src="/images/HUN.jpg" alt="">
         </div>
+
     </header>
 
     <div class="l-navbar" id="nav-bar">
@@ -62,12 +62,14 @@
                         Norte
                     </span>
                 </a>
+
                 <div class="nav__list">
-                    <a href="/consultarCitas" class="nav__link">
-                        <i class="bi bi-clipboard-check nav__icon"></i>
-                        <span class="nav__name">Citas aceptadas</span>
+                    <a href="/conciliator/conciliatormain" class="nav__link">
+                        <i class="bi bi-clipboard nav__icon"></i>
+                        <span class="nav__name">Solicitud de citas</span>
                     </a>
                 </div>
+
                 <div class="nav__list">
                     <a href="/consultarExportarC" class="nav__link">
                         <i class="bi bi-file-earmark-excel nav__icon"></i>
@@ -75,7 +77,6 @@
                     </a>
                   </div> 
             </div>
-
             <a href="#" onclick="logOut()" class="nav__link">
                 <i class='bx bx-log-out nav__icon'></i>
                 <span class="nav__name">Cerrar sesión</span>
@@ -91,24 +92,17 @@
             </h4>
             <hr class="my-4">
             <div class="text-center mb-2">
-                A continuación podrás revisar las citas médicas solicitadas por los usuarios hasta la fecha.
+                A continuación podrás revisar las citas médicas reservadas hasta la fecha
             </div>
             <table id="conTable" class="table table-bordered table-responsive">
                 <thead>
                     <tr>
-                        <th>Hora de solicitud</th>
+                        <th>Reprogramar</th>
                         <th>Nombres</th>
-                        <th>Apellidos</th> 
-                        <th>Género</th>
-                        <th>Estado civil</th>              
-                        <th>Dirección de residencia</th>
+                        <th>Apellidos</th>
                         <th>Correo electrónico</th>
                         <th>Celular</th>
-                        <th>Celular de respaldo</th>
-                        <th>Teléfono</th>
-                        <th>Fecha de nacimiento</th>
                         <th>Tipo de identificación</th>
-                        <th>Lugar de expedición</th>
                         <th>N° de identificación</th>
                         <th>Especialidad</th>
                         <th>Doctor</th>
@@ -120,11 +114,7 @@
                         <th>Régimen</th>
                         <th>Modalidad</th>
                         <th>Anexos</th> 
-                        <th>Autorización</th> 
-                        <th>Acompañante</th>
-                        <th>Anotaciones</th> 
-                        <th>Riesgo epidemiológico</th>  
-                        <th>Consultar solicitud</th>                        
+                        <th>Autorización</th>  
                     </tr>
                 </thead>
                 <tbody>
@@ -134,9 +124,8 @@
                             <!-- Es el nombre que se le dió a los datos obtenidos en el controller.list -->
 
                             <% for(var i=0; i < info.length; i++) { %>
-
                                 <td>
-                                    <%= info[i].hora_solicitud %>
+                                    <a href="/updateC/<%= info[i].idpa %>" class="btn btn-warning"><i class="fas fa-reply-all"></i></a>
                                 </td>
                                 <td>
                                     <%= info[i].NombreP %>
@@ -145,34 +134,13 @@
                                     <%= info[i].ApellidoP %>
                                 </td>
                                 <td>
-                                    <%= info[i].Genero %>
-                                </td>
-                                <td>
-                                    <%= info[i].Estado_civil %>
-                                </td>
-                                <td>
-                                    <%= info[i].Direccion %>-<%= info[i].Barrio %>
-                                </td>
-                                <td>
                                     <%= info[i].Correo %>
                                 </td>
                                 <td>
                                     <%= info[i].Celular %>
                                 </td>
                                 <td>
-                                    <%= info[i].CelularOp %>
-                                </td>
-                                <td>
-                                    <%= info[i].Telefono %>
-                                </td>
-                                <td>
-                                    <%= info[i].fecha_nac %>
-                                </td>
-                                <td>
                                     <%= info[i].Tipo_documento %>
-                                </td>
-                                <td>
-                                    <%= info[i].Municipio %>
                                 </td>
                                 <td>
                                     <%= info[i].CedulaP %>
@@ -204,7 +172,7 @@
                                 <td>
                                     <%= info[i].Modo %>
                                 </td>
-                                <td> <a href="#" class="btn btn-warning"
+                                <td> <a href="#" class="btn btn-success"
                                         onclick="window.open('<%= info[i].Orden %>', '_blank', 'fullscreen=yes'); return false;">
                                         <i class="far fa-file-pdf"></i>
                                     </a>
@@ -212,29 +180,7 @@
                                 </td>
                                 <td>
                                     <%= info[i].Autorizacion %>
-                                </td>
-                                <td>
-                                    <%= info[i].Acompañante %>
-                                </td>
-                                <td>
-                                    <%= info[i].Descripcion %>
-                                </td>
-                                <td> <% if (info[i].P1 == 'Sí' || info[i].P2 == 'Sí' || info[i].P3 == 'Sí' || info[i].P4 == 'Sí' || info[i].P5 == 'Sí' || info[i].P6 == 'Sí' || info[i].P7 == 'Sí' || info[i].P8 == 'Sí') { %>
-                                    <div class="text-center mb-2">
-                                        Indicios: <strong class="font-italic" style="color: red;">SÍ</strong> <br>                                                                              
-                                        Patologías: <strong class="font-italic" style="color: red;"> <%= info[i].P9 %></strong>
-                                    </div>
-                                    <% } %>
-                                    <% if (info[i].P1 == 'No' & info[i].P2 == 'No' & info[i].P3 == 'No' & info[i].P4 == 'No' & info[i].P5 == 'No' & info[i].P6 == 'No' & info[i].P7 == 'No' & info[i].P8 == 'No') { %>
-                                        <div class="text-center mb-2">
-                                            Indicios: <strong class="font-italic" style="color: red;">NO</strong> <br>                                                                              
-                                            Patologías: <strong class="font-italic" style="color: red;"> <%= info[i].P9 %></strong>
-                                        </div>
-                                        <% } %>
-                                </td>
-                                <td>
-                                    <a href="/consultar/<%= info[i].idpa %>" class="btn btn-info"><i class="fab fa-searchengin"></i></a>
-                                </td>                              
+                                </td>                               
 
                     </tr>
                     <% } %>
@@ -257,6 +203,7 @@
     <script>
         $(document).ready(function () {
             $('#conTable').DataTable({
+                // "scrollX": true,              
                 language: {
                     processing: "Búsqueda en curso...",
                     search: "Buscar:",

@@ -6,13 +6,16 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import connectFlash from "connect-flash";
 import session from "express-session";
+var cors = require('cors');
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 
 
 let app = express();
 
-
-// enable body parser post data
+app.use(cors());
+// Se utiliza bodyParser para poder recibir la información del front-end al back-end
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
@@ -32,13 +35,13 @@ app.use(session({
 //app.use(passport.initialize());
 //app.use(passport.session());
 
-//enable flash meessage
+//Para habilitar los flash message en caso de error utilizados en la página de inicio de sesión y registro
 app.use(connectFlash());
 
-//Config view engine
+//Se configura view engine
 configViewEngine(app);
 
-// init all web routes
+//Se encuentran contenidas todas las rutas
 initWebRoutes(app);
 
 

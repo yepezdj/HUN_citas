@@ -5,39 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+    <link rel="shortcut icon" href="https://genfavicon.com/tmp/icon_d1490e0ca97a4e19828ac691e5ef8be0.ico">
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
     <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styleuser.css">
 
     <!-- ===== BOOTSTRAP ===== -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- ===== FULL CALENDAR ===== -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
-    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
-    <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
-    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+
+    <!-- ===== SWEETALERT2 ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <!-- ===== DATEPICKER ===== -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     <title>Usuario</title>
 </head>
 
-<body id="body-pd">   
-
+<body id="body-pd">
     <header class="header" id="header">
         <div class="header__toggle">
             <i class='bx bx-menu' id="header-toggle"></i>
@@ -46,13 +42,13 @@
         <div class="header__img">
             <img src="/images/HUN.jpg" alt="">
         </div>
-    </header>     
+    </header>
 
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
                 <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
-                    <i class='bx bx-layer nav__logo-icon'></i>
+                    <i class="bi bi-house nav__logo-icon"></i>
                     <span class="nav__logo-name">
                         Hospital<br>
                         Universidad del<br>
@@ -62,8 +58,10 @@
 
                 <div class="nav__list">
                     <a href="/consultar" class="nav__link">
-                        <i class='bx bx-folder nav__icon'></i>
-                        <span class="nav__name">Consultar estado de solicitud</span>
+                        <i class="bi bi-search nav__icon" data-toggle="tooltip" data-placement="right"
+                            data-type="danger" title="Consultar estado de la solicitud"></i>
+                        <span class="nav__name">Consultar estado de <br>
+                            solicitud</span>
                     </a>
                 </div>
             </div>
@@ -72,151 +70,1212 @@
                 <span class="nav__name">Cerrar sesión</span>
             </a>
         </nav>
-    </div>  
-    <div class="row" style="margin-top: 80px ;"> 
-    <h2> Bienvenido <%=user.name%></h2>
-    </div>  
-    
-    <!-- ===== FORMULARIO ===== -->
-    <div class="row" style="margin-left: 250px;">                            
-            <div class="col-md-8">
-                <div class="card text-primary">
-                    <div class="card-body card-border-primary" style="width: auto; height: auto; margin: 30px;">                        
-                        <div class="mb-4" style="margin: 50px;">
-                            <label for="Name" class="form-label">Nombres</label>
-                            <input type="text" class="form-control" id="Name" name="Name" value="<%= user.name %>"
-                                readonly>
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <label for="Lastname" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="Lastname" name="Lastname"
-                                value="<%= user.last_name %>" readonly>
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                value="<%= user.email %>" readonly>
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <label for="Cedula" class="form-label">N° de identificación del paciente</label>
-                            <input type="number" class="form-control" id="Cedula" name="Cedula"
-                                placeholder="Sin puntos ni comas" required="true">
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <select class="custom-select mt-2" style="margin-right: 10px;" id="opciones" name="opciones"
-                                onchange="doctors('opciones','Doctores')" required="true">
-                                <option value="0">Seleccione Especialidad</option>
-                            </select>
-                        </div>
-                        <div class="mb-4" style="margin: 50px">
-                            <select class="custom-select mt-2" style="margin-right: 35px;" id="Doctores" name="Doctores"
-                                onclick="ayuda('Doctores','calendar')">
-                                <option value="0">Seleccione Médico</option>
-                            </select>
-                        </div>
+    </div>
 
-                    </div>
+    <div class="container-flex">
+        <div class="row px-3" style="display: block; min-width: fit-content;" id="MyComponent">
+            <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+                <div class="card-body" style="display: block;">
+                    <form action="/add" method="POST" enctype="multipart/form-data" id="form">
+                        <h4 class="title text-center mt-4">
+                            Hola <%=user.name%>
+                        </h4>
+                        <hr class="my-4">
+                        <div class="text-center mb-2">
+                            A continuación podrás completar toda la información requerida para el agendamiento de la
+                            cita
+                            médica (Puedes solicitar la cita de otra persona). <br>
+                            Para esto, haz click en cada ventana y completa los 4 pasos.<br>
+                            <br>
+                            <strong class="font-italic" style="color: red;">RECUERDA QUE DEBES INGRESAR LOS DATOS DEL
+                                PACIENTE.</strong>
+                        </div>
+                        <hr class="my-4">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div>
+                                                <img src="/images/paso1.jpg" style="margin-left: 25px;" width="100px" />
+                                            </div>
+                                            <div class="col">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link btn-block text-left" type="button"
+                                                        data-toggle="collapse" data-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne" id="btnC1">
+                                                        INFORMACIÓN DEL PACIENTE
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-body" id="collapse1">
+                                            <p class="centered">Completa todos los campos de la información del
+                                                paciente. <i class="bi bi-person-lines-fill"></i></p>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Name" class="form-label">Nombres del paciente <label
+                                                                class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Name" name="Name"
+                                                            value="<%= user.name %>" placeholder="Ingresa los nombres"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Lastname" class="form-label">Apellidos del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Lastname"
+                                                            name="Lastname" value="<%= user.last_name %>"
+                                                            placeholder="Ingresa los apellidos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <label for="sexo">Género<label class="redText">*</label></label>
+                                                    <div class="w-100 d-none d-md-block"></div>
+                                                    <div class="btn-group btn-group-toggle toggle"
+                                                        data-toggle="buttons" style="margin-bottom: 20px;">
+                                                        <label class="btn active">
+                                                            <input type="radio" name="sexo" id="masculino"
+                                                                value="Masculino" checked> Masculino
+                                                        </label>
+                                                        <label class="btn open-btn">
+                                                            <input type="radio" name="sexo" id="femenino"
+                                                                value="Femenino"> Femenino
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="estado" class="form-label">Estado civil<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select" style="margin-right: 20px;"
+                                                            id="estado" name="estado">
+                                                            <option value="0">Seleccionar estado civil</option>
+                                                            <option value="Soltero/a">Soltero/a</option>
+                                                            <option value="Casado/a">Casado/a</option>
+                                                            <option value="NIT">NIT</option>
+                                                            <option value="Unión libre">Unión libre</option>
+                                                            <option value="Separado/a">Separado/a</option>
+                                                            <option value="Divorciado/a">Divorciado/a</option>
+                                                            <option value="Viudo/a">Viudo/a</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email" class="form-label" style="margin-top: 20px;">Correo electrónico <label
+                                                                class="redText">*</label></label>
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            value="<%= user.email %>"
+                                                            placeholder="Ingresa el correo electrónico">
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <!-- <span id="emailOK"></span> -->
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email1" class="form-label" style="margin-top: 20px;">Confirma el correo
+                                                            electrónico <label class="redText">*</label></label>
+                                                        <input type="email1" class="form-control" id="email1"
+                                                            name="email1" placeholder="Ingresa el correo electrónico">
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOT">
+                                                        <small class="form-text" style="margin-left: 20px;">Los correos
+                                                            no coinciden</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number" class="form-label">Número de celular<label
+                                                                class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number"
+                                                            name="number" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= user.cellphone %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number1" class="form-label">Confirma el número de
+                                                            celular <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number1"
+                                                            name="number1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="cellphone1">Otro número de celular
+                                                            <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="cellphone1"
+                                                            name="cellphone1"
+                                                            placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                            step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="tele">Teléfono
+                                                            (opcional)</label>
+                                                        <input type="number" class="form-control" id="tele" name="tele"
+                                                            placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                            step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="fechaNac" class="form-label">Fecha de nacimiento
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaNac" name="fechaNac"
+                                                            type="date" autocomplete="off" onkeypress="return false">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="direccion">Dirección de
+                                                            residencia<label class="redText">*</label></label></label>
+                                                        <input type="text" class="form-control" id="direccion"
+                                                            name="direccion"
+                                                            placeholder="Ej: Cra. 27 #59-42, Barranquilla, Atlántico"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="barrio">Barrio de
+                                                            residencia<label class="redText">*</label></label></label>
+                                                        <input type="text" class="form-control" id="barrio"
+                                                            name="barrio" placeholder="Ej: Los Andes"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Tipo" class="form-label"
+                                                            style="margin-top: 20px;">Tipo de documento<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select" style="margin-right: 20px;"
+                                                            id="Tipo" name="Tipo">
+                                                            <option value="0">Seleccionar tipo de documento</option>
+                                                            <option value="Cédula de ciudadanía">Cédula de ciudadanía
+                                                            </option>
+                                                            <option value="Cédula de extranjería">Cédula de extranjería
+                                                            </option>
+                                                            <option value="NIT">NIT</option>
+                                                            <option value="Tarjeta de identitidad">Tarjeta de
+                                                                identitidad</option>
+                                                            <option value="Pasaporte">Pasaporte</option>
+                                                            <option value="Registro civil">Registro civil</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="fechaExp" class="form-label"
+                                                            style="margin-top: 20px;">Fecha de expedición
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaExp" name="fechaExp"
+                                                            type="date" autocomplete="off" onkeypress="return false">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Option" style="margin-top: 20px;"
+                                                            class="form-label">¿Eres extranjero?<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select" style="margin-right: 10px; "
+                                                            id="Option" name="Option" required="true">
+                                                            <option value="0">Seleccionar una opción</option>
+                                                            <option value="1">Sí</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="display: none;" id="depa">
+                                                    <div class="form-input">
+                                                        <label for="Departamento" style="margin-top: 20px;"
+                                                            class="form-label">Lugar de expedición (Departamento)<label
+                                                                class="redText">*</label></label>
+                                                        <select class="custom-select" style="margin-right: 10px;"
+                                                            id="Departamento" name="Departamento"
+                                                            onchange="departamento('Departamento', 'city')">
+                                                            <option value="0">Seleccionar lugar de expedición
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="display: none;" id="muni">
+                                                    <div class="form-input">
+                                                        <label for="city" style="margin-top: 20px;"
+                                                            class="form-label">Lugar de expedición (Municipio)<label
+                                                                class="redText">*</label></label>
+
+                                                        <select class="custom-select" style="margin-right: 10px; "
+                                                            id="city" name="city">
+                                                            <option value="0">Seleccionar lugar de expedición
+                                                            </option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula" class="form-label">N° de identificación del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula"
+                                                            name="Cedula" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                    <div class="form-input">
+                                                        <label for="Cedula1" class="form-label">Confirme N° de
+                                                            identificación<label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="Cedula1"
+                                                            name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="persona" class="form-label"
+                                                            style="margin-top: 20px;">Menciona un acompañante
+                                                            (Opcional)</label>
+                                                        <input type="text" class="form-control" id="persona"
+                                                            name="persona"
+                                                            placeholder="Ingresa los nombres y apellidos del acompañante"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div>
+                                                    <img src="/images/paso2.jpg" style="margin-left: 25px;"
+                                                        width="100px" />
+                                                </div>
+                                                <div class="col">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link btn-block text-left collapsed"
+                                                            type="button" data-toggle="collapse"
+                                                            data-target="#collapseTwo" aria-expanded="false"
+                                                            aria-controls="collapseTwo" id="btnC2">
+                                                            INFORMACIÓN DE LA CITA
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="card-body" id="collapse2" style="display: none;">
+                                                <p class="centered">Completa todos los campos de información acerca de
+                                                    la
+                                                    cita del paciente.
+                                                    <i class="bi bi-clipboard-plus"></i>
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" class="form-label">Tipo de cita <label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Cita" name="Cita" onchange="limpiar(), vaciar(), desaparecer()"
+                                                                onclick="vacio()">
+                                                                <option value="0">Seleccionar tipo de cita médica
+                                                                </option>
+                                                                <option value="Ayudas diagnósticas">Ayudas diagnósticas
+                                                                </option>
+                                                                <option value="Procedimiento ambulatorio">Procedimiento
+                                                                    ambulatorio
+                                                                </option>
+                                                                <option value="Consulta medicina general">
+                                                                    Consulta medicina general</option>
+                                                                <option value="Consulta especializada">Consulta
+                                                                    especializada
+                                                                </option>
+                                                                <option value="Consulta odontología general">Consulta
+                                                                    odontología general
+                                                                </option>
+                                                                <option value="Consulta odontología especializada">
+                                                                    Consulta odontología especializada
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Factura" class="form-label">¿Bajo que afiliación
+                                                                deseas solicitar esta cita?<label
+                                                                    class="redText">*</label></label>
+                                                            <select class="custom-select mt-2"
+                                                                style="margin-right: 20px;" id="Factura" name="Factura"
+                                                                onchange="limpiarAfiliacion()">
+                                                                <option value="0">Seleccionar afiliación</option>
+                                                                <option value="Prepagada">Prepagada</option>
+                                                                <option value="EPS">EPS</option>
+                                                                <option value="ARL">ARL</option>
+                                                                <option value="Particular">Particular</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row" > -->
+                                                    <div class="col-12 col-sm-6" id="reg" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="regimen" class="form-label">Tipo de
+                                                                régimen<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="regimen" name="regimen">
+                                                                <option value="0">Seleccionar tipo de régimen
+                                                                </option>
+                                                                <option value="Subsidiado">Subsidiado
+                                                                </option>
+                                                                <option value="Contributivo">Contributivo
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="eps" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="entidad" class="form-label">Entidad prestadora
+                                                                de salud<label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2"
+                                                                style="margin-right: 20px;" id="entidad" name="entidad">
+                                                                <option value="0">Seleccionar la entidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row"> -->
+                                                    <div class="col-12 col-sm-6" id="div" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Modo" class="form-label">Modalidad de la cita
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Modo" name="Modo">
+                                                                <option value="0">Seleccionar modalidad</option>
+                                                                <option value="Virtual">Virtual</option>
+                                                                <option value="Presencial">Presencial</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="ayudas" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Ayudas" class="form-label">Ayudas diagnósticas
+                                                                <label class="redText">*</label></label>
+                                                            <div class="parent4">
+                                                                <div class="child4">
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="Ayudas"
+                                                                        name="Ayudas" onclick="vacioF()"
+                                                                        onchange="vaciar(), desaparecer()">
+                                                                        <option value="0">Seleccionar ayuda diagnóstica
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="procedimiento"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Procedimientos"
+                                                                class="form-label">Procedimientos ambulatorios
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="Procedimientos" name="Procedimientos"
+                                                                onchange="especialidad2('Procedimientos','opciones2'), limpiarMed(), desaparecer()"
+                                                                onclick="vacio(), vaciarF()">
+                                                                <option value="0">Seleccionar procedimiento ambulatorio
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row"> -->
+
+                                                    <div class="col-12 col-sm-6" id="especialidad"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+
+                                                            <label for="Cita" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones" name="opciones"
+                                                                onchange="doctors('opciones','Doctores'), vacio(), desaparecer()"
+                                                                onclick="vaciarF()">
+                                                                <option value="0">Seleccionar especialidad
+                                                                </option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <div class="parent">
+                                                                <div class="child">
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="Doctores"
+                                                                        name="Doctores" onclick="vacioF()"
+                                                                        onchange="vaciar(), desaparecer()">
+                                                                        <option value="0">Seleccionar profesional de la
+                                                                            salud
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad2"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones2" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones2" name="opciones2"
+                                                                onchange="doctors2('opciones2','Doctores2'), vacio(), desaparecer()"
+                                                                onclick="vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor2" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <div class="parent2">
+                                                                <div class="child2">
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="Doctores2"
+                                                                        name="Doctores2" onclick="vacioF()"
+                                                                        onchange="vaciar(), desaparecer()">
+                                                                        <option value="0">Seleccionar profesional de la
+                                                                            salud
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad3"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones3" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <select class="custom-select mt-2" style="margin-top: 20px;"
+                                                                id="opciones3" name="opciones3"
+                                                                onchange="doctors3('opciones3','Doctores3'), vacio(), desaparecer()"
+                                                                onclick="vaciarF()">
+                                                                <option value="0">Seleccionar especialidad</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor3" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <div class="parent3">
+                                                                <div class="child3">
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="Doctores3"
+                                                                        name="Doctores3" onclick="vacioF()"
+                                                                        onchange="vaciar(), desaparecer()">
+                                                                        <option value="0">Seleccionar profesional de la
+                                                                            salud
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor4" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <div class="parent5">
+                                                                <div class="child5">
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="Doctores4"
+                                                                        name="Doctores4" onclick="vacioF()"
+                                                                        onchange="vaciar(), desaparecer()">
+                                                                        <option value="0">Seleccionar profesional de la
+                                                                            salud
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor5" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <div class="parent6">
+                                                                <div class="child6">
+                                                                    <select class="custom-select mt-2"
+                                                                        style="margin-top: 20px;" id="Doctores5"
+                                                                        name="Doctores5" onclick="vacioF()"
+                                                                        onchange="vaciar(), desaparecer()">
+                                                                        <option value="0">Seleccionar profesional de la
+                                                                            salud
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="display: none;" id="card3">
+                                        <div class="card-header" id="headingThree">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <img src="/images/pasoextra.jpg" style="margin-left: 25px;"
+                                                            width="130px" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <h2 class="mb-0">
+                                                            <button class="btn btn-link btn-block text-left collapsed"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree" id="btnC4">
+                                                                ENCUESTA DE RIESGO EPIDEMIOLÓGICO
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="collapse4" style="display: none;">
+                                            <div class="card-body">
+                                                <div class="text-center mb-2">
+                                                    Debido a que has seleccionado la modalidad de cita presencial, dada
+                                                    la emergencia sanitaria
+                                                    deberás completar la siguiente encuesta para poder solicitar la
+                                                    cita.
+                                                </div>
+                                                <table id="conTable" class="table table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                1. ¿Has tenido fiebre?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options" id="option1"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options" id="option2"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                2. ¿Has presentado síntomas respiratorios:
+                                                                tos,dificultad
+                                                                para respirar, secreción nasal,pérdida del olfato,
+                                                                pérdida del
+                                                                gusto, cansancio, fatiga y/o dolor de garganta?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options1" id="option3"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options1" id="option4"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                3. ¿ Has sido diagnosticado con neumonía recientemente
+                                                                (en menos de 20 días)?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options2" id="option5"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options2" id="option6"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                4. ¿Alguna de las personas con las que convives ha
+                                                                presentado fiebre o los síntomas respiratorios antes
+                                                                mencionados?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options3" id="option7"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options3" id="option8"
+                                                                            value="No" autocomplete="off" checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                5. ¿Has viajado fuera del país los últimos 20 días?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options4" id="option9"
+                                                                            value="Sí" autocomplete="off"> Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options4"
+                                                                            id="option10" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                6. ¿Eres personal de salud o trabajas en el área de
+                                                                la salud y has tenido contacto con pacientes con
+                                                                síntomas
+                                                                respiratorios?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options5"
+                                                                            id="option11" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options5"
+                                                                            id="option12" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                7. ¿Has tenido contacto en los últimos 20 días con
+                                                                pacientes a los se les haya diagnosticado coronavirus?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options6"
+                                                                            id="option13" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options6"
+                                                                            id="option14" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                8. ¿Has tenido contacto en los último 20 días con
+                                                                pacientes hospitalizados por neumonía, o descomposición
+                                                                de sus
+                                                                enfermedades de base?
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-toggle toggle"
+                                                                    data-toggle="buttons">
+                                                                    <label class="btn open-btn">
+                                                                        <input type="radio" name="options7"
+                                                                            id="option15" value="Sí" autocomplete="off">
+                                                                        Sí
+                                                                    </label>
+                                                                    <label class="btn active">
+                                                                        <input type="radio" name="options7"
+                                                                            id="option16" value="No" autocomplete="off"
+                                                                            checked> No
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                9. ANTECEDENTES PATOLÓGICOS NO CONTROLADOS O SIN
+                                                                MEDICACIÓN EN EL MOMENTO
+                                                                (Diabetes,Hipertesión,Respiratorios, Cardiovasculares,
+                                                                obesidad, entre otros)
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="encuesta"
+                                                                        class="form-label">Cuáles:</label>
+                                                                    <textarea class="form-control" id="encuesta"
+                                                                        name="encuesta" rows="3"></textarea>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <img src="/images/paso3.jpg" style="margin-left: 25px;"
+                                                            width="100px" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <h2 class="mb-0">
+                                                            <button class="btn btn-link btn-block text-left collapsed"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree" id="btnC3">
+                                                                AGENDAMIENTO
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="card-body" id="collapse3" style="display: none;">
+                                                    <p class="centered">Selecciona el horario de la cita de acuerdo a la
+                                                        <strong> disponibilidad </strong> del profesional de la salud/Ayuda diagnóstica. <i
+                                                            class="bi bi-calendar-event"></i>
+                                                    </p>
+                                                    <div id="hide">
+                                                        <div class="text-center mb-2">
+
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="col-12 col-sm-12"
+                                                            style="height:300px; overflow-y: scroll;">
+                                                            <table class="table table-hover table-bordered" id="tabla">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica
+                                                                        </th>
+                                                                        <th>Días disponibles</th>
+                                                                        <th>Horarios disponibles</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="myTable">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="col-12 col-sm-12"
+                                                            style="height:300px; overflow-y: scroll; display: none; margin-top: 20px;"
+                                                            id="adiciones">
+                                                            <table class="table table-hover table-bordered" id="tabla1">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <!-- encabezado de tabla -->
+                                                                        <td colspan="3" id="col">Horarios extraordinarios</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica
+                                                                        </th>
+                                                                        <th>Fechas disponibles</th>
+                                                                        <th>Horarios disponibles</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="Table">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="fecha" class="form-label">Fecha de la
+                                                                        cita
+                                                                        <label class="redText">*</label></label>
+                                                                    <input class="form-control" id="fecha" name="fecha"
+                                                                        autocomplete="off" onkeypress="return false"
+                                                                        readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6" id="hide2">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="Horario" class="custom-label">Horas
+                                                                        disponibles
+                                                                        <label class="redText">*</label></label>
+                                                                    <select class="custom-select" id="Horario"
+                                                                        name="Horario">
+                                                                        <option value="0">Seleccionar la hora</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header" id="headingFour">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div>
+                                                            <img src="/images/paso4.jpg" style="margin-left: 25px;"
+                                                                width="100px" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="btn btn-link btn-block text-left collapsed"
+                                                                    type="button" data-toggle="collapse"
+                                                                    data-target="#collapseThree" aria-expanded="false"
+                                                                    aria-controls="collapseThree" id="btnC5">
+                                                                    INFORMACIÓN ADICIONAL
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="collapse5" style="display: none;">
+                                                    <div class="card-body">
+                                                        <p class="centered">Adjunta los archivos necesarios para la
+                                                            cita,
+                                                            como la
+                                                            orden
+                                                            médica ó el número de autorización. <i
+                                                                class="bi bi-archive"></i>
+                                                            <br>
+                                                            <strong class="font-italic">Ten en cuenta que el archivo
+                                                                tiene que estar en formato pdf y su tamaño no puede
+                                                                exceder los 3MB.</strong>
+                                                        </p>
+
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <label for="Orden" class="custom-label">Orden médica (original)
+                                                            <i class="bi bi-paperclip"></i></label>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <input type="file" class="custom-file-input mt-2" id="Orden"
+                                                                name="images" accept="application/pdf"
+                                                                onchange="ValidateSize(this)" value="">
+                                                            <label class="custom-file-label mt-2"
+                                                                for="images">Seleccionar
+                                                                archivo
+                                                                de la
+                                                                orden
+                                                                médica</label>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <hr class="my-4">
+                                                        <div class="text-center mb-2">
+                                                            Ó
+                                                        </div>
+                                                        <div class="form-input">
+                                                            <label for="autorizacion" class="form-label">Digite número
+                                                                de autorización <label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="autorizacion"
+                                                                name="autorizacion"
+                                                                placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                                step="1" oninput="validity.valid||(value='');"
+                                                                style="margin-bottom: 50px;">
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="descripcion" class="form-label">Motivo de la
+                                                                consulta y anotaciones</label>
+                                                            <textarea class="form-control" id="descripcion"
+                                                                name="descripcion" rows="2"></textarea>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; text-align: center;">
+                                                            <button type="submit" class="btn btn-primary"
+                                                                id="btnAgregar" onclick="validar()">Solicitar
+                                                                cita</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>        
-    </div>
-        <!-- ===== CALENDARIO ===== -->
-    <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <card>
-                <form method="POST">
-                    <div id='calendar'></div>
-                </form>
-            </card>
-        </div>
-    </div>
-    </div>
-
-    <!-- ===== MODAL ===== -->
-    <div class="container">
-    <div class="modal fade" id="modalEventos" data-backdrop="static" data-keyboard="false" role="dialog"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="tituloEvento">Agregar Cita</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="#" id="guardar">
-                    <div class="modal-body">
-                        <div class="form-group row" id="elTitulo">
-                            <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="titulo">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-
-                            <label for="start" class="col-sm-2 col-form-label">Fecha inicio</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="start" name="start" value="" readonly>
-                            </div>
-                            <label for="end" class="col-sm-2 col-form-label">Fecha Fin</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="end" name="end" value="" readonly>
-                            </div>
-                            <div class="col-md-10" style="margin: 50px">
-                                <input type="file" class="custom-file-input mt-2" id="Orden" name="Orden"
-                                    accept="application/pdf" required="true">
-                                <label class="custom-file-label mt-2" for="Orden">Seleccionar archivo de la orden
-                                    médica</label>
-                            </div>
-                            <div class="col-md-10 mt-3" style="margin: 50px">
-                                <input type="file" class="custom-file-input mt-2" id="Imagen" name="Imagen"
-                                    required="true">
-                                <label class="custom-file-label" for="Imagen">Seleccionar archivo de imágenes
-                                    diagnósticas</label>
-                            </div>
-                            <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" id="descripcion" rows="2"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnAgregar">Agregar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
-    </div>  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
         integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
-        crossorigin="anonymous"></script>
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
     <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.min.js'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- ===== DATEPICKER ===== -->
     <script>
         document.onload = loadFunctions();
         function loadFunctions() {
 
-            consult();
-
-            consulta();
-
-
+            consultaD();
+             
+            $('input[type=number]').on('wheel', function (e) {
+                return false;
+            });
         }
 
+        document.getElementById('fechaExp').max = new Date(new Date().getTime() -
+            new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+        document.getElementById('fechaNac').max = new Date(new Date().getTime() -
+            new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+
+
+        $('[data-toggle="tooltip"]').each(function () {
+            var options = {
+                html: true
+            };
+
+            if ($(this)[0].hasAttribute('data-type')) {
+                options['template'] =
+                    '<div class="tooltip ' + $(this).attr('data-type') + '" role="tooltip">' +
+                    '	<div class="tooltip-arrow"></div>' +
+                    '	<div class="tooltip-inner"></div>' +
+                    '</div>';
+            }
+
+            $(this).tooltip(options);
+        });
+
+
+
+        var date = new Date();
+        var year = date.getFullYear();
+        console.log(year)
+        if (year == '2021') {
+            natDays = [
+                [1, 1, 2021],
+                [1, 11, 2021],
+                [3, 22, 2021],
+                [4, 1, 2021],
+                [4, 2, 2021],
+                [5, 1, 2021],
+                [5, 17, 2021],
+                [6, 7, 2021],
+                [6, 14, 2021],
+                [7, 5, 2021],
+                [7, 20, 2021],
+                [8, 7, 2021],
+                [8, 16, 2021],
+                [10, 18, 2021],
+                [11, 1, 2021],
+                [11, 15, 2021],
+                [12, 8, 2021],
+                [12, 25, 2021]
+            ];
+        }
+        if (year == '2022') {
+            natDays = [
+                [1, 1, 2022],
+                [1, 10, 2022],
+                [3, 21, 2022],
+                [4, 14, 2022],
+                [4, 15, 2022],
+                [5, 1, 2022],
+                [5, 30, 2022],
+                [6, 20, 2022],
+                [6, 27, 2022],
+                [7, 4, 2022],
+                [7, 20, 2022],
+                [8, 7, 2022],
+                [8, 15, 2022],
+                [10, 17, 2022],
+                [11, 7, 2022],
+                [11, 14, 2022],
+                [12, 8, 2022],
+                [12, 25, 2022]
+            ];
+        }
+        function nationalDays(date) {
+            for (i = 0; i < natDays.length; i++) {
+                if (date.getMonth() == natDays[i][0] - 1 &&
+                    date.getDate() == natDays[i][1]) {
+                    return [false, natDays[i][2] + '_day'];
+                }
+            }
+            var day = date.getDay();
+            return [(day != 0)];
+        }
+        $(function () {
+            $("#fecha").datepicker({
+                dateFormat: 'mm-dd-yy',
+                minDate: new Date(),
+                maxDate: '+6m',
+                monthNames: ['Enero', 'Febrero', 'Marzo',
+                    'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre',
+                    'Octubre', 'Noviembre', 'Diciembre'
+                ],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+                ],
+                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                beforeShowDay: nationalDays,
+                onSelect: async function (date) {
+                    console.log(date)
+                    var con1 = document.getElementById('fecha').value;
+                    var tipo = document.getElementById('Cita').value;
+                    var EspeDoc, nameDoc;
+                    if (tipo == 'Procedimiento ambulatorio') {
+                        EspeDoc = document.getElementById('opciones2').value;
+                        nameDoc = document.getElementById('Doctores2').value;
+                    } else if (tipo == 'Consulta especializada') {
+                        EspeDoc = document.getElementById('opciones').value;
+                        nameDoc = document.getElementById('Doctores').value;
+                    } else if (tipo == 'Consulta odontología especializada') {
+                        EspeDoc = document.getElementById('opciones3').value;
+                        nameDoc = document.getElementById('Doctores3').value;
+                    } else if (tipo == 'Ayudas diagnósticas') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Ayudas').value;
+                    } else if (tipo == 'Consulta medicina general') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Doctores4').value;
+                    } else if (tipo == 'Consulta odontología general') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Doctores5').value;
+                    }
+
+
+                    const consulta2 = {
+                        con: con1,
+                        tipo: tipo,
+                        EspeDoc: EspeDoc,
+                        nameDoc: nameDoc,
+                        date: date
+                    };
+                    const options2 = {
+                        method: "POST",
+                        body: JSON.stringify(consulta2),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    };
+                    var response2 = await fetch('/verifyUser', options2);
+                    console.log(response2);
+                    var hora = await response2.json();
+                    console.log(hora);
+                    select = document.getElementById('Horario');
+                    $("#Horario").empty();
+                    for (var i = 0; i < hora.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = hora[i];
+                        opt.innerHTML = hora[i];
+                        select.add(opt);
+                    }
+                    $("#Horario").prepend(
+                        '<option selected="true" value="0">Seleccionar hora</option>');
+                    return false;
+                },
+            })
+        });
+
+
+
+        const parent = document.querySelector(".parent");
+        parent.addEventListener("change", function (e) {
+            const child = e.target.matches(".child, .child *");
+            if (child) { // If child is click
+                
+                consult();
+                adicion()
+
+            }
+        });
         var result = [];
-        var result3 = [];
         async function consult() {
-            var con1 = document.getElementById('calendar').value;
-            const consulta2 = { con: con1 };
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = {
+                con: con1
+            };
             const options2 = {
                 method: "POST",
                 body: JSON.stringify(consulta2),
@@ -225,190 +1284,1246 @@
                 }
             };
             const response2 = await fetch('/datos', options2);
-            console.log(response2)
+            // console.log(response2)
             result = await response2.json();
-
-            var con3 = document.getElementById('calendar').value;
-            const consulta3 = { con: con3 };
-            const options3 = {
+            console.log(result)
+            buildTable()
+        }
+        function buildTable() {
+            vaciar();
+            vacio();
+            //console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+                			<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+                	  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion() {
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
                 method: "POST",
-                body: JSON.stringify(consulta3),
+                body: JSON.stringify(consulta2),
                 headers: {
                     "Content-Type": "application/json"
                 }
             };
-            const response3 = await fetch('/fechas', options3);
-            console.log(response3)
-            result3 = await response3.json();
-
-            console.log(result3)
-
-            ayuda();
-        }
-
-
-        var hoy = new Date();
-        var dd = String(hoy.getDate()).padStart(2, '0');
-        var mm = String(hoy.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = hoy.getFullYear();
-        hoy = yyyy + '-' + mm + '-' + dd;
-        // document.addEventListener('DOMContentLoaded', function() {
-        function ayuda() {
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();
             console.log(result)
-            console.log(result3)
-            console.log(result4)
-
-
-            var data = [];
-            var j = 0;
-
+            buildTableU()
+        }
+        function buildTableU() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
             select = document.getElementById('Doctores');
-            //Se realiza el ciclo for del json contenido en la variable result
-            for (var i in result) {
-                if (select.value == result[i].Medico) {
-                    if (result3[i].FechaInicio !== result[i].Medico) {
-                        var dataSource = new Object();
-                        dataSource.title = result[i].Titulo;
-                        dataSource.esp = result[i].Especialidad;
-                        dataSource.name = result[i].Medico;
-                        dataSource.start = result[i].FechaI;
-                        dataSource.end = result[i].FechaF;
-                        dataSource.description = 'Esto es una cita médica';
-                        dataSource.color = '#FF5340'
-
-                        data[j] = dataSource;
-                        j++;
-                    }
-                }
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                } 
             }
-            //En esta función se agregan los eventos contenidos en data
-            $('#calendar').fullCalendar({
-                viewRender: function (view) {
-                    console.log(data)
-
-
-                    // TODO: Validar los datos
-                    $('#calendar').fullCalendar('destroy');
-                    $('#calendar').fullCalendar('removeEvents');
-                    $('#calendar').fullCalendar('addEventSource', data);
-                    $('#calendar').fullCalendar('rerenderEvents');
-                },
-            })
-
-            var clickedRef = 0;
-            var enviar = document.getElementById("#btnAgregar");
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-
-                locale: 'es',
-                themeSystem: 'bootstrap',
-                buttonIcons: false,
-                addEventSource: true,
-                selectable: false,
-                initialView: 'dayGridMonth',
-                initialDate: hoy,
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-
-                eventClick: function (info) {
-                    var eventObj = info.event;
-
-                    if (eventObj.url) {
-                        alert(
-                            'Clicked ' + eventObj.title + '.\n' +
-                            'Will open ' + eventObj.url + ' in a new tab'
-                        );
-
-                        window.open(eventObj.url);
-
-                        info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
-                    } else {
-                        var FechaInicio = dateFormat(eventObj.start);
-                        var FechaFin = dateFormat(eventObj.end);
-                        $('#titulo').val(eventObj.title);
-                        $('#start').val(FechaInicio);
-                        $('#end').val(FechaFin);
-                        $('#descripcion').val();
-                        $("#modalEventos").modal("show");
-                    }
-                },
-
-                events: data,
-
-
-                eventColor: '#18E734',
-                color: 'black',     // an option!
-                textColor: 'black'
-
-            });
-            // Función para formatear las fechas para los inputs
-            function dateFormat(df) {
-                var date = new Date(df);
-                var day = date.getDate();
-                var month = date.getMonth();
-                var year = date.getFullYear();
-                var hour = date.getHours();
-                var min = date.getMinutes();
-                var sec = date.getSeconds();
-
-                month = (month < 10) ? "0" + month : month;
-                day = (day < 10) ? "0" + day : day;
-                hour = (hour < 10) ? "0" + hour : hour;
-                min = (min < 10) ? "0" + min : min;
-                sec = (sec < 10) ? "0" + sec : sec;
-
-                return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
-
-            }
-
-            calendar.render();
-
         }
 
 
-        $('#btnAgregar').click(function () {
-            let data = recuperarDatosFormulario();
-            console.log(data)
-            agregarRegistro(data);
-            // $("#modalEventos").modal('hide');
-        })
+        const parent2 = document.querySelector(".parent2");
+        parent2.addEventListener("change", function (e) {
+            const child2 = e.target.matches(".child2, .child2 *");
+            if (child2) { // If child is click
+               
+                consult2();
+                adicion2()
 
-        function recuperarDatosFormulario() {
-            let data = {
-
-                title: $('#titulo').val(),
-                Name: $('#Name').val(),
-                Cedula: $('#Cedula').val(),
-                Lastname: $('#Lastname').val(),
-                opciones: $('#opciones').val(),
-                name: $('#Doctores').val(),
-                start: $('#start').val(),
-                end: $('#end').val(),
-                description: $('#descripcion').val(),
-                Orden: $('#Orden').val(),
-                Imagen: $('#Imagen').val(),
-                color: '#E5C513'
+            }
+        });
+        async function consult2() {
+            var con1 = document.getElementById('Doctores2').value;
+            const consulta2 = {
+                con: con1
             };
-            return data;
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            //console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable2()
+        }
+        function buildTable2() {
+            vaciar();
+            vacio();
+            //console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion2() {
+            var con1 = document.getElementById('Doctores2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU2()
+        }
+        function buildTableU2() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
         }
 
-        function agregarRegistro(data) {
-            $.ajax({
-                type: 'POST',
-                url: '/add',
-                data: data,
-                success: function (msg) {
-                    calendar.refetchEvents();
-                },
-                error: function (error) {
-                    alert("Hay un problema:" + error);
+
+        const parent3 = document.querySelector(".parent3");
+        parent3.addEventListener("change", function (e) {
+            const child3 = e.target.matches(".child3, .child3 *");
+            if (child3) { // If child is click
+
+                consult4();
+                adicion4()
+
+            }
+        });
+        async function consult4() {
+            var con1 = document.getElementById('Doctores3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            //console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable4()
+        }
+        function buildTable4() {
+            vaciar();
+            vacio();
+            // console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion4() {
+            var con1 = document.getElementById('Doctores3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU4()
+        }
+        function buildTableU4() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+
+        const parent4 = document.querySelector(".parent4");
+        parent4.addEventListener("change", function (e) {
+            const child4 = e.target.matches(".child4, .child4 *");
+            if (child4) { // If child is click
+       
+                consult3();
+                adicion3()
+
+            }
+        });
+        async function consult3() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            // console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable3()
+        }
+        function buildTable3() {
+            vaciar();
+            vacio();
+            // console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion3() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU3()
+        }
+        function buildTableU3() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+
+        const parent5 = document.querySelector(".parent5");
+        parent5.addEventListener("change", function (e) {
+            const child5 = e.target.matches(".child5, .child5 *");
+            if (child5) { // If child is click
+           
+                consult5();
+                adicion5()
+
+            }
+        });
+        async function consult5() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            //console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable5()
+        }
+        function buildTable5() {
+            vaciar();
+            vacio();
+            //console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion5() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU5()
+        }
+        function buildTableU5() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+
+        const parent6 = document.querySelector(".parent6");
+        parent6.addEventListener("change", function (e) {
+            const child6 = e.target.matches(".child6, .child6 *");
+            if (child6) { // If child is click
+               
+                consult6();
+                adicion6()
+
+            }
+        });
+        async function consult6() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            // console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable6()
+        }
+        function buildTable6() {
+            vaciar();
+            vacio();
+            // console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion6() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU6()
+        }
+        function buildTableU6() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+
+
+        // $(function () {
+        //     $("#fechaExp").datepicker({
+        //         dateFormat: 'mm-dd-yy',
+        //         changeMonth: true,
+        //         changeYear: true
+        //     })
+        // });
+
+        function vaciarF() {
+            $('#fecha').val('').datepicker("refresh");
+            $("#Horario").empty();
+        }
+        function vacioF() {
+            $('#fecha').val('').datepicker("refresh");
+            $("#Horario").empty();
+        }
+        function limpiar() {
+            $("#Procedimientos").empty();
+            $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
+            $("#Ayudas").empty();
+            $("#Ayudas").prepend('<option selected="true" value="0">Seleccionar ayuda diagnóstica</option>');
+            $("#opciones").empty();
+            $("#opciones").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+            $("#Doctores").empty();
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#opciones2").empty();
+            $("#opciones2").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+            $("#Doctores2").empty();
+            $("#Doctores2").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#opciones3").empty();
+            $("#opciones3").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+            $("#Doctores3").empty();
+            $("#Doctores3").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#Doctores4").empty();
+            $("#Doctores4").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+            $("#Doctores5").empty();
+            $("#Doctores5").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+
+        function limpiarMed() {
+            $("#Doctores2").empty();
+            $("#Doctores2").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+
+        function limpiarAfiliacion() {
+            // $("#Procedimientos").empty();
+            // $("#Procedimientos").prepend('<option selected="true" value="0">Seleccionar procedimiento ambulatorio</option>');
+            $("#entidad").empty();
+            $("#entidad").prepend('<option selected="true" value="0">Seleccionar la entidad</option>');
+        }
+
+        function encuesta() {
+            var cita = document.getElementsById('Cita');
+            var modo = document.getElementsById('Modo');
+        }
+        $(document).ready(function () {
+            $('#Cita').on('change', function () {
+                if (this.value == 'Ayudas diagnósticas') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requieres de ayudas diagnósticas, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
+                    })
+                    $("#card3").show();
+                } else if (this.value == 'Procedimiento ambulatorio') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requieres de procedimiento ambulatorio, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
+                    })
+                    $("#card3").show()
+                } else if (this.value == 'Consulta odontología general') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requieres consulta odontológica general, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
+                    })
+                    $("#card3").show()
+                } else if (this.value == 'Consulta odontología especializada') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que requieres consulta odontológica especializada, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
+                    })
+                    $("#card3").show()
+                } else {
+                    $("#card3").hide()
                 }
             });
+        });
+
+        $(document).ready(function () {
+            $('#Option').on('change', function () {
+                if (this.value == '2') {
+                    $("#depa").show();
+                    $("#muni").show();
+                } else {
+                    $("#depa").hide();
+                    $("#muni").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Modo').on('change', function () {
+                if (this.value == 'Presencial') {
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Debido a que has seleccionado la modalidad de cita presencial, dada la emergencia sanitaria deberás completar la siguiente encuesta para poder solicitar la cita.'
+                    })
+                    $("#card3").show();
+                } else {
+                    $("#card3").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Cita').on('change', function () {
+                if (this.value == 'Consulta medicina general') {
+                    $("#div").show();
+                } else if (this.value == 'Consulta especializada') {
+                    $("#div").show();
+                } else {
+                    $("#div").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Factura').on('change', function () {
+                if (this.value == 'EPS') {
+                    eps();
+                    $("#eps").show();
+                    $("#reg").show();
+                } else if (this.value == 'Prepagada') {
+                    epsPrepagada();
+                    $("#eps").show();
+                    $("#reg").hide();
+                } else if (this.value == 'ARL') {
+                    eps();
+                    $("#eps").show();
+                    $("#reg").hide();
+                } else {
+                    $("#eps").hide();
+                    $("#reg").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Cita').on('change', function () {
+                if (this.value == 'Consulta especializada') {
+                    consulta();
+                    $("#especialidad").show();
+                    $("#doctor").show();
+                    $("#ayudas").hide();
+                    $("#procedimiento").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
+                } else if (this.value == 'Ayudas diagnósticas') {
+                    ayuda();
+                    $("#ayudas").show();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
+                    $("#procedimiento").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
+                } else if (this.value == 'Procedimiento ambulatorio') {
+                    procedimiento();
+                    $("#procedimiento").show();
+                    $("#especialidad2").show();
+                    $("#doctor2").show();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
+                    $("#ayudas").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
+                } else if (this.value == 'Consulta medicina general') {
+                    medicina();
+                    $("#doctor4").show();
+                    $("#procedimiento").hide();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
+                    $("#ayudas").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor5").hide();
+                } else if (this.value == 'Consulta odontología general') {
+                    medicinaOdont();
+                    $("#doctor5").show();
+                    $("#procedimiento").hide();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
+                    $("#ayudas").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                } else if (this.value == 'Consulta odontología especializada') {
+                    especialidadOdont();
+                    $("#especialidad3").show();
+                    $("#doctor3").show();
+                    $("#procedimiento").hide();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
+                    $("#ayudas").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
+                } else {
+                    $("#procedimiento").hide();
+                    $("#ayudas").hide();
+                    $("#especialidad").hide();
+                    $("#doctor").hide();
+                    $("#especialidad2").hide();
+                    $("#doctor2").hide();
+                    $("#especialidad3").hide();
+                    $("#doctor3").hide();
+                    $("#doctor4").hide();
+                    $("#doctor5").hide();
+                }
+            });
+        });
+
+        $('#btnC1').click(function () {
+            $('#collapse1').toggle();
+        });
+        $('#btnC2').click(function () {
+            $('#collapse2').toggle();
+        });
+        $('#btnC3').click(function () {
+            $('#collapse3').toggle();
+        });
+        $('#btnC4').click(function () {
+            $('#collapse4').toggle();
+        });
+        $('#btnC5').click(function () {
+            $('#collapse5').toggle();
+        });
+
+        document.getElementById('email').addEventListener('input', function () {
+            campo = event.target;
+            valido = document.getElementById('emailOK');
+
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+            if (emailRegex.test(campo.value)) {
+                $("#emailOK").show();
+                $("#emailNOTOK").hide();
+                $("#emailOK").hide();
+                // valido.innerText = "válido";               
+            } else {
+                $("#emailNOTOK").show();
+                $("#emailOK").hide();
+                // valido.innerText = "incorrecto";
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: 'Oops...',
+                //     text: 'Debe escribir una dirección válida'
+                // })
+            }
+        });
+        document.getElementById('email1').addEventListener('input', function () {
+            campo = event.target;
+            valido = document.getElementById('emailOK1');
+            // var email = document.getElementsById('email');
+
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+            if (emailRegex.test(campo.value)) {
+                $("#emailOK1").show();
+                $("#emailNOTOK1").hide();
+                $("#emailOK1").hide();
+                // valido.innerText = "válido";               
+            } else {
+                $("#emailNOTOK1").show();
+                $("#emailOK1").hide();
+            }
+
+            // if(campo.value !== email.value){
+            //     $("#emailNOT").show();
+            // }else{
+            //     $("#emailNOT").hide();
+            // }
+        });
+
+        function validar() {
+            var name = document.getElementById("Name").value;
+            var lastname = document.getElementById("Lastname").value;
+            var estado = document.getElementById("estado").value;
+            var email = document.getElementById("email").value;
+            var email1 = document.getElementById("email1").value;
+            var number = document.getElementById("number").value;
+            var number1 = document.getElementById("number1").value;
+            var cellphone1 = document.getElementById("cellphone1").value;
+            var direccion = document.getElementById("direccion").value;
+            var barrio = document.getElementById("barrio").value;
+            var Tipo = document.getElementById("Tipo").value;
+            var fecha_exp = document.getElementById("fechaExp").value;
+
+            var Option = document.getElementById("Option").value;
+            var Departamento = document.getElementById("Departamento").value;
+            var city = document.getElementById("city").value;
+
+            var ncedula = document.getElementById("Cedula").value;
+            var ncedula1 = document.getElementById("Cedula1").value;
+
+            var cita = document.getElementById("Cita").value;
+            var ayuda = document.getElementById("Ayudas").value;
+            var procedimiento = document.getElementById("Procedimientos").value;
+            var especialidad = document.getElementById("opciones").value;
+            var doctor = document.getElementById("Doctores").value;
+            var especialidad2 = document.getElementById("opciones2").value;
+            var doctor2 = document.getElementById("Doctores2").value;
+            var especialidad3 = document.getElementById("opciones3").value;
+            var doctor3 = document.getElementById("Doctores3").value;
+            var doctor4 = document.getElementById("Doctores4").value;
+            var doctor5 = document.getElementById("Doctores5").value;
+
+
+            var modo = document.getElementById("Modo").value;
+
+            var factura = document.getElementById("Factura").value;
+            var regi = document.getElementById("regimen").value;
+            var entidad = document.getElementById("entidad").value;
+
+            var fecha = document.getElementById("fecha").value;
+            var hora = document.getElementById("Horario").value;
+
+            var fileo = document.getElementById("Orden").value;
+            var autorizacion = document.getElementById("autorizacion").value;
+
+            if (name == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes escribir los nombres'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (lastname == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes escribir los apellidos'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (estado == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el estado civil'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (email1 !== email) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Los correos no coinciden'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (number.length == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes digitar el número de celular'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (number1 !== number) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Los números de celular ingresados no coinciden'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cellphone1 == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes ingresar otro número de celular'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (direccion == "" || barrio == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes ingresar tu dirección de residencia'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (Tipo == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de documento'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (fecha_exp == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la fecha de expedición'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (Option == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes responder a si eres extranjero o no'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (Option == "2" & Departamento == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el lugar de expedición'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (Option == "2" & city == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el lugar de expedición'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (ncedula.length == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes ingresar el número de identificación'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (ncedula.length < "5") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El número de identificación debe tener por lo menos 5 dígitos'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (ncedula1 !== ncedula) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El número de identificación no coincide'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de cita médica'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de afiliación'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "EPS" & regi == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el régimen de la EPS'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "EPS" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la EPS'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "Prepagada" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la entidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (factura == "ARL" & entidad == '0') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la entidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Ayudas diagnósticas" & ayuda == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de ayuda'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Procedimiento ambulatorio" & procedimiento == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el tipo de procedimiento'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (procedimiento !== "0" & especialidad2 == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (procedimiento !== "0" & doctor2 == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (modo == "0" & cita == "Consulta especializada") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la modalidad de la cita'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Consulta especializada" & especialidad == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Consulta especializada" & doctor == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Consulta odontología especializada" & especialidad3 == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la especialidad'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (cita == "Consulta odontología especializada" & doctor3 == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (modo == "0" & cita == "Consulta medicina general") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar la modalidad de la cita'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (doctor4 == "0" & cita == "Consulta medicina general") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (doctor5 == "0" & cita == "Consulta odontología general") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar el profesional de la salud'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (fecha == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una fecha'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (hora == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una hora'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (fileo == '' & autorizacion.length == "0" & factura !== "Particular") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes adjuntar archivo de orden médica o digitar número de autorización'
+                })
+                event.preventDefault();
+                return false;
+            }
+            else {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Buen trabajo!',
+                    text: '¡Se han enviado correctamente los datos!'
+                })
+            }
         }
 
+        function ValidateSize(file) {
+            var FileSize = file.files[0].size / 1024 / 1024;
+            var fileo = document.getElementById("Orden");
+            if (FileSize > 3) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El archivo supera los 3 MB'
+                })
+                fileo.value = "";
+                event.preventDefault();
+                return false;
+            }
+        }
 
         //Se crea una función para que el nombre de los documentos cargados 
         //en los inputs de tipo file se muestren en la página, a través de si id
@@ -423,65 +2538,12 @@
             });
         });
 
-        function help() {
-            //Se extre el formulario donde se encuentran contenidos los campos a través de su id
-            var selectes = document.getElementById("opciones").value;//Se extrea cada elemento
-            var selectdr = document.getElementById("Doctores").value;
-            var ncedula = document.getElementById("Cedula").value;
-            var fileo = document.getElementById("Cedula").files;
-
-            if (selectes == "0") {
-                $('.myalert').alert();
-                return false;
-            } if (ncedula.length == "0" || ncedula.length < "7") {
-                return false;
-            } if (fileo == "0") {
-                return false;
-            }
-        }
-
-        $("#btnAgregar").on("click", help);
-        $('#myalert').on('close.bs.alert', help)
-
-        async function doctors(s1, s2) {
-            var con1 = document.getElementById('opciones').value;
-            const consulta2 = { con: con1 };
-            const options2 = {
-                method: "POST",
-                body: JSON.stringify(consulta2),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
-            const response2 = await fetch('/doctor', options2);
-            result5 = await response2.json();
-
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-
-            s2.innerHTML = "";
-
-            select = document.getElementById('Doctores');
-            for (var i = 0; i < result5.length; i++) {
-
-                if (s1.value == result5[i].Especialidad) {
-                    var opt = document.createElement('option');
-                    opt.value = result5[i].Nombres;
-                    opt.innerHTML = result5[i].Nombres;
-                    select.add(opt);
-
-                }
-
-            }
-
-
-        }
-
-
-        var result4 = [];
+        //+++++++++++ CARGA A LOS SELECT PARA CONSULTA MEDICINA ESPECIALIZADA +++++++++++++++++//
         async function consulta() {
             var con1 = document.getElementById('opciones').value;
-            const consulta2 = { con: con1 };
+            const consulta2 = {
+                con: con1
+            };
             const options2 = {
                 method: "POST",
                 body: JSON.stringify(consulta2),
@@ -491,18 +2553,374 @@
             };
             const response2 = await fetch('/agenda', options2);
             result4 = await response2.json();
-
             select = document.getElementById('opciones');
-
             for (var i = 0; i < result4.length; i++) {
                 var opt = document.createElement('option');
                 opt.value = result4[i].Especialidad;
                 opt.innerHTML = result4[i].Especialidad;
                 select.add(opt);
+            }
+        }
+        async function doctors(s1, s2) {
+            var con1 = document.getElementById('opciones').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/doctor', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Nombres;
+                    opt.innerHTML = result5[i].Nombres;
+                    select.add(opt);
+                }
+            }
+            $("#Doctores").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
 
+
+        //+++++++++++ LIMPIAR TABLAS PARA CONSULTA ESPECIALIZADA +++++++++++++++++//
+        function vaciarU() {
+            document.getElementById('Table').innerHTML = '';
+        }
+        function vacioU() {
+            document.getElementById('Table').innerHTML = '';
+        }
+        function vaciar() {
+            document.getElementById('myTable').innerHTML = '';
+        }
+        function vacio() {
+            document.getElementById('myTable').innerHTML = '';
+        }
+        function desaparecer() {
+            $("#adiciones").hide();
+        }
+
+        //+++++++++++ CARGA A LOS SELECT PARA PROCEDIMIENTOS AMBULATORIOS +++++++++++++++++//
+        async function procedimiento() {
+            var con1 = document.getElementById('Procedimientos').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/procedimiento', options2);
+            result4 = await response2.json();
+            console.log(result4)
+            select = document.getElementById('Procedimientos');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Procedimientos;
+                opt.innerHTML = result4[i].Procedimientos;
+                select.add(opt);
+            }
+
+        }
+        async function especialidad2(s1, s2) {
+            var con1 = document.getElementById('opciones2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/procedimiento', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('opciones2');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Procedimientos) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Especialidad;
+                    opt.innerHTML = result5[i].Especialidad;
+                    select.add(opt);
+                }
+            }
+            $("#opciones2").prepend('<option selected="true" value="0">Seleccionar especialidad</option>');
+        }
+        async function doctors2(s1, s2) {
+            var con1 = document.getElementById('opciones2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/doctor_procedimiento', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Nombres;
+                    opt.innerHTML = result5[i].Nombres;
+                    select.add(opt);
+                }
+            }
+            $("#Doctores2").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+
+
+        //+++++++++++ CARGA A LOS SELECT PARA LAS AYUDAS DIAGNÓSTICAS +++++++++++++++++//
+        async function ayuda() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/ayuda', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Ayudas;
+                opt.innerHTML = result4[i].Ayudas;
+                select.add(opt);
+            }
+
+        }
+
+        //+++++++++++ CARGA A LOS SELECT PARA LA CONSULTA PARA ODONTOLOGÍA ESPECIALIZADA +++++++++++++++++//
+        async function especialidadOdont() {
+            var con1 = document.getElementById('opciones3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/odontologiaE', options2);
+            result4 = await response2.json();
+            select = document.getElementById('opciones3');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Especialidad;
+                opt.innerHTML = result4[i].Especialidad;
+                select.add(opt);
+            }
+        }
+        async function doctors3(s1, s2) {
+            var con1 = document.getElementById('opciones3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/odontologiaespecializada', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Especialidad) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Doctor;
+                    opt.innerHTML = result5[i].Doctor;
+                    select.add(opt);
+                }
+            }
+            $("#Doctores3").prepend('<option selected="true" value="0">Seleccionar profesional de la salud</option>');
+        }
+
+        //+++++++++++ CARGA A LOS SELECT PARA LA CONSULTA PARA CONSULTA MEDICINA GENERAL +++++++++++++++++//
+        async function medicina() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/medicina', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Doctor;
+                opt.innerHTML = result4[i].Doctor;
+                select.add(opt);
             }
         }
 
+
+        //+++++++++++ CARGA A LOS SELECT PARA LA CONSULTA PARA ODONTOLOGÍA GENERAL+++++++++++++++++//
+        async function medicinaOdont() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/medicinaOdont', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Doctor;
+                opt.innerHTML = result4[i].Doctor;
+                select.add(opt);
+            }
+        }
+
+        async function eps() {
+            var con1 = document.getElementById('entidad').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/listaEPS', options2);
+            result4 = await response2.json();
+            select = document.getElementById('entidad');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].eps;
+                opt.innerHTML = result4[i].eps;
+                select.add(opt);
+            }
+        }
+
+        async function epsPrepagada() {
+            var con1 = document.getElementById('entidad').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/listaEPS', options2);
+            result4 = await response2.json();
+            select = document.getElementById('entidad');
+            for (var i = 0; i < result4.length; i++) {
+                if (result4[i].Prepagada == 'Si') {
+                    var opt = document.createElement('option');
+                    opt.value = result4[i].eps;
+                    opt.innerHTML = result4[i].eps;
+                    select.add(opt);
+                }
+            }
+        }
+
+        var result4 = [];
+        async function consultaD() {
+            var con1 = document.getElementById('Departamento').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/departamentos', options2);
+            result4 = await response2.json();
+            select = document.getElementById('Departamento');
+            for (var i = 0; i < result4.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result4[i].Departamento;
+                opt.innerHTML = result4[i].Departamento;
+                select.add(opt);
+            }
+        }
+
+
+        async function departamento(s1, s2) {
+            var con1 = document.getElementById('Departamento').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/municipio', options2);
+            result5 = await response2.json();
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            select = document.getElementById('city');
+            for (var i = 0; i < result5.length; i++) {
+                if (s1.value == result5[i].Departamento) {
+                    var opt = document.createElement('option');
+                    opt.value = result5[i].Municipio;
+                    opt.innerHTML = result5[i].Municipio;
+                    select.add(opt);
+                }
+            }
+            $("#city").prepend('<option selected="true" value="0">Seleccionar lugar de expedición</option>');
+        }
+
+        
+        
     </script>
     <!--===== MAIN JS =====-->
     <script src="/js/main.js"></script>

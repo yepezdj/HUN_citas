@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="https://genfavicon.com/tmp/icon_d1490e0ca97a4e19828ac691e5ef8be0.ico">
+
+    <!-- ===== BOX ICONS ===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/styleuser.css">
+
+    <!-- ===== BOOTSTRAP ===== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- ===== SWEETALERT2 ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <!-- ===== DATEPICKER ===== -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <title>Conciliador</title>
+</head>
+
+<body id="body-pd">
+
+    <header class="header" id="header">
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+
+        <div class="header__img">
+            <img src="/images/HUN.jpg" alt="">
+        </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="https://www.uninorte.edu.co/web/hospital" class="nav__logo">
+                    <i class="bi bi-house nav__logo-icon"></i> 
+                    <span class="nav__logo-name">
+                        Hospital<br>
+                        Universidad del<br>
+                        Norte
+                    </span>
+                </a>
+
+                <div class="nav__list">
+                    <a href="/conciliator/conciliatormain" class="nav__link">
+                        <i class="bi bi-clipboard nav__icon"></i>
+                        <span class="nav__name">Solicitud de citas</span>
+                    </a>
+                </div>
+
+                <div class="nav__list">
+                    <a href="/consultarCitas" class="nav__link">
+                        <i class="bi bi-clipboard-check nav__icon"></i>
+                        <span class="nav__name">Citas aceptadas</span>
+                    </a>
+                </div>
+
+                <div class="nav__list">
+                    <a href="/consultarExportarC" class="nav__link">
+                        <i class="bi bi-file-earmark-excel nav__icon"></i>
+                      <span class="nav__name">Exportar citas</span>
+                    </a>
+                  </div> 
+            </div>
+            <a href="#" onclick="logOut()" class="nav__link">
+                <i class='bx bx-log-out nav__icon'></i>
+                <span class="nav__name">Cerrar sesión</span>
+            </a>
+        </nav>
+    </div>
+
+   
+    <div class="container-flex">
+        <div class="row px-3" style="display: block; min-width: fit-content;" id="MyComponent">
+            <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+                <div class="card-body" style="display: block;">
+                    <form action="/updateC/<%= datos.idpa %>" method="POST" enctype="multipart/form-data" id="form">
+                        <h4 class="title text-center mt-4">
+                            Hola <%=user.name%>
+                        </h4>
+                        <hr class="my-4">
+                        <div class="text-center mb-2">
+                            A continuación podrás reprogramar la cita médica del paciente. <br>
+                            Para esto, haz click en la ventana AGENDAMIENTO.<br>                            
+                        </div>
+                        <hr class="my-4">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div>
+                                                <img src="/images/paso1.jpg" style="margin-left: 25px;" width="100px" />
+                                            </div>
+                                            <div class="col">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link btn-block text-left" type="button"
+                                                        data-toggle="collapse" data-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne" id="btnC1">
+                                                        INFORMACIÓN DEL PACIENTE
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-body" id="collapse1">                                            
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Name" class="form-label">Nombres del paciente <label
+                                                                class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Name" name="Name"
+                                                            value="<%= datos.NombreP %>"
+                                                            placeholder="Ingresa los nombres" autocomplete="off" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Lastname" class="form-label">Apellidos del
+                                                            paciente <label class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Lastname"
+                                                            name="Lastname" value="<%= datos.ApellidoP %>"
+                                                            placeholder="Ingresa los apellidos" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email" class="form-label">Correo electrónico <label
+                                                                class="redText">*</label></label>
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            value="<%= datos.Correo %>"
+                                                            placeholder="Ingresa el correo electrónico" readonly>
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <!-- <span id="emailOK"></span> -->
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="email1" class="form-label">Confirma el correo
+                                                            electrónico <label class="redText">*</label></label>
+                                                        <input type="email1" class="form-control" id="email1"
+                                                            name="email1" placeholder="Ingresa el correo electrónico"
+                                                            value="<%= datos.Correo %>" readonly>
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOTOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            inválida</small>
+                                                    </div>
+                                                    <div class="alert alert-success"
+                                                        style="margin-top: 5px; display: none;" id="emailOK1">
+                                                        <small class="form-text" style="margin-left: 20px;">Dirección
+                                                            válida</small>
+                                                    </div>
+                                                    <div class="alert alert-danger"
+                                                        style="margin-top: 5px; display: none;" id="emailNOT">
+                                                        <small class="form-text" style="margin-left: 20px;">Los correos
+                                                            no coinciden</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number" class="form-label">Número de celular<label
+                                                                class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number"
+                                                            name="number" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Celular %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="number1" class="form-label">Confirma el número de
+                                                            celular <label class="redText">*</label></label>
+                                                        <input type="number" class="form-control" id="number1"
+                                                            name="number1" placeholder="Sin puntos ni comas ni guiones"
+                                                            min="0" step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Celular %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="cellphone1">Otro número de celular
+                                                            (opcional)</label>
+                                                        <input type="number" class="form-control" id="cellphone1"
+                                                            name="cellphone1"
+                                                            placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                            step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.CelularOp %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="tele">Teléfono
+                                                            (opcional)</label>
+                                                        <input type="number" class="form-control" id="tele" name="tele"
+                                                            placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                            step="1" oninput="validity.valid||(value='');"
+                                                            value="<%= datos.Telefono %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="fechaNac" class="form-label">Fecha de nacimiento
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaNac" name="fechaNac"
+                                                            type="text" autocomplete="off" onkeypress="return false"
+                                                            value="<%= datos.fecha_nac %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="direccion">Dirección de
+                                                            residencia<label class="redText">*</label></label></label>
+                                                        <input type="text" class="form-control" id="direccion"
+                                                            name="direccion"
+                                                            placeholder="Ej: Cra. 27 #59-42, Barranquilla, Atlántico"
+                                                            autocomplete="off" value="<%= datos.Direccion %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="barrio">Barrio de
+                                                            residencia<label class="redText">*</label></label></label>
+                                                        <input type="text" class="form-control" id="barrio"
+                                                            name="barrio" placeholder="Ej: Los Andes" autocomplete="off"
+                                                            value="<%= datos.Barrio %>" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="Tipo" class="form-label"
+                                                            style="margin-top: 20px;">Tipo de documento<label
+                                                                class="redText">*</label></label>
+                                                        <input type="text" class="form-control" id="Tipo" name="Tipo"
+                                                            autocomplete="off" value="<%= datos.Tipo_documento %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="fechaExp" class="form-label"
+                                                            style="margin-top: 20px;">Fecha de expedición
+                                                            <label class="redText">*</label></label>
+                                                        <input class="form-control" id="fechaExp" name="fechaExp"
+                                                            type="text" autocomplete="off" onkeypress="return false"
+                                                            value="<%= datos.fecha_exp %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" id="depa">
+                                                    <div class="form-input">
+                                                        <label for="Departamento" style="margin-top: 20px;"
+                                                            class="form-label">Lugar de expedición (Departamento)<label
+                                                                class="redText">*</label></label>
+                                                        <input class="form-control" id="Departamento"
+                                                            name="Departamento" type="text" autocomplete="off"
+                                                            onkeypress="return false" value="<%= datos.Departamento %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6" id="muni">
+                                                    <div class="form-input">
+                                                        <label for="city" style="margin-top: 20px;"
+                                                            class="form-label">Lugar de expedición (Municipio)<label
+                                                                class="redText">*</label></label>
+                                                        <input class="form-control" id="city" name="city" type="text"
+                                                            autocomplete="off" onkeypress="return false"
+                                                            value="<%= datos.Municipio %>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                        <div class="form-input">
+                                                            <label for="Cedula" class="form-label">N° de identificación del
+                                                                paciente <label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="Cedula"
+                                                                name="Cedula" placeholder="Sin puntos ni comas ni guiones"
+                                                                min="0" step="1" oninput="validity.valid||(value='');"
+                                                                value="<%= datos.CedulaP %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" style="margin-top: 20px;">
+                                                        <div class="form-input">
+                                                            <label for="Cedula1" class="form-label">Confirme N° de
+                                                                identificación<label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="Cedula1"
+                                                                name="Cedula1" placeholder="Sin puntos ni comas ni guiones"
+                                                                min="0" step="1" oninput="validity.valid||(value='');"
+                                                                value="<%= datos.CedulaP %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-input">
+                                                        <label for="persona" class="form-label"
+                                                            style="margin-top: 20px;">Menciona un acompañante</label>
+                                                        <input type="text" class="form-control" id="persona"
+                                                            name="persona"
+                                                            placeholder="Ingresa los nombres y apellidos del acompañante"
+                                                            autocomplete="off" value="<%= datos.Acompañante %>" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div>
+                                                    <img src="/images/paso2.jpg" style="margin-left: 25px;"
+                                                        width="100px" />
+                                                </div>
+                                                <div class="col">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link btn-block text-left collapsed"
+                                                            type="button" data-toggle="collapse"
+                                                            data-target="#collapseTwo" aria-expanded="false"
+                                                            aria-controls="collapseTwo" id="btnC2">
+                                                            INFORMACIÓN DE LA CITA
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="card-body" id="collapse2" style="display: none;">                                               
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" class="form-label">Tipo de cita <label
+                                                                    class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Cita"
+                                                                name="Cita" autocomplete="off"
+                                                                value="<%= datos.Cita %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Factura" class="form-label">¿Bajo que afiliación
+                                                                deseas solicitar esta cita?<label
+                                                                    class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Factura"
+                                                                name="Factura" autocomplete="off"
+                                                                value="<%= datos.Afiliacion %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row" > -->
+                                                    <div class="col-12 col-sm-6" id="reg" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="regimen" class="form-label">Tipo de
+                                                                régimen<label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="regimen"
+                                                                name="regimen" autocomplete="off"
+                                                                value="<%= datos.Regimen %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="eps" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="entidad" class="form-label">Entidad prestadora
+                                                                de salud<label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="entidad"
+                                                                name="entidad" autocomplete="off"
+                                                                value="<%= datos.entidad %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row"> -->
+                                                    <div class="col-12 col-sm-6" id="div" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Modo" class="form-label">Modalidad de la cita
+                                                                <label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Modo"
+                                                                name="Modo" autocomplete="off"
+                                                                value="<%= datos.Modo %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="ayudas" style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Ayudas" class="form-label">Ayudas diagnósticas
+                                                                <label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Ayudas"
+                                                                name="Ayudas" autocomplete="off"
+                                                                value="<%= datos.Doctor %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="procedimiento"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Procedimientos"
+                                                                class="form-label">Procedimientos ambulatorios
+                                                                <label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="procedimiento"
+                                                                name="procedimiento" autocomplete="off"
+                                                                value="<%= datos.Procedimiento %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div>
+                                                <div class="row"> -->
+
+                                                    <div class="col-12 col-sm-6" id="especialidad"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="Cita" class="form-label">Especialidad <label
+                                                                    class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="opciones"
+                                                                name="opciones" autocomplete="off"
+                                                                value="<%= datos.Especialidad %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Doctores"
+                                                                name="Doctores" autocomplete="off"
+                                                                value="<%= datos.Doctor %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad2"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones2" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="opciones2"
+                                                                name="opciones2" autocomplete="off"
+                                                                value="<%= datos.Especialidad %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor2" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Doctores2"
+                                                                name="Doctores2" autocomplete="off"
+                                                                value="<%= datos.Doctor %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="especialidad3"
+                                                        style="display: none;">
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="opciones3" class="form-label">Especialidad
+                                                                <label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="opciones3"
+                                                                name="opciones3" autocomplete="off"
+                                                                value="<%= datos.Especialidad %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor3" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Doctores3"
+                                                                name="Doctores3" autocomplete="off"
+                                                                value="<%= datos.Doctor %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor4" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Doctores4"
+                                                                name="Doctores4" autocomplete="off"
+                                                                value="<%= datos.Doctor %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6" id="doctor5" style="display: none;">
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; margin-bottom: 20px;">
+                                                            <label for="Cita" class="form-label">Profesional de la
+                                                                salud<label class="redText">*</label></label>
+                                                            <input type="text" class="form-control" id="Doctores5"
+                                                                name="procedimiento" autocomplete="off"
+                                                                value="<%= datos.Doctor %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <img src="/images/paso3.jpg" style="margin-left: 25px;"
+                                                            width="100px" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <h2 class="mb-0">
+                                                            <button class="btn btn-link btn-block text-left collapsed"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree" id="btnC3">
+                                                                AGENDAMIENTO
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="card-body" id="collapse3" style="display: none;">
+                                                   
+                                                    <div class="w-100 d-none d-md-block"></div>                                                    
+                                                    <div id="hide">
+                                                        <div class="text-center mb-2">
+                                                            Horarios habituales del profesional de la salud/Ayuda diagnóstica.
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="col-12 col-sm-12"
+                                                            style="height:300px; overflow-y: scroll;">
+                                                            <table class="table table-hover table-bordered" id="tabla">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica</th>
+                                                                        <th>Días disponibles</th>
+                                                                        <th>Horarios disponibles</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="myTable">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="col-12 col-sm-12"
+                                                            style="height:300px; overflow-y: scroll; display: none; margin-top: 20px;"
+                                                            id="adiciones">
+                                                            <table class="table table-hover table-bordered" id="tabla1">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <!-- encabezado de tabla -->
+                                                                        <td colspan="3" id="col">Horarios extraordinarios</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Profesional de la salud/Ayuda diagnóstica
+                                                                        </th>
+                                                                        <th>Fechas disponibles</th>
+                                                                        <th>Horarios disponibles</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="Table">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="fecha1" class="form-label">Fecha de la
+                                                                        cita
+                                                                        <label class="redText">*</label></label>
+                                                                    <input class="form-control" id="fecha1" name="fecha1"
+                                                                        autocomplete="off" onkeypress="return false">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6" id="hide2">
+                                                                <div class="form-input" style="margin-top: 20px;">
+                                                                    <label for="Horario" class="custom-label">Horas
+                                                                        disponibles
+                                                                        <label class="redText">*</label></label>
+                                                                    <select class="custom-select" id="Horario"
+                                                                        name="Horario">
+                                                                        <option value="0">Seleccionar la hora</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header" id="headingFour">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div>
+                                                            <img src="/images/paso4.jpg" style="margin-left: 25px;"
+                                                                width="100px" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="btn btn-link btn-block text-left collapsed"
+                                                                    type="button" data-toggle="collapse"
+                                                                    data-target="#collapseThree" aria-expanded="false"
+                                                                    aria-controls="collapseThree" id="btnC5">
+                                                                    INFORMACIÓN ADICIONAL
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="collapse5" style="display: none;">
+                                                    <div class="card-body">                                                    
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <label class="form-label mt-2">Orden médica <a href="#"
+                                                                onclick="window.open('<%= datos.Orden %>', '_blank', 'fullscreen=yes'); return false;">
+                                                                <i class="far fa-eye"></i>
+                                                            </a></label>                                                        
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <hr class="my-4">
+                                                        <div class="text-center mb-2">
+                                                            Ó
+                                                        </div>
+                                                        <div class="form-input">
+                                                            <label for="autorizacion" class="form-label">Digite número
+                                                                de autorización <label class="redText">*</label></label>
+                                                            <input type="number" class="form-control" id="autorizacion"
+                                                                name="autorizacion"
+                                                                placeholder="Sin puntos ni comas ni guiones" min="0"
+                                                                step="1" oninput="validity.valid||(value='');"
+                                                                style="margin-bottom: 50px;"
+                                                                value="<%= datos.Autorizacion %>" readonly>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input" style="margin-top: 20px;">
+                                                            <label for="descripcion" class="form-label">Motivo de la
+                                                                consulta y anotaciones</label>
+                                                            <textarea class="form-control" id="descripcion"
+                                                                name="descripcion"
+                                                                rows="2" readonly><%= datos.Descripcion %></textarea>
+                                                        </div>
+                                                        <div class="w-100 d-none d-md-block"></div>
+                                                        <div class="form-input"
+                                                            style="margin-top: 20px; text-align: center;">
+                                                            <button type="submit" class="btn btn-primary"
+                                                                id="btnAgregar" onclick="validar()">Reagendar
+                                                                cita</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
+        integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+
+    
+    <script>
+        document.onload = loadFunctions();
+        function loadFunctions() {
+           
+            consult();    
+            consult2();
+            consult4();
+            consult3();
+            consult5();
+            consult6();
+
+            adicion();
+            adicion2();
+            adicion3();
+            adicion4();
+            adicion5();
+            adicion6();
+            
+        }
+
+        var date = new Date();
+        var year = date.getFullYear();
+        console.log(year)
+
+        if (year == '2021') {
+            natDays = [[1, 1, 2021],
+            [1, 11, 2021], [3, 22, 2021], [4, 1, 2021], [4, 2, 2021],
+            [5, 1, 2021], [5, 17, 2021], [6, 7, 2021], [6, 14, 2021],
+            [7, 5, 2021], [7, 20, 2021], [8, 7, 2021], [8, 16, 2021],
+            [10, 18, 2021], [11, 1, 2021], [11, 15, 2021], [12, 8, 2021],
+            [12, 25, 2021]
+            ];
+        } if (year == '2022') {
+            natDays = [[1, 1, 2022],
+            [1, 10, 2022], [3, 21, 2022], [4, 14, 2022], [4, 15, 2022],
+            [5, 1, 2022], [5, 30, 2022], [6, 20, 2022], [6, 27, 2022],
+            [7, 4, 2022], [7, 20, 2022], [8, 7, 2022], [8, 15, 2022],
+            [10, 17, 2022], [11, 7, 2022], [11, 14, 2022], [12, 8, 2022],
+            [12, 25, 2022]
+            ];
+        }
+
+        function nationalDays(date) {
+            for (i = 0; i < natDays.length; i++) {
+                if (date.getMonth() == natDays[i][0] - 1 &&
+                    date.getDate() == natDays[i][1]) {
+                    return [false, natDays[i][2] + '_day'];
+                }
+            }
+            var day = date.getDay();
+            return [(day != 0)];
+        }
+
+        $(function () {
+            $.datepicker.setDefaults($.datepicker.regional["es"]);
+            $("#fecha1").datepicker({
+                dateFormat: 'mm-dd-yy',
+                minDate: new Date(),
+                maxDate: '+6m',
+                monthNames: ['Enero', 'Febrero', 'Marzo',
+                    'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre',
+                    'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                beforeShowDay: nationalDays,
+                onSelect: async function (date) {
+                    console.log(date)
+                    var con1 = document.getElementById('fecha1').value;
+                    var tipo = document.getElementById('Cita').value;
+                    var EspeDoc, nameDoc;
+                    if (tipo == 'Procedimiento ambulatorio') {
+                        EspeDoc = document.getElementById('opciones2').value;
+                        nameDoc = document.getElementById('Doctores2').value;
+                    } else if (tipo == 'Consulta especializada') {
+                        EspeDoc = document.getElementById('opciones').value;
+                        nameDoc = document.getElementById('Doctores').value;
+                    } else if (tipo == 'Consulta odontología especializada') {
+                        EspeDoc = document.getElementById('opciones3').value;
+                        nameDoc = document.getElementById('Doctores3').value;
+                    } else if (tipo == 'Ayudas diagnósticas') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Ayudas').value;
+                    } else if (tipo == 'Consulta medicina general') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Doctores4').value;
+                    } else if (tipo == 'Consulta odontología general') {
+                        EspeDoc = 'No aplica'
+                        nameDoc = document.getElementById('Doctores5').value;
+                    }
+
+
+                    const consulta2 = {
+                        con: con1,
+                        tipo: tipo,
+                        EspeDoc: EspeDoc,
+                        nameDoc: nameDoc,
+                        date: date
+                    };
+                    const options2 = {
+                        method: "POST",
+                        body: JSON.stringify(consulta2),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    };
+                    var response2 = await fetch('/verifyUser', options2);
+                    console.log(response2);
+                    var hora = await response2.json();
+                    console.log(hora);
+                    select = document.getElementById('Horario');
+                    $("#Horario").empty();
+                    for (var i = 0; i < hora.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = hora[i];
+                        opt.innerHTML = hora[i];
+                        select.add(opt);
+                    }
+                    $("#Horario").prepend(
+                        '<option selected="true" value="0">Seleccionar hora</option>');
+                    return false;
+                },
+            })
+        });
+
+        function vaciarF() {
+
+            $('#fecha1').val('').datepicker("refresh");
+            $("#Horario").empty();
+
+        }
+
+        function vacioF() {
+
+            $('#fecha1').val('').datepicker("refresh");
+            $("#Horario").empty();
+
+        }
+
+        $(document).ready(function () {
+            $('#Cita').on('change', function () {
+                if (this.value == 'Consulta medicina general') {
+                    $("#div").show();
+                } else if (this.value == 'Consulta especializada') {
+                    $("#div").show();
+                } else {
+                    $("#div").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Option').on('change', function () {
+                if (this.value == '1') {
+                    $("#hide").show();
+                    $("#row").hide()
+                }
+                else {
+                    $("#hide").hide()
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Factura').on('change', function () {
+                if (this.value == 'EPS') {
+                    $("#eps").show();
+                } else {
+                    $("#eps").hide()
+                }
+            });
+        });
+
+        $('#btnC1').click(function () {
+            $('#collapse1').toggle();
+        });
+        $('#btnC2').click(function () {            
+            $('#collapse2').toggle();
+            cita();
+        });
+        $('#btnC3').click(function () {
+            $('#collapse3').toggle();
+        });
+        $('#btnC4').click(function () {
+            $('#collapse4').toggle();
+        });
+        $('#btnC5').click(function () {
+            $('#collapse5').toggle();
+        });
+
+        document.getElementById('email').addEventListener('input', function () {
+            campo = event.target;
+            valido = document.getElementById('emailOK');
+
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+            if (emailRegex.test(campo.value)) {
+                $("#emailOK").show();
+                $("#emailNOTOK").hide();
+                $("#emailOK").hide();                             
+            } else {
+                $("#emailNOTOK").show();
+                $("#emailOK").hide();                
+            }
+        });
+        document.getElementById('email1').addEventListener('input', function () {
+            campo = event.target;
+            valido = document.getElementById('emailOK1');
+           
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+            if (emailRegex.test(campo.value)) {
+                $("#emailOK1").show();
+                $("#emailNOTOK1").hide();
+                $("#emailOK1").hide();                              
+            } else {
+                $("#emailNOTOK1").show();
+                $("#emailOK1").hide();
+            }
+        });
+
+        function cita() {
+            var cita = $("#Cita").val();
+            if (cita == 'Consulta especializada') {
+                // consulta();
+                $("#especialidad").show();
+                $("#doctor").show();
+                $("#ayudas").hide();
+                $("#procedimiento").hide();
+                $("#especialidad2").hide();
+                $("#doctor2").hide();
+                $("#especialidad3").hide();
+                $("#doctor3").hide();
+                $("#doctor4").hide();
+                $("#doctor5").hide();
+            } else if (cita == 'Ayudas diagnósticas') {
+                // ayuda();
+                $("#ayudas").show();
+                $("#especialidad").hide();
+                $("#doctor").hide();
+                $("#procedimiento").hide();
+                $("#especialidad2").hide();
+                $("#doctor2").hide();
+                $("#especialidad3").hide();
+                $("#doctor3").hide();
+                $("#doctor4").hide();
+                $("#doctor5").hide();
+            } else if (cita == 'Procedimiento ambulatorio') {
+                // procedimiento();
+                $("#procedimiento").show();
+                $("#especialidad2").show();
+                $("#doctor2").show();
+                $("#especialidad").hide();
+                $("#doctor").hide();
+                $("#ayudas").hide();
+                $("#especialidad3").hide();
+                $("#doctor3").hide();
+                $("#doctor4").hide();
+                $("#doctor5").hide();
+            } else if (cita == 'Consulta medicina general') {
+                // medicina();
+                $("#doctor4").show();
+                $("#procedimiento").hide();
+                $("#especialidad").hide();
+                $("#doctor").hide();
+                $("#ayudas").hide();
+                $("#especialidad2").hide();
+                $("#doctor2").hide();
+                $("#especialidad3").hide();
+                $("#doctor3").hide();
+                $("#doctor5").hide();
+            } else if (cita == 'Consulta odontología general') {
+                // medicinaOdont();
+                $("#doctor5").show();
+                $("#procedimiento").hide();
+                $("#especialidad").hide();
+                $("#doctor").hide();
+                $("#ayudas").hide();
+                $("#especialidad2").hide();
+                $("#doctor2").hide();
+                $("#especialidad3").hide();
+                $("#doctor3").hide();
+                $("#doctor4").hide();
+            } else if (cita == 'Consulta odontología especializada') {
+                // especialidadOdont();
+                $("#especialidad3").show();
+                $("#doctor3").show();
+                $("#procedimiento").hide();
+                $("#especialidad").hide();
+                $("#doctor").hide();
+                $("#ayudas").hide();
+                $("#especialidad2").hide();
+                $("#doctor2").hide();
+                $("#doctor4").hide();
+                $("#doctor5").hide();
+            } else {
+                $("#procedimiento").hide();
+                $("#ayudas").hide();
+                $("#especialidad").hide();
+                $("#doctor").hide();
+                $("#especialidad2").hide();
+                $("#doctor2").hide();
+                $("#especialidad3").hide();
+                $("#doctor3").hide();
+                $("#doctor4").hide();
+                $("#doctor5").hide();
+            }
+        }
+      
+        async function consult() {
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable()
+        }
+        function buildTable() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion() {
+            var con1 = document.getElementById('Doctores').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTableU()
+        }
+        function buildTableU() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                } 
+            }
+        }
+
+        async function consult2() {
+            var con1 = document.getElementById('Doctores2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable2()
+        }
+        function buildTable2() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion2() {
+            var con1 = document.getElementById('Doctores2').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU2()
+        }
+        function buildTableU2() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores2');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+        async function consult3() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable3()
+        }
+        function buildTable3() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                      <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+						              	<td>                              
+                                ${result[i].hora_ini}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].Tipo}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion3() {
+            var con1 = document.getElementById('Ayudas').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU3()
+        }
+        function buildTableU3() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Ayudas');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+        async function consult4() {
+            var con1 = document.getElementById('Doctores3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable4()
+        }
+        function buildTable4() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion4() {
+            var con1 = document.getElementById('Doctores3').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU4()
+        }
+        function buildTableU4() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores3');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+        async function consult5() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable5()
+        }
+        function buildTable5() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion5() {
+            var con1 = document.getElementById('Doctores4').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU5()
+        }
+        function buildTableU5() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores4');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+        async function consult6() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/datos', options2);
+            console.log(response2)
+            result = await response2.json();
+            console.log(result)
+            buildTable6()
+        }
+        function buildTable6() {
+            vaciar();
+            vacio();
+            console.log(result)
+            var table = document.getElementById('myTable');
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].dia}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+        async function adicion6() {
+            var con1 = document.getElementById('Doctores5').value;
+            const consulta2 = {
+                con: con1
+            };
+            const options2 = {
+                method: "POST",
+                body: JSON.stringify(consulta2),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const response2 = await fetch('/verExcepciones', options2);
+            console.log(response2)
+            result = await response2.json();            
+            buildTableU6()
+        }
+        function buildTableU6() {
+            vaciarU();
+            vacioU();
+            console.log(result)
+            var table = document.getElementById('Table');
+            select = document.getElementById('Doctores5');
+            for (var i = 0; i < result.length; i++) {
+                if (select.value == result[i].Doctor) {
+                    $("#adiciones").show();
+                    var row = `<tr>
+                            <td>                              
+                                ${result[i].Doctor}                                
+                            </td> 
+                            <td>                              
+                                ${result[i].fecha}                                
+                            </td> 							
+							<td>                              
+                                ${result[i].hora_ini} - ${result[i].hora_fin}                                
+                            </td>                                                          
+					  </tr>`
+                    table.innerHTML += row
+                }
+            }
+        }
+
+        function validar() {
+            //Se extre el formulario donde se encuentran contenidos los campos a través de su id
+            var fecha = document.getElementById("fecha1").value;
+            var hora = document.getElementById("Horario").value;       
+
+
+            if (fecha == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una fecha'
+                })
+                event.preventDefault();
+                return false;
+            }
+            if (hora == "0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debes seleccionar una hora'
+                })
+                event.preventDefault();
+                return false;
+            }
+            else {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Buen trabajo!',
+                    text: '¡Se han realizado correctamente los cambios!'
+                })
+            }
+        }
+             
+        function vaciarU() {
+            document.getElementById('Table').innerHTML = '';
+        }
+        function vacioU() {
+            document.getElementById('Table').innerHTML = '';
+        }
+
+        function vaciar() {
+            document.getElementById('myTable').innerHTML = '';
+        }
+        function vacio() {
+            document.getElementById('myTable').innerHTML = '';
+        }
+     
+
+    </script>
+    <!--===== MAIN JS =====-->
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

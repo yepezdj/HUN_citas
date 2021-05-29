@@ -1,130 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Register page</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/users.css">
-    <link rel="stylesheet" href="/lib/jquery/jquery.datetimepicker.min.css">
+  <title>Register page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="shortcut icon" href="https://genfavicon.com/tmp/icon_d1490e0ca97a4e19828ac691e5ef8be0.ico">
+
+  <!-- ===== BOX ICONS ===== -->
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ===== BOOTSTRAP ===== -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+
+  <!-- ===== SWEETALERT2 ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+  <!-- ===== DATEPICKER ===== -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
 </head>
+
 <body>
-    <div class="container">
-        <div class="container">
-            <div class="row mt-5">
-                <div class="col-7 image-left">
+
+  <div class="container">
+    <div class="row px-3">
+      <div class="col-lg-10 col-xl-6 card flex-row mx-auto px-0">
+        <!-- <div class=" d-none d-md-flex">
+          <img src="/images/login.jpg" alt="">
+        </div> -->
+        <div class="card-body" id="card">
+          <h4 class="title text-center mt-4">
+            Bienvenido a la página de registro
+          </h4>
+          <div>
+            <% if(errors !==" " ) {%>
+              <% errors.forEach(function(item) { %>
+                <div class="alert alert-danger">
+                  <%- item %>
                 </div>
-                    <div class="col-5">
-                        <div>
-                            <% if(errors !== " ") {%>
-                                <% errors.forEach(function(item) { %>
-                                    <div class="alert alert-danger">
-                                        <%- item %>
-                                    </div>
-                                <%})%>
-                            <%}%>
-                        </div>
-                
-                        <form method="POST" action="/register">
-                            <div class="form-group">
-                                <label for="nombre">Nombres</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese sus nombres">     
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Apellidos</label>
-                                <input type="text" class="form-control" id="last_name " name="last_name" placeholder="Ingrese sus apellidos">     
-                            </div>
-                            <div class="form-group">
-                              <label for="cedula">Cedula</label>
-                              <input type="number" class="form-control bg-grey" id="cedula" name="cedula"
-                              placeholder="Ingrese su cedula" autocomplete="off">     
-                            </div>
-                            <div class="form-group mb-0">
-                              <label for="sexo">Sexo</label>
-                            </div>
-                            <div class="form-group">
-                              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-primary active">
-                                  <input type="radio" name="sexo" id="masculino" value="masculino" checked> Masculino
-                                </label>
-                                <label class="btn btn-primary">
-                                  <input type="radio" name="sexo" id="femenino" value="femenino"> Femenino
-                                </label>
-                              </div>  
-                            </div>
-                            <div class="form-group">
-                              <label for="fecha_nac">Fecha de nacimiento</label>
-                              <input class="form-control bg-grey" id="fecha_nac" name="fecha_nac"
-                              placeholder="Ingrese su fecha de nacimiento" autocomplete="off">     
-                          </div>
-                          <div class="form-group">
-                              <label for="email">Correo electronico</label>
-                              <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo electrónico">     
-                          </div>
-                          <div class="form-group">
-                            <label for="city">Ciudad de residencia</label>
-                            <input class="form-control" id="city" name="city" placeholder="Ingrese su ciudad de residencia" autocomplete="off">     
-                          </div>
-                          <div class="form-group">
-                            <label for="cedula">Numero de celular</label>
-                            <input type="number" class="form-control bg-grey" id="cellphone" name="cellphone"
-                            placeholder="Ingrese su celular" autocomplete="off">     
-                          </div>
-                          <div class="form-group">
-                            <label for="eps" >EPS</label>
-                            <input class="form-control" id="eps" name="eps" placeholder="Ingrese su EPS" autocomplete="off">     
-                          </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su Contraseña">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Confirmar contraseña</label>
-                                <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword" placeholder="Confirme su contraseña">
-                            </div>
-                                <button type="submit" class="btn btn-primary">Registrar</button>
-                        </form>
-                      <hr>
-                      <div>
-                          Si ya tienes una cuenta, inicia sesión.
-                      </div>
-                      <a href="/login">
-                        <button type="button" class="btn btn-primary">Inciar sesión</button>
-                      </a>
-                      <div>
-                          Regresar a la <a href="/">pagina principal</a>.
-                      </div>
-                    </div>
-                </div>
+                <%})%>
+                  <%}%>
+          </div>
+          <!-- <form> -->
+            <div class="form-input">
+              <span><i class="fa fa-envelope-o"></i></span>
+              <label for="nombre" class="font-weight-bold">Nombres</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Ingresa tus nombres" required>
+            </div>
+            <div class="form-input">
+              <label for="apellido" class="font-weight-bold">Apellidos</label>
+              <input type="text" class="form-control" id="last_name" name="last_name"
+                placeholder="Ingresa tus apellidos">
+            </div>
+            <div class="form-input">
+              <label for="sexo" class="font-weight-bold">Género</label>
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="btn-group btn-group-toggle toggle" data-toggle="buttons">
+                <label class="btn active">
+                  <input type="radio" name="sexo" id="masculino" value="masculino" checked> Masculino
+                </label>
+                <label class="btn open-btn">
+                  <input type="radio" name="sexo" id="femenino" value="femenino"> Femenino
+                </label>
+              </div>
+            </div>
+            <div class="form-input">
+              <label for="cellphone" class="font-weight-bold">Número de celular</label>
+              <input type="number" class="form-control" id="cellphone" name="cellphone" placeholder="Ingresa tu celular"
+                autocomplete="off" min="0" step="1" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-input">
+              <label for="email" class="font-weight-bold">Correo electrónico</label>
+              <input type="email" class="form-control" id="email" name="email"
+                placeholder="Ingresa tu correo electrónico">
+            </div>
+            <div class="alert alert-danger" style="margin-top: 5px; display: none;" id="emailNOTOK">
+              <small class="form-text" style="margin-left: 20px;">Dirección
+                inválida</small>
+            </div>
+            <div class="form-input">
+              <label for="password" class="font-weight-bold">Contraseña</label>
+              <input type="password" class="form-control" id="password" name="password"
+                placeholder="Ingresa tu Contraseña">
+              <small class="form-text text-muted">La contraseña debe tener al menos 8 caracteres.</small>
+            </div>
+            <div class="form-input">
+              <label for="password" class="font-weight-bold">Confirmar contraseña</label>
+              <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword"
+                placeholder="Confirma tu contraseña">
             </div>
 
+            <div class="mb-3">
+              <button type="submit" class="btn btn-block" id="btn">
+                REGISTRARTE
+              </button>
+            </div>
+          <!-- </form> -->
+
+          <hr class="my-4">
+          <div class="text-center mb-2">
+            ¿Ya tienes una cuenta?
+            <a href="/login" class="register-link">
+              Inicia sesión aquí.
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- Toggle button -->
+  </div>
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- Toggle button -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous">
-  </script>
-  <script src="/lib/jquery/jquery.js"></script>
-  <script src="/lib/jquery/jquery.datetimepicker.full.js"></script>
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"
+    integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+  <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script src="/lib/jquery/jquery.js"></script>
+  <script src="/lib/jquery/jquery.datetimepicker.full.js"></script> -->
+  <!-- ===== DATEPICKER ===== -->
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+
+
   <script>
-    $("#fecha_examen").datetimepicker({
-      format: 'Y-m-d',
-      timepicker: false
+
+    var password = document.getElementById("password")
+      , confirm_password = document.getElementById("confirmationPassword");
+    function validatePassword() {
+      if (password.value != confirmationPassword.value) {
+        confirmationPassword.setCustomValidity("Las contraseñas no coinciden.");
+      } else {
+        confirmationPassword.setCustomValidity('');
+      }
+    }
+    password.onchange = validatePassword;
+    confirmationPassword.onkeyup = validatePassword;
+
+    document.getElementById('email').addEventListener('input', function () {
+      campo = event.target;
+      valido = document.getElementById('emailOK');
+
+      emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+      if (emailRegex.test(campo.value)) {
+        $("#emailNOTOK").hide();
+      } else {
+        $("#emailNOTOK").show();
+      }
     });
 
-    $("#fecha_nac").datetimepicker({
-      format: 'Y-m-d',
-      timepicker: false
-    });
+
+    $('#btn').click(function () {
+      let data = recuperarDatosFormulario();
+      console.log(data)
+      if (!data) {
+        console.log('error')
+      } else {
+        agregarRegistro(data);
+      }
+    })
+
+    function recuperarDatosFormulario() {
+      let data = {
+        name: $('#name').val(),
+        last_name: $('#last_name').val(),
+        sexo: $('input[name="sexo"]:checked').val(),
+        cellphone: $('#cellphone').val(),
+        email: $('#email').val(),
+        password: $('#password').val(),
+        password1: $('#confirmationPassword').val()
+      };
+      if (data.name == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tus nombres'
+        });
+        return false;
+      }
+      if (data.last_name == "") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tus apellidos'
+        });
+        return false;
+      }
+      if (data.cellphone == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tu número de celular'
+        });
+        return false;
+      }
+      if (data.email == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar tu correo electrónico'
+        });
+        return false;
+      }
+      if (data.password == '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Debes ingresar la contraseña'
+        });
+        return false;
+      }
+      if (data.password.length < '8') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La contraseña debe tener al menos 8 caracteres'
+        });
+        return false;
+      }
+      if (data.password !== data.password1) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Las contraseñas ingresadas no coinciden'
+        });
+        return false;
+      }
+      return data;
+    }
+    function agregarRegistro(data) {
+      $.ajax({
+        type: 'POST',
+        url: '/register',
+        data: data,
+        success: function (msg) {
+          Swal.fire(
+            '¡Buen trabajo!',
+            '¡Te has registrado correctamente!',
+            'success'
+          ).then(function () {
+            window.location = "/login";
+          });
+        },
+        error: function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error'
+          })
+        }
+      });
+    }
   </script>
 </body>
+
 </html>
