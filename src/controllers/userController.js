@@ -382,10 +382,10 @@ let agendar = async (req, res) => {
         }
 
         const tokenOrden = jwt.sign(payloadOrden, secret);
-        linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
+        linkOrden = `http://oficinavirtualhun.ddns.net:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
     } else {
-        linkOrden = `http://3.17.161.209:8080/nofiles`;
+        linkOrden = `http://oficinavirtualhun.ddns.net:8080/nofiles`;
         console.log(linkOrden);
     }
 
@@ -523,7 +523,7 @@ let update = async (req, res) => {
         }
 
         const tokenOrden = jwt.sign(payloadOrden, secret);
-        linkOrden = `http://3.17.161.209:8080/files/${user.id}/${tokenOrden}`;
+        linkOrden = `http://oficinavirtualhun.ddns.net:8080/files/${user.id}/${tokenOrden}`;
         console.log(linkOrden);
 
         connection.query("UPDATE agendamiento SET Orden = ? WHERE idpa = ?", [linkOrden, req.params.idpa], (err, datos) => {
